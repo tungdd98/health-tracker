@@ -1,4 +1,0 @@
-interface:
-  display_name: "Design-First Web Planning"
-  short_description: "Keep brief, design, and implementation planning separate for web apps"
-  default_prompt: "Plan this web app with a design-first workflow: create a lean brief, prepare a Stitch handoff, and avoid implementation details until the design is approved."

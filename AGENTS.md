@@ -13,6 +13,16 @@ This repository is an Nx monorepo. The main app lives in `apps/health-tracker-we
 - `yarn format` - write Prettier formatting changes.
 - `yarn format:check` - verify formatting without changing files.
 
+## Definition of Done
+
+Before reporting a task as complete or creating a commit, always run this verification sequence:
+
+1. `yarn format` (or format only the files touched when scope must stay narrow)
+2. `yarn lint`
+3. `yarn build` for app-impacting changes
+
+Do not claim completion while formatting or lint/build issues are still unresolved.
+
 ## Coding Style & Naming Conventions
 
 Use TypeScript, 2-space indentation, single quotes, and semicolon-free style to match the existing codebase. Prefer small, focused modules and colocate implementation files with their feature area, for example `libs/ui/src/lib/app-shell.tsx`. Follow the repository's ESLint and Prettier configuration; avoid unused variables and prefix intentionally unused arguments with `_`.
@@ -28,5 +38,3 @@ Commit history uses conventional commits such as `feat:`, `fix:`, `docs:`, and `
 ## Agent-Specific Instructions
 
 Before any multi-step implementation task, read and follow `docs/process/planning-workflow.md`. For every active phase under `docs/superpowers/plans/`, keep tracking synchronized with reality: mark completed tasks in the phase `index.md`, update checklist items inside the task file, and do not leave finished work unchecked.
-
-For future design tasks using Stitch or similar tools, treat only the approved default screen frames as the visual source of truth unless the task explicitly says otherwise. Do not rely on AI-generated error, loading, or other state variants as authoritative design references. Those non-default states should normally be implemented in code by preserving the default layout and applying state-only changes.
