@@ -1,5 +1,6 @@
 import { FormProvider as ReactHookFormProvider, type UseFormReturn } from 'react-hook-form';
 import type { PropsWithChildren } from 'react';
+import { Stack } from '@mui/material';
 
 type AppFormProviderProps<TValues extends Record<string, unknown>> = PropsWithChildren<{
   form: UseFormReturn<TValues>;
@@ -14,7 +15,7 @@ export function AppFormProvider<TValues extends Record<string, unknown>>({
   return (
     <ReactHookFormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
-        {children}
+        <Stack spacing={2.5}>{children}</Stack>
       </form>
     </ReactHookFormProvider>
   );

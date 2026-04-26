@@ -1,11 +1,11 @@
 import { TextField, type TextFieldProps } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 
-type FormTextFieldProps = {
+type FormTextAreaFieldProps = {
   name: string;
-} & Omit<TextFieldProps, 'name'>;
+} & Omit<TextFieldProps, 'multiline' | 'name'>;
 
-export function FormTextField({ name, ...props }: FormTextFieldProps) {
+export function FormTextAreaField({ name, ...props }: FormTextAreaFieldProps) {
   const { control } = useFormContext();
 
   return (
@@ -17,8 +17,9 @@ export function FormTextField({ name, ...props }: FormTextFieldProps) {
           {...props}
           {...field}
           error={fieldState.invalid}
-          fullWidth
           helperText={fieldState.error?.message ?? props.helperText}
+          minRows={4}
+          multiline
         />
       )}
     />
