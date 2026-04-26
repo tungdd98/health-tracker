@@ -1,12 +1,16 @@
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import HotelRoundedIcon from '@mui/icons-material/HotelRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import RestaurantRoundedIcon from '@mui/icons-material/RestaurantRounded';
 import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded';
 import { Alert, Button, Divider, Grid, Stack, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
+import { mapAuthErrorToMessage, signOutUser } from '@health-tracker/api';
 import {
   AppFormProvider,
   FormCheckboxField,
@@ -30,6 +34,8 @@ import {
   PageSection,
 } from '@health-tracker/ui';
 
+import { useAuthSession } from '../auth/use-auth-session';
+
 type PreviewFormValues = {
   energy: number;
   focus: string;
@@ -43,6 +49,11 @@ type PreviewFormValues = {
 };
 
 export function LandingPage() {
+  const navigate = useNavigate();
+  const { user } = useAuthSession();
+  const [signOutError, setSignOutError] = useState('');
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
   const form = useForm<PreviewFormValues>({
     defaultValues: {
       energy: 7,
@@ -57,24 +68,53 @@ export function LandingPage() {
     },
   });
 
+  const handleSignOut = async () => {
+    setSignOutError('');
+    setIsSigningOut(true);
+
+    const { error } = await signOutUser();
+
+    if (error) {
+      setIsSigningOut(false);
+      setSignOutError(mapAuthErrorToMessage(error));
+      return;
+    }
+
+    navigate('/login');
+  };
+
   return (
     <AppShell
-      headerEyebrow="Health Tracker DS"
-      headerSubtitle="Mobile-first tokens and base components synchronized from Stitch"
-      headerTitle="Soft mobile system"
+      headerAction={
+        <Button
+          disabled={isSigningOut}
+          onClick={handleSignOut}
+          startIcon={<LogoutRoundedIcon />}
+          variant="outlined"
+        >
+          {isSigningOut ? 'Đang đăng xuất...' : 'Đăng xuất'}
+        </Button>
+      }
+      headerEyebrow="Bảng điều khiển riêng"
+      headerSubtitle="Nhịp theo dõi hôm nay đã sẵn sàng để Hoàng Thượng tiếp tục cập nhật."
+      headerTitle="Không gian sức khỏe"
       navValue="home"
     >
       <Stack spacing={2.5}>
+        {signOutError ? (
+          <Alert color="error" variant="filled">
+            {signOutError}
+          </Alert>
+        ) : null}
         <PageSection
-          eyebrow="Foundation"
-          title="A calm design system, ready for feature screens"
-          description="The app theme, shell, navigation, surfaces, and form controls now share the same mobile-first language."
+          eyebrow="Đăng nhập thành công"
+          title={`Chào mừng trở lại${user?.email ? ',' : ''} ${user?.email ?? ''}`.trim()}
+          description="Từ đây Hoàng Thượng có thể tiếp tục theo dõi nhịp sinh hoạt, nước uống, bữa ăn, và những thay đổi nhỏ mỗi ngày."
         >
           <Stack direction="row" flexWrap="wrap" gap={1}>
-            <AppChip label="Plus Jakarta Sans" />
-            <AppChip label="Soft rose palette" />
-            <AppChip label="Rounded surfaces" />
-            <AppChip label="Form-heavy flows" />
+            <AppChip label="Phiên hoạt động" />
+            <AppChip label={user?.email ?? 'Đã xác thực'} />
+            <AppChip label="Nhịp chăm sóc ổn định" />
           </Stack>
         </PageSection>
 
@@ -82,10 +122,10 @@ export function LandingPage() {
           <Grid size={{ xs: 12, sm: 6 }}>
             <AppCard sx={{ p: 3 }}>
               <Stack spacing={1}>
-                <Typography variant="overline">Today</Typography>
+                <Typography variant="overline">Hôm nay</Typography>
                 <Typography variant="h2">82</Typography>
                 <Typography color="text.secondary">
-                  Serenity score shaped by sleep, water, and meal rhythm.
+                  Chỉ số cân bằng hôm nay đang được giữ tốt nhờ giấc ngủ, nước uống, và bữa ăn.
                 </Typography>
               </Stack>
             </AppCard>
@@ -93,14 +133,14 @@ export function LandingPage() {
           <Grid size={{ xs: 12, sm: 6 }}>
             <AppCard sx={{ p: 3 }}>
               <Stack spacing={1.5}>
-                <Typography variant="overline">Highlights</Typography>
+                <Typography variant="overline">Điểm nổi bật</Typography>
                 <Stack direction="row" flexWrap="wrap" gap={1}>
-                  <AppChip color="secondary" icon={<WaterDropRoundedIcon />} label="Hydration" />
-                  <AppChip color="secondary" icon={<HotelRoundedIcon />} label="Sleep" />
-                  <AppChip color="secondary" icon={<RestaurantRoundedIcon />} label="Meals" />
+                  <AppChip color="secondary" icon={<WaterDropRoundedIcon />} label="Nước uống" />
+                  <AppChip color="secondary" icon={<HotelRoundedIcon />} label="Giấc ngủ" />
+                  <AppChip color="secondary" icon={<RestaurantRoundedIcon />} label="Bữa ăn" />
                 </Stack>
                 <Typography color="text.secondary">
-                  Surfaces stay soft and spacious so dense health data does not feel clinical.
+                  Bố cục vẫn nhẹ và thoáng để dữ liệu sức khỏe hằng ngày không trở nên nặng nề.
                 </Typography>
               </Stack>
             </AppCard>
@@ -108,42 +148,42 @@ export function LandingPage() {
         </Grid>
 
         <PageSection
-          eyebrow="Surfaces"
-          title="Cards, list items, and feedback blocks"
-          description="Reusable building blocks for the first feature screens."
+          eyebrow="Theo dõi nhanh"
+          title="Các mốc chăm sóc đang được lưu lại"
+          description="Trang chủ tạm thời này cho thấy vòng lặp đăng nhập, phiên làm việc, và bề mặt sản phẩm đã nối với nhau."
         >
           <Stack spacing={1.5}>
             <AppListItem
               leading={<WaterDropRoundedIcon />}
-              subtitle="Soft goal tracking without dashboard noise"
-              title="Hydration log"
+              subtitle="Theo dõi mục tiêu dịu nhẹ, không tạo cảm giác như dashboard dày đặc"
+              title="Nhật ký nước uống"
               trailing="2.1L"
             />
             <AppListItem
               leading={<HotelRoundedIcon />}
-              subtitle="Gentle framing for daily health check-ins"
-              title="Sleep recap"
+              subtitle="Khung tóm tắt ngắn cho lần kiểm tra sức khỏe đầu ngày"
+              title="Tóm tắt giấc ngủ"
               trailing="7h 45m"
             />
-            <Alert color="info" variant="filled">
-              Buttons, chips, cards, and list rows now inherit the same design tokens.
+            <Alert color="success" variant="filled">
+              Phiên đăng nhập đã hoạt động. Hoàng Thượng đang ở trong khu vực riêng của ứng dụng.
             </Alert>
           </Stack>
         </PageSection>
 
         <PageSection
-          eyebrow="Forms"
-          title="Shared controls for mobile-first health entry"
-          description="The forms library now exposes consistent wrappers instead of hand-styled fields per screen."
+          eyebrow="Nhập liệu"
+          title="Biểu mẫu dùng chung cho các lần cập nhật tiếp theo"
+          description="Các control hiện tại vẫn được giữ lại để phase sau tiếp tục xây dựng luồng ghi nhận sức khỏe thật sự."
         >
-          <FormStepper activeStep={1} steps={['Profile', 'Habits', 'Preview']} />
+          <FormStepper activeStep={1} steps={['Hồ sơ', 'Thói quen', 'Xem trước']} />
           <Divider flexItem sx={{ my: 1 }} />
           <AppFormProvider form={form} onSubmit={async () => undefined}>
-            <FormTextField label="Morning note" name="journal" />
+            <FormTextField label="Ghi chú buổi sáng" name="journal" />
             <Grid container spacing={2}>
               <Grid size={{ xs: 12, sm: 6 }}>
                 <FormSelectField
-                  label="Water target"
+                  label="Mục tiêu nước uống"
                   name="waterGoal"
                   options={[
                     { label: '1.5L', value: '1.5l' },
@@ -153,46 +193,46 @@ export function LandingPage() {
                 />
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
-                <FormDateField label="Next check-in" name="targetDate" />
+                <FormDateField label="Lần kiểm tra tiếp theo" name="targetDate" />
               </Grid>
             </Grid>
             <FormSegmentedControl
-              label="Focus mode"
+              label="Nhịp tập trung"
               name="focus"
               options={[
-                { label: 'Reset', value: 'reset' },
-                { label: 'Steady', value: 'steady' },
-                { label: 'Push', value: 'push' },
+                { label: 'Khởi động lại', value: 'reset' },
+                { label: 'Ổn định', value: 'steady' },
+                { label: 'Tăng tốc', value: 'push' },
               ]}
             />
             <FormRadioGroup
-              label="Sleep quality"
+              label="Chất lượng giấc ngủ"
               name="sleepQuality"
               options={[
-                { label: 'Light', value: 'light' },
-                { label: 'Good', value: 'good' },
-                { label: 'Deep', value: 'deep' },
+                { label: 'Nhẹ', value: 'light' },
+                { label: 'Tốt', value: 'good' },
+                { label: 'Sâu', value: 'deep' },
               ]}
               row
             />
-            <FormSliderField label="Energy level" max={10} min={0} name="energy" step={1} />
+            <FormSliderField label="Mức năng lượng" max={10} min={0} name="energy" step={1} />
             <FormTextAreaField
-              label="Journal reflection"
+              label="Nhật ký ngắn"
               name="journal"
-              placeholder="Capture a light end-of-day note..."
+              placeholder="Lưu lại một ghi chú thật ngắn cho cuối ngày..."
             />
             <FormCheckboxField
-              helperText="Use a soft confirmation style for repeat habits."
-              label="Workout completed today"
+              helperText="Giữ kiểu xác nhận nhẹ nhàng cho các thói quen lặp lại."
+              label="Hôm nay đã vận động"
               name="workoutToday"
             />
             <FormSwitchField
-              helperText="Settings-style toggles also share the same shape language."
-              label="Gentle reminders"
+              helperText="Các toggle kiểu cài đặt cũng dùng cùng ngôn ngữ hình khối hiện tại."
+              label="Nhắc nhở nhẹ"
               name="reminders"
             />
             <Button type="submit" variant="contained">
-              Save preview state
+              Lưu trạng thái xem trước
             </Button>
           </AppFormProvider>
         </PageSection>
@@ -200,19 +240,19 @@ export function LandingPage() {
         <Grid container spacing={2}>
           <Grid size={{ xs: 12, sm: 6 }}>
             <PageSection
-              eyebrow="Loading"
-              title="Soft skeletons"
-              description="Use these while health summaries or timelines are fetching."
+              eyebrow="Đang tải"
+              title="Skeleton cho các phần sắp tới"
+              description="Giữ lại mẫu loading mềm cho những màn tóm tắt sức khỏe sẽ được bổ sung ở phase sau."
             >
               <LoadingBlock />
             </PageSection>
           </Grid>
           <Grid size={{ xs: 12, sm: 6 }}>
             <EmptyState
-              action={<Button variant="outlined">Start first entry</Button>}
-              description="Empty and success states now sit on the same visual foundation as the rest of the app."
+              action={<Button variant="outlined">Bắt đầu lần ghi đầu tiên</Button>}
+              description="Empty state hiện đã nằm trong vùng riêng của người dùng, không còn là màn preview thuần thiết kế."
               icon={<FavoriteRoundedIcon />}
-              title="No health moments yet"
+              title="Chưa có cột mốc sức khỏe nào"
             />
           </Grid>
         </Grid>
@@ -221,10 +261,10 @@ export function LandingPage() {
           <Stack direction="row" spacing={1.5}>
             <AccessTimeRoundedIcon color="primary" />
             <Stack spacing={0.5}>
-              <Typography variant="subtitle1">Next move</Typography>
+              <Typography variant="subtitle1">Bước tiếp theo</Typography>
               <Typography color="text.secondary">
-                Feature screens can now build on shared tokens and wrappers instead of inventing UI
-                from scratch.
+                Auth routing đã hoàn chỉnh để phase kế tiếp có thể thêm màn riêng tư mà không phải
+                dựng lại nền tảng phiên đăng nhập.
               </Typography>
             </Stack>
           </Stack>

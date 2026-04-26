@@ -15,7 +15,7 @@
 - [x] Task 01: [Extend the shared API layer for auth session and error handling](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-2-health-tracker-auth/task-01-auth-api-foundation.md)
 - [x] Task 02: [Design the auth screens and states in Stitch](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-2-health-tracker-auth/task-02-stitch-auth-design.md)
 - [x] Task 03: [Build the auth layout and the `Login` and `Sign Up` screens](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-2-health-tracker-auth/task-03-auth-ui-and-forms.md)
-- [ ] Task 04: [Wire route guards, session bootstrap, and the signed-in home flow](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-2-health-tracker-auth/task-04-auth-routing-and-home.md)
+- [x] Task 04: [Wire route guards, session bootstrap, and the signed-in home flow](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-2-health-tracker-auth/task-04-auth-routing-and-home.md)
 - [ ] Task 05: [Verify auth flows and sync plan tracking](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-2-health-tracker-auth/task-05-verification-and-tracking.md)
 
 ## File Structure Map

@@ -12,7 +12,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
@@ -40,6 +40,15 @@ export function SignUpPage() {
   });
 
   const isSubmitting = form.formState.isSubmitting;
+  const email = form.watch('email');
+  const password = form.watch('password');
+  const confirmPassword = form.watch('confirmPassword');
+
+  useEffect(() => {
+    if (submitError) {
+      setSubmitError('');
+    }
+  }, [confirmPassword, email, password, submitError]);
 
   const handleSubmit = async (values: SignUpFormValues) => {
     setSubmitError('');
@@ -51,7 +60,7 @@ export function SignUpPage() {
       return;
     }
 
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (

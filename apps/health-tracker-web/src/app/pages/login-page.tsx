@@ -11,7 +11,7 @@ import {
   Link,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
@@ -37,6 +37,14 @@ export function LoginPage() {
   });
 
   const isSubmitting = form.formState.isSubmitting;
+  const email = form.watch('email');
+  const password = form.watch('password');
+
+  useEffect(() => {
+    if (submitError) {
+      setSubmitError('');
+    }
+  }, [email, password, submitError]);
 
   const handleSubmit = async (values: LoginFormValues) => {
     setSubmitError('');
@@ -48,7 +56,7 @@ export function LoginPage() {
       return;
     }
 
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (

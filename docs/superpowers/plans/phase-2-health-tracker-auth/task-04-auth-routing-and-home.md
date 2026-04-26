@@ -11,7 +11,7 @@
 - Modify: `apps/health-tracker-web/src/app/pages/login-page.tsx`
 - Modify: `apps/health-tracker-web/src/app/pages/signup-page.tsx`
 
-- [ ] **Step 1: Review the current router and landing page behavior**
+- [x] **Step 1: Review the current router and landing page behavior**
 
 Read these files before wiring guards:
 
@@ -22,7 +22,7 @@ Read these files before wiring guards:
 
 Expected: The worker understands the current app bootstrap and which routes must change in this phase.
 
-- [ ] **Step 2: Add a small app-owned auth session hook**
+- [x] **Step 2: Add a small app-owned auth session hook**
 
 Create `apps/health-tracker-web/src/app/auth/use-auth-session.ts` that:
 
@@ -34,7 +34,7 @@ Keep this hook app-owned so route composition stays explicit and readable in the
 
 Expected: The router and authenticated home can react to session changes without duplicating Supabase session logic.
 
-- [ ] **Step 3: Add a shared bootstrap/loading route state**
+- [x] **Step 3: Add a shared bootstrap/loading route state**
 
 Create `apps/health-tracker-web/src/app/components/auth-route-state.tsx` to show a lightweight loading surface while auth resolution is in progress.
 
@@ -42,7 +42,7 @@ Keep it simple and visually consistent with the existing design system.
 
 Expected: The app has a dedicated state for the auth bootstrap window and avoids redirect flicker.
 
-- [ ] **Step 4: Rework the router into public-only and private behavior**
+- [x] **Step 4: Rework the router into public-only and private behavior**
 
 Update `apps/health-tracker-web/src/app/router.tsx` so that:
 
@@ -54,7 +54,7 @@ Update `apps/health-tracker-web/src/app/router.tsx` so that:
 
 Expected: Route behavior matches the approved spec for all authenticated and unauthenticated cases.
 
-- [ ] **Step 5: Make the landing page a signed-in home**
+- [x] **Step 5: Make the landing page a signed-in home**
 
 Update `apps/health-tracker-web/src/app/pages/landing-page.tsx` so the page still reuses the current design-system surfaces but now clearly indicates authenticated state. Add:
 
@@ -66,7 +66,7 @@ Keep the page useful as a temporary dashboard while removing the feeling that it
 
 Expected: A successful login or sign-up lands on a private screen that proves the auth loop works end-to-end.
 
-- [ ] **Step 6: Tighten the remaining page flows**
+- [x] **Step 6: Tighten the remaining page flows**
 
 Update `login-page.tsx`, `signup-page.tsx`, and `not-found-page.tsx` as needed so:
 
@@ -76,7 +76,7 @@ Update `login-page.tsx`, `signup-page.tsx`, and `not-found-page.tsx` as needed s
 
 Expected: Edge navigation paths still feel coherent after auth routing is introduced.
 
-- [ ] **Step 7: Lint the routed app flow**
+- [x] **Step 7: Lint the routed app flow**
 
 Run:
 
@@ -86,7 +86,7 @@ yarn eslint apps/health-tracker-web/src apps/health-tracker-web/vite.config.ts -
 
 Expected: The app layer changes lint cleanly with the new routing and session logic.
 
-- [ ] **Step 8: Commit the route and home integration**
+- [x] **Step 8: Commit the route and home integration**
 
 Run:
 
@@ -96,3 +96,14 @@ git commit -m "feat: wire auth routes"
 ```
 
 Expected: Git creates a focused commit for auth-aware routing and the temporary private home.
+
+### Execution Notes
+
+- Added `useAuthSession` as an app-owned session store so auth bootstrap and auth state changes can be consumed from routes and pages without duplicating Supabase wiring.
+- Added `AuthRouteState` as the dedicated bootstrap surface while session resolution is pending.
+- Reworked the router into `PublicOnlyRoute` and `PrivateRoute` behavior for `/login`, `/signup`, and `/`.
+- Upgraded the landing page into a temporary signed-in home with authenticated email context and a real `Sign Out` action.
+- Tightened `Login` and `Sign Up` so submit errors clear after further editing and successful submit navigates with `replace`.
+- Verification run:
+  - `yarn eslint apps/health-tracker-web/src apps/health-tracker-web/vite.config.ts --max-warnings=0`
+  - `yarn build`
