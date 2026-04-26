@@ -6,7 +6,7 @@ export function BodyMetricsStep() {
   return (
     <Stack spacing={1.5}>
       <Typography color="text.secondary">
-        Dữ liệu cơ thể giúp app có bối cảnh nền cho các tính năng sức khỏe ở phase sau.
+        Chiều cao và cân nặng giúp gợi ý sức khỏe sát hơn theo thể trạng.
       </Typography>
 
       <Grid container spacing={2}>

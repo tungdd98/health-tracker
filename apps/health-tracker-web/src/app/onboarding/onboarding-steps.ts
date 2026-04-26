@@ -1,5 +1,3 @@
-import { SUPPORTED_ONBOARDING_PHASES } from '@health-tracker/api';
-
 import {
   ONBOARDING_STEP_IDS,
   type OnboardingStepDefinition,
@@ -9,28 +7,28 @@ import {
 export const ONBOARDING_STEPS: readonly OnboardingStepDefinition[] = [
   {
     id: ONBOARDING_STEP_IDS.phase,
-    title: 'Select Phase',
-    description: 'Chọn nhánh sản phẩm phù hợp trước khi tiếp tục.',
+    title: 'Chọn giai đoạn',
+    description: 'Chọn giai đoạn phù hợp để bắt đầu.',
   },
   {
     id: ONBOARDING_STEP_IDS.basicProfile,
-    title: 'Basic Profile',
-    description: 'Thêm tên và ngày sinh nếu Hoàng Thượng muốn cá nhân hóa.',
+    title: 'Thông tin cơ bản',
+    description: 'Điền tên hiển thị và ngày sinh để cá nhân hóa trải nghiệm.',
   },
   {
     id: ONBOARDING_STEP_IDS.cycle,
-    title: 'Cycle Information',
-    description: 'Bổ sung dữ liệu chu kỳ để các bước sau có bối cảnh phù hợp.',
+    title: 'Chu kỳ kinh nguyệt',
+    description: 'Bổ sung dữ liệu chu kỳ để theo dõi chính xác hơn.',
   },
   {
     id: ONBOARDING_STEP_IDS.bodyMetrics,
-    title: 'Body Metrics',
-    description: 'Ghi nhận chiều cao và cân nặng nếu có sẵn.',
+    title: 'Chiều cao và cân nặng',
+    description: 'Thêm chiều cao và cân nặng nếu đã có sẵn.',
   },
   {
     id: ONBOARDING_STEP_IDS.completion,
-    title: 'Completion',
-    description: 'Xác nhận rằng bước khởi tạo đã hoàn tất.',
+    title: 'Hoàn tất',
+    description: 'Mọi thứ đã sẵn sàng để bắt đầu sử dụng ứng dụng.',
   },
 ];
 
@@ -70,4 +68,4 @@ export const getPreviousOnboardingStepId = (stepId: OnboardingStepId) => {
   return currentIndex > 0 ? (ONBOARDING_STEPS[currentIndex - 1]?.id ?? null) : null;
 };
 
-export const SUPPORTED_PHASE_OPTIONS = SUPPORTED_ONBOARDING_PHASES;
+export { SUPPORTED_ONBOARDING_PHASES as SUPPORTED_PHASE_OPTIONS } from '@health-tracker/api';

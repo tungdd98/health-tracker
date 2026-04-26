@@ -86,10 +86,7 @@ export function OnboardingLayout({
               <Stack spacing={1}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
                   <Typography color="text.secondary" variant="overline">
-                    Bước {currentStepNumber} / {totalSteps}
-                  </Typography>
-                  <Typography color="text.secondary" variant="body2">
-                    {Math.round(progressValue)}%
+                    {currentStepNumber} / {totalSteps}
                   </Typography>
                 </Stack>
                 <LinearProgress
@@ -105,11 +102,13 @@ export function OnboardingLayout({
 
               {children}
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
-                <Box sx={{ flex: 1 }}>{backAction}</Box>
-                <Box sx={{ flex: 1 }}>{skipAction}</Box>
-                <Box sx={{ flex: 1 }}>{continueAction}</Box>
-              </Stack>
+              {backAction || skipAction || continueAction ? (
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
+                  <Box sx={{ flex: 1 }}>{backAction}</Box>
+                  <Box sx={{ flex: 1 }}>{skipAction}</Box>
+                  <Box sx={{ flex: 1 }}>{continueAction}</Box>
+                </Stack>
+              ) : null}
 
               {footerNote ? (
                 <Typography color="text.secondary" variant="caption">

@@ -1,5 +1,5 @@
 import type { AuthSession } from '@supabase/supabase-js';
-import { useSyncExternalStore } from 'react';
+import { useMemo, useSyncExternalStore } from 'react';
 
 import {
   getCurrentSession,
@@ -69,7 +69,10 @@ const getSnapshot = () => authStore;
 
 export const useAuthSession = () => {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
-  const onboardingProfile = getOnboardingProfileFromUser(snapshot.session?.user ?? null);
+  const onboardingProfile = useMemo(
+    () => getOnboardingProfileFromUser(snapshot.session?.user ?? null),
+    [snapshot.session?.user],
+  );
 
   return {
     isAuthResolved: snapshot.isAuthResolved,

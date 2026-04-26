@@ -1,14 +1,10 @@
-import { Grid, Stack, Typography } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 
 import { FormDateField, FormTextField } from '@health-tracker/forms';
 
 export function BasicProfileStep() {
   return (
     <Stack spacing={1.5}>
-      <Typography color="text.secondary">
-        Bước này là tùy chọn. Hoàng Thượng có thể điền nếu muốn ứng dụng cá nhân hóa hơn.
-      </Typography>
-
       <Grid container spacing={2}>
         <Grid size={{ xs: 12 }}>
           <FormTextField

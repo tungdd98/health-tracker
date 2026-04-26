@@ -11,15 +11,14 @@ import { type OnboardingPhaseStepValues, type OnboardingPhaseOption } from './on
 const PHASE_OPTIONS: OnboardingPhaseOption[] = [
   {
     phase: 'pre-pregnancy',
-    label: 'Preparing for pregnancy',
-    description: 'Bộ công cụ dành cho người đang chuẩn bị có em bé.',
-    helperLabel: 'Đang mở',
+    label: 'Chuẩn bị có em bé',
+    description: 'Lộ trình dành cho giai đoạn chuẩn bị mang thai.',
   },
   {
-    label: 'Currently pregnant',
-    description: 'Nhánh này sẽ được mở ở phase sau.',
+    label: 'Đang có em bé',
+    description: 'Mục này sẽ sớm được mở trong bản cập nhật tiếp theo.',
     disabled: true,
-    helperLabel: 'Coming soon',
+    helperLabel: 'Sắp ra mắt',
   },
 ];
 
@@ -88,11 +87,7 @@ export function PhaseStep() {
       control={control}
       name="selectedPhase"
       render={({ field, fieldState }) => (
-        <FormField
-          error={fieldState.error?.message}
-          label="Chọn giai đoạn phù hợp"
-          helperText="Hoàng Thượng cần chọn một nhánh để tiếp tục qua các bước còn lại."
-        >
+        <FormField error={fieldState.error?.message} label="Chọn giai đoạn phù hợp">
           <Stack spacing={1.5}>
             {PHASE_OPTIONS.map((option) => (
               <PhaseOptionCard

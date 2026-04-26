@@ -6,7 +6,7 @@ export function CycleStep() {
   return (
     <Stack spacing={1.5}>
       <Typography color="text.secondary">
-        Thông tin này giúp những bước sau hiểu nhịp chu kỳ, nhưng hoàn toàn có thể bỏ qua.
+        Thông tin này giúp theo dõi chu kỳ tốt hơn. Nếu chưa sẵn sàng, có thể để trống.
       </Typography>
 
       <Grid container spacing={2}>

@@ -10,6 +10,7 @@ import type { ZodIssue } from 'zod';
 import {
   completeOnboarding,
   mapAuthErrorToMessage,
+  type OnboardingProfile,
   updateOnboardingProfile,
 } from '@health-tracker/api';
 import { AppFormProvider } from '@health-tracker/forms';
@@ -56,6 +57,17 @@ const toDateTimeOrNull = (value: string | null) => {
   return parsedValue.isValid ? parsedValue : null;
 };
 
+const isSameOnboardingProfile = (current: OnboardingProfile, next: OnboardingProfile) =>
+  current.selectedPhase === next.selectedPhase &&
+  current.onboardingCompleted === next.onboardingCompleted &&
+  current.onboardingCompletedAt === next.onboardingCompletedAt &&
+  current.displayName === next.displayName &&
+  current.birthDate === next.birthDate &&
+  current.cycleLengthDays === next.cycleLengthDays &&
+  current.lastPeriodStartDate === next.lastPeriodStartDate &&
+  current.heightCm === next.heightCm &&
+  current.weightKg === next.weightKg;
+
 const buildFormDefaults = (
   profile: ReturnType<typeof useAuthSession>['onboardingProfile'],
 ): OnboardingFormValues => ({
@@ -99,8 +111,7 @@ const mapZodIssuesToFields = (
 
 export function OnboardingPage() {
   const navigate = useNavigate();
-  const { hasSelectedOnboardingPhase, isOnboardingComplete, onboardingProfile, user } =
-    useAuthSession();
+  const { isOnboardingComplete, onboardingProfile, user } = useAuthSession();
 
   const [currentStepId, setCurrentStepId] = useState<OnboardingStepId>(ONBOARDING_STEP_IDS.phase);
   const [profileSnapshot, setProfileSnapshot] = useState(onboardingProfile);
@@ -123,7 +134,9 @@ export function OnboardingPage() {
   const weightKg = useWatch({ control: form.control, name: 'weightKg' });
 
   useEffect(() => {
-    setProfileSnapshot(onboardingProfile);
+    setProfileSnapshot((current) =>
+      isSameOnboardingProfile(current, onboardingProfile) ? current : onboardingProfile,
+    );
   }, [onboardingProfile]);
 
   useEffect(() => {
@@ -156,7 +169,8 @@ export function OnboardingPage() {
   })();
 
   const showSkip = isOptionalStep(currentStepId) && isCurrentStepEmpty;
-  const canGoBack = currentStepId !== ONBOARDING_STEP_IDS.phase;
+  const canGoBack =
+    currentStepId !== ONBOARDING_STEP_IDS.phase && currentStepId !== ONBOARDING_STEP_IDS.completion;
 
   const mergeProfileSnapshot = (patch: Partial<ReturnType<typeof buildFormDefaults>>) => {
     setProfileSnapshot((current) => ({
@@ -348,10 +362,9 @@ export function OnboardingPage() {
       case ONBOARDING_STEP_IDS.completion:
         return (
           <CompletionStep
-            footer="Khi xác nhận, Hoàng Thượng sẽ vào trang chủ tạm thời của ứng dụng."
             onPrimaryAction={handleComplete}
             primaryActionDisabled={isSubmitting}
-            primaryActionLabel="Vào ứng dụng"
+            primaryActionLabel="Bắt đầu ngay"
             primaryActionLoading={isSubmitting}
           />
         );
@@ -412,12 +425,7 @@ export function OnboardingPage() {
         continueAction={continueAction}
         currentStepNumber={currentStepNumber}
         description={currentStep.description}
-        eyebrow={hasSelectedOnboardingPhase ? 'Đã chọn phase' : 'Thiết lập ban đầu'}
-        footerNote={
-          currentStepId === ONBOARDING_STEP_IDS.phase
-            ? 'Phase đầu tiên là bắt buộc.'
-            : 'Các bước còn lại có thể bỏ qua nếu chưa có dữ liệu.'
-        }
+        eyebrow="Thiết lập ban đầu"
         skipAction={skipAction}
         title={currentStep.title}
         totalSteps={ONBOARDING_STEP_COUNT}

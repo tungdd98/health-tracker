@@ -19,12 +19,10 @@ export function CompletionStep({
 }: CompletionStepProps) {
   return (
     <Stack spacing={2}>
-      <Stack spacing={1}>
+      <Stack alignItems="center" spacing={1} textAlign="center">
         <CheckCircleRoundedIcon color="primary" sx={{ fontSize: 40 }} />
-        <Typography variant="h4">Hoàn tất khởi tạo</Typography>
-        <Typography color="text.secondary">
-          Mọi thông tin cần thiết đã sẵn sàng để Hoàng Thượng bắt đầu sử dụng app.
-        </Typography>
+        <Typography variant="h4">Sẵn sàng bắt đầu</Typography>
+        <Typography color="text.secondary">Mọi thông tin cơ bản đã được thiết lập.</Typography>
       </Stack>
 
       <Button
