@@ -15,7 +15,7 @@
 - Read first: `libs/forms/src/index.ts`
 - Read first: `docs/superpowers/specs/2026-04-26-onboarding-design.md`
 
-- [ ] **Step 1: Review the existing auth layout and shared form primitives**
+- [x] **Step 1: Review the existing auth layout and shared form primitives**
 
 Read these files before editing:
 
@@ -25,7 +25,7 @@ Read these files before editing:
 
 Expected: The worker understands the existing visual language and the shared field components already available in the repo.
 
-- [ ] **Step 2: Define the wizard step model**
+- [x] **Step 2: Define the wizard step model**
 
 Create:
 
@@ -40,7 +40,7 @@ Include:
 
 Expected: The wizard order and navigation model are declared once instead of being scattered through the page.
 
-- [ ] **Step 3: Add per-step validation schemas**
+- [x] **Step 3: Add per-step validation schemas**
 
 Create `apps/health-tracker-web/src/app/onboarding/onboarding-schemas.ts` with separate Zod schemas for:
 
@@ -57,7 +57,7 @@ Requirements:
 
 Expected: Each step can validate only its own fields while keeping optional steps truly optional.
 
-- [ ] **Step 4: Build the shared onboarding layout shell**
+- [x] **Step 4: Build the shared onboarding layout shell**
 
 Create `apps/health-tracker-web/src/app/components/onboarding-layout.tsx` with:
 
@@ -71,7 +71,7 @@ Keep the visual tone aligned with the auth screens rather than inventing a new p
 
 Expected: Every onboarding step renders inside one consistent mobile-first layout.
 
-- [ ] **Step 5: Build the step components**
+- [x] **Step 5: Build the step components**
 
 Create focused app-owned step components:
 
@@ -99,7 +99,7 @@ Requirements by step:
 
 Expected: The page-level wizard can compose simple focused step components instead of one oversized form file.
 
-- [ ] **Step 6: Lint the onboarding UI scaffolding**
+- [x] **Step 6: Lint the onboarding UI scaffolding**
 
 Run:
 
@@ -109,7 +109,7 @@ yarn eslint apps/health-tracker-web/src --max-warnings=0
 
 Expected: The new onboarding UI modules lint cleanly before flow logic is added.
 
-- [ ] **Step 7: Commit the onboarding UI scaffolding**
+- [x] **Step 7: Commit the onboarding UI scaffolding**
 
 Run:
 
