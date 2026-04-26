@@ -1,10 +1,11 @@
 ### Task 08: Add the minimal Zustand reference store
 
 **Files:**
+
 - Create: `libs/state/src/lib/app-ui-store.ts`
 - Modify: `libs/state/src/index.ts`
 
-- [ ] **Step 1: Implement the sample app UI store**
+- [x] **Step 1: Implement the sample app UI store**
 
 Create `libs/state/src/lib/app-ui-store.ts`:
 
@@ -27,7 +28,7 @@ export const useAppUiStore = create<AppUiState>((set) => ({
 
 Expected: The project has one minimal Zustand store that demonstrates the intended pattern without introducing domain state.
 
-- [ ] **Step 2: Export the state library surface**
+- [x] **Step 2: Export the state library surface**
 
 Set `libs/state/src/index.ts` to:
 

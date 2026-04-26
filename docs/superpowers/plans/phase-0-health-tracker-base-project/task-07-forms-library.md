@@ -1,11 +1,12 @@
 ### Task 07: Build the forms library
 
 **Files:**
+
 - Create: `libs/forms/src/lib/form-provider.tsx`
 - Create: `libs/forms/src/lib/form-text-field.tsx`
 - Modify: `libs/forms/src/index.ts`
 
-- [ ] **Step 1: Implement the shared form provider**
+- [x] **Step 1: Implement the shared form provider**
 
 Create `libs/forms/src/lib/form-provider.tsx`:
 
@@ -35,7 +36,7 @@ export function AppFormProvider<TValues extends Record<string, unknown>>({
 
 Expected: The workspace has a standard wrapper for RHF-based forms.
 
-- [ ] **Step 2: Implement the shared text field wrapper**
+- [x] **Step 2: Implement the shared text field wrapper**
 
 Create `libs/forms/src/lib/form-text-field.tsx`:
 
@@ -69,7 +70,7 @@ export function FormTextField({ name, ...props }: FormTextFieldProps) {
 
 Expected: A reusable MUI text field wrapper exists for future forms.
 
-- [ ] **Step 3: Export the forms library surface**
+- [x] **Step 3: Export the forms library surface**
 
 Set `libs/forms/src/index.ts` to:
 

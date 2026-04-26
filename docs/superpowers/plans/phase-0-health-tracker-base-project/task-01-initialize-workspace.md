@@ -1,6 +1,7 @@
 ### Task 01: Initialize the Nx workspace and React app
 
 **Files:**
+
 - Create: `package.json`
 - Create: `nx.json`
 - Create: `tsconfig.base.json`
@@ -10,7 +11,7 @@
 - Create: `apps/health-tracker-web/src/app/app.tsx`
 - Create: `apps/health-tracker-web/index.html`
 
-- [ ] **Step 1: Scaffold the Nx workspace with Yarn**
+- [x] **Step 1: Scaffold the Nx workspace with Yarn**
 
 Run:
 
@@ -20,7 +21,7 @@ yarn create nx-workspace@latest . --preset=apps --nxCloud=skip --packageManager=
 
 Expected: Nx initializes the workspace in the current directory and creates root config files including `package.json`, `nx.json`, and `tsconfig.base.json`.
 
-- [ ] **Step 2: Add the React plugin and generate the web app**
+- [x] **Step 2: Add the React plugin and generate the web app**
 
 Run:
 
@@ -31,7 +32,7 @@ yarn nx g @nx/react:app health-tracker-web --bundler=vite --style=css --routing=
 
 Expected: `apps/health-tracker-web` exists, the app builds with Vite, and no unit or e2e test projects are generated.
 
-- [ ] **Step 3: Verify the generated app starts**
+- [x] **Step 3: Verify the generated app starts**
 
 Run:
 

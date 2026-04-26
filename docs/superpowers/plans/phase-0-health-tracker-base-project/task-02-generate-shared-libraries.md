@@ -1,6 +1,7 @@
 ### Task 02: Generate the shared foundation libraries
 
 **Files:**
+
 - Create: `libs/theme/project.json`
 - Create: `libs/theme/src/index.ts`
 - Create: `libs/ui/project.json`
@@ -12,7 +13,7 @@
 - Create: `libs/state/project.json`
 - Create: `libs/state/src/index.ts`
 
-- [ ] **Step 1: Generate publish-disabled React/TS libraries**
+- [x] **Step 1: Generate publish-disabled React/TS libraries**
 
 Run:
 
@@ -26,7 +27,7 @@ yarn nx g @nx/react:lib state --bundler=vite --unitTestRunner=none
 
 Expected: All five libraries are created under `libs/` with Nx project metadata and no test scaffolding.
 
-- [ ] **Step 2: Normalize the public entrypoints to clean exports**
+- [x] **Step 2: Normalize the public entrypoints to clean exports**
 
 Update the generated index files so each library exports only intentionally named modules:
 

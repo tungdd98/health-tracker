@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "tsBuildInfoFile": "../../node_modules/.tmp/health-tracker-web-node.tsbuildinfo"
+  },
+  "include": ["vite.config.ts"]
+}

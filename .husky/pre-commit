@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -e
+
+yarn nx format:check
+yarn nx run-many -t lint --all

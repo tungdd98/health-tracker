@@ -12,15 +12,15 @@
 
 ## Tracking
 
-- [ ] Task 01: [Initialize the Nx workspace and React app](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-01-initialize-workspace.md)
-- [ ] Task 02: [Generate the shared foundation libraries](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-02-generate-shared-libraries.md)
-- [ ] Task 03: [Install runtime dependencies and root developer tooling](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-03-root-tooling.md)
-- [ ] Task 04: [Build the shared theme library](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-04-theme-library.md)
-- [ ] Task 05: [Build the API foundation](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-05-api-foundation.md)
-- [ ] Task 06: [Build the UI library primitives](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-06-ui-library.md)
-- [ ] Task 07: [Build the forms library](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-07-forms-library.md)
-- [ ] Task 08: [Add the minimal Zustand reference store](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-08-state-library.md)
-- [ ] Task 09: [Wire the app providers, routes, and screens](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-09-app-wiring.md)
+- [x] Task 01: [Initialize the Nx workspace and React app](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-01-initialize-workspace.md)
+- [x] Task 02: [Generate the shared foundation libraries](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-02-generate-shared-libraries.md)
+- [x] Task 03: [Install runtime dependencies and root developer tooling](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-03-root-tooling.md)
+- [x] Task 04: [Build the shared theme library](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-04-theme-library.md)
+- [x] Task 05: [Build the API foundation](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-05-api-foundation.md)
+- [x] Task 06: [Build the UI library primitives](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-06-ui-library.md)
+- [x] Task 07: [Build the forms library](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-07-forms-library.md)
+- [x] Task 08: [Add the minimal Zustand reference store](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-08-state-library.md)
+- [x] Task 09: [Wire the app providers, routes, and screens](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-09-app-wiring.md)
 - [ ] Task 10: [Final verification and developer documentation](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-10-verification-and-readme.md)
 
 ## File Structure Map

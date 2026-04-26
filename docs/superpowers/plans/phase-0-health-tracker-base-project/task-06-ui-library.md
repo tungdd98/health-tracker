@@ -1,6 +1,7 @@
 ### Task 06: Build the UI library primitives
 
 **Files:**
+
 - Create: `libs/ui/src/lib/app-shell.tsx`
 - Create: `libs/ui/src/lib/app-header.tsx`
 - Create: `libs/ui/src/lib/page-section.tsx`
@@ -8,7 +9,7 @@
 - Create: `libs/ui/src/lib/empty-state.tsx`
 - Modify: `libs/ui/src/index.ts`
 
-- [ ] **Step 1: Implement the shared shell and section components**
+- [x] **Step 1: Implement the shared shell and section components**
 
 Create `libs/ui/src/lib/app-shell.tsx`:
 
@@ -42,12 +43,7 @@ type PageSectionProps = PropsWithChildren<{
   description?: string;
 }>;
 
-export function PageSection({
-  eyebrow,
-  title,
-  description,
-  children,
-}: PageSectionProps) {
+export function PageSection({ eyebrow, title, description, children }: PageSectionProps) {
   return (
     <Card sx={{ p: 4 }}>
       <Stack spacing={2}>
@@ -69,7 +65,7 @@ export function PageSection({
 
 Expected: The shared library has a stable application shell and standard page section wrapper.
 
-- [ ] **Step 2: Implement the header, loading, and empty states**
+- [x] **Step 2: Implement the header, loading, and empty states**
 
 Create `libs/ui/src/lib/app-header.tsx`:
 
@@ -130,7 +126,7 @@ export function EmptyState({ title, description, action }: EmptyStateProps) {
 
 Expected: The UI library contains the project-specific primitives named in the design spec.
 
-- [ ] **Step 3: Export the UI surface**
+- [x] **Step 3: Export the UI surface**
 
 Set `libs/ui/src/index.ts` to:
 

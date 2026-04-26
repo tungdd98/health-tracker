@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@health-tracker/api": ["libs/api/src/index.ts"],
+      "@health-tracker/forms": ["libs/forms/src/index.ts"],
+      "@health-tracker/state": ["libs/state/src/index.ts"],
+      "@health-tracker/theme": ["libs/theme/src/index.ts"],
+      "@health-tracker/ui": ["libs/ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".nx", ".worktrees"]
+}

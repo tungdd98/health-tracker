@@ -1,6 +1,7 @@
 ### Task 09: Wire the app providers, routes, and screens
 
 **Files:**
+
 - Create: `apps/health-tracker-web/src/app/providers.tsx`
 - Create: `apps/health-tracker-web/src/app/router.tsx`
 - Create: `apps/health-tracker-web/src/app/pages/landing-page.tsx`
@@ -8,7 +9,7 @@
 - Modify: `apps/health-tracker-web/src/app/app.tsx`
 - Modify: `apps/health-tracker-web/src/main.tsx`
 
-- [ ] **Step 1: Implement the provider composition**
+- [x] **Step 1: Implement the provider composition**
 
 Create `apps/health-tracker-web/src/app/providers.tsx`:
 
@@ -37,7 +38,7 @@ export function AppProviders({ children }: PropsWithChildren) {
 
 Expected: The app has one explicit provider composition entrypoint that wires theme, query client, and Supabase bootstrap.
 
-- [ ] **Step 2: Implement the routes and screens**
+- [x] **Step 2: Implement the routes and screens**
 
 Create `apps/health-tracker-web/src/app/pages/landing-page.tsx`:
 
@@ -55,7 +56,9 @@ export function LandingPage() {
         description="This phase focuses on project setup, shared libraries, and provider wiring."
       >
         <Stack spacing={1}>
-          <Typography>React, Nx, MUI, React Query, Supabase, and shared foundations are in place.</Typography>
+          <Typography>
+            React, Nx, MUI, React Query, Supabase, and shared foundations are in place.
+          </Typography>
           <Typography color="text.secondary">
             The next phase can start adding auth and health-tracking features on top of this base.
           </Typography>
@@ -113,7 +116,7 @@ export const appRouter = createBrowserRouter([
 
 Expected: The app exposes `/` and `*` with the route structure required by the spec.
 
-- [ ] **Step 3: Wire the app root to providers and router**
+- [x] **Step 3: Wire the app root to providers and router**
 
 Set `apps/health-tracker-web/src/app/app.tsx` to:
 

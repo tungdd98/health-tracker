@@ -1,6 +1,7 @@
 ### Task 03: Install runtime dependencies and root developer tooling
 
 **Files:**
+
 - Modify: `package.json`
 - Create: `.nvmrc`
 - Create: `.env.example`
@@ -12,7 +13,7 @@
 - Create: `.husky/commit-msg`
 - Modify: `.gitignore`
 
-- [ ] **Step 1: Add runtime dependencies**
+- [x] **Step 1: Add runtime dependencies**
 
 Run:
 
@@ -22,7 +23,7 @@ yarn add @mui/material @mui/icons-material @emotion/react @emotion/styled react-
 
 Expected: `package.json` contains the requested application dependencies.
 
-- [ ] **Step 2: Add root dev dependencies**
+- [x] **Step 2: Add root dev dependencies**
 
 Run:
 
@@ -32,7 +33,7 @@ yarn add -D prettier husky @commitlint/cli @commitlint/config-conventional eslin
 
 Expected: Root tooling dependencies are available for formatting, linting, hooks, and commit message validation.
 
-- [ ] **Step 3: Add root formatting and environment files**
+- [x] **Step 3: Add root formatting and environment files**
 
 Create these files:
 
@@ -76,7 +77,7 @@ dist
 
 Expected: Formatting defaults, ignored outputs, Node version, and documented env variables are in place.
 
-- [ ] **Step 4: Create the root ESLint config**
+- [x] **Step 4: Create the root ESLint config**
 
 Create `eslint.config.mjs`:
 
@@ -101,7 +102,7 @@ export default [
     },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
 ];
@@ -109,7 +110,7 @@ export default [
 
 Expected: The workspace has a pragmatic flat ESLint config that works across app and libs.
 
-- [ ] **Step 5: Configure Commitlint and Husky**
+- [x] **Step 5: Configure Commitlint and Husky**
 
 Create `commitlint.config.cjs`:
 

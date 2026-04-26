@@ -1,12 +1,13 @@
 ### Task 05: Build the API foundation
 
 **Files:**
+
 - Create: `libs/api/src/lib/env.ts`
 - Create: `libs/api/src/lib/supabase.ts`
 - Create: `libs/api/src/lib/query-client.ts`
 - Modify: `libs/api/src/index.ts`
 
-- [ ] **Step 1: Implement runtime env parsing**
+- [x] **Step 1: Implement runtime env parsing**
 
 Create `libs/api/src/lib/env.ts`:
 
@@ -28,7 +29,7 @@ export const appEnv: AppEnv = envSchema.parse({
 
 Expected: Invalid or missing Supabase env values fail at startup with a clear schema error.
 
-- [ ] **Step 2: Implement the shared Supabase client**
+- [x] **Step 2: Implement the shared Supabase client**
 
 Create `libs/api/src/lib/supabase.ts`:
 
@@ -37,15 +38,12 @@ import { createClient } from '@supabase/supabase-js';
 
 import { appEnv } from './env';
 
-export const supabase = createClient(
-  appEnv.VITE_SUPABASE_URL,
-  appEnv.VITE_SUPABASE_ANON_KEY,
-);
+export const supabase = createClient(appEnv.VITE_SUPABASE_URL, appEnv.VITE_SUPABASE_ANON_KEY);
 ```
 
 Expected: The app has a single importable Supabase client instance.
 
-- [ ] **Step 3: Implement the shared Query Client**
+- [x] **Step 3: Implement the shared Query Client**
 
 Create `libs/api/src/lib/query-client.ts`:
 
@@ -65,7 +63,7 @@ export const createAppQueryClient = () =>
 
 Expected: React Query has a single default factory with pragmatic defaults.
 
-- [ ] **Step 4: Export the API surface**
+- [x] **Step 4: Export the API surface**
 
 Set `libs/api/src/index.ts` to:
 

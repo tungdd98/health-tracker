@@ -1,0 +1,15 @@
+{
+  "name": "forms",
+  "root": "libs/forms",
+  "sourceRoot": "libs/forms/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint libs/forms/src --max-warnings=0"
+      }
+    }
+  },
+  "tags": []
+}

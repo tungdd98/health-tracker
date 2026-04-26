@@ -1,15 +1,3 @@
-### Task 04: Build the shared theme library
-
-**Files:**
-
-- Create: `libs/theme/src/lib/theme.ts`
-- Modify: `libs/theme/src/index.ts`
-
-- [x] **Step 1: Implement the project theme**
-
-Create `libs/theme/src/lib/theme.ts`:
-
-```ts
 import { createTheme } from '@mui/material/styles';
 
 export const appTheme = createTheme({
@@ -62,27 +50,3 @@ export const appTheme = createTheme({
     },
   },
 });
-```
-
-Expected: The workspace has a single shared MUI theme with project-level visual defaults.
-
-- [x] **Step 2: Export the theme from the library entrypoint**
-
-Set `libs/theme/src/index.ts` to:
-
-```ts
-export * from './lib/theme';
-```
-
-Expected: App code can import `appTheme` from `@health-tracker/theme`.
-
-- [ ] **Step 3: Commit the theme foundation**
-
-Run:
-
-```bash
-git add libs/theme
-git commit -m "feat: add shared mui theme"
-```
-
-Expected: Git creates a commit containing the theme implementation.

@@ -1,10 +1,11 @@
 ### Task 10: Final verification and developer documentation
 
 **Files:**
+
 - Create: `README.md`
 - Modify: `package.json`
 
-- [ ] **Step 1: Add helpful root scripts**
+- [x] **Step 1: Add helpful root scripts**
 
 Ensure `package.json` includes these scripts:
 
@@ -22,11 +23,11 @@ Ensure `package.json` includes these scripts:
 
 Expected: The repo has ergonomic root commands for day-to-day development.
 
-- [ ] **Step 2: Write the project README**
+- [x] **Step 2: Write the project README**
 
 Create `README.md`:
 
-```md
+````md
 # Health Tracker
 
 ## Requirements
@@ -40,6 +41,7 @@ Create `README.md`:
 yarn install
 cp .env.example .env.local
 ```
+````
 
 Fill in `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` before running the app.
 
@@ -60,11 +62,12 @@ yarn format
 - MUI and React Query setup
 - Supabase client bootstrap
 - ESLint, Prettier, Husky, Commitlint
-```
+
+````
 
 Expected: A new engineer can install, configure env values, and run the workspace without reading implementation code.
 
-- [ ] **Step 3: Run the final verification commands**
+- [x] **Step 3: Run the final verification commands**
 
 Run:
 
@@ -72,11 +75,13 @@ Run:
 yarn install
 yarn lint
 yarn build
-```
+````
 
 Expected: All commands succeed with no lint errors and the app builds successfully.
 
 - [ ] **Step 4: Perform a final smoke check**
+
+Smoke check note: the sandbox blocks listening on local ports with `EPERM`, so the dev-server run could not be completed here even though the app builds successfully.
 
 Run:
 
