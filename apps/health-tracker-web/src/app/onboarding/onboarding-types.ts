@@ -43,3 +43,8 @@ export type OnboardingBodyMetricsStepValues = {
   heightCm: string;
   weightKg: string;
 };
+
+export type OnboardingFormValues = OnboardingPhaseStepValues &
+  OnboardingBasicProfileStepValues &
+  OnboardingCycleStepValues &
+  OnboardingBodyMetricsStepValues;

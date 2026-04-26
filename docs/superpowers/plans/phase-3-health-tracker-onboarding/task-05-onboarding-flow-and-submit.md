@@ -10,7 +10,7 @@
 - Read first: `apps/health-tracker-web/src/app/onboarding/onboarding-schemas.ts`
 - Read first: `docs/superpowers/specs/2026-04-26-onboarding-design.md`
 
-- [ ] **Step 1: Create the wizard page shell and current-step rendering**
+- [x] **Step 1: Create the wizard page shell and current-step rendering**
 
 Create `apps/health-tracker-web/src/app/pages/onboarding-page.tsx` and wire it to:
 
@@ -23,7 +23,7 @@ Initialize the wizard from the first step every time this page is opened in this
 
 Expected: The onboarding route renders a complete page shell with the correct first step for a first-time user.
 
-- [ ] **Step 2: Implement per-step `Continue` persistence**
+- [x] **Step 2: Implement per-step `Continue` persistence**
 
 In `onboarding-page.tsx`, implement focused submit handlers:
 
@@ -44,7 +44,7 @@ Each handler should call the shared onboarding update helper and keep the user o
 
 Expected: The wizard writes step data incrementally instead of waiting for one final submit.
 
-- [ ] **Step 3: Implement `Back` and `Skip` behavior**
+- [x] **Step 3: Implement `Back` and `Skip` behavior**
 
 Required rules:
 
@@ -55,7 +55,7 @@ Required rules:
 
 Expected: The flow matches the spec's soft onboarding rules without hidden partial-save surprises.
 
-- [ ] **Step 4: Implement final completion behavior**
+- [x] **Step 4: Implement final completion behavior**
 
 On the `Completion` step:
 
@@ -67,7 +67,7 @@ Do not mark onboarding complete from any earlier step.
 
 Expected: Completion state is only set from the last screen, exactly as defined in the spec.
 
-- [ ] **Step 5: Add submit-state and error handling**
+- [x] **Step 5: Add submit-state and error handling**
 
 The onboarding page should include:
 
@@ -77,7 +77,7 @@ The onboarding page should include:
 
 Expected: The wizard remains stable under save failures and does not falsely complete onboarding.
 
-- [ ] **Step 6: Lint and build the onboarding flow**
+- [x] **Step 6: Lint and build the onboarding flow**
 
 Run:
 
@@ -88,7 +88,7 @@ yarn build
 
 Expected: The full repo still passes the required verification commands after the onboarding flow is wired.
 
-- [ ] **Step 7: Commit the onboarding flow behavior**
+- [x] **Step 7: Commit the onboarding flow behavior**
 
 Run:
 

@@ -16,7 +16,7 @@
 - [x] Task 02: [Design the onboarding screens in Google Stitch](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-02-stitch-onboarding-design.md)
 - [x] Task 03: [Gate authenticated routes with onboarding-aware session logic](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-03-onboarding-routing-and-session.md)
 - [x] Task 04: [Build the onboarding wizard structure, schemas, and step components](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-04-onboarding-ui-and-steps.md)
-- [ ] Task 05: [Wire onboarding persistence, navigation, and completion behavior](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-onboarding-flow-and-submit.md)
+- [x] Task 05: [Wire onboarding persistence, navigation, and completion behavior](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-onboarding-flow-and-submit.md)
 - [ ] Task 06: [Verify onboarding flows and synchronize plan tracking](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-06-verification-and-tracking.md)
 
 ## File Structure Map
