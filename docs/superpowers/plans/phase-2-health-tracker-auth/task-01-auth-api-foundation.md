@@ -7,7 +7,7 @@
 - Modify: `libs/api/src/lib/supabase.ts`
 - Modify: `libs/api/src/index.ts`
 
-- [ ] **Step 1: Review the existing Supabase client and current exports**
+- [x] **Step 1: Review the existing Supabase client and current exports**
 
 Read these files before editing:
 
@@ -17,7 +17,7 @@ Read these files before editing:
 
 Expected: The worker understands the current API surface and the auth requirements before adding new helpers.
 
-- [ ] **Step 2: Add a small shared auth helper module**
+- [x] **Step 2: Add a small shared auth helper module**
 
 Create `libs/api/src/lib/auth.ts` with focused helpers around the existing `supabase` client. Include:
 
@@ -29,7 +29,7 @@ Create `libs/api/src/lib/auth.ts` with focused helpers around the existing `supa
 
 Expected: App code can import a narrow auth API instead of calling raw Supabase methods throughout the route and screen layer.
 
-- [ ] **Step 3: Add human-readable auth error mapping**
+- [x] **Step 3: Add human-readable auth error mapping**
 
 Create `libs/api/src/lib/auth-errors.ts` with a small mapper function such as `mapAuthErrorToMessage(error: AuthError | Error | null): string`. Cover at least:
 
@@ -41,13 +41,13 @@ Return short Vietnamese strings suitable for inline form-level error display.
 
 Expected: Submit-level auth failures can be shown consistently without leaking raw Supabase messages into the UI.
 
-- [ ] **Step 4: Adjust the shared Supabase client only if auth behavior requires it**
+- [x] **Step 4: Adjust the shared Supabase client only if auth behavior requires it**
 
 Update `libs/api/src/lib/supabase.ts` only if needed to make auth behavior explicit, for example by adding an options object for auth persistence defaults instead of relying on hidden library defaults.
 
 Expected: The shared client remains a single importable instance and the auth-related behavior that matters for this phase is visible in code.
 
-- [ ] **Step 5: Export the new auth surface**
+- [x] **Step 5: Export the new auth surface**
 
 Update `libs/api/src/index.ts` to export the new auth helpers and error mapper together with the existing env, query-client, and supabase exports.
 
