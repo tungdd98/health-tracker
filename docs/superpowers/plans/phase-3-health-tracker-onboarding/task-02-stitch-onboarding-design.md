@@ -5,7 +5,7 @@
 - Reference: `docs/superpowers/specs/2026-04-26-onboarding-design.md`
 - Modify: the Google Stitch project for Health Tracker onboarding screens and implementation-state notes
 
-- [ ] **Step 1: Re-read the approved onboarding spec before touching Stitch**
+- [x] **Step 1: Re-read the approved onboarding spec before touching Stitch**
 
 Review:
 
@@ -20,7 +20,7 @@ Focus on:
 
 Expected: The Stitch work stays aligned with the approved scope and does not drift into unsupported product branches.
 
-- [ ] **Step 2: Design the `Select Phase / Default` frame**
+- [x] **Step 2: Design the `Select Phase / Default` frame**
 
 Create or update a dedicated frame for the first onboarding step that includes:
 
@@ -33,7 +33,7 @@ Create or update a dedicated frame for the first onboarding step that includes:
 
 Expected: Engineering has a clear visual source of truth for the only required onboarding step.
 
-- [ ] **Step 3: Design the optional data-entry default frames**
+- [x] **Step 3: Design the optional data-entry default frames**
 
 Create or update dedicated default frames for:
 
@@ -50,7 +50,7 @@ Each frame should include:
 
 Expected: Each optional onboarding step has an authoritative default layout before code implementation begins.
 
-- [ ] **Step 4: Design the `Hoàn tất / Default` frame**
+- [x] **Step 4: Design the `Hoàn tất / Default` frame**
 
 Create or update the final completion frame with:
 
@@ -60,7 +60,7 @@ Create or update the final completion frame with:
 
 Expected: The wizard has a clear visual destination that matches the approved completion behavior.
 
-- [ ] **Step 5: Capture state and implementation notes without making non-default variants authoritative**
+- [x] **Step 5: Capture state and implementation notes without making non-default variants authoritative**
 
 Document implementation-facing notes in the Stitch handoff or task execution notes for:
 
@@ -75,7 +75,7 @@ Do not make generated loading or error mockups the design source of truth unless
 
 Expected: Engineering can implement validation, loading, and error states in code while preserving the approved default layouts.
 
-- [ ] **Step 6: Scope-check the Stitch output before moving to code**
+- [x] **Step 6: Scope-check the Stitch output before moving to code**
 
 Verify the final Stitch set does not introduce:
 
@@ -86,3 +86,37 @@ Verify the final Stitch set does not introduce:
 - dashboard mockups beyond a minimal post-onboarding handoff if needed
 
 Expected: The phase moves into UI implementation with stable visual references and no hidden scope expansion.
+
+### Execution Notes
+
+- Stitch project: `projects/2050085960228570195` (`Trợ lý Sức khỏe Chang`)
+- Stitch session: `593088093545485730`
+- Updated design system: `Health Tracker Mobile DS`
+- The onboarding screens were generated in the same warm rose / tonal layering language as auth, using Plus Jakarta Sans across the set.
+
+### Final Screen Inventory
+
+- `Select Phase / Default`
+- `Basic Profile / Default`
+- `Cycle Information / Default`
+- `Body Metrics / Default`
+- `Completion / Default`
+
+### Authority Decision
+
+- The approved Stitch source of truth for onboarding implementation is limited to the five default screens above.
+- Any loading, validation error, or submit error behavior should be implemented in code on top of the default layouts.
+- The disabled `Đang có em bé` branch remains visible but is not an implementation target in this phase.
+
+### Implementation Notes
+
+- `Select Phase / Default`: progress `1 / 5`, eyebrow + title + description, one enabled selection card, one disabled coming-soon card, and primary `Tiếp tục`.
+- `Basic Profile / Default`: progress `2 / 5`, title + helper copy, `Tên hiển thị` and `Ngày sinh`, with `Quay lại`, `Bỏ qua`, `Tiếp tục`.
+- `Cycle Information / Default`: progress `3 / 5`, helper copy explaining why cycle data is requested, `Độ dài chu kỳ` and `Ngày bắt đầu kỳ kinh gần nhất`, with `Quay lại`, `Bỏ qua`, `Tiếp tục`.
+- `Body Metrics / Default`: progress `4 / 5`, `Chiều cao (cm)` and `Cân nặng (kg)`, with `Quay lại`, `Bỏ qua`, `Tiếp tục`.
+- `Completion / Default`: progress `5 / 5`, simple completion message, calm summary tone, primary `Bắt đầu ngay`.
+- Inline field errors should sit directly beneath the related field.
+- Submit-level errors should be shown above the primary CTA.
+- Loading states should disable the CTA without shifting layout.
+- `Bỏ qua` should appear only on optional steps and be disabled or hidden when the step already has entered values.
+- No extra pregnancy, settings, dashboard, mood, or medication screens were introduced.
