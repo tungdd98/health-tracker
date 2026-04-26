@@ -38,7 +38,7 @@ export * from './lib/app-ui-store';
 
 Expected: The reference store is available through a clean public entrypoint.
 
-- [ ] **Step 3: Commit the state reference**
+- [x] **Step 3: Commit the state reference**
 
 Run:
 

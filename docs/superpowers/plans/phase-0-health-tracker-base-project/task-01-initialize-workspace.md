@@ -42,7 +42,7 @@ yarn nx serve health-tracker-web
 
 Expected: The dev server starts successfully and serves the default Nx React page in the terminal output.
 
-- [ ] **Step 4: Commit the workspace bootstrap**
+- [x] **Step 4: Commit the workspace bootstrap**
 
 Run:
 

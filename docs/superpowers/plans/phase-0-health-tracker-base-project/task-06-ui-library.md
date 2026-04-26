@@ -140,7 +140,7 @@ export * from './lib/empty-state';
 
 Expected: Consumers can import all project-level UI building blocks from the library root.
 
-- [ ] **Step 4: Commit the UI primitives**
+- [x] **Step 4: Commit the UI primitives**
 
 Run:
 

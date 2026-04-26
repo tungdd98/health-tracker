@@ -75,7 +75,7 @@ export * from './lib/supabase';
 
 Expected: App code can import the env object, Supabase client, and Query Client factory from one place.
 
-- [ ] **Step 5: Commit the API foundation**
+- [x] **Step 5: Commit the API foundation**
 
 Run:
 

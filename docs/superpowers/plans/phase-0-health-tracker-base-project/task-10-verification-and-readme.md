@@ -91,7 +91,7 @@ yarn dev
 
 Expected: The dev server starts and the app shows the minimal landing page at `/`, with the not-found page rendering for an unknown route.
 
-- [ ] **Step 5: Commit the final project polish**
+- [x] **Step 5: Commit the final project polish**
 
 Run:
 

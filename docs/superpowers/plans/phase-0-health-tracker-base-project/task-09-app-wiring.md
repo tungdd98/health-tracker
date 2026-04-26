@@ -160,7 +160,7 @@ createRoot(rootElement).render(
 
 Expected: The generated app is replaced with the shared-provider bootstrap and route-based screen composition.
 
-- [ ] **Step 4: Commit the app wiring**
+- [x] **Step 4: Commit the app wiring**
 
 Run:
 

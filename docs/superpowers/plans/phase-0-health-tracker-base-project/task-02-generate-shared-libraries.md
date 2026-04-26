@@ -65,7 +65,7 @@ export * from './lib/app-ui-store';
 
 Expected: The libraries expose stable project-level entrypoints instead of leaving default generator exports in place.
 
-- [ ] **Step 3: Commit the library boundaries**
+- [x] **Step 3: Commit the library boundaries**
 
 Run:
 

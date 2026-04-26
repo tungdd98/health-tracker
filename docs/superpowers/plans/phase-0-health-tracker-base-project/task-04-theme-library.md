@@ -76,7 +76,7 @@ export * from './lib/theme';
 
 Expected: App code can import `appTheme` from `@health-tracker/theme`.
 
-- [ ] **Step 3: Commit the theme foundation**
+- [x] **Step 3: Commit the theme foundation**
 
 Run:
 

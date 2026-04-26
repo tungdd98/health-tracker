@@ -81,7 +81,7 @@ export * from './lib/form-text-field';
 
 Expected: Consumers can import the shared form primitives from the library root.
 
-- [ ] **Step 4: Commit the forms library**
+- [x] **Step 4: Commit the forms library**
 
 Run:
 

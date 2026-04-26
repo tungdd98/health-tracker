@@ -142,7 +142,7 @@ yarn commitlint --edit "$1"
 
 Expected: Commits are blocked when format, lint, or commit message validation fails.
 
-- [ ] **Step 6: Commit the root toolchain**
+- [x] **Step 6: Commit the root toolchain**
 
 Run:
 
