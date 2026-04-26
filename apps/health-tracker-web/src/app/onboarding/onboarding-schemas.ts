@@ -1,72 +1,12 @@
 import { SUPPORTED_ONBOARDING_PHASES } from '@health-tracker/api';
-import { DateTime } from 'luxon';
 import { z } from 'zod';
 
-const optionalTextSchema = z.preprocess((value) => {
-  if (typeof value !== 'string') {
-    return value === null || value === undefined ? undefined : value;
-  }
-
-  const trimmedValue = value.trim();
-
-  return trimmedValue ? trimmedValue : undefined;
-}, z.string().max(120).optional());
-
-const optionalDateSchema = z.preprocess((value) => {
-  if (value instanceof DateTime) {
-    return value;
-  }
-
-  return undefined;
-}, z.instanceof(DateTime).optional());
-
-const optionalIntegerSchema = z.preprocess((value) => {
-  if (value === '' || value === null || value === undefined) {
-    return undefined;
-  }
-
-  if (typeof value === 'string') {
-    const trimmedValue = value.trim();
-
-    if (!trimmedValue) {
-      return undefined;
-    }
-
-    const parsedValue = Number(trimmedValue);
-
-    return Number.isFinite(parsedValue) ? parsedValue : value;
-  }
-
-  if (typeof value === 'number' && Number.isFinite(value)) {
-    return value;
-  }
-
-  return value;
-}, z.number().int().positive().optional());
-
-const optionalNumberSchema = z.preprocess((value) => {
-  if (value === '' || value === null || value === undefined) {
-    return undefined;
-  }
-
-  if (typeof value === 'string') {
-    const trimmedValue = value.trim();
-
-    if (!trimmedValue) {
-      return undefined;
-    }
-
-    const parsedValue = Number(trimmedValue);
-
-    return Number.isFinite(parsedValue) ? parsedValue : value;
-  }
-
-  if (typeof value === 'number' && Number.isFinite(value)) {
-    return value;
-  }
-
-  return value;
-}, z.number().positive().optional());
+import {
+  optionalDateTimeSchema,
+  optionalPositiveIntegerSchema,
+  optionalPositiveNumberSchema,
+  optionalTrimmedTextSchema,
+} from '../profile/profile-schemas';
 
 export const onboardingPhaseSchema = z.object({
   selectedPhase: z
@@ -78,18 +18,18 @@ export const onboardingPhaseSchema = z.object({
 });
 
 export const onboardingBasicProfileSchema = z.object({
-  displayName: optionalTextSchema,
-  birthDate: optionalDateSchema,
+  displayName: optionalTrimmedTextSchema,
+  birthDate: optionalDateTimeSchema,
 });
 
 export const onboardingCycleSchema = z.object({
-  cycleLengthDays: optionalIntegerSchema,
-  lastPeriodStartDate: optionalDateSchema,
+  cycleLengthDays: optionalPositiveIntegerSchema,
+  lastPeriodStartDate: optionalDateTimeSchema,
 });
 
 export const onboardingBodyMetricsSchema = z.object({
-  heightCm: optionalNumberSchema,
-  weightKg: optionalNumberSchema,
+  heightCm: optionalPositiveNumberSchema,
+  weightKg: optionalPositiveNumberSchema,
 });
 
 export type OnboardingPhaseFormValues = z.infer<typeof onboardingPhaseSchema>;

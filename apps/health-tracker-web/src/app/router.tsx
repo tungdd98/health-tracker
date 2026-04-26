@@ -6,6 +6,7 @@ import { LandingPage } from './pages/landing-page';
 import { LoginPage } from './pages/login-page';
 import { NotFoundPage } from './pages/not-found-page';
 import { OnboardingPage } from './pages/onboarding-page';
+import { SettingsPage } from './pages/settings-page';
 import { SignUpPage } from './pages/signup-page';
 
 function PublicOnlyRoute({ children }: { children: React.ReactNode }) {
@@ -73,6 +74,14 @@ export const appRouter = createBrowserRouter([
       <OnboardingRoute>
         <OnboardingPage />
       </OnboardingRoute>
+    ),
+  },
+  {
+    path: '/settings',
+    element: (
+      <PrivateRoute>
+        <SettingsPage />
+      </PrivateRoute>
     ),
   },
   {

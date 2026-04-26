@@ -10,7 +10,7 @@
 - Read first: `docs/superpowers/specs/2026-04-26-settings-design.md`
 - Read first: `apps/health-tracker-web/src/app/pages/onboarding-page.tsx`
 
-- [ ] **Step 1: Re-read the approved settings spec and current onboarding data flow**
+- [x] **Step 1: Re-read the approved settings spec and current onboarding data flow**
 
 Review:
 
@@ -28,7 +28,7 @@ Focus on:
 
 Expected: The worker understands which rules must be shared and which writes remain settings-specific.
 
-- [ ] **Step 2: Extract shared field-level schema helpers for profile data**
+- [x] **Step 2: Extract shared field-level schema helpers for profile data**
 
 Create `apps/health-tracker-web/src/app/profile/profile-schemas.ts` and move reusable field rules there for:
 
@@ -41,7 +41,7 @@ Then update `apps/health-tracker-web/src/app/onboarding/onboarding-schemas.ts` s
 
 Expected: Onboarding and settings can rely on one field-rule source for the overlapping profile fields.
 
-- [ ] **Step 3: Add shared mapping helpers for section defaults and patch normalization**
+- [x] **Step 3: Add shared mapping helpers for section defaults and patch normalization**
 
 Create `apps/health-tracker-web/src/app/profile/profile-mappers.ts` with helpers that can be reused by both onboarding and settings for:
 
@@ -53,7 +53,7 @@ Do not move onboarding page business flow into this file. Keep it focused on pro
 
 Expected: Settings page tasks can reuse stable value-shaping helpers instead of copying conversions from onboarding.
 
-- [ ] **Step 4: Tighten the shared metadata update surface in `libs/api`**
+- [x] **Step 4: Tighten the shared metadata update surface in `libs/api`**
 
 Update `libs/api/src/lib/onboarding.ts` only as needed so settings can submit targeted section patches cleanly. Acceptable outcomes include:
 
@@ -64,7 +64,7 @@ Also update `libs/api/src/index.ts` so any new shared helpers are exported.
 
 Expected: The app layer has a clean way to write settings section patches without inventing a second persistence system.
 
-- [ ] **Step 5: Lint the shared profile foundation changes**
+- [x] **Step 5: Lint the shared profile foundation changes**
 
 Run:
 

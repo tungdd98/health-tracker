@@ -18,6 +18,12 @@ export type OnboardingProfile = {
   weightKg: number | null;
 };
 
+export type OnboardingPersonalInfoPatch = Pick<OnboardingProfile, 'displayName' | 'birthDate'>;
+export type OnboardingCycleAndBodyPatch = Pick<
+  OnboardingProfile,
+  'cycleLengthDays' | 'lastPeriodStartDate' | 'heightCm' | 'weightKg'
+>;
+
 const createDefaultOnboardingProfile = (): OnboardingProfile => ({
   selectedPhase: null,
   onboardingCompleted: false,
@@ -98,6 +104,16 @@ export const updateOnboardingProfile = async (user: User, patch: Partial<Onboard
     },
   });
 };
+
+export const updateOnboardingPersonalInfo = async (
+  user: User,
+  patch: OnboardingPersonalInfoPatch,
+) => updateOnboardingProfile(user, patch);
+
+export const updateOnboardingCycleAndBody = async (
+  user: User,
+  patch: OnboardingCycleAndBodyPatch,
+) => updateOnboardingProfile(user, patch);
 
 export const completeOnboarding = async (user: User) =>
   updateOnboardingProfile(user, {

@@ -1,9 +1,7 @@
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
-import { Alert, Button, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
+import { Button, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import { mapAuthErrorToMessage, signOutUser } from '@health-tracker/api';
 import { AppCard, AppChip, AppShell, PageSection } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
@@ -11,48 +9,27 @@ import { useAuthSession } from '../auth/use-auth-session';
 export function LandingPage() {
   const navigate = useNavigate();
   const { user } = useAuthSession();
-  const [signOutError, setSignOutError] = useState('');
-  const [isSigningOut, setIsSigningOut] = useState(false);
 
-  const handleSignOut = async () => {
-    setSignOutError('');
-    setIsSigningOut(true);
-
-    const { error } = await signOutUser();
-
-    if (error) {
-      setIsSigningOut(false);
-      setSignOutError(mapAuthErrorToMessage(error));
+  const handleNavChange = (value: string) => {
+    if (value === 'settings') {
+      navigate('/settings');
       return;
     }
 
-    navigate('/login');
+    if (value === 'home') {
+      navigate('/');
+    }
   };
 
   return (
     <AppShell
-      headerAction={
-        <Button
-          disabled={isSigningOut}
-          onClick={handleSignOut}
-          startIcon={<LogoutRoundedIcon />}
-          variant="outlined"
-        >
-          {isSigningOut ? 'Đang đăng xuất...' : 'Đăng xuất'}
-        </Button>
-      }
       headerEyebrow="Không gian riêng"
       headerSubtitle="Đây là đích tạm thời sau onboarding, trước khi dashboard thật được xây ở phase sau."
       headerTitle="Trang chủ tối giản"
+      onNavChange={handleNavChange}
       navValue="home"
     >
       <Stack spacing={2.5}>
-        {signOutError ? (
-          <Alert color="error" variant="filled">
-            {signOutError}
-          </Alert>
-        ) : null}
-
         <PageSection
           eyebrow="Đăng nhập thành công"
           title={`Chào mừng${user?.email ? `, ${user.email}` : ''}`}
@@ -73,6 +50,14 @@ export function LandingPage() {
               Tạm thời trang này chỉ chứng minh rằng session và route đã đi đúng nhánh sau khi
               onboarding được hoàn tất.
             </Typography>
+            <Button
+              onClick={() => navigate('/settings')}
+              startIcon={<TuneRoundedIcon />}
+              sx={{ alignSelf: 'flex-start', mt: 1 }}
+              variant="outlined"
+            >
+              Mở cài đặt
+            </Button>
           </Stack>
         </AppCard>
       </Stack>

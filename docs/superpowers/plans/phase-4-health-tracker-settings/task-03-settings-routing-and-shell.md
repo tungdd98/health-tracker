@@ -11,7 +11,7 @@
 - Read first: `apps/health-tracker-web/src/app/router.tsx`
 - Read first: `libs/ui/src/lib/app-shell.tsx`
 
-- [ ] **Step 1: Review the current private-route and bottom-nav behavior**
+- [x] **Step 1: Review the current private-route and bottom-nav behavior**
 
 Read these files before editing:
 
@@ -22,7 +22,7 @@ Read these files before editing:
 
 Expected: The worker understands how the app currently guards private routes and why the bottom nav still needs route-aware behavior.
 
-- [ ] **Step 2: Add a private `/settings` route**
+- [x] **Step 2: Add a private `/settings` route**
 
 Update `apps/health-tracker-web/src/app/router.tsx` so authenticated users who already satisfy the onboarding gate can open `/settings` through the same private-route behavior used for `/`.
 
@@ -34,7 +34,7 @@ Required behavior:
 
 Expected: `Settings` becomes a real private destination rather than a placeholder nav item.
 
-- [ ] **Step 3: Add the initial settings page scaffold**
+- [x] **Step 3: Add the initial settings page scaffold**
 
 Create `apps/health-tracker-web/src/app/pages/settings-page.tsx` with a signed-in page shell that includes:
 
@@ -47,19 +47,19 @@ Do not build the full section forms in this task. Keep this task focused on rout
 
 Expected: The app has a reachable settings destination with the right page-level framing.
 
-- [ ] **Step 4: Make the app shell nav route-aware enough for home and settings**
+- [x] **Step 4: Make the app shell nav route-aware enough for home and settings**
 
 Update `libs/ui/src/lib/app-shell.tsx` and `libs/ui/src/lib/app-bottom-nav.tsx` only as needed so app pages can respond to bottom-nav selection changes and navigate between at least `home` and `settings` without hard-wiring settings logic into the UI library.
 
 Expected: The nav can move the signed-in user into `Settings` from normal app chrome.
 
-- [ ] **Step 5: Adjust the landing page to point into settings cleanly**
+- [x] **Step 5: Adjust the landing page to point into settings cleanly**
 
 Update `apps/health-tracker-web/src/app/pages/landing-page.tsx` so the home surface exposes a clear path into `Settings` and stops being the long-term owner of account actions that now belong under the settings spec.
 
 Expected: The home placeholder remains simple while the user can discover the new settings route naturally.
 
-- [ ] **Step 6: Lint the route and shell changes**
+- [x] **Step 6: Lint the route and shell changes**
 
 Run:
 

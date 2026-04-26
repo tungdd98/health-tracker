@@ -9,7 +9,7 @@
 - Read first: `apps/health-tracker-web/src/app/profile/profile-mappers.ts`
 - Read first: `docs/superpowers/specs/2026-04-26-settings-design.md`
 
-- [ ] **Step 1: Review the settings section foundation and auth sign-out flow**
+- [x] **Step 1: Review the settings section foundation and auth sign-out flow**
 
 Read:
 
@@ -21,7 +21,7 @@ Read:
 
 Expected: The worker understands the section-level save pattern already established and the current sign-out behavior that needs to move under settings.
 
-- [ ] **Step 2: Implement the `Chu kỳ & cơ thể` section**
+- [x] **Step 2: Implement the `Chu kỳ & cơ thể` section**
 
 Update `apps/health-tracker-web/src/app/pages/settings-page.tsx` so the page:
 
@@ -34,7 +34,7 @@ Update `apps/health-tracker-web/src/app/pages/settings-page.tsx` so the page:
 
 Expected: The second editable section behaves independently and matches the approved spec.
 
-- [ ] **Step 3: Add the confirmed sign-out dialog and account section**
+- [x] **Step 3: Add the confirmed sign-out dialog and account section**
 
 Create `apps/health-tracker-web/src/app/components/sign-out-confirm-dialog.tsx` and wire it into `apps/health-tracker-web/src/app/pages/settings-page.tsx` so:
 
@@ -46,13 +46,13 @@ Create `apps/health-tracker-web/src/app/components/sign-out-confirm-dialog.tsx` 
 
 Expected: The destructive account action matches the approved settings behavior instead of happening immediately from the page header.
 
-- [ ] **Step 4: Simplify the landing page after settings owns sign-out**
+- [x] **Step 4: Simplify the landing page after settings owns sign-out**
 
 Update `apps/health-tracker-web/src/app/pages/landing-page.tsx` only as needed so it no longer conflicts with the settings-owned sign-out flow and still acts as a lightweight signed-in placeholder home.
 
 Expected: Account actions have one clear owner while the home page stays intentionally small.
 
-- [ ] **Step 5: Lint the completed settings experience**
+- [x] **Step 5: Lint the completed settings experience**
 
 Run:
 

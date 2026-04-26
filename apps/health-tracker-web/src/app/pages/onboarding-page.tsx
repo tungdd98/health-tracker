@@ -1,7 +1,6 @@
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Alert, Box, Button, CircularProgress } from '@mui/material';
-import { DateTime } from 'luxon';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm, useWatch, type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -46,16 +45,12 @@ import type {
   OnboardingStepId,
 } from '../onboarding/onboarding-types';
 import { ONBOARDING_STEP_IDS } from '../onboarding/onboarding-types';
-
-const toDateTimeOrNull = (value: string | null) => {
-  if (!value) {
-    return null;
-  }
-
-  const parsedValue = DateTime.fromISO(value);
-
-  return parsedValue.isValid ? parsedValue : null;
-};
+import {
+  normalizeOptionalIsoDate,
+  normalizeOptionalText,
+  toCycleAndBodyDefaults,
+  toPersonalInfoDefaults,
+} from '../profile/profile-mappers';
 
 const isSameOnboardingProfile = (current: OnboardingProfile, next: OnboardingProfile) =>
   current.selectedPhase === next.selectedPhase &&
@@ -71,13 +66,8 @@ const isSameOnboardingProfile = (current: OnboardingProfile, next: OnboardingPro
 const buildFormDefaults = (
   profile: ReturnType<typeof useAuthSession>['onboardingProfile'],
 ): OnboardingFormValues => ({
-  selectedPhase: profile.selectedPhase,
-  displayName: profile.displayName ?? '',
-  birthDate: toDateTimeOrNull(profile.birthDate),
-  cycleLengthDays: profile.cycleLengthDays?.toString() ?? '',
-  lastPeriodStartDate: toDateTimeOrNull(profile.lastPeriodStartDate),
-  heightCm: profile.heightCm?.toString() ?? '',
-  weightKg: profile.weightKg?.toString() ?? '',
+  ...toPersonalInfoDefaults(profile),
+  ...toCycleAndBodyDefaults(profile),
 });
 
 const isOptionalStep = (stepId: OnboardingStepId) =>
@@ -225,10 +215,8 @@ export function OnboardingPage() {
 
       setIsSaving(true);
       const { error } = await updateOnboardingProfile(user, {
-        displayName: result.data.displayName?.trim() || undefined,
-        birthDate: result.data.birthDate
-          ? (result.data.birthDate.toISODate() ?? undefined)
-          : undefined,
+        displayName: normalizeOptionalText(result.data.displayName),
+        birthDate: normalizeOptionalIsoDate(result.data.birthDate),
       });
       setIsSaving(false);
 
@@ -238,8 +226,8 @@ export function OnboardingPage() {
       }
 
       mergeProfileSnapshot({
-        displayName: result.data.displayName?.trim() ?? '',
-        birthDate: result.data.birthDate ? (result.data.birthDate.toISODate() ?? null) : null,
+        displayName: normalizeOptionalText(result.data.displayName) ?? '',
+        birthDate: normalizeOptionalIsoDate(result.data.birthDate) ?? null,
       });
       setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.cycle);
       return;
@@ -259,9 +247,7 @@ export function OnboardingPage() {
       setIsSaving(true);
       const { error } = await updateOnboardingProfile(user, {
         cycleLengthDays: result.data.cycleLengthDays,
-        lastPeriodStartDate: result.data.lastPeriodStartDate
-          ? (result.data.lastPeriodStartDate.toISODate() ?? undefined)
-          : undefined,
+        lastPeriodStartDate: normalizeOptionalIsoDate(result.data.lastPeriodStartDate),
       });
       setIsSaving(false);
 
@@ -272,9 +258,7 @@ export function OnboardingPage() {
 
       mergeProfileSnapshot({
         cycleLengthDays: result.data.cycleLengthDays?.toString() ?? '',
-        lastPeriodStartDate: result.data.lastPeriodStartDate
-          ? (result.data.lastPeriodStartDate.toISODate() ?? null)
-          : null,
+        lastPeriodStartDate: normalizeOptionalIsoDate(result.data.lastPeriodStartDate) ?? null,
       });
       setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.bodyMetrics);
       return;
