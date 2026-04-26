@@ -28,3 +28,5 @@ Commit history uses conventional commits such as `feat:`, `fix:`, `docs:`, and `
 ## Agent-Specific Instructions
 
 Before any multi-step implementation task, read and follow `docs/process/planning-workflow.md`. For every active phase under `docs/superpowers/plans/`, keep tracking synchronized with reality: mark completed tasks in the phase `index.md`, update checklist items inside the task file, and do not leave finished work unchecked.
+
+For future design tasks using Stitch or similar tools, treat only the approved default screen frames as the visual source of truth unless the task explicitly says otherwise. Do not rely on AI-generated error, loading, or other state variants as authoritative design references. Those non-default states should normally be implemented in code by preserving the default layout and applying state-only changes.

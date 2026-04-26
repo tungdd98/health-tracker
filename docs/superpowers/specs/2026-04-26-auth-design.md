@@ -207,10 +207,14 @@ The Stitch work for this phase should stay tightly focused on the screens and st
 
 ### Required frames
 
-- `Login`
-- `Sign Up`
+- `Login / Default`
+- `Sign Up / Default`
 
-### Required states per screen
+### State references for implementation
+
+The approved visual source of truth in Stitch for this phase is limited to the default `Login` and `Sign Up` screens.
+
+State variants should be handled during implementation using the same base layout:
 
 - Default
 - Field error

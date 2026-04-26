@@ -21,7 +21,7 @@ Read these files before composing the auth screens:
 - `docs/superpowers/specs/2026-04-26-auth-design.md`
 - `docs/superpowers/plans/phase-2-health-tracker-auth/task-02-stitch-auth-design.md`
 
-Expected: The worker understands the existing visual language, the approved Stitch auth states, and the shared form abstractions before introducing auth-specific UI.
+Expected: The worker understands the existing visual language, the approved default Stitch auth screens, the documented implementation-state notes, and the shared form abstractions before introducing auth-specific UI.
 
 - [ ] **Step 2: Add auth form schemas and copy constants**
 

@@ -71,3 +71,12 @@ When a task is finished:
 3. Keep the plan files consistent with actual progress at all times
 
 Do not postpone checkbox updates until the end of the session.
+
+## Design Task Rule
+
+For future design tasks that use Stitch, Pencil, or similar AI design tools:
+
+1. Treat the approved default screens as the visual source of truth unless the task explicitly requires finalized state variants
+2. Do not treat AI-generated error, loading, success, or other state variations as authoritative by default
+3. Document state behavior as implementation notes when possible, so engineering can apply those states in code without changing the approved default layout
+4. If state mockups are generated for exploration, explicitly mark whether they are authoritative or non-authoritative in the task file or spec
