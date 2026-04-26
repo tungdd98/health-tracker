@@ -10,7 +10,7 @@
 - Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-onboarding-flow-and-submit.md`
 - Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-06-verification-and-tracking.md`
 
-- [ ] **Step 1: Verify the required static quality gates**
+- [x] **Step 1: Verify the required static quality gates**
 
 Run:
 
@@ -21,7 +21,7 @@ yarn build
 
 Expected: The repo passes the required verification commands for this phase.
 
-- [ ] **Step 2: Verify the manual onboarding behaviors**
+- [x] **Step 2: Verify the manual onboarding behaviors**
 
 Run the app locally with valid Supabase env values and verify:
 
@@ -37,7 +37,7 @@ Run the app locally with valid Supabase env values and verify:
 
 Expected: Runtime behavior matches the approved onboarding spec and not just the static build.
 
-- [ ] **Step 3: Verify the partial-progress edge case**
+- [x] **Step 3: Verify the partial-progress edge case**
 
 Manually verify:
 
@@ -53,7 +53,7 @@ Expected:
 - the saved `selectedPhase` is enough to satisfy future app entry
 - onboarding is still not marked complete unless the final step had been confirmed
 
-- [ ] **Step 4: Synchronize plan tracking**
+- [x] **Step 4: Synchronize plan tracking**
 
 Mark the phase index and every completed checklist item in:
 
@@ -67,7 +67,7 @@ Mark the phase index and every completed checklist item in:
 
 Expected: Tracking reflects real execution progress immediately at the end of the phase.
 
-- [ ] **Step 5: Commit verification and tracking updates**
+- [x] **Step 5: Commit verification and tracking updates**
 
 Run:
 
@@ -77,3 +77,10 @@ git commit -m "docs: update onboarding phase tracking"
 ```
 
 Expected: Git records the verified execution state of the onboarding phase.
+
+### Verification Notes
+
+- Static quality gates executed locally:
+  - `yarn lint`
+  - `yarn build`
+- Manual onboarding behavior and partial-progress edge-case verification were confirmed as done by Hoàng Thượng in this execution pass.
