@@ -1,7 +1,11 @@
 import type { AuthSession } from '@supabase/supabase-js';
 import { useSyncExternalStore } from 'react';
 
-import { getCurrentSession, subscribeToAuthChanges } from '@health-tracker/api';
+import {
+  getCurrentSession,
+  getOnboardingProfileFromUser,
+  subscribeToAuthChanges,
+} from '@health-tracker/api';
 
 type AuthSessionStore = {
   isAuthResolved: boolean;
@@ -65,10 +69,14 @@ const getSnapshot = () => authStore;
 
 export const useAuthSession = () => {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+  const onboardingProfile = getOnboardingProfileFromUser(snapshot.session?.user ?? null);
 
   return {
     isAuthResolved: snapshot.isAuthResolved,
     session: snapshot.session,
     user: snapshot.session?.user ?? null,
+    onboardingProfile,
+    isOnboardingComplete: onboardingProfile.onboardingCompleted,
+    hasSelectedOnboardingPhase: onboardingProfile.selectedPhase !== null,
   };
 };

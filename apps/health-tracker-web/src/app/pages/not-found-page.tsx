@@ -7,14 +7,18 @@ import { useAuthSession } from '../auth/use-auth-session';
 import { AuthRouteState } from '../components/auth-route-state';
 
 export function NotFoundPage() {
-  const { isAuthResolved, session } = useAuthSession();
+  const { hasSelectedOnboardingPhase, isAuthResolved, session } = useAuthSession();
 
   if (!isAuthResolved) {
     return <AuthRouteState />;
   }
 
-  const homePath = session ? '/' : '/login';
-  const buttonLabel = session ? 'Về trang chủ' : 'Tới đăng nhập';
+  const homePath = session ? (hasSelectedOnboardingPhase ? '/' : '/onboarding') : '/login';
+  const buttonLabel = session
+    ? hasSelectedOnboardingPhase
+      ? 'Về trang chủ'
+      : 'Tới onboarding'
+    : 'Tới đăng nhập';
 
   return (
     <AppShell>
