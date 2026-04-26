@@ -1,19 +1,30 @@
-# Repository Instructions
+# Repository Guidelines
 
-## Planning Workflow
+## Project Structure & Module Organization
 
-Before implementing any multi-step task, the assistant must read and follow:
+This repository is an Nx monorepo. The main app lives in `apps/health-tracker-web/`, with source code under `apps/health-tracker-web/src/`. Shared code belongs in `libs/`, grouped by concern: `libs/ui`, `libs/forms`, `libs/state`, `libs/theme`, and `libs/api`. Repository-level docs and execution plans live in `docs/`, especially `docs/process/` and `docs/superpowers/`.
 
-- `docs/process/planning-workflow.md`
+## Build, Test, and Development Commands
 
-This workflow is mandatory for new plans, plan revisions, and execution tracking updates.
+- `yarn install` - install dependencies.
+- `yarn dev` - run the web app locally through Nx/Vite.
+- `yarn build` - create a production build for `health-tracker-web`.
+- `yarn lint` - run ESLint across all Nx projects.
+- `yarn format` - write Prettier formatting changes.
+- `yarn format:check` - verify formatting without changing files.
 
-## Tracking Discipline
+## Coding Style & Naming Conventions
 
-When a task is completed, the assistant must immediately update the relevant tracking files:
+Use TypeScript, 2-space indentation, single quotes, and semicolon-free style to match the existing codebase. Prefer small, focused modules and colocate implementation files with their feature area, for example `libs/ui/src/lib/app-shell.tsx`. Follow the repository's ESLint and Prettier configuration; avoid unused variables and prefix intentionally unused arguments with `_`.
 
-- Mark the task as done in the phase `index.md`
-- Mark completed checklist items inside the task file
-- Keep the tracking state synchronized with actual execution progress
+## Testing Guidelines
 
-The assistant must not leave completed work unchecked for later cleanup.
+There is no dedicated test runner configured yet. Treat `yarn lint` and `yarn build` as the required verification commands for changes. If you add tests, name them clearly near the code they cover, such as `*.test.ts` or `*.test.tsx`, and document any new test command in the relevant package.
+
+## Commit & Pull Request Guidelines
+
+Commit history uses conventional commits such as `feat:`, `fix:`, `docs:`, and `chore:`. Keep commit messages short and scoped. Pull requests should summarize the change, link the related issue or spec when available, and include screenshots for UI updates. Mention any new environment variables or manual setup steps.
+
+## Agent-Specific Instructions
+
+Before any multi-step implementation task, read and follow `docs/process/planning-workflow.md`. For every active phase under `docs/superpowers/plans/`, keep tracking synchronized with reality: mark completed tasks in the phase `index.md`, update checklist items inside the task file, and do not leave finished work unchecked.
