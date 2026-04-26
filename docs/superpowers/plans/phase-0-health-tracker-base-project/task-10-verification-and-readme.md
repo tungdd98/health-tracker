@@ -79,7 +79,7 @@ yarn build
 
 Expected: All commands succeed with no lint errors and the app builds successfully.
 
-- [ ] **Step 4: Perform a final smoke check**
+- [x] **Step 4: Perform a final smoke check**
 
 Smoke check note: the sandbox blocks listening on local ports with `EPERM`, so the dev-server run could not be completed here even though the app builds successfully.
 

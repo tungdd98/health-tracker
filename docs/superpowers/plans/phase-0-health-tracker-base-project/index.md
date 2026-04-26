@@ -21,7 +21,7 @@
 - [x] Task 07: [Build the forms library](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-07-forms-library.md)
 - [x] Task 08: [Add the minimal Zustand reference store](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-08-state-library.md)
 - [x] Task 09: [Wire the app providers, routes, and screens](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-09-app-wiring.md)
-- [ ] Task 10: [Final verification and developer documentation](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-10-verification-and-readme.md)
+- [x] Task 10: [Final verification and developer documentation](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-0-health-tracker-base-project/task-10-verification-and-readme.md)
 
 ## File Structure Map
 
