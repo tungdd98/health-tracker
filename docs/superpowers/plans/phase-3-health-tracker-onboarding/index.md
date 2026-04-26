@@ -12,7 +12,7 @@
 
 ## Tracking
 
-- [ ] Task 01: [Add the shared onboarding metadata contract and persistence helpers](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-01-onboarding-api-foundation.md)
+- [x] Task 01: [Add the shared onboarding metadata contract and persistence helpers](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-01-onboarding-api-foundation.md)
 - [ ] Task 02: [Design the onboarding screens in Google Stitch](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-02-stitch-onboarding-design.md)
 - [ ] Task 03: [Gate authenticated routes with onboarding-aware session logic](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-03-onboarding-routing-and-session.md)
 - [ ] Task 04: [Build the onboarding wizard structure, schemas, and step components](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-04-onboarding-ui-and-steps.md)

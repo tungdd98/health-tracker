@@ -7,7 +7,7 @@
 - Read first: `docs/superpowers/specs/2026-04-26-onboarding-design.md`
 - Read first: `libs/api/src/lib/auth.ts`
 
-- [ ] **Step 1: Review the existing auth client surface and the approved onboarding spec**
+- [x] **Step 1: Review the existing auth client surface and the approved onboarding spec**
 
 Read these files before editing:
 
@@ -17,7 +17,7 @@ Read these files before editing:
 
 Expected: The worker understands that this phase stores onboarding state in Supabase auth metadata rather than introducing a new database layer.
 
-- [ ] **Step 2: Create the shared onboarding metadata types and parser**
+- [x] **Step 2: Create the shared onboarding metadata types and parser**
 
 Create `libs/api/src/lib/onboarding.ts` with:
 
@@ -39,7 +39,7 @@ Use a focused runtime guard instead of trusting `user_metadata` blindly.
 
 Expected: App code can read normalized onboarding state from any authenticated user object without duplicating metadata parsing logic.
 
-- [ ] **Step 3: Add metadata update helpers that preserve unrelated user metadata**
+- [x] **Step 3: Add metadata update helpers that preserve unrelated user metadata**
 
 In `libs/api/src/lib/onboarding.ts`, add:
 
@@ -55,13 +55,13 @@ Implementation requirements:
 
 Expected: The app has one safe place to write onboarding state without accidentally replacing the entire auth metadata object.
 
-- [ ] **Step 4: Export the onboarding API surface**
+- [x] **Step 4: Export the onboarding API surface**
 
 Update `libs/api/src/index.ts` to export the onboarding helpers and types together with the existing auth/query/env exports.
 
 Expected: App code can import onboarding metadata helpers from `@health-tracker/api`.
 
-- [ ] **Step 5: Lint the shared API changes**
+- [x] **Step 5: Lint the shared API changes**
 
 Run:
 
@@ -71,7 +71,7 @@ yarn eslint libs/api/src --max-warnings=0
 
 Expected: The API helper changes lint cleanly before app code starts using them.
 
-- [ ] **Step 6: Commit the onboarding API foundation**
+- [x] **Step 6: Commit the onboarding API foundation**
 
 Run:
 
