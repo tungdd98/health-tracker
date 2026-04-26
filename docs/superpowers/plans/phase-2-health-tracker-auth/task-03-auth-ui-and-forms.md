@@ -10,7 +10,7 @@
 - Modify: `libs/forms/src/lib/form-text-field.tsx`
 - Modify: `libs/forms/src/index.ts` only if the auth screens need a newly exported forms primitive
 
-- [ ] **Step 1: Review the current design-system building blocks**
+- [x] **Step 1: Review the current design-system building blocks**
 
 Read these files before composing the auth screens:
 
@@ -23,7 +23,7 @@ Read these files before composing the auth screens:
 
 Expected: The worker understands the existing visual language, the approved default Stitch auth screens, the documented implementation-state notes, and the shared form abstractions before introducing auth-specific UI.
 
-- [ ] **Step 2: Add auth form schemas and copy constants**
+- [x] **Step 2: Add auth form schemas and copy constants**
 
 Create `apps/health-tracker-web/src/app/auth/auth-schemas.ts` with Zod schemas and inferred types for:
 
@@ -40,13 +40,13 @@ Create `apps/health-tracker-web/src/app/auth/auth-copy.ts` for the hero titles, 
 
 Expected: Validation and UI copy are centralized instead of being duplicated inside the page components.
 
-- [ ] **Step 3: Upgrade the shared text field wrapper if auth needs password affordances**
+- [x] **Step 3: Upgrade the shared text field wrapper if auth needs password affordances**
 
 Update `libs/forms/src/lib/form-text-field.tsx` only if the current wrapper cannot cleanly support password visibility toggles or input adornments. Preserve existing behavior for all current consumers.
 
 Expected: The auth screens can use the shared forms layer instead of bypassing it with one-off MUI fields.
 
-- [ ] **Step 4: Build the shared auth layout**
+- [x] **Step 4: Build the shared auth layout**
 
 Create `apps/health-tracker-web/src/app/components/auth-layout.tsx` with:
 
@@ -58,7 +58,7 @@ Keep the component reusable across both auth pages and aligned with the current 
 
 Expected: `Login` and `Sign Up` share one visual structure instead of drifting into two independently styled screens.
 
-- [ ] **Step 5: Build the `Login` page**
+- [x] **Step 5: Build the `Login` page**
 
 Create `apps/health-tracker-web/src/app/pages/login-page.tsx` using:
 
@@ -79,7 +79,7 @@ Include:
 
 Expected: The `Login` screen is visually complete and functionally wired for sign-in.
 
-- [ ] **Step 6: Build the `Sign Up` page**
+- [x] **Step 6: Build the `Sign Up` page**
 
 Create `apps/health-tracker-web/src/app/pages/signup-page.tsx` using the same structure as `Login`, but add:
 
@@ -92,7 +92,7 @@ Use the approved behavior that a successful sign-up should continue into the app
 
 Expected: The `Sign Up` screen is ready for account creation with the approved validation rules and visual direction.
 
-- [ ] **Step 7: Lint the auth UI before wiring routing**
+- [x] **Step 7: Lint the auth UI before wiring routing**
 
 Run:
 
@@ -102,7 +102,7 @@ yarn eslint apps/health-tracker-web/src/app --max-warnings=0
 
 Expected: The new auth pages and helpers are clean before route integration work begins.
 
-- [ ] **Step 8: Commit the auth UI slice**
+- [x] **Step 8: Commit the auth UI slice**
 
 Run:
 
@@ -112,3 +112,14 @@ git commit -m "feat: add auth screens"
 ```
 
 Expected: Git creates a focused commit for the auth layout and form screens.
+
+### Execution Notes
+
+- Added shared auth copy and Zod schemas in `apps/health-tracker-web/src/app/auth/*` to keep validation and Vietnamese UI strings centralized.
+- Added `AuthLayout` as the single reusable auth surface pattern for both `Login` and `Sign Up`.
+- Kept Stitch authority limited to default screens and implemented `field error`, `submit loading`, and `submit error` as code-level states on top of the same layout.
+- Upgraded `FormTextField` without breaking existing consumers by continuing to forward `TextFieldProps`, which now cleanly supports password visibility toggles through `InputProps`.
+- Verification run:
+  - `yarn eslint apps/health-tracker-web/src/app --max-warnings=0`
+  - `yarn eslint libs/forms/src --max-warnings=0`
+  - `yarn build`

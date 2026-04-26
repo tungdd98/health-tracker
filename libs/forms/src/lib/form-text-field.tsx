@@ -19,6 +19,7 @@ export function FormTextField({ name, ...props }: FormTextFieldProps) {
           error={fieldState.invalid}
           fullWidth
           helperText={fieldState.error?.message ?? props.helperText}
+          value={field.value ?? ''}
         />
       )}
     />
