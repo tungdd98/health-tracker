@@ -1,4 +1,4 @@
-### Task 04: Wire onboarding persistence, navigation, and completion behavior
+### Task 05: Wire onboarding persistence, navigation, and completion behavior
 
 **Files:**
 

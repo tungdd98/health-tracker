@@ -1,4 +1,4 @@
-### Task 03: Build the onboarding wizard structure, schemas, and step components
+### Task 04: Build the onboarding wizard structure, schemas, and step components
 
 **Files:**
 

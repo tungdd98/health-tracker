@@ -1,13 +1,14 @@
-### Task 05: Verify onboarding flows and synchronize plan tracking
+### Task 06: Verify onboarding flows and synchronize plan tracking
 
 **Files:**
 
 - Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/index.md`
 - Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-01-onboarding-api-foundation.md`
-- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-02-onboarding-routing-and-session.md`
-- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-03-onboarding-ui-and-steps.md`
-- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-04-onboarding-flow-and-submit.md`
-- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-verification-and-tracking.md`
+- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-02-stitch-onboarding-design.md`
+- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-03-onboarding-routing-and-session.md`
+- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-04-onboarding-ui-and-steps.md`
+- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-onboarding-flow-and-submit.md`
+- Modify: `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-06-verification-and-tracking.md`
 
 - [ ] **Step 1: Verify the required static quality gates**
 
@@ -58,10 +59,11 @@ Mark the phase index and every completed checklist item in:
 
 - `docs/superpowers/plans/phase-3-health-tracker-onboarding/index.md`
 - `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-01-onboarding-api-foundation.md`
-- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-02-onboarding-routing-and-session.md`
-- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-03-onboarding-ui-and-steps.md`
-- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-04-onboarding-flow-and-submit.md`
-- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-verification-and-tracking.md`
+- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-02-stitch-onboarding-design.md`
+- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-03-onboarding-routing-and-session.md`
+- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-04-onboarding-ui-and-steps.md`
+- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-onboarding-flow-and-submit.md`
+- `docs/superpowers/plans/phase-3-health-tracker-onboarding/task-06-verification-and-tracking.md`
 
 Expected: Tracking reflects real execution progress immediately at the end of the phase.
 

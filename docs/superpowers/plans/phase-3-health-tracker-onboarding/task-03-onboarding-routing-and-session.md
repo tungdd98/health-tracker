@@ -1,4 +1,4 @@
-### Task 02: Gate authenticated routes with onboarding-aware session logic
+### Task 03: Gate authenticated routes with onboarding-aware session logic
 
 **Files:**
 

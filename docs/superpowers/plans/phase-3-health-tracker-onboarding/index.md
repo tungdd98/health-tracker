@@ -13,15 +13,18 @@
 ## Tracking
 
 - [ ] Task 01: [Add the shared onboarding metadata contract and persistence helpers](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-01-onboarding-api-foundation.md)
-- [ ] Task 02: [Gate authenticated routes with onboarding-aware session logic](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-02-onboarding-routing-and-session.md)
-- [ ] Task 03: [Build the onboarding wizard structure, schemas, and step components](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-03-onboarding-ui-and-steps.md)
-- [ ] Task 04: [Wire onboarding persistence, navigation, and completion behavior](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-04-onboarding-flow-and-submit.md)
-- [ ] Task 05: [Verify onboarding flows and synchronize plan tracking](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-verification-and-tracking.md)
+- [ ] Task 02: [Design the onboarding screens in Google Stitch](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-02-stitch-onboarding-design.md)
+- [ ] Task 03: [Gate authenticated routes with onboarding-aware session logic](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-03-onboarding-routing-and-session.md)
+- [ ] Task 04: [Build the onboarding wizard structure, schemas, and step components](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-04-onboarding-ui-and-steps.md)
+- [ ] Task 05: [Wire onboarding persistence, navigation, and completion behavior](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-05-onboarding-flow-and-submit.md)
+- [ ] Task 06: [Verify onboarding flows and synchronize plan tracking](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-3-health-tracker-onboarding/task-06-verification-and-tracking.md)
 
 ## File Structure Map
 
 - `docs/superpowers/specs/2026-04-26-onboarding-design.md`
   - Source spec for this phase
+- `task-02-stitch-onboarding-design.md`
+  - Authoritative visual handoff for the onboarding default screens and implementation notes
 - `libs/api/src/lib/onboarding.ts`
   - Shared onboarding metadata types, parsing, and update helpers
 - `libs/api/src/index.ts`
@@ -55,14 +58,15 @@
 
 ## Spec Coverage
 
-- First-login onboarding routing after auth: Tasks 01 and 02
-- Required phase selection with disabled pregnancy branch: Tasks 03 and 04
-- Optional profile, cycle, and body-metrics steps: Tasks 03 and 04
-- Incremental persistence on `Continue`: Tasks 01 and 04
-- `Skip` and `Back` behavior: Task 04
-- Completion-only `onboarding_completed` flag: Tasks 01 and 04
-- Warm mobile-first onboarding UI: Task 03
-- Verification and tracking updates: Task 05
+- First-login onboarding routing after auth: Tasks 01 and 03
+- Authoritative Stitch design for the onboarding default screens: Task 02
+- Required phase selection with disabled pregnancy branch: Tasks 02, 04, and 05
+- Optional profile, cycle, and body-metrics steps: Tasks 02, 04, and 05
+- Incremental persistence on `Continue`: Tasks 01 and 05
+- `Skip` and `Back` behavior: Task 05
+- Completion-only `onboarding_completed` flag: Tasks 01 and 05
+- Warm mobile-first onboarding UI: Tasks 02 and 04
+- Verification and tracking updates: Task 06
 
 ## Notes For Implementers
 
