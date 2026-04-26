@@ -17,7 +17,7 @@
 - [x] Task 03: [Add the authenticated settings route and app navigation entry](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-4-health-tracker-settings/task-03-settings-routing-and-shell.md)
 - [x] Task 04: [Build the personal-information settings section](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-4-health-tracker-settings/task-04-settings-personal-info.md)
 - [x] Task 05: [Build the cycle-and-body section and confirmed sign-out flow](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-4-health-tracker-settings/task-05-settings-cycle-body-and-signout.md)
-- [ ] Task 06: [Verify the settings flows and synchronize plan tracking](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-4-health-tracker-settings/task-06-verification-and-tracking.md)
+- [x] Task 06: [Verify the settings flows and synchronize plan tracking](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-4-health-tracker-settings/task-06-verification-and-tracking.md)
 
 ## File Structure Map
 

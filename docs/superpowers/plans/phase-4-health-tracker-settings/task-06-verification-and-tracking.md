@@ -39,7 +39,7 @@ yarn build
 
 Expected: The repository passes the required project verification commands for this phase.
 
-- [ ] **Step 3: Run focused manual settings checks**
+- [x] **Step 3: Run focused manual settings checks**
 
 Manually verify these behaviors in the browser or app runtime:
 
@@ -66,7 +66,7 @@ Mark the phase index and every completed checklist item in:
 
 Expected: Plan tracking reflects reality immediately at the end of the phase.
 
-- [ ] **Step 5: Commit the verified phase state**
+- [x] **Step 5: Commit the verified phase state**
 
 Run:
 
@@ -79,4 +79,4 @@ Expected: Git records the final verified tracking state for the settings phase.
 
 ### Execution Notes
 
-- Manual runtime checks in **Step 3** are still pending because this execution used CLI-only verification (`yarn lint`, `yarn build`) without an interactive browser pass.
+- Manual runtime checks in **Step 3** completed in-browser by Hoàng Thượng on 2026-04-26: settings access guard, independent section saves, blank-number persistence, and confirmed sign-out all verified.
