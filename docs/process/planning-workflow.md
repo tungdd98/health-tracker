@@ -72,6 +72,19 @@ When a task is finished:
 
 Do not postpone checkbox updates until the end of the session.
 
-## Design Task Rule
+## Design Step (UI Features Only)
 
-For future design tasks, do not enforce any tool-specific step (for example: mandatory Stitch handoff) inside the workflow.
+For features that introduce or change UI screens, layouts, or visual flows, insert a design step **between spec approval and plan writing**:
+
+```
+brainstorming → spec → designing-with-pencil → writing-plans → executing-plans
+```
+
+Rules:
+
+- Use the **Pencil MCP server** to produce a `.pen` artifact at `docs/superpowers/designs/YYYY-MM-DD-<topic>.pen`. Each distinct screen/state lives in its own frame.
+- Invoke the `designing-with-pencil` skill to drive this step — it owns the procedure (screens to cover, states, naming, handoff).
+- Skip the design step entirely for backend-only, CLI, schema-only, or pure-logic changes.
+- The plan **MUST reference the design** (`docs/superpowers/designs/<file>.pen` → frame `<name>`) instead of describing UI in prose. Plan tasks for UI work cover state, validation, API, routing — not visual description.
+
+Rationale: keeping UI in `.pen` artifacts (not plan text) shortens plans, removes guesswork at implementation time, and makes design changes cheap.

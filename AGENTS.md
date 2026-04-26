@@ -38,3 +38,5 @@ Commit history uses conventional commits such as `feat:`, `fix:`, `docs:`, and `
 ## Agent-Specific Instructions
 
 Before any multi-step implementation task, read and follow `docs/process/planning-workflow.md`. For every active phase under `docs/superpowers/plans/`, keep tracking synchronized with reality: mark completed tasks in the phase `index.md`, update checklist items inside the task file, and do not leave finished work unchecked.
+
+For features that touch UI (new screens, layout changes, visual flows), insert a design step between spec approval and `writing-plans`: invoke the `designing-with-pencil` skill to produce a `.pen` artifact under `docs/superpowers/designs/`. Plan tasks for UI must reference the design file + frame name rather than re-describing visuals in prose. Skip the design step for backend, CLI, or pure-logic work. See `docs/process/planning-workflow.md` for the full rule.
