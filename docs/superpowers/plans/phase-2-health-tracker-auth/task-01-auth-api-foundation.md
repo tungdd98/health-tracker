@@ -53,7 +53,7 @@ Update `libs/api/src/index.ts` to export the new auth helpers and error mapper t
 
 Expected: App code can import every shared auth primitive from `@health-tracker/api`.
 
-- [ ] **Step 6: Sanity-check the library surface**
+- [x] **Step 6: Sanity-check the library surface**
 
 Run:
 
@@ -63,7 +63,7 @@ yarn eslint libs/api/src --max-warnings=0
 
 Expected: The API library changes lint cleanly before the app starts consuming them.
 
-- [ ] **Step 7: Commit the auth API foundation**
+- [x] **Step 7: Commit the auth API foundation**
 
 Run:
 
