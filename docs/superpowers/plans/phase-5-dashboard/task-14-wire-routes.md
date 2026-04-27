@@ -6,7 +6,7 @@
 - Modify: `apps/health-tracker-web/src/app/pages/settings-page.tsx`
 - Delete: `apps/health-tracker-web/src/app/pages/landing-page.tsx`
 
-- [ ] **Step 1: Update `router.tsx`**
+- [x] **Step 1: Update `router.tsx`**
 
 Replace the full content of `apps/health-tracker-web/src/app/router.tsx`:
 
@@ -129,7 +129,7 @@ export const appRouter = createBrowserRouter([
 ]);
 ```
 
-- [ ] **Step 2: Add `calendar` branch to `handleNavChange` in `settings-page.tsx`**
+- [x] **Step 2: Add `calendar` branch to `handleNavChange` in `settings-page.tsx`**
 
 Find the `handleNavChange` function in `apps/health-tracker-web/src/app/pages/settings-page.tsx` and replace it:
 
@@ -151,13 +151,13 @@ const handleNavChange = (value: string) => {
 };
 ```
 
-- [ ] **Step 3: Delete `landing-page.tsx`**
+- [x] **Step 3: Delete `landing-page.tsx`**
 
 ```bash
 rm apps/health-tracker-web/src/app/pages/landing-page.tsx
 ```
 
-- [ ] **Step 4: Verify — no remaining references to LandingPage**
+- [x] **Step 4: Verify — no remaining references to LandingPage**
 
 ```bash
 grep -r "LandingPage\|landing-page" apps/health-tracker-web/src
@@ -165,7 +165,7 @@ grep -r "LandingPage\|landing-page" apps/health-tracker-web/src
 
 Expected: no output (zero references remaining).
 
-- [ ] **Step 5: Run full Definition of Done**
+- [x] **Step 5: Run full Definition of Done**
 
 ```bash
 yarn format && yarn lint && yarn build
@@ -173,7 +173,7 @@ yarn format && yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/router.tsx \
@@ -182,6 +182,6 @@ git rm apps/health-tracker-web/src/app/pages/landing-page.tsx
 git commit -m "feat: wire dashboard and calendar routes, remove LandingPage"
 ```
 
-- [ ] **Step 7: Mark complete in index.md**
+- [x] **Step 7: Mark complete in index.md**
 
 Check off Task 14 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

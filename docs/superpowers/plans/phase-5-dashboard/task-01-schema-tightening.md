@@ -6,7 +6,7 @@
 - Modify: `apps/health-tracker-web/src/app/onboarding/onboarding-schemas.ts`
 - Modify: `apps/health-tracker-web/src/app/settings/settings-schemas.ts`
 
-- [ ] **Step 1: Add `cycleLengthDaysSchema` to `profile-schemas.ts`**
+- [x] **Step 1: Add `cycleLengthDaysSchema` to `profile-schemas.ts`**
 
 In `apps/health-tracker-web/src/app/profile/profile-schemas.ts`, add after the existing `optionalPositiveIntegerSchema`:
 
@@ -17,7 +17,7 @@ export const cycleLengthDaysSchema = z.preprocess(
 );
 ```
 
-- [ ] **Step 2: Update `onboarding-schemas.ts` to use the new schema**
+- [x] **Step 2: Update `onboarding-schemas.ts` to use the new schema**
 
 In `apps/health-tracker-web/src/app/onboarding/onboarding-schemas.ts`, change the import:
 
@@ -39,7 +39,7 @@ export const onboardingCycleSchema = z.object({
 });
 ```
 
-- [ ] **Step 3: Update `settings-schemas.ts` to use the new schema**
+- [x] **Step 3: Update `settings-schemas.ts` to use the new schema**
 
 In `apps/health-tracker-web/src/app/settings/settings-schemas.ts`, change the import:
 
@@ -63,7 +63,7 @@ export const cycleAndBodySettingsSchema = z.object({
 });
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -71,7 +71,7 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/profile/profile-schemas.ts \
@@ -80,6 +80,6 @@ git add apps/health-tracker-web/src/app/profile/profile-schemas.ts \
 git commit -m "feat: tighten cycleLengthDays schema to [21, 45]"
 ```
 
-- [ ] **Step 6: Mark complete in index.md**
+- [x] **Step 6: Mark complete in index.md**
 
 Check off Task 01 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

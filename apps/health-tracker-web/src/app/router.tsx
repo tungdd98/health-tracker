@@ -1,8 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { useAuthSession } from './auth/use-auth-session';
+import { CalendarPage } from './calendar/calendar-page';
 import { AuthRouteState } from './components/auth-route-state';
-import { LandingPage } from './pages/landing-page';
+import { DashboardPage } from './dashboard/dashboard-page';
 import { LoginPage } from './pages/login-page';
 import { NotFoundPage } from './pages/not-found-page';
 import { OnboardingPage } from './pages/onboarding-page';
@@ -64,7 +65,15 @@ export const appRouter = createBrowserRouter([
     path: '/',
     element: (
       <PrivateRoute>
-        <LandingPage />
+        <DashboardPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/calendar',
+    element: (
+      <PrivateRoute>
+        <CalendarPage />
       </PrivateRoute>
     ),
   },

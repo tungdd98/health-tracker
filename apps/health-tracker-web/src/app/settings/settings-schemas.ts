@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 import {
+  cycleLengthDaysSchema,
   optionalDateTimeSchema,
-  optionalPositiveIntegerSchema,
   optionalPositiveNumberSchema,
   optionalTrimmedTextSchema,
 } from '../profile/profile-schemas';
@@ -13,7 +13,7 @@ export const personalInfoSettingsSchema = z.object({
 });
 
 export const cycleAndBodySettingsSchema = z.object({
-  cycleLengthDays: optionalPositiveIntegerSchema,
+  cycleLengthDays: cycleLengthDaysSchema,
   lastPeriodStartDate: optionalDateTimeSchema,
   heightCm: optionalPositiveNumberSchema,
   weightKg: optionalPositiveNumberSchema,

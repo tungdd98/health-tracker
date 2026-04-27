@@ -1,6 +1,5 @@
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import InsightsRoundedIcon from '@mui/icons-material/InsightsRounded';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import { Box, Container } from '@mui/material';
 import type { PropsWithChildren } from 'react';
@@ -10,8 +9,7 @@ import { AppBottomNav, type AppBottomNavItem } from './app-bottom-nav';
 
 const defaultNavItems: AppBottomNavItem[] = [
   { icon: <HomeRoundedIcon />, label: 'Home', value: 'home' },
-  { icon: <FavoriteBorderRoundedIcon />, label: 'Log', value: 'log' },
-  { icon: <InsightsRoundedIcon />, label: 'Trends', value: 'trends' },
+  { icon: <CalendarMonthRoundedIcon />, label: 'Calendar', value: 'calendar' },
   { icon: <TuneRoundedIcon />, label: 'Settings', value: 'settings' },
 ];
 

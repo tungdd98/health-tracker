@@ -45,6 +45,11 @@ export const optionalPositiveIntegerSchema = z.preprocess(
   z.number().int().positive().optional(),
 );
 
+export const cycleLengthDaysSchema = z.preprocess(
+  parseOptionalPositiveNumber,
+  z.number().int().min(21).max(45).optional(),
+);
+
 export const optionalPositiveNumberSchema = z.preprocess(
   parseOptionalPositiveNumber,
   z.number().positive().optional(),

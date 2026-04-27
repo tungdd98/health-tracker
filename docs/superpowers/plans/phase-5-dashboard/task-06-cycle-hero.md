@@ -9,11 +9,11 @@
 
 - Create: `apps/health-tracker-web/src/app/dashboard/cycle-hero.tsx`
 
-- [ ] **Step 1: Open Pencil and read the 5 hero frames**
+- [x] **Step 1: Open Pencil and read the 5 hero frames**
 
 Open `docs/superpowers/designs/2026-04-26-dashboard.pen` in Pencil. Read frames `dashboard-predict`, `dashboard-overdue`, `dashboard-stale`, `dashboard-nudge`, `dashboard-loading`. Note layout, SVG ring structure, center text hierarchy, stale banner placement, nudge card body, and skeleton shape.
 
-- [ ] **Step 2: Create `cycle-hero.tsx`**
+- [x] **Step 2: Create `cycle-hero.tsx`**
 
 ```tsx
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
@@ -207,7 +207,7 @@ export function CycleHero({ mode, snapshot, isLoading, onLogPeriod }: CycleHeroP
 
 > Replace all romanized ASCII strings (countdown line, nudge text, stale banner, button labels) with proper Vietnamese strings with diacritics. cSpell warnings are cosmetic — lint and build are unaffected.
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -215,13 +215,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/dashboard/cycle-hero.tsx
 git commit -m "feat: add CycleHero component with SVG ring and 4 modes"
 ```
 
-- [ ] **Step 5: Mark complete in index.md**
+- [x] **Step 5: Mark complete in index.md**
 
 Check off Task 06 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

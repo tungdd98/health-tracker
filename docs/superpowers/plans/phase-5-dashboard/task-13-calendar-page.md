@@ -9,11 +9,11 @@
 
 - Create: `apps/health-tracker-web/src/app/calendar/calendar-page.tsx`
 
-- [ ] **Step 1: Open Pencil and read the 3 calendar frames**
+- [x] **Step 1: Open Pencil and read the 3 calendar frames**
 
 Confirm: month nav strip (left chevron, centered label, right chevron), skeleton grid layout, empty-state card body and button, legend placement below grid.
 
-- [ ] **Step 2: Create `calendar-page.tsx`**
+- [x] **Step 2: Create `calendar-page.tsx`**
 
 ```tsx
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
@@ -145,7 +145,7 @@ export function CalendarPage() {
 > - Empty state button: "Mở cài đặt"
 > - Disclaimer: same as dashboard disclaimer
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -153,13 +153,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/calendar/calendar-page.tsx
 git commit -m "feat: add CalendarPage with month nav, grid, legend, and empty state"
 ```
 
-- [ ] **Step 5: Mark complete in index.md**
+- [x] **Step 5: Mark complete in index.md**
 
 Check off Task 13 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

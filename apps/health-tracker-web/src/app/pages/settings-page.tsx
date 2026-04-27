@@ -153,6 +153,11 @@ export function SettingsPage() {
       return;
     }
 
+    if (value === 'calendar') {
+      navigate('/calendar');
+      return;
+    }
+
     if (value === 'settings') {
       navigate('/settings');
     }

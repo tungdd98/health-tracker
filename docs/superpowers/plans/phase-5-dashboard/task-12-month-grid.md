@@ -9,11 +9,11 @@
 
 - Create: `apps/health-tracker-web/src/app/calendar/month-grid.tsx`
 
-- [ ] **Step 1: Open Pencil and read both calendar frames**
+- [x] **Step 1: Open Pencil and read both calendar frames**
 
 Confirm: 7-column grid, headers `CN T2 T3 T4 T5 T6 T7` (Sunday-first), day cells colored by phase, today has outline ring, out-of-month cells are dimmed (lower opacity), empty-state cells have no color.
 
-- [ ] **Step 2: Create `month-grid.tsx`**
+- [x] **Step 2: Create `month-grid.tsx`**
 
 ```tsx
 import { Box, Typography } from '@mui/material';
@@ -100,7 +100,7 @@ export function MonthGrid({ displayMonth, input }: MonthGridProps) {
 }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -108,13 +108,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/calendar/month-grid.tsx
 git commit -m "feat: add MonthGrid with 42-cell Sunday-first layout"
 ```
 
-- [ ] **Step 5: Mark complete in index.md**
+- [x] **Step 5: Mark complete in index.md**
 
 Check off Task 12 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

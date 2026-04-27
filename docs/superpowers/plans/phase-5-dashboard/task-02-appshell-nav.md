@@ -8,11 +8,11 @@
 
 - Modify: `libs/ui/src/lib/app-shell.tsx`
 
-- [ ] **Step 1: Open Pencil and read `dashboard-predict` frame**
+- [x] **Step 1: Open Pencil and read `dashboard-predict` frame**
 
 Open `docs/superpowers/designs/2026-04-26-dashboard.pen` in Pencil. Read frame `dashboard-predict` (aoNGi). Confirm: 3-tab bottom nav — Home (`HomeRounded`), Calendar (`CalendarMonthRounded`), Settings (`TuneRounded`).
 
-- [ ] **Step 2: Update `app-shell.tsx`**
+- [x] **Step 2: Update `app-shell.tsx`**
 
 Replace the full content of `libs/ui/src/lib/app-shell.tsx`:
 
@@ -72,7 +72,7 @@ export function AppShell({
 }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -80,13 +80,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add libs/ui/src/lib/app-shell.tsx
 git commit -m "feat: update AppShell bottom nav to 3 tabs (Home, Calendar, Settings)"
 ```
 
-- [ ] **Step 5: Mark complete in index.md**
+- [x] **Step 5: Mark complete in index.md**
 
 Check off Task 02 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

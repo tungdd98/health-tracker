@@ -9,11 +9,11 @@
 
 - Create: `apps/health-tracker-web/src/app/dashboard/log-period-dialog.tsx`
 
-- [ ] **Step 1: Open Pencil and read both dialog frames**
+- [x] **Step 1: Open Pencil and read both dialog frames**
 
 Open `docs/superpowers/designs/2026-04-26-dashboard.pen` in Pencil. Read frames `log-period-dialog-idle` (1GzPh) and `log-period-dialog-error` (7w0ma). Note button placement, spinner position, inline error message location under body text.
 
-- [ ] **Step 2: Create `log-period-dialog.tsx`**
+- [x] **Step 2: Create `log-period-dialog.tsx`**
 
 ```tsx
 import {
@@ -100,7 +100,7 @@ export function LogPeriodDialog({ open, user, onClose, onSuccess }: LogPeriodDia
 
 > Replace all romanized ASCII strings with proper Vietnamese strings with diacritics at implementation time.
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -108,13 +108,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/dashboard/log-period-dialog.tsx
 git commit -m "feat: add LogPeriodDialog with inline error state"
 ```
 
-- [ ] **Step 5: Mark complete in index.md**
+- [x] **Step 5: Mark complete in index.md**
 
 Check off Task 07 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

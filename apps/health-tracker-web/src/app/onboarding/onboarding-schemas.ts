@@ -2,8 +2,8 @@ import { SUPPORTED_ONBOARDING_PHASES } from '@health-tracker/api';
 import { z } from 'zod';
 
 import {
+  cycleLengthDaysSchema,
   optionalDateTimeSchema,
-  optionalPositiveIntegerSchema,
   optionalPositiveNumberSchema,
   optionalTrimmedTextSchema,
 } from '../profile/profile-schemas';
@@ -23,7 +23,7 @@ export const onboardingBasicProfileSchema = z.object({
 });
 
 export const onboardingCycleSchema = z.object({
-  cycleLengthDays: optionalPositiveIntegerSchema,
+  cycleLengthDays: cycleLengthDaysSchema,
   lastPeriodStartDate: optionalDateTimeSchema,
 });
 

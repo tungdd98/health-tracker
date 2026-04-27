@@ -8,11 +8,11 @@
 
 - Create: `apps/health-tracker-web/src/app/dashboard/tip-of-day.tsx`
 
-- [ ] **Step 1: Open Pencil and read `dashboard-predict` frame**
+- [x] **Step 1: Open Pencil and read `dashboard-predict` frame**
 
 Locate the tip card section. Confirm: overline reads "Meo hom nay" (proper Vietnamese: "Mẹo hôm nay"), body is one short phrase.
 
-- [ ] **Step 2: Create `tip-of-day.tsx`**
+- [x] **Step 2: Create `tip-of-day.tsx`**
 
 ```tsx
 import { Skeleton, Stack, Typography } from '@mui/material';
@@ -58,7 +58,7 @@ export function TipOfDay({ phase, isLoading }: TipOfDayProps) {
 
 > Replace "Meo hom nay" with "Mẹo hôm nay" (Vietnamese with diacritics) at implementation time.
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -66,13 +66,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/dashboard/tip-of-day.tsx
 git commit -m "feat: add TipOfDay card component"
 ```
 
-- [ ] **Step 5: Mark complete in index.md**
+- [x] **Step 5: Mark complete in index.md**
 
 Check off Task 09 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

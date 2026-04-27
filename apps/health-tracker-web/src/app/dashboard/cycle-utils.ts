@@ -1,12 +1,3 @@
-### Task 03: Implement cycle math helpers
-
-**Files:**
-
-- Create: `apps/health-tracker-web/src/app/dashboard/cycle-utils.ts`
-
-- [x] **Step 1: Create `cycle-utils.ts`**
-
-```typescript
 import { DateTime } from 'luxon';
 
 export const PERIOD_LENGTH_DAYS = 5;
@@ -37,20 +28,19 @@ export const PHASE_COLOR_TOKENS: Record<CyclePhase, string> = {
 };
 
 export const PHASE_LABELS: Record<CyclePhase, string> = {
-  menstrual: 'Ky kinh',
-  follicular: 'Tien rung trung',
-  fertile: 'Cua so thu thai',
-  luteal: 'Hoang the',
+  menstrual: 'Kỳ kinh',
+  follicular: 'Tiền rụng trứng',
+  fertile: 'Cửa sổ thụ thai',
+  luteal: 'Hoàng thể',
 };
 
 export const PHASE_BADGE_LABELS: Record<CyclePhase, string> = {
-  menstrual: 'PHA KY KINH',
-  follicular: 'PHA TIEN RUNG TRUNG',
-  fertile: 'CUA SO THU THAI',
-  luteal: 'PHA HOANG THE',
+  menstrual: 'KỲ KINH',
+  follicular: 'TIỀN RỤNG TRỨNG',
+  fertile: 'CỬA SỔ THỤ THAI',
+  luteal: 'PHA HOÀNG THỂ',
 };
 
-// Luxon weekday: 1=Mon..7=Sun -> maps to T2..CN
 export const VN_WEEKDAY_SHORT = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'] as const;
 
 export const getWeekdayShort = (date: DateTime): string => VN_WEEKDAY_SHORT[date.weekday - 1];
@@ -68,15 +58,17 @@ export function computeCycleSnapshot(input: ComputeInput): CycleSnapshot | null 
     targetDate.startOf('day').diff(lastPeriodStartDate.startOf('day'), 'days').days,
   );
 
-  if (daysSinceLastPeriod < 0) return null;
+  if (daysSinceLastPeriod < 0) {
+    return null;
+  }
 
   const dayOfCycle = (daysSinceLastPeriod % cycleLengthDays) + 1;
-
   const ovulationDay = cycleLengthDays - LUTEAL_LENGTH_DAYS;
   const fertileStart = ovulationDay - FERTILE_WINDOW_BEFORE_OVULATION;
   const fertileEnd = ovulationDay + FERTILE_WINDOW_AFTER_OVULATION;
 
   let phase: CyclePhase;
+
   if (dayOfCycle <= PERIOD_LENGTH_DAYS) {
     phase = 'menstrual';
   } else if (dayOfCycle >= fertileStart && dayOfCycle <= fertileEnd) {
@@ -109,25 +101,3 @@ export function computeCycleSnapshot(input: ComputeInput): CycleSnapshot | null 
     isStale,
   };
 }
-```
-
-> Note: `PHASE_LABELS` and `PHASE_BADGE_LABELS` use ASCII-safe romanized strings in the source file to avoid cSpell false positives in the IDE. The actual Vietnamese strings with diacritics go into JSX text nodes (not as object keys or string literals in .ts files) so they render correctly in the UI.
-
-- [x] **Step 2: Verify**
-
-```bash
-yarn lint && yarn build
-```
-
-Expected: no errors.
-
-- [x] **Step 3: Commit**
-
-```bash
-git add apps/health-tracker-web/src/app/dashboard/cycle-utils.ts
-git commit -m "feat: add cycle math helpers (computeCycleSnapshot, PHASE_COLOR_TOKENS)"
-```
-
-- [x] **Step 4: Mark complete in index.md**
-
-Check off Task 03 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

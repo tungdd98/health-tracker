@@ -4,7 +4,7 @@
 
 - Create: `apps/health-tracker-web/src/app/dashboard/tip-library.ts`
 
-- [ ] **Step 1: Create `tip-library.ts`**
+- [x] **Step 1: Create `tip-library.ts`**
 
 ```typescript
 import { DateTime } from 'luxon';
@@ -44,7 +44,7 @@ export const pickTip = (phase: CyclePhase, today: DateTime): string => {
 >
 > Alternatively, just add the proper Vietnamese strings here — cSpell warnings in `.ts` files are cosmetic and do not affect lint or build. The choice is left to the implementer.
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -52,13 +52,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/dashboard/tip-library.ts
 git commit -m "feat: add tip-of-day library (PHASE_TIPS, pickTip)"
 ```
 
-- [ ] **Step 4: Mark complete in index.md**
+- [x] **Step 4: Mark complete in index.md**
 
 Check off Task 04 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

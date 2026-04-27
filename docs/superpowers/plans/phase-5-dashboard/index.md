@@ -18,20 +18,20 @@ Shell layout frame: tracked in task #10 (Pencil design for AppShell header + bot
 
 ## Tracking
 
-- [ ] Task 01: [Tighten cycleLengthDays schema to range 21-45](task-01-schema-tightening.md)
-- [ ] Task 02: [Update AppShell bottom nav to 3 tabs](task-02-appshell-nav.md)
-- [ ] Task 03: [Implement cycle math helpers](task-03-cycle-utils.md)
-- [ ] Task 04: [Implement tip-of-day library](task-04-tip-library.md)
-- [ ] Task 05: [Implement cycle hero mode derivation](task-05-cycle-hero-modes.md)
-- [ ] Task 06: [Implement CycleHero component](task-06-cycle-hero.md)
-- [ ] Task 07: [Implement LogPeriodDialog](task-07-log-period-dialog.md)
-- [ ] Task 08: [Implement 7-day OutlookStrip](task-08-outlook-strip.md)
-- [ ] Task 09: [Implement TipOfDay card](task-09-tip-of-day.md)
-- [ ] Task 10: [Compose DashboardPage](task-10-dashboard-page.md)
-- [ ] Task 11: [Implement PhaseLegend](task-11-phase-legend.md)
-- [ ] Task 12: [Implement MonthGrid](task-12-month-grid.md)
-- [ ] Task 13: [Implement CalendarPage](task-13-calendar-page.md)
-- [ ] Task 14: [Wire routes, remove LandingPage, update nav handlers](task-14-wire-routes.md)
+- [x] Task 01: [Tighten cycleLengthDays schema to range 21-45](task-01-schema-tightening.md)
+- [x] Task 02: [Update AppShell bottom nav to 3 tabs](task-02-appshell-nav.md)
+- [x] Task 03: [Implement cycle math helpers](task-03-cycle-utils.md)
+- [x] Task 04: [Implement tip-of-day library](task-04-tip-library.md)
+- [x] Task 05: [Implement cycle hero mode derivation](task-05-cycle-hero-modes.md)
+- [x] Task 06: [Implement CycleHero component](task-06-cycle-hero.md)
+- [x] Task 07: [Implement LogPeriodDialog](task-07-log-period-dialog.md)
+- [x] Task 08: [Implement 7-day OutlookStrip](task-08-outlook-strip.md)
+- [x] Task 09: [Implement TipOfDay card](task-09-tip-of-day.md)
+- [x] Task 10: [Compose DashboardPage](task-10-dashboard-page.md)
+- [x] Task 11: [Implement PhaseLegend](task-11-phase-legend.md)
+- [x] Task 12: [Implement MonthGrid](task-12-month-grid.md)
+- [x] Task 13: [Implement CalendarPage](task-13-calendar-page.md)
+- [x] Task 14: [Wire routes, remove LandingPage, update nav handlers](task-14-wire-routes.md)
 
 ---
 

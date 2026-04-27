@@ -8,11 +8,11 @@
 
 - Create: `apps/health-tracker-web/src/app/calendar/phase-legend.tsx`
 
-- [ ] **Step 1: Open Pencil and read `calendar-with-data` frame**
+- [x] **Step 1: Open Pencil and read `calendar-with-data` frame**
 
 Confirm: 4 chips, dot size, label text, spacing. Labels: Ky kinh / Tien rung trung / Cua so thu thai / Hoang the (proper Vietnamese with diacritics).
 
-- [ ] **Step 2: Create `phase-legend.tsx`**
+- [x] **Step 2: Create `phase-legend.tsx`**
 
 ```tsx
 import { Box, Stack, Typography } from '@mui/material';
@@ -54,7 +54,7 @@ export function PhaseLegend() {
 
 > Replace romanized label strings with proper Vietnamese: "Kỳ kinh", "Tiền rụng trứng", "Cửa sổ thụ thai", "Hoàng thể".
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -62,13 +62,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/calendar/phase-legend.tsx
 git commit -m "feat: add PhaseLegend component"
 ```
 
-- [ ] **Step 5: Mark complete in index.md**
+- [x] **Step 5: Mark complete in index.md**
 
 Check off Task 11 in `docs/superpowers/plans/phase-5-dashboard/index.md`.

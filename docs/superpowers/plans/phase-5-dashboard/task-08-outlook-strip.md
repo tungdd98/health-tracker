@@ -8,11 +8,11 @@
 
 - Create: `apps/health-tracker-web/src/app/dashboard/outlook-strip.tsx`
 
-- [ ] **Step 1: Open Pencil and read `dashboard-predict` frame**
+- [x] **Step 1: Open Pencil and read `dashboard-predict` frame**
 
 Confirm cell dimensions, today highlight style, dot size, and spacing between cells.
 
-- [ ] **Step 2: Create `outlook-strip.tsx`**
+- [x] **Step 2: Create `outlook-strip.tsx`**
 
 ```tsx
 import { Box, Skeleton, Stack } from '@mui/material';
@@ -101,7 +101,7 @@ export function OutlookStrip({ input, isLoading }: OutlookStripProps) {
 }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 ```bash
 yarn lint && yarn build
@@ -109,13 +109,13 @@ yarn lint && yarn build
 
 Expected: no errors.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add apps/health-tracker-web/src/app/dashboard/outlook-strip.tsx
 git commit -m "feat: add 7-day OutlookStrip component"
 ```
 
-- [ ] **Step 5: Mark complete in index.md**
+- [x] **Step 5: Mark complete in index.md**
 
 Check off Task 08 in `docs/superpowers/plans/phase-5-dashboard/index.md`.
