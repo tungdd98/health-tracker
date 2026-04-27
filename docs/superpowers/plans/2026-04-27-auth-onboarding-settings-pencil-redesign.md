@@ -1,6 +1,6 @@
 # Auth, Onboarding & Settings — Pencil Redesign Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Create `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen` with 7 reusable Pencil components and 16 frames covering Login, SignUp, Onboarding (5 steps), and Settings screens — replacing the old Stitch designs.
 
@@ -51,7 +51,7 @@ Each screen frame: `width: 390` (iPhone 14 viewport), `height: fit_content`.
 
 - Create: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Open the design document**
+- [x] **Step 1: Open the design document**
 
 ```
 open_document("docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen")
@@ -59,7 +59,7 @@ open_document("docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen"
 
 Expected: Document opens (new blank canvas).
 
-- [ ] **Step 2: Load editor state and guidelines**
+- [x] **Step 2: Load editor state and guidelines**
 
 ```
 get_editor_state({ include_schema: false })
@@ -68,7 +68,7 @@ get_guidelines("guide", "style")
 
 Read the style guide to inform color, spacing, and type choices before designing.
 
-- [ ] **Step 3: Check available variables**
+- [x] **Step 3: Check available variables**
 
 ```
 get_variables()
@@ -86,7 +86,7 @@ Reusable component used by Login, SignUp, and all Onboarding frames. Contains ic
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create the AuthHero reusable component**
+- [x] **Step 1: Create the AuthHero reusable component**
 
 Place at approximately `x: 0, y: 0` on the canvas.
 
@@ -162,7 +162,7 @@ I(hero, {
 });
 ```
 
-- [ ] **Step 2: Screenshot to verify**
+- [x] **Step 2: Screenshot to verify**
 
 ```
 get_screenshot(AuthHero_id)
@@ -180,7 +180,7 @@ FormCard is the frosted-glass card wrapping all auth/onboarding forms. PrimaryBu
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create FormCard reusable component**
+- [x] **Step 1: Create FormCard reusable component**
 
 Place below AuthHero (y: ~300).
 
@@ -220,7 +220,7 @@ I(card, {
 });
 ```
 
-- [ ] **Step 2: Create PrimaryButton reusable component**
+- [x] **Step 2: Create PrimaryButton reusable component**
 
 Place below FormCard (y: ~560).
 
@@ -266,7 +266,7 @@ I(btn, {
 });
 ```
 
-- [ ] **Step 3: Screenshot both components**
+- [x] **Step 3: Screenshot both components**
 
 ```
 get_screenshot(card_id)
@@ -285,7 +285,7 @@ OnboardingProgressBar shows step counter + linear progress. PhaseOptionCard is t
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create OnboardingProgressBar reusable component**
+- [x] **Step 1: Create OnboardingProgressBar reusable component**
 
 Place at `y: ~680` in the component library.
 
@@ -342,7 +342,7 @@ I(trackBg, {
 });
 ```
 
-- [ ] **Step 2: Create PhaseOptionCard reusable component**
+- [x] **Step 2: Create PhaseOptionCard reusable component**
 
 Place at `y: ~800` in the component library. This is the selectable card used in the Phase step.
 
@@ -413,7 +413,7 @@ I(row, {
 });
 ```
 
-- [ ] **Step 3: Screenshot to verify**
+- [x] **Step 3: Screenshot to verify**
 
 ```
 get_screenshot(pb_id)
@@ -430,7 +430,7 @@ Expected: OnboardingProgressBar — counter label + filled track. PhaseOptionCar
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create SettingsSectionCard reusable component**
+- [x] **Step 1: Create SettingsSectionCard reusable component**
 
 Place at `y: ~1000` in the component library.
 
@@ -475,7 +475,7 @@ I(ssc, {
 });
 ```
 
-- [ ] **Step 2: Create AppShellHeader reusable component**
+- [x] **Step 2: Create AppShellHeader reusable component**
 
 Place at `y: ~1180` in the component library.
 
@@ -520,7 +520,7 @@ I(ash, {
 });
 ```
 
-- [ ] **Step 3: Create AppBottomNav reusable component**
+- [x] **Step 3: Create AppBottomNav reusable component**
 
 Place at `y: ~1340` in the component library.
 
@@ -625,7 +625,7 @@ I(setTab, {
 });
 ```
 
-- [ ] **Step 4: Screenshot all three new components**
+- [x] **Step 4: Screenshot all three new components**
 
 ```
 get_screenshot(ssc_id)
@@ -645,7 +645,7 @@ Place in the Auth group at `x: 600`. Frames stacked vertically with 60px gap bet
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create login-default frame**
+- [x] **Step 1: Create login-default frame**
 
 ```javascript
 loginDefault = I(document, {
@@ -791,7 +791,7 @@ U(loginDefault, { placeholder: false });
 
 > **Note:** The exact descendant IDs (`overline_id`, `title_id`, `placeholder_id`, etc.) will be resolved at runtime from `batch_get` on the component. Use `batch_get([AuthHero_id, FormCard_id, PrimaryButton_id], readDepth:3)` before this task to learn the actual child IDs, then substitute them in the operations above.
 
-- [ ] **Step 2: Create login-loading frame by copying login-default**
+- [x] **Step 2: Create login-loading frame by copying login-default**
 
 ```javascript
 loginLoading = C(loginDefault_id, document, {
@@ -820,7 +820,7 @@ spinner = I(loginLoading + '/cta_id', {
 U(loginLoading, { placeholder: false });
 ```
 
-- [ ] **Step 3: Create login-error frame by copying login-default**
+- [x] **Step 3: Create login-error frame by copying login-default**
 
 ```javascript
 loginError = C(loginDefault_id, document, {
@@ -860,7 +860,7 @@ I(errorAlert, {
 U(loginError, { placeholder: false });
 ```
 
-- [ ] **Step 4: Screenshot all three login frames**
+- [x] **Step 4: Screenshot all three login frames**
 
 ```
 get_screenshot(loginDefault_id)
@@ -880,7 +880,7 @@ Place in the Auth group continuing from Login: `x: 1000` (or same x with more ve
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Find empty space on canvas**
+- [x] **Step 1: Find empty space on canvas**
 
 ```
 find_empty_space_on_canvas({width:390, height:2400})
@@ -888,7 +888,7 @@ find_empty_space_on_canvas({width:390, height:2400})
 
 Use the returned coordinates for the SignUp group.
 
-- [ ] **Step 2: Create signup-default frame**
+- [x] **Step 2: Create signup-default frame**
 
 Structure mirrors login-default but with 3 fields (email, password + caption, confirm password) and different hero copy.
 
@@ -921,15 +921,15 @@ I(footer, {type:"text", content:"Đăng nhập", fontSize:14, fontWeight:"600", 
 U(signupDefault, {placeholder:false})
 ```
 
-- [ ] **Step 3: Create signup-loading by copying signup-default**
+- [x] **Step 3: Create signup-loading by copying signup-default**
 
 Same approach as login-loading: copy frame, update CTA to show spinner + "Đang tạo tài khoản...".
 
-- [ ] **Step 4: Create signup-error by copying signup-default**
+- [x] **Step 4: Create signup-error by copying signup-default**
 
 Same approach as login-error: copy frame, insert red Alert between confirm password field and CTA.
 
-- [ ] **Step 5: Screenshot all three signup frames**
+- [x] **Step 5: Screenshot all three signup frames**
 
 ```
 get_screenshot(signupDefault_id)
@@ -949,7 +949,7 @@ Place Onboarding group at `x: 1400`. Steps stacked vertically.
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create onboarding-phase frame (step 1/5)**
+- [x] **Step 1: Create onboarding-phase frame (step 1/5)**
 
 ```javascript
 obPhase = I(document, {
@@ -1030,7 +1030,7 @@ U(ctaInst + '/label_id', { content: 'Tiếp tục' });
 U(obPhase, { placeholder: false });
 ```
 
-- [ ] **Step 2: Create onboarding-basic-profile frame (step 2/5)**
+- [x] **Step 2: Create onboarding-basic-profile frame (step 2/5)**
 
 ```javascript
 obBasic = I(document, {
@@ -1078,7 +1078,7 @@ U(ctaInst + '/label_id', { content: 'Tiếp tục' });
 U(obBasic, { placeholder: false });
 ```
 
-- [ ] **Step 3: Screenshot frames**
+- [x] **Step 3: Screenshot frames**
 
 ```
 get_screenshot(obPhase_id)
@@ -1095,7 +1095,7 @@ Expected: onboarding-phase — step 1/5 progress bar, 2 option cards (first sele
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create onboarding-cycle frame (step 3/5)**
+- [x] **Step 1: Create onboarding-cycle frame (step 3/5)**
 
 Same structure as onboarding-basic-profile. Progress bar at 60% (3/5), label "Chu kỳ".
 
@@ -1141,7 +1141,7 @@ I(skipBtn, {
 U(obCycle, { placeholder: false });
 ```
 
-- [ ] **Step 2: Create onboarding-body-metrics frame (step 4/5)**
+- [x] **Step 2: Create onboarding-body-metrics frame (step 4/5)**
 
 Same structure. Progress bar at 80% (4/5), label "Chỉ số cơ thể".
 
@@ -1170,7 +1170,7 @@ obBody = I(document, {
 U(obBody, { placeholder: false });
 ```
 
-- [ ] **Step 3: Screenshot both frames**
+- [x] **Step 3: Screenshot both frames**
 
 ```
 get_screenshot(obCycle_id)
@@ -1187,7 +1187,7 @@ Expected: Step 3 — cycle fields + 3-button row. Step 4 — body metric fields 
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create onboarding-completion frame (step 5/5)**
+- [x] **Step 1: Create onboarding-completion frame (step 5/5)**
 
 ```javascript
 obCompletion = I(document, {
@@ -1262,7 +1262,7 @@ U(ctaInst + '/label_id', { content: 'Vào app' });
 U(obCompletion, { placeholder: false });
 ```
 
-- [ ] **Step 2: Create onboarding-loading generic frame**
+- [x] **Step 2: Create onboarding-loading generic frame**
 
 Copy onboarding-basic-profile frame (representative of any step mid-submit):
 
@@ -1292,7 +1292,7 @@ I(obLoading + '/cta_id', {
 U(obLoading, { placeholder: false });
 ```
 
-- [ ] **Step 3: Create onboarding-error generic frame**
+- [x] **Step 3: Create onboarding-error generic frame**
 
 Copy onboarding-basic-profile frame (representative of any step with validation error):
 
@@ -1317,7 +1317,7 @@ errText = I(obError + '/field1_frame_id', {
 U(obError, { placeholder: false });
 ```
 
-- [ ] **Step 4: Screenshot all three frames**
+- [x] **Step 4: Screenshot all three frames**
 
 ```
 get_screenshot(obCompletion_id)
@@ -1337,7 +1337,7 @@ Place Settings group at `x: 2600`.
 
 - Modify: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Create settings-default frame**
+- [x] **Step 1: Create settings-default frame**
 
 ```javascript
 settDefault = I(document, {
@@ -1440,7 +1440,7 @@ U(settDefault, { placeholder: false });
 
 > **Note on bottom nav:** Since the frame uses vertical layout with `fit_content`, pin the nav via `layoutPosition: "absolute"` at the bottom of the frame, or add it as a separate overlay element. Adjust `padding-bottom` of the main content to 80px to avoid overlap.
 
-- [ ] **Step 2: Create settings-saving frame by copying settings-default**
+- [x] **Step 2: Create settings-saving frame by copying settings-default**
 
 ```javascript
 settSaving = C(settDefault_id, document, {
@@ -1469,7 +1469,7 @@ I(settSaving + '/saveBtn1_id', {
 U(settSaving, { placeholder: false });
 ```
 
-- [ ] **Step 3: Create settings-error frame by copying settings-default**
+- [x] **Step 3: Create settings-error frame by copying settings-default**
 
 ```javascript
 settError = C(settDefault_id, document, {
@@ -1512,7 +1512,7 @@ I(snackbar, {
 U(settError, { placeholder: false });
 ```
 
-- [ ] **Step 4: Screenshot all three settings frames**
+- [x] **Step 4: Screenshot all three settings frames**
 
 ```
 get_screenshot(settDefault_id)
@@ -1530,7 +1530,7 @@ Expected: settings-default — header, 3 section cards, sign-out outlined in red
 
 - Read: `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
 
-- [ ] **Step 1: Verify frame count via editor state**
+- [x] **Step 1: Verify frame count via editor state**
 
 ```
 get_editor_state({ include_schema: false })
@@ -1549,7 +1549,7 @@ And **7 reusable components**:
 
 If any frame or component is missing, create it before proceeding.
 
-- [ ] **Step 2: Take final screenshots of one frame per group**
+- [x] **Step 2: Take final screenshots of one frame per group**
 
 ```
 get_screenshot(loginDefault_id)
@@ -1560,7 +1560,7 @@ get_screenshot(settingsDefault_id)
 
 Confirm all four look visually consistent — same background color, same card style, same typography treatment.
 
-- [ ] **Step 3: Run format check**
+- [x] **Step 3: Run format check**
 
 ```bash
 yarn format
@@ -1568,7 +1568,7 @@ yarn format
 
 Expected: No changes needed (`.pen` file is binary, Prettier ignores it).
 
-- [ ] **Step 4: Commit the design file**
+- [x] **Step 4: Commit the design file**
 
 ```bash
 git add docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen
