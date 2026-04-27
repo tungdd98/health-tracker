@@ -8,9 +8,9 @@ import { AppHeader } from './app-header';
 import { AppBottomNav, type AppBottomNavItem } from './app-bottom-nav';
 
 const defaultNavItems: AppBottomNavItem[] = [
-  { icon: <HomeRoundedIcon />, label: 'Home', value: 'home' },
-  { icon: <CalendarMonthRoundedIcon />, label: 'Calendar', value: 'calendar' },
-  { icon: <TuneRoundedIcon />, label: 'Settings', value: 'settings' },
+  { icon: <HomeRoundedIcon />, label: 'Trang chủ', value: 'home' },
+  { icon: <CalendarMonthRoundedIcon />, label: 'Chu kỳ', value: 'calendar' },
+  { icon: <TuneRoundedIcon />, label: 'Cài đặt', value: 'settings' },
 ];
 
 type AppShellProps = PropsWithChildren<{
