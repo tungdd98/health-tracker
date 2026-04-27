@@ -108,6 +108,12 @@ Expected: The phase moves into UI implementation with stable visual references a
 - Any loading, validation error, or submit error behavior should be implemented in code on top of the default layouts.
 - The disabled `Đang có em bé` branch remains visible but is not an implementation target in this phase.
 
+### Pencil Redesign Follow-up
+
+- On `2026-04-27`, onboarding visuals were refreshed in code against `docs/superpowers/designs/2026-04-27-onboarding.pen`.
+- The active implementation now follows the Pencil frames `onboarding-phase`, `onboarding-basic-profile`, `onboarding-cycle`, `onboarding-body-metrics`, `onboarding-completion`, plus the documented loading/error states.
+- Stitch remains useful as the original phase artifact, but the current onboarding hero, progress treatment, copy hierarchy, and completion screen are aligned to the Pencil redesign.
+
 ### Implementation Notes
 
 - `Select Phase / Default`: progress `1 / 5`, eyebrow + title + description, one enabled selection card, one disabled coming-soon card, and primary `Tiếp tục`.

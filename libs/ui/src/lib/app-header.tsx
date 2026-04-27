@@ -30,15 +30,15 @@ export function AppHeader({
   }
 
   return (
-    <Box component="header" sx={{ pb: 2, pt: 0 }}>
+    <Box component="header" sx={{ pb: 2.5, pt: 0.5, px: 0.5 }}>
       <Stack alignItems="flex-start" direction="row" justifyContent="space-between" spacing={2}>
         <Stack spacing={0.5}>
           {eyebrow ? (
-            <Typography color="primary.main" variant="overline">
+            <Typography color="text.secondary" variant="overline">
               {eyebrow}
             </Typography>
           ) : null}
-          {title ? <Typography variant="h4">{title}</Typography> : null}
+          {title ? <Typography variant="h3">{title}</Typography> : null}
           {subtitle ? (
             <Typography
               color="text.secondary"

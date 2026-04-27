@@ -74,3 +74,9 @@ Expected: The phase can move into implementation with stable visual references a
 - The approved Stitch source of truth for settings implementation is limited to the default `Settings` screen.
 - Validation, loading, success, and error states should be implemented in code by preserving the same layout and applying state-only changes.
 - The sign-out confirmation dialog may be documented as implementation notes unless Hoàng Thượng later asks for a finalized dialog mockup.
+
+### Pencil Redesign Follow-up
+
+- On `2026-04-27`, settings visuals were refreshed in code against `docs/superpowers/designs/2026-04-27-settings.pen`.
+- The active implementation now follows the Pencil frames `settings-default`, `settings-saving`, and `settings-error`, including the updated signed-in header, section-card typography, and outlined sign-out action.
+- Stitch remains the original phase artifact, but the current settings presentation is now aligned to the Pencil redesign.

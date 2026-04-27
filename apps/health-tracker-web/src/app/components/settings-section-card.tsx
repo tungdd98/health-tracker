@@ -16,10 +16,12 @@ export function SettingsSectionCard({
   children,
 }: SettingsSectionCardProps) {
   return (
-    <AppCard sx={{ p: 3 }}>
-      <Stack spacing={2.5}>
+    <AppCard sx={{ borderRadius: '24px', p: 2.5 }}>
+      <Stack spacing={2}>
         <Box>
-          <Typography variant="h4">{title}</Typography>
+          <Typography sx={{ fontSize: '1rem', fontWeight: 600 }} variant="subtitle1">
+            {title}
+          </Typography>
           {description ? (
             <Typography color="text.secondary" sx={{ mt: 0.75 }}>
               {description}

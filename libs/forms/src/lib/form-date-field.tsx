@@ -17,6 +17,7 @@ export function FormDateField({ label, name }: FormDateFieldProps) {
       render={({ field, fieldState }) => (
         <DatePicker
           enableAccessibleFieldDOMStructure={false}
+          format="dd/MM/yyyy"
           label={label}
           value={field.value ?? null}
           onChange={(value) => field.onChange(value)}

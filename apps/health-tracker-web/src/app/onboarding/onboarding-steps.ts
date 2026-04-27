@@ -8,27 +8,27 @@ export const ONBOARDING_STEPS: readonly OnboardingStepDefinition[] = [
   {
     id: ONBOARDING_STEP_IDS.phase,
     title: 'Chọn giai đoạn',
-    description: 'Chọn giai đoạn phù hợp để bắt đầu.',
+    description: 'Bắt đầu bằng việc chọn giai đoạn phù hợp với hành trình của bạn.',
   },
   {
     id: ONBOARDING_STEP_IDS.basicProfile,
     title: 'Thông tin cơ bản',
-    description: 'Điền tên hiển thị và ngày sinh để cá nhân hóa trải nghiệm.',
+    description: 'Thêm vài thông tin nhẹ nhàng để trải nghiệm theo dõi gần gũi hơn.',
   },
   {
     id: ONBOARDING_STEP_IDS.cycle,
-    title: 'Chu kỳ kinh nguyệt',
-    description: 'Bổ sung dữ liệu chu kỳ để theo dõi chính xác hơn.',
+    title: 'Chu kỳ',
+    description: 'Nếu đã có sẵn, hãy thêm dữ liệu chu kỳ để việc theo dõi sát hơn.',
   },
   {
     id: ONBOARDING_STEP_IDS.bodyMetrics,
-    title: 'Chiều cao và cân nặng',
-    description: 'Thêm chiều cao và cân nặng nếu đã có sẵn.',
+    title: 'Chỉ số cơ thể',
+    description: 'Bạn có thể bổ sung chiều cao và cân nặng ngay bây giờ hoặc để sau.',
   },
   {
     id: ONBOARDING_STEP_IDS.completion,
     title: 'Hoàn tất',
-    description: 'Mọi thứ đã sẵn sàng để bắt đầu sử dụng ứng dụng.',
+    description: 'Bạn đã sẵn sàng để bắt đầu theo dõi nhịp sức khỏe của mình.',
   },
 ];
 

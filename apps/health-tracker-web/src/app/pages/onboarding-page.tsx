@@ -348,7 +348,7 @@ export function OnboardingPage() {
           <CompletionStep
             onPrimaryAction={handleComplete}
             primaryActionDisabled={isSubmitting}
-            primaryActionLabel="Bắt đầu ngay"
+            primaryActionLabel="Vào app"
             primaryActionLoading={isSubmitting}
           />
         );
@@ -411,6 +411,7 @@ export function OnboardingPage() {
         description={currentStep.description}
         eyebrow="Thiết lập ban đầu"
         skipAction={skipAction}
+        stepLabel={currentStep.title}
         title={currentStep.title}
         totalSteps={ONBOARDING_STEP_COUNT}
       >

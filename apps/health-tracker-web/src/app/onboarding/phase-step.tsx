@@ -87,7 +87,7 @@ export function PhaseStep() {
       control={control}
       name="selectedPhase"
       render={({ field, fieldState }) => (
-        <FormField error={fieldState.error?.message} label="Chọn giai đoạn phù hợp">
+        <FormField error={fieldState.error?.message} label="Giai đoạn phù hợp">
           <Stack spacing={1.5}>
             {PHASE_OPTIONS.map((option) => (
               <PhaseOptionCard

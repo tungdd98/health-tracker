@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { alpha } from '@mui/material/styles';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 
 export type AppBottomNavItem = {
@@ -17,14 +18,18 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
   return (
     <Paper
       elevation={0}
-      sx={{
+      sx={(theme) => ({
         bottom: 16,
         left: '50%',
+        borderRadius: '20px',
+        backgroundColor: alpha(theme.palette.background.paper, 0.88),
+        backdropFilter: 'blur(18px)',
+        boxShadow: `0 18px 40px ${alpha(theme.palette.primary.main, 0.12)}`,
         position: 'fixed',
         transform: 'translateX(-50%)',
         width: 'min(calc(100vw - 32px), 600px)',
         zIndex: 10,
-      }}
+      })}
     >
       <BottomNavigation
         showLabels
@@ -43,7 +48,7 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
             icon={item.icon}
             label={item.label}
             sx={{
-              borderRadius: 3,
+              borderRadius: '20px',
               color: 'text.secondary',
               minHeight: '100%',
               minWidth: 0,
@@ -63,6 +68,9 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
               },
               '&.Mui-selected': {
                 bgcolor: 'primary.main',
+                color: 'primary.main',
+              },
+              '&.Mui-selected .MuiSvgIcon-root': {
                 color: 'primary.contrastText',
               },
               '&.Mui-selected .MuiBottomNavigationAction-label': {

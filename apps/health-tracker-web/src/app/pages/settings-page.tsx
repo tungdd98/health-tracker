@@ -144,8 +144,6 @@ export function SettingsPage() {
   const selectedPhaseLabel = profileSnapshot.selectedPhase
     ? ONBOARDING_PHASE_LABELS[profileSnapshot.selectedPhase]
     : 'Chưa thiết lập';
-  const greetingName =
-    profileSnapshot.displayName?.trim() || user?.email?.split('@')[0]?.trim() || 'bạn';
 
   const handleNavChange = (value: string) => {
     if (value === 'home') {
@@ -303,7 +301,7 @@ export function SettingsPage() {
   return (
     <AppShell
       headerEyebrow="Tài khoản"
-      headerSubtitle={`Quản lý thông tin của ${greetingName}`}
+      headerSubtitle="Quản lý thông tin của bạn"
       headerTitle="Cài đặt"
       navValue="settings"
       onNavChange={handleNavChange}
@@ -395,7 +393,7 @@ export function SettingsPage() {
             disabled={isSigningOut}
             onClick={handleOpenSignOutDialog}
             startIcon={<LogoutRoundedIcon />}
-            variant="contained"
+            variant="outlined"
           >
             Đăng xuất
           </Button>

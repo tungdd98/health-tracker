@@ -1,25 +1,25 @@
 export const authCopy = {
   login: {
-    eyebrow: 'Nhịp sống khỏe mỗi ngày',
-    title: 'Chào mừng bạn quay lại',
+    eyebrow: 'Chào mừng trở lại',
+    title: 'Đăng nhập',
     description:
-      'Đăng nhập để tiếp tục theo dõi chỉ số và giữ nhịp chăm sóc cơ thể thật nhẹ nhàng.',
+      'Tiếp tục hành trình theo dõi nhịp sức khỏe của mình một cách nhẹ nhàng và đều đặn.',
     emailLabel: 'Email',
     passwordLabel: 'Mật khẩu',
     submitLabel: 'Đăng nhập',
     submitLoadingLabel: 'Đang đăng nhập...',
     switchPrompt: 'Chưa có tài khoản?',
-    switchActionLabel: 'Tạo tài khoản',
+    switchActionLabel: 'Đăng ký',
   },
   signUp: {
-    eyebrow: 'Bắt đầu hành trình bền vững',
-    title: 'Tạo tài khoản mới',
+    eyebrow: 'Tạo tài khoản',
+    title: 'Bắt đầu hành trình',
     description:
-      'Thiết lập không gian theo dõi sức khỏe riêng để lưu lại những thay đổi nhỏ nhưng quan trọng mỗi ngày.',
+      'Tạo không gian riêng để lưu lại những thay đổi nhỏ nhưng quan trọng của cơ thể mỗi ngày.',
     emailLabel: 'Email',
     passwordLabel: 'Mật khẩu',
     confirmPasswordLabel: 'Nhập lại mật khẩu',
-    passwordRule: 'Mật khẩu cần có ít nhất 8 ký tự.',
+    passwordRule: 'Tối thiểu 8 ký tự',
     submitLabel: 'Tạo tài khoản',
     submitLoadingLabel: 'Đang tạo tài khoản...',
     switchPrompt: 'Đã có tài khoản?',

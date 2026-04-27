@@ -3,24 +3,16 @@ import { alpha } from '@mui/material/styles';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import type { PropsWithChildren, ReactNode } from 'react';
 
-import { AppCard, AppChip } from '@health-tracker/ui';
+import { AppCard } from '@health-tracker/ui';
 
 type AuthLayoutProps = PropsWithChildren<{
   eyebrow: string;
   title: string;
   description: string;
-  chips?: string[];
   footer?: ReactNode;
 }>;
 
-export function AuthLayout({
-  eyebrow,
-  title,
-  description,
-  chips,
-  footer,
-  children,
-}: AuthLayoutProps) {
+export function AuthLayout({ eyebrow, title, description, footer, children }: AuthLayoutProps) {
   return (
     <Box
       component="main"
@@ -33,12 +25,12 @@ export function AuthLayout({
       }}
     >
       <Container maxWidth="sm" sx={{ px: '0 !important' }}>
-        <Stack spacing={3}>
+        <Stack spacing={2.5}>
           <Stack
             spacing={1.5}
             alignItems="center"
             textAlign="center"
-            sx={{ px: { xs: 1.5, sm: 3 } }}
+            sx={{ px: { xs: 1.5, sm: 3 }, pt: { xs: 2, sm: 0 } }}
           >
             <Box
               sx={(theme) => ({
@@ -63,27 +55,21 @@ export function AuthLayout({
             <Typography color="text.secondary" sx={{ maxWidth: 420 }}>
               {description}
             </Typography>
-            {chips && chips.length > 0 ? (
-              <Stack direction="row" flexWrap="wrap" justifyContent="center" gap={1}>
-                {chips.map((chip) => (
-                  <AppChip key={chip} label={chip} />
-                ))}
-              </Stack>
-            ) : null}
           </Stack>
 
           <AppCard
             sx={(theme) => ({
+              borderRadius: '24px',
               p: { xs: 2.5, sm: 3.5 },
               backgroundColor: alpha(theme.palette.background.paper, 0.92),
               backdropFilter: 'blur(14px)',
+              boxShadow: `0 24px 48px ${alpha(theme.palette.primary.main, 0.08)}`,
             })}
           >
-            <Stack spacing={2.5}>
-              {children}
-              {footer}
-            </Stack>
+            <Stack spacing={2.5}>{children}</Stack>
           </AppCard>
+
+          {footer ? <Box sx={{ px: 1 }}>{footer}</Box> : null}
         </Stack>
       </Container>
     </Box>

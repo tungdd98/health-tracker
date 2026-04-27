@@ -97,6 +97,13 @@ Expected: The phase can move into UI implementation with stable visual reference
 - Additional visual state screens generated earlier in Stitch are not authoritative and should not be used as design references for code.
 - `field error`, `submit loading`, and `submit error` should be implemented in code by preserving the default layout and applying state-only changes.
 
+### Pencil Redesign Follow-up
+
+- On `2026-04-27`, auth visuals were refreshed in code against the Pencil redesign artifacts:
+  - `docs/superpowers/designs/2026-04-27-auth.pen` → `login-default`, `login-loading`, `login-error`
+  - `docs/superpowers/designs/2026-04-27-auth.pen` → `signup-default`, `signup-loading`, `signup-error`
+- Stitch remains the historical phase artifact, but the current auth screen hierarchy, copy, and spacing now follow the Pencil frames above.
+
 ### Final Hero Copy
 
 - Login eyebrow: `Nhịp sống khỏe mỗi ngày`

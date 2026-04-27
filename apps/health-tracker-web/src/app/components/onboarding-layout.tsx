@@ -9,6 +9,7 @@ type OnboardingLayoutProps = PropsWithChildren<{
   eyebrow: string;
   title: string;
   description: string;
+  stepLabel: string;
   currentStepNumber: number;
   totalSteps: number;
   backAction?: ReactNode;
@@ -21,6 +22,7 @@ export function OnboardingLayout({
   eyebrow,
   title,
   description,
+  stepLabel,
   currentStepNumber,
   totalSteps,
   backAction,
@@ -43,12 +45,12 @@ export function OnboardingLayout({
       }}
     >
       <Container maxWidth="sm" sx={{ px: '0 !important' }}>
-        <Stack spacing={3}>
+        <Stack spacing={2.5}>
           <Stack
             spacing={1.5}
             alignItems="center"
             textAlign="center"
-            sx={{ px: { xs: 1.5, sm: 3 } }}
+            sx={{ px: { xs: 1.5, sm: 3 }, pt: { xs: 2, sm: 0 } }}
           >
             <Box
               sx={(theme) => ({
@@ -77,17 +79,20 @@ export function OnboardingLayout({
 
           <AppCard
             sx={(theme) => ({
+              borderRadius: '24px',
               p: { xs: 2.5, sm: 3.5 },
               backgroundColor: alpha(theme.palette.background.paper, 0.92),
               backdropFilter: 'blur(14px)',
+              boxShadow: `0 24px 48px ${alpha(theme.palette.primary.main, 0.08)}`,
             })}
           >
             <Stack spacing={2.5}>
               <Stack spacing={1}>
-                <Stack direction="row" justifyContent="space-between" alignItems="center">
+                <Stack spacing={0.25}>
                   <Typography color="text.secondary" variant="overline">
-                    {currentStepNumber} / {totalSteps}
+                    Bước {currentStepNumber} / {totalSteps}
                   </Typography>
+                  <Typography variant="body2">{stepLabel}</Typography>
                 </Stack>
                 <LinearProgress
                   sx={{

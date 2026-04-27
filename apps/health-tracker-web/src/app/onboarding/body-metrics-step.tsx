@@ -6,7 +6,7 @@ export function BodyMetricsStep() {
   return (
     <Stack spacing={1.5}>
       <Typography color="text.secondary">
-        Chiều cao và cân nặng giúp gợi ý sức khỏe sát hơn theo thể trạng.
+        Bạn có thể thêm các chỉ số này ngay lúc này hoặc để sau khi cần.
       </Typography>
 
       <Grid container spacing={2}>
