@@ -1,5 +1,14 @@
 # Auth, Onboarding & Settings — Pencil Redesign Implementation Plan
 
+> **Artifact split note (2026-04-27):** The original single-file output was later split for maintainability. Current design artifacts are:
+>
+> - `docs/superpowers/designs/2026-04-27-common-ui.pen`
+> - `docs/superpowers/designs/2026-04-27-auth.pen`
+> - `docs/superpowers/designs/2026-04-27-onboarding.pen`
+> - `docs/superpowers/designs/2026-04-27-settings.pen`
+>
+> Treat references below to `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen` as historical execution context for the original implementation pass.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Create `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen` with 7 reusable Pencil components and 16 frames covering Login, SignUp, Onboarding (5 steps), and Settings screens — replacing the old Stitch designs.

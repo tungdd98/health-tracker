@@ -1,0 +1,774 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "VY1Cs",
+      "x": 0,
+      "y": 0,
+      "name": "AuthHero",
+      "reusable": true,
+      "width": 390,
+      "layout": "vertical",
+      "gap": "$space-sm",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "xniYw",
+          "name": "bubble",
+          "width": 68,
+          "height": 68,
+          "fill": "#F4DCE4B8",
+          "cornerRadius": 34,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#6C5A6124",
+            "offset": {
+              "x": 0,
+              "y": 18
+            },
+            "blur": 36
+          },
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "u4VZY",
+              "name": "fav",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "favorite",
+              "iconFontFamily": "Material Symbols Rounded",
+              "fill": "$color-accent-primary"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "gbaNG",
+          "name": "overline",
+          "fill": "$color-text-secondary",
+          "content": "GIAI ĐOẠN",
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 11,
+          "fontWeight": "700",
+          "letterSpacing": 2.5
+        },
+        {
+          "type": "text",
+          "id": "Gm0Q1",
+          "name": "title",
+          "fill": "$color-text-primary",
+          "textGrowth": "fixed-width",
+          "width": 340,
+          "content": "Tiêu đề trang",
+          "lineHeight": 1.08,
+          "textAlign": "center",
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 32,
+          "fontWeight": "700",
+          "letterSpacing": -1
+        },
+        {
+          "type": "text",
+          "id": "XwoG2",
+          "name": "desc",
+          "fill": "$color-text-secondary",
+          "textGrowth": "fixed-width",
+          "width": 320,
+          "content": "Mô tả ngắn về màn hình này.",
+          "lineHeight": 1.65,
+          "textAlign": "center",
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "CoYKj",
+      "x": 0,
+      "y": 280,
+      "name": "FormCard",
+      "reusable": true,
+      "width": 390,
+      "fill": "#FFFFFFEB",
+      "cornerRadius": "$radius-xl",
+      "effect": [
+        {
+          "type": "background_blur",
+          "radius": 14
+        },
+        {
+          "type": "shadow",
+          "shadowType": "outer",
+          "color": "#6C5A6114",
+          "offset": {
+            "x": 0,
+            "y": 24
+          },
+          "blur": 48
+        }
+      ],
+      "layout": "vertical",
+      "gap": "$space-lg",
+      "padding": [
+        28,
+        20
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "L4fFJ",
+          "name": "content-slot",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": "$space-lg",
+          "children": [
+            {
+              "type": "text",
+              "id": "vOsdp",
+              "name": "placeholderText",
+              "fill": "$color-text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Nội dung form ở đây",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Qv2tN",
+      "x": 0,
+      "y": 560,
+      "name": "PrimaryButton",
+      "reusable": true,
+      "width": 350,
+      "height": 48,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "enabled": true,
+        "rotation": 45,
+        "size": {
+          "height": 1
+        },
+        "colors": [
+          {
+            "color": "$color-accent-primary",
+            "position": 0
+          },
+          {
+            "color": "#6C5A61B8",
+            "position": 1
+          }
+        ]
+      },
+      "cornerRadius": "$radius-pill",
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#6C5A612E",
+        "offset": {
+          "x": 0,
+          "y": 18
+        },
+        "blur": 36
+      },
+      "gap": "$space-xs",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "text",
+          "id": "CgZDC",
+          "name": "btnLabel",
+          "fill": "$color-accent-on-primary",
+          "content": "Đăng nhập",
+          "fontFamily": "$font-family-base",
+          "fontSize": 16,
+          "fontWeight": "700",
+          "letterSpacing": -0.15
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "PoLWb",
+      "x": 0,
+      "y": 680,
+      "name": "OnboardingProgressBar",
+      "reusable": true,
+      "width": 350,
+      "layout": "vertical",
+      "gap": "$space-xs",
+      "children": [
+        {
+          "type": "frame",
+          "id": "79tGe",
+          "name": "counterRow",
+          "width": "fill_container",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "AlruN",
+              "name": "progressLabel",
+              "fill": "$color-text-secondary",
+              "content": "1 / 5 · Chọn giai đoạn",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 11,
+              "fontWeight": "700",
+              "letterSpacing": 2.5
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "HmuQI",
+          "name": "track",
+          "width": "fill_container",
+          "height": 8,
+          "fill": "#0000000F",
+          "cornerRadius": "$radius-pill",
+          "children": [
+            {
+              "type": "frame",
+              "id": "ugkDP",
+              "name": "fillBar",
+              "width": 70,
+              "height": "fill_container",
+              "fill": {
+                "type": "gradient",
+                "gradientType": "linear",
+                "enabled": true,
+                "rotation": 90,
+                "size": {
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "$color-accent-primary",
+                    "position": 0
+                  },
+                  {
+                    "color": "#6C5A61B8",
+                    "position": 1
+                  }
+                ]
+              },
+              "cornerRadius": "$radius-pill"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "k8sRa",
+      "x": 0,
+      "y": 800,
+      "name": "PhaseOptionCard",
+      "reusable": true,
+      "width": 350,
+      "fill": "#FFFFFFEB",
+      "cornerRadius": 24,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#6C5A6100"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#6C5A6114",
+        "offset": {
+          "x": 0,
+          "y": 14
+        },
+        "blur": 30
+      },
+      "layout": "vertical",
+      "gap": "$space-xs",
+      "padding": 18,
+      "children": [
+        {
+          "type": "frame",
+          "id": "g4PIr",
+          "name": "row",
+          "width": "fill_container",
+          "gap": "$space-xs",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "XpEvg",
+              "name": "text-block",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "J14ne",
+                  "name": "optTitle",
+                  "fill": "$color-text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Tên lựa chọn",
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "mF8l2",
+                  "name": "optDesc",
+                  "fill": "$color-text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Mô tả lựa chọn.",
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "icon_font",
+              "id": "rGw8E",
+              "name": "chevron",
+              "width": 20,
+              "height": 20,
+              "iconFontName": "chevron_right",
+              "iconFontFamily": "Material Symbols Rounded",
+              "fill": "$color-accent-primary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "esvEx",
+      "x": 0,
+      "y": 980,
+      "name": "SettingsSectionCard",
+      "reusable": true,
+      "width": 390,
+      "fill": "#FFFFFFEB",
+      "cornerRadius": "$radius-xl",
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#6C5A6114",
+        "offset": {
+          "x": 0,
+          "y": 24
+        },
+        "blur": 48
+      },
+      "layout": "vertical",
+      "gap": "$space-md",
+      "padding": 20,
+      "children": [
+        {
+          "type": "text",
+          "id": "XVxD9",
+          "name": "sectionTitle",
+          "fill": "$color-text-primary",
+          "content": "Tiêu đề nhóm",
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 16,
+          "fontWeight": "600"
+        },
+        {
+          "type": "frame",
+          "id": "8jVKZ",
+          "name": "content-slot",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": "$space-md",
+          "children": [
+            {
+              "type": "text",
+              "id": "UFgD0",
+              "name": "sectionPlaceholder",
+              "fill": "$color-text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Nội dung phần cài đặt",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "2ovBL",
+      "x": 0,
+      "y": 1220,
+      "name": "AppShellHeader",
+      "reusable": true,
+      "width": 390,
+      "layout": "vertical",
+      "gap": 4,
+      "padding": [
+        20,
+        16,
+        0,
+        16
+      ],
+      "children": [
+        {
+          "type": "text",
+          "id": "EWYik",
+          "name": "headerEyebrow",
+          "fill": "$color-text-secondary",
+          "content": "TÀI KHOẢN",
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 11,
+          "fontWeight": "700",
+          "letterSpacing": 2.5
+        },
+        {
+          "type": "text",
+          "id": "39RjM",
+          "name": "headerTitle",
+          "fill": "$color-text-primary",
+          "content": "Cài đặt",
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 23,
+          "fontWeight": "700",
+          "letterSpacing": -0.46
+        },
+        {
+          "type": "text",
+          "id": "9Qw2T",
+          "name": "headerSubtitle",
+          "fill": "$color-text-secondary",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Quản lý thông tin của bạn",
+          "fontFamily": "Plus Jakarta Sans",
+          "fontSize": 15,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "1r4CC",
+      "x": 0,
+      "y": 1380,
+      "name": "AppBottomNav",
+      "reusable": true,
+      "width": 390,
+      "height": 64,
+      "fill": "#FFFFFFDF",
+      "cornerRadius": 28,
+      "effect": [
+        {
+          "type": "background_blur",
+          "radius": 18
+        },
+        {
+          "type": "shadow",
+          "shadowType": "outer",
+          "color": "#6C5A611F",
+          "offset": {
+            "x": 0,
+            "y": 18
+          },
+          "blur": 40
+        }
+      ],
+      "padding": [
+        0,
+        16
+      ],
+      "justifyContent": "space_between",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "fHAvr",
+          "name": "homeTab",
+          "width": "fill_container",
+          "height": "fill_container",
+          "cornerRadius": 22,
+          "layout": "vertical",
+          "gap": 2,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "U88NG",
+              "name": "homeIcon",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "home",
+              "iconFontFamily": "Material Symbols Rounded",
+              "fill": "$color-text-secondary"
+            },
+            {
+              "type": "text",
+              "id": "5A5MH",
+              "name": "homeText",
+              "fill": "$color-text-secondary",
+              "content": "HOME",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 10,
+              "fontWeight": "600",
+              "letterSpacing": 0.5
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "PC52I",
+          "name": "calTab",
+          "width": "fill_container",
+          "height": "fill_container",
+          "cornerRadius": 22,
+          "layout": "vertical",
+          "gap": 2,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "jnWuy",
+              "name": "calIcon",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "calendar_month",
+              "iconFontFamily": "Material Symbols Rounded",
+              "fill": "$color-text-secondary"
+            },
+            {
+              "type": "text",
+              "id": "lZAwh",
+              "name": "calText",
+              "fill": "$color-text-secondary",
+              "content": "LỊCH",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 10,
+              "fontWeight": "600",
+              "letterSpacing": 0.5
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "hvQSe",
+          "name": "setTab",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$color-accent-primary",
+          "cornerRadius": 22,
+          "layout": "vertical",
+          "gap": 2,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "Igvf6",
+              "name": "setIcon",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "settings",
+              "iconFontFamily": "Material Symbols Rounded",
+              "fill": "$color-text-inverse"
+            },
+            {
+              "type": "text",
+              "id": "6kcyw",
+              "name": "setText",
+              "fill": "$color-text-inverse",
+              "content": "CÀI ĐẶT",
+              "fontFamily": "Plus Jakarta Sans",
+              "fontSize": 10,
+              "fontWeight": "600",
+              "letterSpacing": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "color-accent-on-primary": {
+      "type": "color",
+      "value": "#FFF7F8"
+    },
+    "color-accent-primary": {
+      "type": "color",
+      "value": "#6C5A61"
+    },
+    "color-bg-canvas": {
+      "type": "color",
+      "value": "#FFF8F8"
+    },
+    "color-bg-surface": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "color-bg-tinted": {
+      "type": "color",
+      "value": "#FFF0F4"
+    },
+    "color-bg-tinted-strong": {
+      "type": "color",
+      "value": "#F4DCE4"
+    },
+    "color-border-strong": {
+      "type": "color",
+      "value": "#C0ADB3"
+    },
+    "color-border-subtle": {
+      "type": "color",
+      "value": "#E8DDE1"
+    },
+    "color-error-bg": {
+      "type": "color",
+      "value": "#F8E7EA"
+    },
+    "color-error-text": {
+      "type": "color",
+      "value": "#A8364B"
+    },
+    "color-overlay": {
+      "type": "color",
+      "value": "#3B2F3499"
+    },
+    "color-phase-fertile": {
+      "type": "color",
+      "value": "#E6A173"
+    },
+    "color-phase-follicular": {
+      "type": "color",
+      "value": "#F4DCE4"
+    },
+    "color-phase-luteal": {
+      "type": "color",
+      "value": "#CFC5DB"
+    },
+    "color-phase-menstrual": {
+      "type": "color",
+      "value": "#D78A95"
+    },
+    "color-text-inverse": {
+      "type": "color",
+      "value": "#FFF7F8"
+    },
+    "color-text-muted": {
+      "type": "color",
+      "value": "#8A7B82"
+    },
+    "color-text-primary": {
+      "type": "color",
+      "value": "#3B2F34"
+    },
+    "color-text-secondary": {
+      "type": "color",
+      "value": "#6A5B61"
+    },
+    "color-warning-bg": {
+      "type": "color",
+      "value": "#F8EFE2"
+    },
+    "color-warning-text": {
+      "type": "color",
+      "value": "#7B5D4B"
+    },
+    "font-family-base": {
+      "type": "string",
+      "value": "Plus Jakarta Sans"
+    },
+    "font-size-body": {
+      "type": "number",
+      "value": 15
+    },
+    "font-size-body-large": {
+      "type": "number",
+      "value": 16
+    },
+    "font-size-caption": {
+      "type": "number",
+      "value": 12
+    },
+    "font-size-display": {
+      "type": "number",
+      "value": 20
+    },
+    "font-size-title": {
+      "type": "number",
+      "value": 20
+    },
+    "radius-lg": {
+      "type": "number",
+      "value": 28
+    },
+    "radius-md": {
+      "type": "number",
+      "value": 20
+    },
+    "radius-pill": {
+      "type": "number",
+      "value": 999
+    },
+    "radius-sm": {
+      "type": "number",
+      "value": 12
+    },
+    "radius-xl": {
+      "type": "number",
+      "value": 32
+    },
+    "space-2xl": {
+      "type": "number",
+      "value": 32
+    },
+    "space-2xs": {
+      "type": "number",
+      "value": 4
+    },
+    "space-lg": {
+      "type": "number",
+      "value": 20
+    },
+    "space-md": {
+      "type": "number",
+      "value": 16
+    },
+    "space-sm": {
+      "type": "number",
+      "value": 12
+    },
+    "space-xl": {
+      "type": "number",
+      "value": 24
+    },
+    "space-xs": {
+      "type": "number",
+      "value": 8
+    }
+  }
+}

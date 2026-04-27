@@ -9,9 +9,12 @@
 
 Recreate the Login, SignUp, Onboarding, and Settings screens as a Pencil design system, replacing the previous Stitch designs. The Stitch designs suffered from visual inconsistency, component/code mismatch, and no reusable component structure. This redesign uses a component-first approach in Pencil to establish a consistent visual source of truth aligned with the live MUI theme.
 
-## Design File
+## Design Files
 
-`docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen`
+- `docs/superpowers/designs/2026-04-27-common-ui.pen`
+- `docs/superpowers/designs/2026-04-27-auth.pen`
+- `docs/superpowers/designs/2026-04-27-onboarding.pen`
+- `docs/superpowers/designs/2026-04-27-settings.pen`
 
 ## Design Tokens (from `libs/theme/src/lib/theme.ts`)
 
@@ -189,7 +192,12 @@ All onboarding frames share: AuthHero (heart icon + overline "Onboarding" + step
 
 ## Frame Naming Convention
 
-All frame names use kebab-case prefixed by screen group: `login-*`, `signup-*`, `onboarding-*`, `settings-*`. Implementation plan tasks must reference `docs/superpowers/designs/2026-04-27-auth-onboarding-settings.pen` + frame name instead of describing visuals in prose.
+All frame names use kebab-case prefixed by screen group: `login-*`, `signup-*`, `onboarding-*`, `settings-*`. Implementation plan tasks must reference the split Pencil files plus frame name instead of describing visuals in prose:
+
+- `docs/superpowers/designs/2026-04-27-auth.pen` → `login-*`, `signup-*`
+- `docs/superpowers/designs/2026-04-27-onboarding.pen` → `onboarding-*`
+- `docs/superpowers/designs/2026-04-27-settings.pen` → `settings-*`
+- `docs/superpowers/designs/2026-04-27-common-ui.pen` → reusable components only
 
 ## Scope
 
@@ -209,8 +217,8 @@ Excluded:
 
 The redesign is complete when:
 
-- All 16 frames exist in the `.pen` file
-- Reusable components are defined and used consistently across all screens
+- All 16 frames exist across the split `.pen` files
+- Reusable components are defined in `2026-04-27-common-ui.pen` and mirrored consistently in the screen-cluster files that use them
 - Design tokens from `theme.ts` are applied — no hardcoded colors or fonts that diverge from the theme
 - Loading and error states are represented for every screen group
 - Improvements table items are reflected in the Pencil frames
