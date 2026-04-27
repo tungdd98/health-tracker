@@ -7,12 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppCard } from '@health-tracker/ui';
 
 import type { CycleHeroMode } from './cycle-hero-modes';
-import {
-  PHASE_BADGE_LABELS,
-  PHASE_COLOR_TOKENS,
-  PHASE_LABELS,
-  type CycleSnapshot,
-} from './cycle-utils';
+import { PHASE_BADGE_LABELS, PHASE_LABELS, type CycleSnapshot } from './cycle-utils';
 
 const polarToCartesian = (cx: number, cy: number, r: number, deg: number) => {
   const rad = ((deg - 90) * Math.PI) / 180;
@@ -45,6 +40,7 @@ type CycleRingProps = {
 
 function CycleRing({ snapshot }: CycleRingProps) {
   const theme = useTheme();
+  const phaseColors = theme.palette.phase;
   const cycleLength = snapshot.dayOfCycle + snapshot.daysUntilNextPeriod - 1;
   const ovulationDay = cycleLength - 14;
   const fertileStart = ovulationDay - 5;
@@ -54,7 +50,7 @@ function CycleRing({ snapshot }: CycleRingProps) {
   const fertileEndDeg = (fertileEnd / cycleLength) * 360;
   const markerDeg = ((snapshot.dayOfCycle - 1) / cycleLength) * 360;
   const marker = polarToCartesian(100, 100, 80, markerDeg);
-  const markerColor = PHASE_COLOR_TOKENS[snapshot.phase];
+  const markerColor = phaseColors[snapshot.phase];
 
   return (
     <svg height={200} viewBox="0 0 200 200" width={200}>
@@ -69,14 +65,14 @@ function CycleRing({ snapshot }: CycleRingProps) {
       <path
         d={describeArc(100, 100, 80, 0, menstrualEndDeg)}
         fill="none"
-        stroke={PHASE_COLOR_TOKENS.menstrual}
+        stroke={phaseColors.menstrual}
         strokeLinecap="round"
         strokeWidth={14}
       />
       <path
         d={describeArc(100, 100, 80, fertileStartDeg, fertileEndDeg)}
         fill="none"
-        stroke={PHASE_COLOR_TOKENS.fertile}
+        stroke={phaseColors.fertile}
         strokeLinecap="round"
         strokeWidth={14}
       />
@@ -194,7 +190,7 @@ export function CycleHero({ mode, snapshot, isLoading, onLogPeriod }: CycleHeroP
   }
 
   const countdownLine = getCountdownLine(snapshot);
-  const highlightColor = PHASE_COLOR_TOKENS[snapshot.phase];
+  const highlightColor = theme.palette.phase[snapshot.phase];
   const showLogCta = mode === 'overdue' || mode === 'stale';
 
   return (

@@ -36,8 +36,13 @@ export function AppShell({
   navValue = 'home',
 }: AppShellProps) {
   return (
-    <Box sx={{ minHeight: '100vh', pb: 2, pt: 2, px: 2 }}>
-      <Container maxWidth="sm" sx={{ px: '0 !important' }}>
+    <Box sx={{ minHeight: '100vh', px: 2, py: 2 }}>
+      <Container
+        maxWidth="sm"
+        sx={{
+          px: '0 !important',
+        }}
+      >
         <AppHeader
           action={headerAction}
           eyebrow={headerEyebrow}
@@ -45,7 +50,7 @@ export function AppShell({
           subtitle={headerSubtitle}
           title={headerTitle}
         />
-        <Box sx={{ pb: 3 }}>{children}</Box>
+        <Box sx={{ pb: 14 }}>{children}</Box>
         <AppBottomNav items={navItems} onChange={onNavChange} value={navValue} />
       </Container>
     </Box>

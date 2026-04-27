@@ -27,6 +27,8 @@ Do not claim completion while formatting or lint/build issues are still unresolv
 
 Use TypeScript, 2-space indentation, single quotes, and semicolon-free style to match the existing codebase. Prefer small, focused modules and colocate implementation files with their feature area, for example `libs/ui/src/lib/app-shell.tsx`. Follow the repository's ESLint and Prettier configuration; avoid unused variables and prefix intentionally unused arguments with `_`.
 
+For MUI icons, prefer the `Rounded` variants by default. If a screen already uses another icon family as an approved design exception, keep the approved design; otherwise do not mix in non-Rounded MUI icon variants.
+
 ## Testing Guidelines
 
 There is no dedicated test runner configured yet. Treat `yarn lint` and `yarn build` as the required verification commands for changes. If you add tests, name them clearly near the code they cover, such as `*.test.ts` or `*.test.tsx`, and document any new test command in the relevant package.

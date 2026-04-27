@@ -1,7 +1,7 @@
 import { Box, Typography, alpha, useTheme } from '@mui/material';
 import { DateTime } from 'luxon';
 
-import { computeCycleSnapshot, PHASE_COLOR_TOKENS } from '../dashboard/cycle-utils';
+import { computeCycleSnapshot } from '../dashboard/cycle-utils';
 
 const GRID_HEADERS = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
 
@@ -58,7 +58,7 @@ export function MonthGrid({ displayMonth, input }: MonthGridProps) {
             : null;
 
           const backgroundColor =
-            snapshot && isCurrentMonth ? PHASE_COLOR_TOKENS[snapshot.phase] : 'transparent';
+            snapshot && isCurrentMonth ? theme.palette.phase[snapshot.phase] : 'transparent';
 
           return (
             <Box

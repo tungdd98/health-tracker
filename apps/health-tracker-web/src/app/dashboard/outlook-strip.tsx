@@ -1,7 +1,7 @@
 import { Box, Skeleton, Stack, Typography, alpha, useTheme } from '@mui/material';
 import { DateTime } from 'luxon';
 
-import { computeCycleSnapshot, getWeekdayShort, PHASE_COLOR_TOKENS } from './cycle-utils';
+import { computeCycleSnapshot, getWeekdayShort } from './cycle-utils';
 
 type StripInput = {
   cycleLengthDays: number;
@@ -41,7 +41,7 @@ export function OutlookStrip({ input, isLoading }: OutlookStripProps) {
             })
           : null;
         const dotColor = snapshot
-          ? PHASE_COLOR_TOKENS[snapshot.phase]
+          ? theme.palette.phase[snapshot.phase]
           : alpha(theme.palette.text.secondary, 0.2);
 
         return (
@@ -63,11 +63,7 @@ export function OutlookStrip({ input, isLoading }: OutlookStripProps) {
               py: 1,
             }}
           >
-            <Typography
-              color={isToday ? 'text.secondary' : 'text.secondary'}
-              sx={{ letterSpacing: 0.5 }}
-              variant="caption"
-            >
+            <Typography color="text.secondary" sx={{ letterSpacing: 0.5 }} variant="caption">
               {getWeekdayShort(date)}
             </Typography>
             <Typography fontWeight={isToday ? 700 : 600} variant="body2">

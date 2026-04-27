@@ -35,11 +35,11 @@ export const ONBOARDING_STEPS: readonly OnboardingStepDefinition[] = [
 export const ONBOARDING_STEP_COUNT = ONBOARDING_STEPS.length;
 
 export const ONBOARDING_STEP_FIELD_NAMES = {
-  phase: ['selectedPhase'] as const,
-  basicProfile: ['displayName', 'birthDate'] as const,
-  cycle: ['cycleLengthDays', 'lastPeriodStartDate'] as const,
-  bodyMetrics: ['heightCm', 'weightKg'] as const,
-  completion: [] as const,
+  [ONBOARDING_STEP_IDS.phase]: ['selectedPhase'] as const,
+  [ONBOARDING_STEP_IDS.basicProfile]: ['displayName', 'birthDate'] as const,
+  [ONBOARDING_STEP_IDS.cycle]: ['cycleLengthDays', 'lastPeriodStartDate'] as const,
+  [ONBOARDING_STEP_IDS.bodyMetrics]: ['heightCm', 'weightKg'] as const,
+  [ONBOARDING_STEP_IDS.completion]: [] as const,
 } as const;
 
 export const ONBOARDING_OPTIONAL_STEP_IDS = [

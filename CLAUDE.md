@@ -57,6 +57,7 @@ Import via path aliases: `@health-tracker/ui`, `@health-tracker/forms`, etc. (co
 - TypeScript strict mode, 2-space indent, single quotes, semicolons enabled (Prettier config), 100-char line width.
 - Unused variables disallowed; prefix intentionally unused arguments with `_`.
 - Colocate implementation files with their feature area (e.g., `libs/ui/src/lib/app-shell.tsx`).
+- For MUI icons, use the `Rounded` variants by default unless an approved design explicitly requires something else.
 
 ## Commits
 

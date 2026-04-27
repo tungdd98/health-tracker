@@ -2,7 +2,7 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Alert, Box, Button, CircularProgress } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
-import { useForm, useWatch, type UseFormReturn } from 'react-hook-form';
+import { useForm, useWatch, type Path, type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import type { ZodIssue } from 'zod';
 
@@ -91,7 +91,7 @@ const mapZodIssuesToFields = (
     const fieldName = issue.path[0];
 
     if (typeof fieldName === 'string') {
-      form.setError(fieldName as keyof OnboardingFormValues, {
+      form.setError(fieldName as Path<OnboardingFormValues>, {
         type: 'manual',
         message: issue.message,
       });
@@ -162,7 +162,7 @@ export function OnboardingPage() {
   const canGoBack =
     currentStepId !== ONBOARDING_STEP_IDS.phase && currentStepId !== ONBOARDING_STEP_IDS.completion;
 
-  const mergeProfileSnapshot = (patch: Partial<ReturnType<typeof buildFormDefaults>>) => {
+  const mergeProfileSnapshot = (patch: Partial<OnboardingProfile>) => {
     setProfileSnapshot((current) => ({
       ...current,
       ...patch,
@@ -226,7 +226,7 @@ export function OnboardingPage() {
       }
 
       mergeProfileSnapshot({
-        displayName: normalizeOptionalText(result.data.displayName) ?? '',
+        displayName: normalizeOptionalText(result.data.displayName) ?? null,
         birthDate: normalizeOptionalIsoDate(result.data.birthDate) ?? null,
       });
       setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.cycle);
@@ -257,7 +257,7 @@ export function OnboardingPage() {
       }
 
       mergeProfileSnapshot({
-        cycleLengthDays: result.data.cycleLengthDays?.toString() ?? '',
+        cycleLengthDays: result.data.cycleLengthDays ?? null,
         lastPeriodStartDate: normalizeOptionalIsoDate(result.data.lastPeriodStartDate) ?? null,
       });
       setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.bodyMetrics);
@@ -288,8 +288,8 @@ export function OnboardingPage() {
       }
 
       mergeProfileSnapshot({
-        heightCm: result.data.heightCm?.toString() ?? '',
-        weightKg: result.data.weightKg?.toString() ?? '',
+        heightCm: result.data.heightCm ?? null,
+        weightKg: result.data.weightKg ?? null,
       });
       setCurrentStepId(ONBOARDING_STEP_IDS.completion);
     }

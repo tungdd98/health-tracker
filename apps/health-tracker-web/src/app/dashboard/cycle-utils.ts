@@ -20,13 +20,6 @@ export type CycleSnapshot = {
   isStale: boolean;
 };
 
-export const PHASE_COLOR_TOKENS: Record<CyclePhase, string> = {
-  menstrual: '#F08080',
-  follicular: '#F8C8C8',
-  fertile: '#FF8A65',
-  luteal: '#C9B8E0',
-};
-
 export const PHASE_LABELS: Record<CyclePhase, string> = {
   menstrual: 'Kỳ kinh',
   follicular: 'Tiền rụng trứng',

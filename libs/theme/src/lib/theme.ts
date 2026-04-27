@@ -1,5 +1,25 @@
 import { alpha, createTheme } from '@mui/material/styles';
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    phase: {
+      menstrual: string;
+      follicular: string;
+      fertile: string;
+      luteal: string;
+    };
+  }
+
+  interface PaletteOptions {
+    phase?: {
+      menstrual: string;
+      follicular: string;
+      fertile: string;
+      luteal: string;
+    };
+  }
+}
+
 const rose = {
   primary: '#6c5a61',
   primaryContainer: '#f4dce4',
@@ -16,6 +36,10 @@ const rose = {
   textMuted: '#6a5b61',
   border: '#c0adb3',
   error: '#a8364b',
+  phaseMenstrual: '#F08080',
+  phaseFollicular: '#F8C8C8',
+  phaseFertile: '#FF8A65',
+  phaseLuteal: '#C9B8E0',
 };
 
 export const appTheme = createTheme({
@@ -47,6 +71,12 @@ export const appTheme = createTheme({
       secondary: rose.textMuted,
     },
     divider: alpha(rose.border, 0.28),
+    phase: {
+      menstrual: rose.phaseMenstrual,
+      follicular: rose.phaseFollicular,
+      fertile: rose.phaseFertile,
+      luteal: rose.phaseLuteal,
+    },
   },
   shape: {
     borderRadius: 24,

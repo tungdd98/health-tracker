@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
-import { useForm, type UseFormReturn } from 'react-hook-form';
+import { useForm, type Path, type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import type { ZodIssue } from 'zod';
 
@@ -69,7 +69,7 @@ const mapZodIssuesToFields = <TValues extends Record<string, unknown>>(
     const fieldName = issue.path[0];
 
     if (typeof fieldName === 'string') {
-      form.setError(fieldName as keyof TValues, {
+      form.setError(fieldName as Path<TValues>, {
         type: 'manual',
         message: issue.message,
       });
@@ -302,9 +302,9 @@ export function SettingsPage() {
 
   return (
     <AppShell
-      headerSubtitle="Cài đặt"
-      headerSubtitleFontWeight={600}
-      headerTitle={`Hello ${greetingName}`}
+      headerEyebrow="Tài khoản"
+      headerSubtitle={`Quản lý thông tin của ${greetingName}`}
+      headerTitle="Cài đặt"
       navValue="settings"
       onNavChange={handleNavChange}
     >
