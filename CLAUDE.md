@@ -67,3 +67,5 @@ Conventional commits: `feat:`, `fix:`, `docs:`, `chore:`. Keep messages short an
 Before any multi-step implementation, read `docs/process/planning-workflow.md`. Keep phase tracking in `docs/superpowers/plans/` synchronized: mark completed tasks in the phase `index.md` and check off items inside each task file.
 
 **UI work** — for features with new screens, layout changes, or visual flows, insert a design step between spec and plan: invoke the `designing-with-pencil` skill, save the `.pen` artifact under `docs/superpowers/designs/YYYY-MM-DD-<topic>.pen`. Plan tasks for UI MUST reference the design file + frame name instead of describing visuals in prose. Skip for backend/CLI/logic-only changes.
+
+**UI implementation rule** — do NOT write UI component code until the corresponding Pencil frame exists and has been referenced in the plan task. Every plan task that touches a screen or component MUST open the `.pen` file in Pencil and read the matching frame before writing a single line of JSX. If no frame exists for a piece of UI, stop and design it first.
