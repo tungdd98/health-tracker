@@ -35,10 +35,6 @@ const getCountdownLine = (snapshot: CycleSnapshot): string => {
   return `Kỳ kinh tiếp · còn ${snapshot.daysUntilNextPeriod} ngày`;
 };
 
-const COLOR_WARNING_BG = '#F8EFE2';
-const COLOR_WARNING_TEXT = '#7B5D4B';
-const COLOR_BORDER_STRONG = '#C0ADB3';
-
 type CycleRingProps = {
   snapshot: CycleSnapshot;
 };
@@ -56,6 +52,9 @@ function CycleRing({ snapshot }: CycleRingProps) {
   const markerDeg = ((snapshot.dayOfCycle - 1) / cycleLength) * 360;
   const marker = polarToCartesian(100, 100, 80, markerDeg);
   const markerColor = phaseColors[snapshot.phase];
+  const badgeText = theme.appTokens.typography.microLabel;
+  const valueText = theme.appTokens.typography.metricValue;
+  const helperText = theme.appTokens.typography.helper;
 
   return (
     <svg height={200} viewBox="0 0 200 200" width={200}>
@@ -92,9 +91,9 @@ function CycleRing({ snapshot }: CycleRingProps) {
       <text
         fill={markerColor}
         fontFamily={theme.typography.fontFamily}
-        fontSize={10}
-        fontWeight={700}
-        letterSpacing={1.2}
+        fontSize={badgeText.fontSize}
+        fontWeight={badgeText.fontWeight}
+        letterSpacing={badgeText.letterSpacing}
         textAnchor="middle"
         x={100}
         y={82}
@@ -104,8 +103,8 @@ function CycleRing({ snapshot }: CycleRingProps) {
       <text
         fill={theme.palette.text.primary}
         fontFamily={theme.typography.fontFamily}
-        fontSize={20}
-        fontWeight={700}
+        fontSize={valueText.fontSize}
+        fontWeight={valueText.fontWeight}
         textAnchor="middle"
         x={100}
         y={108}
@@ -115,7 +114,7 @@ function CycleRing({ snapshot }: CycleRingProps) {
       <text
         fill={theme.palette.text.secondary}
         fontFamily={theme.typography.fontFamily}
-        fontSize={12}
+        fontSize={helperText.fontSize}
         textAnchor="middle"
         x={100}
         y={128}
@@ -150,6 +149,7 @@ export function CycleHero({
         sx={{
           border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
           p: 3,
+          borderRadius: theme.appTokens.radius.xl,
         }}
       >
         <Stack alignItems="center" spacing={2}>
@@ -166,19 +166,20 @@ export function CycleHero({
         sx={{
           border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
           p: 4,
+          borderRadius: theme.appTokens.radius.xl,
         }}
       >
         <Stack alignItems="center" spacing={2} textAlign="center">
           <Box
-            sx={{
+            sx={(currentTheme) => ({
               alignItems: 'center',
-              bgcolor: alpha(theme.palette.primary.light, 0.7),
-              borderRadius: 999,
+              bgcolor: currentTheme.palette.surface.accent,
+              borderRadius: currentTheme.appTokens.radius.pill,
               display: 'flex',
               height: 64,
               justifyContent: 'center',
               width: 64,
-            }}
+            })}
           >
             <CalendarTodayRoundedIcon color="primary" />
           </Box>
@@ -210,32 +211,48 @@ export function CycleHero({
     <AppCard
       sx={{
         border: isStale
-          ? `2px solid ${COLOR_WARNING_TEXT}`
+          ? `2px solid ${theme.palette.status.warningText}`
           : `1px solid ${alpha(theme.palette.divider, 0.9)}`,
         overflow: 'hidden',
         p: 3,
+        borderRadius: theme.appTokens.radius.xl,
       }}
     >
       {isStale ? (
         <Box
-          sx={{
+          sx={(currentTheme) => ({
             alignItems: 'flex-start',
-            backgroundColor: COLOR_WARNING_BG,
-            border: `1px solid ${COLOR_BORDER_STRONG}`,
-            borderRadius: '20px',
+            backgroundColor: currentTheme.palette.status.warningSurface,
+            border: `1px solid ${currentTheme.palette.border.strong}`,
+            borderRadius: currentTheme.appTokens.radius.lg,
             display: 'flex',
             gap: 1.25,
             mb: 2,
             px: 1.75,
             py: 1.5,
-          }}
+          })}
         >
-          <OpacityRoundedIcon sx={{ color: COLOR_WARNING_TEXT, fontSize: 18, mt: 0.125 }} />
+          <OpacityRoundedIcon
+            sx={(currentTheme) => ({
+              color: currentTheme.palette.status.warningText,
+              fontSize: 18,
+              mt: 0.125,
+            })}
+          />
           <Box>
-            <Typography sx={{ color: COLOR_WARNING_TEXT, fontSize: 13, fontWeight: 700 }}>
+            <Typography
+              sx={(currentTheme) => ({
+                color: currentTheme.palette.status.warningText,
+                fontSize: '0.8125rem',
+                fontWeight: 700,
+              })}
+            >
               Dữ liệu chu kỳ có vẻ cũ
             </Typography>
-            <Typography color="text.secondary" sx={{ fontSize: 12, lineHeight: 1.4 }}>
+            <Typography
+              color="text.secondary"
+              sx={(currentTheme) => currentTheme.appTokens.typography.helper}
+            >
               Hãy cập nhật để dự đoán chính xác hơn.
             </Typography>
           </Box>
@@ -251,15 +268,18 @@ export function CycleHero({
           alignItems="center"
           direction="row"
           spacing={1}
-          sx={{
-            bgcolor: '#FFF0F4',
-            borderRadius: 999,
+          sx={(currentTheme) => ({
+            bgcolor: currentTheme.palette.surface.sunken,
+            borderRadius: currentTheme.appTokens.radius.pill,
             px: 1.75,
             py: 1,
-          }}
+          })}
         >
           <OpacityRoundedIcon sx={{ color: highlightColor, fontSize: 14 }} />
-          <Typography color="text.primary" sx={{ fontSize: 12, fontWeight: 500 }}>
+          <Typography
+            color="text.primary"
+            sx={(currentTheme) => currentTheme.appTokens.typography.helper}
+          >
             {countdownLine}
           </Typography>
         </Stack>
@@ -270,11 +290,6 @@ export function CycleHero({
             onClick={onLogPeriod}
             startIcon={<OpacityRoundedIcon />}
             sx={{
-              background: isStale
-                ? 'linear-gradient(135deg, #6C5A61 0%, #6C5A61B8 100%)'
-                : undefined,
-              borderColor: isStale ? 'primary.main' : COLOR_BORDER_STRONG,
-              color: isStale ? '#FFF7F8' : 'text.primary',
               maxWidth: '100%',
             }}
             variant={isStale ? 'contained' : 'outlined'}

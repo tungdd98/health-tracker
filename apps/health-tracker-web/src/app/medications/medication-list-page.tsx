@@ -8,10 +8,10 @@ import {
   Box,
   Button,
   ButtonBase,
-  ListItemIcon,
-  ListItemText,
   Chip,
   IconButton,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
   Skeleton,
@@ -22,6 +22,8 @@ import {
 import { DateTime } from 'luxon';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { EmptyState } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
 import { AppConfirmDialog } from '../components/app-confirm-dialog';
@@ -101,35 +103,40 @@ export function MedicationListPage() {
         {isLoading ? (
           <Stack spacing={1.5}>
             {Array.from({ length: 3 }, (_, index) => (
-              <Skeleton key={index} height={120} sx={{ borderRadius: '20px' }} variant="rounded" />
+              <Skeleton
+                key={index}
+                height={120}
+                sx={(theme) => ({ borderRadius: theme.appTokens.radius.xl })}
+                variant="rounded"
+              />
             ))}
           </Stack>
         ) : null}
 
         {!isLoading && (medications?.length ?? 0) === 0 ? (
-          <Stack
-            alignItems="center"
-            spacing={2.5}
+          <Box
             sx={{
-              minHeight: 'calc(100dvh - 220px)',
+              display: 'flex',
               justifyContent: 'center',
+              minHeight: 'calc(100dvh - 220px)',
               px: 0.5,
             }}
           >
-            <MedicationRoundedIcon sx={{ color: '#c0adb3', fontSize: 56 }} />
-            <Typography sx={{ fontSize: 18, fontWeight: 700 }}>Chưa có thuốc nào</Typography>
-            <Typography color="text.secondary" sx={{ maxWidth: 300, textAlign: 'center' }}>
-              Thêm thuốc để theo dõi lịch uống hằng ngày.
-            </Typography>
-            <Button
-              onClick={() => navigate('/medications/new')}
-              startIcon={<AddRoundedIcon />}
-              sx={{ mt: 0.5, px: 3, py: 1.75 }}
-              variant="contained"
-            >
-              Thêm thuốc đầu tiên
-            </Button>
-          </Stack>
+            <EmptyState
+              action={
+                <Button
+                  onClick={() => navigate('/medications/new')}
+                  startIcon={<AddRoundedIcon />}
+                  variant="contained"
+                >
+                  Thêm thuốc đầu tiên
+                </Button>
+              }
+              description="Thêm thuốc để theo dõi lịch uống hằng ngày."
+              icon={<MedicationRoundedIcon sx={{ color: 'border.default', fontSize: 34 }} />}
+              title="Chưa có thuốc nào"
+            />
+          </Box>
         ) : null}
 
         <Stack spacing={1.5} sx={{ pt: 1 }}>
@@ -145,15 +152,15 @@ export function MedicationListPage() {
               <Stack
                 key={medication.id}
                 spacing={1}
-                sx={{
+                sx={(theme) => ({
                   backgroundColor: 'background.paper',
                   border: '1px solid',
                   borderColor: 'divider',
-                  borderRadius: '20px',
+                  borderRadius: theme.appTokens.radius.xl,
                   opacity: isFaded ? 0.58 : 1,
                   px: 2,
                   py: 2,
-                }}
+                })}
               >
                 <Stack
                   alignItems="center"
@@ -165,12 +172,7 @@ export function MedicationListPage() {
                     onClick={() => navigate(`/medications/${medication.id}/edit`)}
                     sx={{ justifyContent: 'flex-start', textAlign: 'left' }}
                   >
-                    <Typography
-                      color="text.primary"
-                      fontSize={15}
-                      fontWeight={700}
-                      textAlign="left"
-                    >
+                    <Typography color="text.primary" textAlign="left" variant="subtitle1">
                       {medication.name}
                     </Typography>
                   </ButtonBase>
@@ -210,13 +212,19 @@ export function MedicationListPage() {
                   {schedule.ended ? (
                     <Chip color="default" label={schedule.label} size="small" variant="outlined" />
                   ) : (
-                    <Typography color="text.secondary" sx={{ fontSize: 13 }}>
+                    <Typography
+                      color="text.secondary"
+                      sx={(theme) => theme.appTokens.typography.sectionLabel}
+                    >
                       {schedule.label}
                     </Typography>
                   )}
                 </Stack>
 
-                <Typography color="text.secondary" sx={{ fontSize: 13, fontWeight: 500 }}>
+                <Typography
+                  color="text.secondary"
+                  sx={(theme) => theme.appTokens.typography.sectionLabel}
+                >
                   {medication.doses.map((dose) => dose.timeOfDay).join(' · ')}
                 </Typography>
               </Stack>

@@ -20,7 +20,12 @@ export function OutlookStrip({ input, isLoading }: OutlookStripProps) {
     return (
       <Stack direction="row" spacing={0.75}>
         {Array.from({ length: 7 }, (_, index) => (
-          <Skeleton key={index} sx={{ borderRadius: 2.5, flex: 1 }} variant="rounded" height={62} />
+          <Skeleton
+            key={index}
+            height={62}
+            sx={{ borderRadius: theme.appTokens.radius.xl, flex: 1 }}
+            variant="rounded"
+          />
         ))}
       </Stack>
     );
@@ -49,11 +54,11 @@ export function OutlookStrip({ input, isLoading }: OutlookStripProps) {
             key={date.toISODate()}
             sx={{
               alignItems: 'center',
-              bgcolor: isToday ? alpha(theme.palette.primary.light, 0.5) : 'background.paper',
+              bgcolor: isToday ? theme.palette.surface.selected : 'background.paper',
               border: '1px solid',
               borderColor: isToday ? 'primary.main' : 'transparent',
-              borderRadius: 2.5,
-              boxShadow: isToday ? theme.shadows[4] : theme.shadows[2],
+              borderRadius: theme.appTokens.radius.xl,
+              boxShadow: isToday ? theme.appTokens.shadow.card : 'none',
               display: 'flex',
               flex: 1,
               flexDirection: 'column',
@@ -64,10 +69,10 @@ export function OutlookStrip({ input, isLoading }: OutlookStripProps) {
               py: 1,
             }}
           >
-            <Typography color="text.secondary" sx={{ letterSpacing: 0.5 }} variant="caption">
+            <Typography color="text.secondary" sx={theme.appTokens.typography.helper}>
               {getWeekdayShort(date)}
             </Typography>
-            <Typography fontWeight={isToday ? 700 : 600} variant="body2">
+            <Typography sx={{ fontWeight: isToday ? 700 : 600 }} variant="body2">
               {date.toFormat('dd')}
             </Typography>
             <Box

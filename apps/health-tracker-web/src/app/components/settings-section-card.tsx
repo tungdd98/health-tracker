@@ -16,14 +16,14 @@ export function SettingsSectionCard({
   children,
 }: SettingsSectionCardProps) {
   return (
-    <AppCard sx={{ borderRadius: '24px', p: 2.5 }}>
+    <AppCard sx={(theme) => ({ borderRadius: theme.appTokens.radius.xl, p: 2.5 })}>
       <Stack spacing={2}>
         <Box>
-          <Typography sx={{ fontSize: '1rem', fontWeight: 600 }} variant="subtitle1">
+          <Typography sx={(theme) => theme.appTokens.typography.sectionValue} variant="subtitle1">
             {title}
           </Typography>
           {description ? (
-            <Typography color="text.secondary" sx={{ mt: 0.75 }}>
+            <Typography color="text.secondary" sx={{ mt: 0.75 }} variant="body2">
               {description}
             </Typography>
           ) : null}

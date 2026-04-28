@@ -14,23 +14,24 @@ export function EmptyState({ icon, title, description, action }: EmptyStateProps
     <Stack
       alignItems="flex-start"
       spacing={2}
-      sx={{
-        bgcolor: 'rgba(255,255,255,0.78)',
-        borderRadius: 6,
+      sx={(theme) => ({
+        bgcolor: theme.palette.surface.raised,
+        borderRadius: theme.appTokens.radius.xl,
+        boxShadow: theme.appTokens.shadow.card,
         p: 3,
-      }}
+      })}
     >
       <Box
-        sx={{
+        sx={(theme) => ({
           alignItems: 'center',
-          bgcolor: 'primary.light',
-          borderRadius: 999,
+          bgcolor: theme.palette.surface.accent,
+          borderRadius: theme.appTokens.radius.pill,
           color: 'primary.main',
           display: 'flex',
           height: 52,
           justifyContent: 'center',
           width: 52,
-        }}
+        })}
       >
         {icon ?? <FavoriteRoundedIcon />}
       </Box>

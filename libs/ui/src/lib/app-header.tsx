@@ -21,7 +21,7 @@ export function AppHeader({
   if (action) {
     actionNode =
       typeof action === 'string' ? (
-        <IconButton color="primary" sx={{ bgcolor: 'rgba(255,255,255,0.72)' }}>
+        <IconButton color="primary" sx={{ bgcolor: 'surface.raised' }}>
           {action}
         </IconButton>
       ) : (
@@ -42,8 +42,11 @@ export function AppHeader({
           {subtitle ? (
             <Typography
               color="text.secondary"
-              sx={{ fontWeight: subtitleFontWeight }}
-              variant="body2"
+              sx={(theme) => ({
+                ...theme.appTokens.typography.sectionValue,
+                fontWeight:
+                  subtitleFontWeight ?? theme.appTokens.typography.sectionValue.fontWeight,
+              })}
             >
               {subtitle}
             </Typography>

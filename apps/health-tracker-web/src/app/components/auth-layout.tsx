@@ -1,5 +1,4 @@
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
-import { alpha } from '@mui/material/styles';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import type { PropsWithChildren, ReactNode } from 'react';
 
@@ -17,53 +16,54 @@ export function AuthLayout({ eyebrow, title, description, footer, children }: Au
     <Box
       component="main"
       sx={{
-        minHeight: '100dvh',
-        display: 'flex',
         alignItems: 'center',
-        py: { xs: 4, sm: 6 },
+        display: 'flex',
+        minHeight: '100dvh',
         px: 2,
+        py: { xs: 4, sm: 6 },
       }}
     >
       <Container maxWidth="sm" sx={{ px: '0 !important' }}>
         <Stack spacing={2.5}>
           <Stack
-            spacing={1.5}
             alignItems="center"
-            textAlign="center"
+            spacing={1.5}
             sx={{ px: { xs: 1.5, sm: 3 }, pt: { xs: 2, sm: 0 } }}
+            textAlign="center"
           >
             <Box
               sx={(theme) => ({
-                width: 68,
-                height: 68,
+                alignItems: 'center',
+                bgcolor: theme.palette.surface.accent,
                 borderRadius: '50%',
-                display: 'grid',
-                placeItems: 'center',
+                boxShadow: theme.appTokens.shadow.icon,
                 color: theme.palette.primary.main,
-                backgroundColor: alpha(theme.palette.primary.light, 0.72),
-                boxShadow: `0 18px 36px ${alpha(theme.palette.primary.main, 0.14)}`,
+                display: 'grid',
+                height: 68,
+                placeItems: 'center',
+                width: 68,
               })}
             >
               <FavoriteRoundedIcon />
             </Box>
-            <Typography variant="overline" color="text.secondary">
+            <Typography color="text.secondary" variant="overline">
               {eyebrow}
             </Typography>
-            <Typography variant="h2" sx={{ maxWidth: 360 }}>
+            <Typography sx={{ maxWidth: 360 }} variant="h2">
               {title}
             </Typography>
-            <Typography color="text.secondary" sx={{ maxWidth: 420 }}>
+            <Typography color="text.secondary" sx={{ maxWidth: 420 }} variant="body2">
               {description}
             </Typography>
           </Stack>
 
           <AppCard
             sx={(theme) => ({
-              borderRadius: '24px',
-              p: { xs: 2.5, sm: 3.5 },
-              backgroundColor: alpha(theme.palette.background.paper, 0.92),
               backdropFilter: 'blur(14px)',
-              boxShadow: `0 24px 48px ${alpha(theme.palette.primary.main, 0.08)}`,
+              backgroundColor: theme.palette.surface.raised,
+              borderRadius: theme.appTokens.radius.xl,
+              boxShadow: theme.appTokens.shadow.modal,
+              p: { xs: 2.5, sm: 3.5 },
             })}
           >
             <Stack spacing={2.5}>{children}</Stack>

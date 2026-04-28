@@ -1,5 +1,4 @@
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
-import { alpha } from '@mui/material/styles';
 import { Box, CircularProgress, Container, Stack, Typography } from '@mui/material';
 
 import { AppCard } from '@health-tracker/ui';
@@ -9,9 +8,9 @@ export function AuthRouteState() {
     <Box
       component="main"
       sx={{
-        minHeight: '100dvh',
-        display: 'flex',
         alignItems: 'center',
+        display: 'flex',
+        minHeight: '100dvh',
         px: 2,
         py: 4,
       }}
@@ -19,27 +18,29 @@ export function AuthRouteState() {
       <Container maxWidth="xs" sx={{ px: '0 !important' }}>
         <AppCard
           sx={(theme) => ({
+            backgroundColor: theme.palette.surface.raised,
+            boxShadow: theme.appTokens.shadow.modal,
             p: 4,
             textAlign: 'center',
-            backgroundColor: alpha(theme.palette.background.paper, 0.92),
           })}
         >
-          <Stack spacing={2} alignItems="center">
+          <Stack alignItems="center" spacing={2}>
             <Box
               sx={(theme) => ({
-                width: 64,
-                height: 64,
+                alignItems: 'center',
+                bgcolor: theme.palette.surface.accent,
                 borderRadius: '50%',
-                display: 'grid',
-                placeItems: 'center',
                 color: theme.palette.primary.main,
-                backgroundColor: alpha(theme.palette.primary.light, 0.72),
+                display: 'grid',
+                height: 64,
+                placeItems: 'center',
+                width: 64,
               })}
             >
               <FavoriteRoundedIcon />
             </Box>
             <Typography variant="h4">Đang chuẩn bị không gian sức khỏe</Typography>
-            <Typography color="text.secondary">
+            <Typography color="text.secondary" variant="body2">
               Nô tỳ đang kiểm tra phiên đăng nhập để đưa Hoàng Thượng vào đúng màn hình.
             </Typography>
             <CircularProgress size={28} />

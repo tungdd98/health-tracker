@@ -38,7 +38,13 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
   };
 
   if (isLoading) {
-    return <Skeleton height={180} sx={{ borderRadius: '20px' }} variant="rounded" />;
+    return (
+      <Skeleton
+        height={180}
+        sx={(theme) => ({ borderRadius: theme.appTokens.radius.xl })}
+        variant="rounded"
+      />
+    );
   }
 
   if (totalCount === 0) {
@@ -46,17 +52,21 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
       <Stack
         alignItems="center"
         spacing={1.5}
-        sx={{
+        sx={(theme) => ({
           backgroundColor: 'background.paper',
           border: '1px solid',
           borderColor: 'divider',
-          borderRadius: '20px',
+          borderRadius: theme.appTokens.radius.xl,
           px: 2.5,
           py: 3,
-        }}
+        })}
       >
         <MedicationRoundedIcon color="action" sx={{ fontSize: 34 }} />
-        <Typography color="text.secondary" fontWeight={500} textAlign="center">
+        <Typography
+          color="text.secondary"
+          sx={(theme) => theme.appTokens.typography.sectionValue}
+          textAlign="center"
+        >
           Chưa có thuốc nào hôm nay
         </Typography>
 
@@ -74,26 +84,29 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
   return (
     <Stack
       spacing={1.5}
-      sx={{
+      sx={(theme) => ({
         backgroundColor: 'background.paper',
         border: '1px solid',
         borderColor: 'divider',
-        borderRadius: '20px',
+        borderRadius: theme.appTokens.radius.xl,
         px: 2.5,
         py: 2.5,
-      }}
+      })}
     >
       <Stack alignItems="center" direction="row" justifyContent="space-between">
         <Typography fontWeight={700}>Thuốc hôm nay</Typography>
         <Box
-          sx={{
-            backgroundColor: 'background.default',
-            borderRadius: '999px',
+          sx={(theme) => ({
+            backgroundColor: theme.palette.surface.canvas,
+            borderRadius: theme.appTokens.radius.pill,
             px: 1.25,
             py: 0.5,
-          }}
+          })}
         >
-          <Typography color="text.secondary" fontSize={13} fontWeight={600}>
+          <Typography
+            color="text.secondary"
+            sx={(theme) => theme.appTokens.typography.sectionValue}
+          >
             {takenCount}/{totalCount} đã uống
           </Typography>
         </Box>
@@ -107,15 +120,15 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
             onClick={() => {
               void handleToggleDose(dose.doseId, dose.taken);
             }}
-            sx={{
+            sx={(theme) => ({
               alignItems: 'flex-start',
-              borderRadius: 1,
+              borderRadius: theme.appTokens.radius.xs,
               justifyContent: 'flex-start',
               opacity: dose.taken ? 1 : 0.55,
               px: 0.25,
               py: 1,
               textAlign: 'left',
-            }}
+            })}
           >
             <Stack alignItems="flex-start" direction="row" spacing={1.25} width="100%">
               <Box
@@ -128,13 +141,21 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
                 {dose.taken ? <CheckBoxRoundedIcon /> : <CheckBoxOutlineBlankRoundedIcon />}
               </Box>
               <Stack spacing={0.25} width="100%">
-                <Typography sx={{ color: 'text.primary', fontSize: 14, fontWeight: 600 }}>
+                <Typography
+                  sx={(theme) => ({
+                    ...theme.appTokens.typography.sectionValue,
+                    color: theme.palette.text.primary,
+                  })}
+                >
                   {dose.timeOfDay} {dose.medicationName}
                   {dose.dosage ? ` · ${dose.dosage}` : ''}
                 </Typography>
 
                 {dose.notes ? (
-                  <Typography color="text.secondary" sx={{ fontSize: 12 }}>
+                  <Typography
+                    color="text.secondary"
+                    sx={(theme) => theme.appTokens.typography.helper}
+                  >
                     {dose.notes}
                   </Typography>
                 ) : null}
@@ -146,9 +167,9 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
 
       <ButtonBase
         onClick={() => navigate('/medications')}
-        sx={{
+        sx={(theme) => ({
           alignItems: 'center',
-          borderRadius: 999,
+          borderRadius: theme.appTokens.radius.pill,
           color: 'primary.main',
           display: 'inline-flex',
           gap: 0.25,
@@ -156,9 +177,9 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
           px: 1,
           py: 0.5,
           width: '100%',
-        }}
+        })}
       >
-        <Typography fontSize={14} fontWeight={600}>
+        <Typography sx={(theme) => theme.appTokens.typography.sectionValue}>
           Quản lý thuốc
         </Typography>
         <KeyboardArrowRightRoundedIcon fontSize="small" />

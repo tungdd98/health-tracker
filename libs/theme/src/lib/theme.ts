@@ -1,21 +1,95 @@
+import type { CSSProperties } from 'react';
 import { alpha, createTheme } from '@mui/material/styles';
+
+type PhasePalette = {
+  menstrual: string;
+  follicular: string;
+  fertile: string;
+  luteal: string;
+};
+
+type SurfacePalette = {
+  canvas: string;
+  canvasSubtle: string;
+  raised: string;
+  overlay: string;
+  sunken: string;
+  accent: string;
+  accentStrong: string;
+  selected: string;
+  selectedStrong: string;
+  progressTrack: string;
+};
+
+type BorderPalette = {
+  subtle: string;
+  default: string;
+  strong: string;
+  focus: string;
+};
+
+type StatusPalette = {
+  warningSurface: string;
+  warningText: string;
+};
+
+type AppRadiusTokens = {
+  xs: number;
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+  xxl: number;
+  card: number;
+  pill: number;
+};
+
+type AppShadowTokens = {
+  soft: string;
+  card: string;
+  floating: string;
+  modal: string;
+  icon: string;
+};
+
+type AppTypographyTokens = {
+  eyebrow: CSSProperties;
+  sectionLabel: CSSProperties;
+  sectionValue: CSSProperties;
+  helper: CSSProperties;
+  microLabel: CSSProperties;
+  metricValue: CSSProperties;
+  titleMd: CSSProperties;
+};
 
 declare module '@mui/material/styles' {
   interface Palette {
-    phase: {
-      menstrual: string;
-      follicular: string;
-      fertile: string;
-      luteal: string;
-    };
+    phase: PhasePalette;
+    surface: SurfacePalette;
+    border: BorderPalette;
+    status: StatusPalette;
   }
 
   interface PaletteOptions {
-    phase?: {
-      menstrual: string;
-      follicular: string;
-      fertile: string;
-      luteal: string;
+    phase?: PhasePalette;
+    surface?: SurfacePalette;
+    border?: BorderPalette;
+    status?: StatusPalette;
+  }
+
+  interface Theme {
+    appTokens: {
+      radius: AppRadiusTokens;
+      shadow: AppShadowTokens;
+      typography: AppTypographyTokens;
+    };
+  }
+
+  interface ThemeOptions {
+    appTokens?: {
+      radius?: Partial<AppRadiusTokens>;
+      shadow?: Partial<AppShadowTokens>;
+      typography?: Partial<AppTypographyTokens>;
     };
   }
 }
@@ -28,6 +102,7 @@ const rose = {
   tertiary: '#53616a',
   tertiaryContainer: '#e1f0fb',
   background: '#fff8f8',
+  backgroundSoft: '#fffdfd',
   paper: '#ffffff',
   surfaceLow: '#fff0f4',
   surface: '#fbe9ef',
@@ -35,11 +110,16 @@ const rose = {
   text: '#3b2f34',
   textMuted: '#6a5b61',
   border: '#c0adb3',
+  borderSubtle: '#e8dde1',
   error: '#a8364b',
+  warningSurface: '#f8efe2',
+  warningText: '#7b5d4b',
   phaseMenstrual: '#F08080',
   phaseFollicular: '#F8C8C8',
   phaseFertile: '#FF8A65',
   phaseLuteal: '#C9B8E0',
+  primaryContrast: '#fff7f8',
+  secondaryContrast: '#effcf0',
 };
 
 const baseTheme = createTheme();
@@ -54,19 +134,84 @@ const softShadows = baseTheme.shadows.map((shadow, index) => {
     .replaceAll('rgba(0,0,0,0.12)', 'rgba(0,0,0,0.04)');
 }) as typeof baseTheme.shadows;
 
+const appTokens = {
+  radius: {
+    xs: 6,
+    sm: 8,
+    md: 12,
+    lg: 16,
+    xl: 20,
+    xxl: 24,
+    card: 28,
+    pill: 999,
+  },
+  shadow: {
+    soft: `0 10px 20px ${alpha(rose.primary, 0.12)}`,
+    card: `0 12px 24px ${alpha(rose.primary, 0.06)}`,
+    floating: `0 14px 32px ${alpha(rose.primary, 0.1)}`,
+    modal: `0 24px 48px ${alpha(rose.primary, 0.08)}`,
+    icon: `0 18px 36px ${alpha(rose.primary, 0.14)}`,
+  },
+  typography: {
+    eyebrow: {
+      fontSize: '0.72rem',
+      fontWeight: 700,
+      letterSpacing: '0.16em',
+      lineHeight: 1,
+      textTransform: 'uppercase',
+    },
+    sectionLabel: {
+      fontSize: '0.8125rem',
+      fontWeight: 600,
+      lineHeight: 1.4,
+    },
+    sectionValue: {
+      fontSize: '0.875rem',
+      fontWeight: 600,
+      lineHeight: 1.4,
+    },
+    helper: {
+      fontSize: '0.75rem',
+      lineHeight: 1.4,
+    },
+    microLabel: {
+      fontSize: '0.625rem',
+      fontWeight: 700,
+      letterSpacing: '0.08em',
+      lineHeight: 1.2,
+      textTransform: 'uppercase',
+    },
+    metricValue: {
+      fontSize: '1.375rem',
+      fontWeight: 700,
+      lineHeight: 1.2,
+    },
+    titleMd: {
+      fontSize: '1.125rem',
+      fontWeight: 700,
+      lineHeight: 1.25,
+    },
+  },
+} satisfies {
+  radius: AppRadiusTokens;
+  shadow: AppShadowTokens;
+  typography: AppTypographyTokens;
+};
+
 export const appTheme = createTheme({
   shadows: softShadows,
+  appTokens,
   palette: {
     mode: 'light',
     primary: {
       main: rose.primary,
       light: rose.primaryContainer,
-      contrastText: '#fff7f8',
+      contrastText: rose.primaryContrast,
     },
     secondary: {
       main: rose.secondary,
       light: rose.secondaryContainer,
-      contrastText: '#effcf0',
+      contrastText: rose.secondaryContrast,
     },
     info: {
       main: rose.tertiary,
@@ -90,9 +235,31 @@ export const appTheme = createTheme({
       fertile: rose.phaseFertile,
       luteal: rose.phaseLuteal,
     },
+    surface: {
+      canvas: rose.background,
+      canvasSubtle: rose.backgroundSoft,
+      raised: alpha(rose.paper, 0.92),
+      overlay: alpha(rose.paper, 0.98),
+      sunken: rose.surfaceLow,
+      accent: alpha(rose.primaryContainer, 0.72),
+      accentStrong: rose.primaryContainer,
+      selected: alpha(rose.primaryContainer, 0.42),
+      selectedStrong: rose.primaryContainer,
+      progressTrack: 'rgba(0, 0, 0, 0.06)',
+    },
+    border: {
+      subtle: rose.borderSubtle,
+      default: rose.border,
+      strong: alpha(rose.border, 0.82),
+      focus: rose.primary,
+    },
+    status: {
+      warningSurface: rose.warningSurface,
+      warningText: rose.warningText,
+    },
   },
   shape: {
-    borderRadius: 24,
+    borderRadius: 1,
   },
   typography: {
     fontFamily: '"Plus Jakarta Sans", sans-serif',
@@ -165,7 +332,7 @@ export const appTheme = createTheme({
           backgroundColor: rose.background,
           backgroundImage:
             `radial-gradient(circle at top, ${alpha(rose.primaryContainer, 0.9)} 0%, transparent 38%), ` +
-            `linear-gradient(180deg, ${rose.background} 0%, #fffdfd 100%)`,
+            `linear-gradient(180deg, ${rose.background} 0%, ${rose.backgroundSoft} 100%)`,
         },
       },
     },
@@ -175,18 +342,24 @@ export const appTheme = createTheme({
       },
       styleOverrides: {
         root: {
-          borderRadius: 999,
+          borderRadius: appTokens.radius.pill,
           minHeight: 48,
           minWidth: 120,
           paddingInline: 20,
         },
         contained: {
           background: `linear-gradient(135deg, ${rose.primary} 0%, ${alpha(rose.primary, 0.72)} 100%)`,
-          boxShadow: `0 10px 20px ${alpha(rose.primary, 0.12)}`,
+          boxShadow: appTokens.shadow.soft,
+          '&.Mui-disabled': {
+            background: `linear-gradient(135deg, ${rose.primary} 0%, ${alpha(rose.primary, 0.72)} 100%)`,
+            color: alpha(rose.primaryContrast, 0.72),
+            opacity: 0.56,
+          },
         },
         outlined: {
-          borderColor: alpha(rose.border, 0.36),
+          borderColor: alpha(rose.border, 0.5),
           backgroundColor: alpha(rose.paper, 0.7),
+          color: rose.textMuted,
         },
         text: {
           color: rose.primary,
@@ -199,16 +372,31 @@ export const appTheme = createTheme({
           backgroundImage: 'none',
         },
         rounded: {
-          borderRadius: 28,
+          borderRadius: appTokens.radius.xxl,
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 32,
+          borderRadius: appTokens.radius.card,
           backgroundColor: alpha(rose.paper, 0.94),
-          boxShadow: `0 12px 24px ${alpha(rose.primary, 0.06)}`,
+          boxShadow: appTokens.shadow.card,
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: appTokens.radius.card,
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paperAnchorBottom: {
+          borderTopLeftRadius: appTokens.radius.xl,
+          borderTopRightRadius: appTokens.radius.xl,
         },
       },
     },
@@ -221,7 +409,7 @@ export const appTheme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: 20,
+          borderRadius: appTokens.radius.lg,
           backgroundColor: alpha(rose.surfaceLow, 0.96),
           '& fieldset': {
             borderColor: alpha(rose.border, 0.2),
@@ -239,7 +427,24 @@ export const appTheme = createTheme({
         },
       },
     },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+            WebkitAppearance: 'none',
+            margin: 0,
+          },
+        },
+      },
+    },
     MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: rose.textMuted,
+        },
+      },
+    },
+    MuiFormLabel: {
       styleOverrides: {
         root: {
           color: rose.textMuted,
@@ -257,7 +462,7 @@ export const appTheme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 999,
+          borderRadius: appTokens.radius.pill,
           backgroundColor: alpha(rose.primaryContainer, 0.85),
           color: rose.primary,
           fontWeight: 600,
@@ -267,7 +472,7 @@ export const appTheme = createTheme({
     MuiBottomNavigation: {
       styleOverrides: {
         root: {
-          borderRadius: 28,
+          borderRadius: appTokens.radius.xxl,
           backgroundColor: alpha(rose.paper, 0.88),
           backdropFilter: 'blur(18px)',
           boxShadow: `0 10px 22px ${alpha(rose.primary, 0.08)}`,
@@ -293,7 +498,7 @@ export const appTheme = createTheme({
         root: {
           gap: 8,
           padding: 6,
-          borderRadius: 999,
+          borderRadius: appTokens.radius.pill,
           backgroundColor: alpha(rose.surface, 0.92),
         },
       },
@@ -302,7 +507,7 @@ export const appTheme = createTheme({
       styleOverrides: {
         root: {
           border: 0,
-          borderRadius: 999,
+          borderRadius: appTokens.radius.pill,
           paddingInline: 14,
           color: rose.textMuted,
           '&.Mui-selected': {
@@ -350,6 +555,15 @@ export const appTheme = createTheme({
         },
         rail: {
           backgroundColor: alpha(rose.primary, 0.18),
+        },
+      },
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          borderRadius: appTokens.radius.pill,
+          backgroundColor: 'rgba(0, 0, 0, 0.06)',
+          overflow: 'hidden',
         },
       },
     },

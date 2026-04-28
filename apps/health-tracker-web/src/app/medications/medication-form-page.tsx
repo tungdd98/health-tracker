@@ -169,10 +169,26 @@ export function MedicationFormPage() {
     return (
       <MedicationPageLayout onBack={() => navigate('/medications')} title="Sửa thuốc">
         <Stack spacing={1.5}>
-          <Skeleton height={56} sx={{ borderRadius: '14px' }} variant="rounded" />
-          <Skeleton height={56} sx={{ borderRadius: '14px' }} variant="rounded" />
-          <Skeleton height={56} sx={{ borderRadius: '14px' }} variant="rounded" />
-          <Skeleton height={120} sx={{ borderRadius: '20px' }} variant="rounded" />
+          <Skeleton
+            height={56}
+            sx={(theme) => ({ borderRadius: theme.appTokens.radius.sm })}
+            variant="rounded"
+          />
+          <Skeleton
+            height={56}
+            sx={(theme) => ({ borderRadius: theme.appTokens.radius.sm })}
+            variant="rounded"
+          />
+          <Skeleton
+            height={56}
+            sx={(theme) => ({ borderRadius: theme.appTokens.radius.sm })}
+            variant="rounded"
+          />
+          <Skeleton
+            height={120}
+            sx={(theme) => ({ borderRadius: theme.appTokens.radius.xl })}
+            variant="rounded"
+          />
         </Stack>
       </MedicationPageLayout>
     );
@@ -190,47 +206,60 @@ export function MedicationFormPage() {
           <FormTextAreaField label="Ghi chú" name="notes" minRows={3} />
 
           <Stack spacing={1}>
-            <Typography color="text.secondary" fontSize={13} fontWeight={600}>
+            <Typography
+              color="text.secondary"
+              sx={(theme) => theme.appTokens.typography.sectionLabel}
+            >
               Loại lịch *
             </Typography>
             <ButtonBase
               onClick={() => form.setValue('scheduleType', 'daily')}
-              sx={{
+              sx={(theme) => ({
                 alignItems: 'center',
-                backgroundColor: scheduleType === 'daily' ? 'primary.light' : 'background.paper',
+                backgroundColor:
+                  scheduleType === 'daily'
+                    ? theme.palette.surface.selected
+                    : theme.palette.background.paper,
                 border: '1px solid',
                 borderColor: scheduleType === 'daily' ? 'primary.main' : 'divider',
-                borderRadius: 1.5,
+                borderRadius: theme.appTokens.radius.sm,
                 justifyContent: 'flex-start',
                 px: 2,
                 py: 1.25,
-              }}
+              })}
             >
               <Typography
                 color={scheduleType === 'daily' ? 'text.primary' : 'text.secondary'}
-                fontSize={14}
-                fontWeight={scheduleType === 'daily' ? 600 : 500}
+                sx={(theme) => ({
+                  ...theme.appTokens.typography.sectionValue,
+                  fontWeight: scheduleType === 'daily' ? 600 : 500,
+                })}
               >
                 Hằng ngày
               </Typography>
             </ButtonBase>
             <ButtonBase
               onClick={() => form.setValue('scheduleType', 'course')}
-              sx={{
+              sx={(theme) => ({
                 alignItems: 'center',
-                backgroundColor: scheduleType === 'course' ? 'primary.light' : 'background.paper',
+                backgroundColor:
+                  scheduleType === 'course'
+                    ? theme.palette.surface.selected
+                    : theme.palette.background.paper,
                 border: '1px solid',
                 borderColor: scheduleType === 'course' ? 'primary.main' : 'divider',
-                borderRadius: 1.5,
+                borderRadius: theme.appTokens.radius.sm,
                 justifyContent: 'flex-start',
                 px: 2,
                 py: 1.25,
-              }}
+              })}
             >
               <Typography
                 color={scheduleType === 'course' ? 'text.primary' : 'text.secondary'}
-                fontSize={14}
-                fontWeight={scheduleType === 'course' ? 600 : 500}
+                sx={(theme) => ({
+                  ...theme.appTokens.typography.sectionValue,
+                  fontWeight: scheduleType === 'course' ? 600 : 500,
+                })}
               >
                 Theo liệu trình
               </Typography>
@@ -247,10 +276,16 @@ export function MedicationFormPage() {
                 type="number"
               />
               <Stack direction="row" justifyContent="space-between" px={0.25}>
-                <Typography color="text.secondary" fontSize={13} fontWeight={500}>
+                <Typography
+                  color="text.secondary"
+                  sx={(theme) => theme.appTokens.typography.sectionLabel}
+                >
                   Kết thúc dự kiến
                 </Typography>
-                <Typography color="text.secondary" fontSize={13} fontWeight={600}>
+                <Typography
+                  color="text.secondary"
+                  sx={(theme) => theme.appTokens.typography.sectionValue}
+                >
                   {computedEndDateLabel ?? '--/--/----'}
                 </Typography>
               </Stack>
@@ -258,7 +293,10 @@ export function MedicationFormPage() {
           ) : null}
 
           <Stack spacing={1}>
-            <Typography color="text.secondary" fontSize={13} fontWeight={600}>
+            <Typography
+              color="text.secondary"
+              sx={(theme) => theme.appTokens.typography.sectionLabel}
+            >
               Lịch uống
             </Typography>
             <DoseTimeListField />

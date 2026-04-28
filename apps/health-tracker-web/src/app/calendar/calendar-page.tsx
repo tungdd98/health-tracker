@@ -76,22 +76,20 @@ export function CalendarPage() {
             aria-label="Tháng trước"
             onClick={() => setDisplayMonth((current) => current.minus({ months: 1 }))}
             sx={{
-              bgcolor: alpha(theme.palette.background.paper, 0.84),
+              bgcolor: theme.palette.surface.raised,
               border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
             }}
           >
             <ChevronLeftRoundedIcon />
           </IconButton>
 
-          <Typography fontWeight={600} variant="subtitle1">
-            {monthLabel}
-          </Typography>
+          <Typography variant="subtitle1">{monthLabel}</Typography>
 
           <IconButton
             aria-label="Tháng sau"
             onClick={() => setDisplayMonth((current) => current.plus({ months: 1 }))}
             sx={{
-              bgcolor: alpha(theme.palette.background.paper, 0.84),
+              bgcolor: theme.palette.surface.raised,
               border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
             }}
           >
@@ -131,12 +129,7 @@ export function CalendarPage() {
         {!isLoading && hasData ? <PhaseLegend /> : null}
 
         {!isLoading && !hasData ? (
-          <AppCard
-            sx={{
-              p: 3,
-              textAlign: 'center',
-            }}
-          >
+          <AppCard sx={{ p: 3, textAlign: 'center' }}>
             <Stack alignItems="center" spacing={1.5}>
               <Typography color="text.primary" variant="subtitle1">
                 Cần thêm dữ liệu chu kỳ

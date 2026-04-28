@@ -12,7 +12,6 @@ import { MoodBottomSheet } from './mood-bottom-sheet';
 import { useDailyLog } from './use-daily-log';
 import { WeightBottomSheet } from './weight-bottom-sheet';
 
-const COLOR_BORDER_SUBTLE = '#E8DDE1';
 const LOG_CARD_HEIGHT = 90;
 
 type DailyLogStripProps = {
@@ -50,13 +49,13 @@ function LogCard({ icon, label, value, onClick }: LogCardProps) {
     <Box
       component="button"
       onClick={onClick}
-      sx={{
+      sx={(theme) => ({
         alignItems: 'center',
         appearance: 'none',
-        backgroundColor: 'background.paper',
+        backgroundColor: theme.palette.background.paper,
         border: '1px solid',
-        borderColor: isFilled ? 'primary.main' : COLOR_BORDER_SUBTLE,
-        borderRadius: '20px',
+        borderColor: isFilled ? 'primary.main' : 'border.subtle',
+        borderRadius: theme.appTokens.radius.xl,
         color: 'text.primary',
         cursor: 'pointer',
         display: 'flex',
@@ -67,7 +66,7 @@ function LogCard({ icon, label, value, onClick }: LogCardProps) {
         justifyContent: 'center',
         px: 1.75,
         py: 1.75,
-      }}
+      })}
       type="button"
     >
       <Box
@@ -82,17 +81,17 @@ function LogCard({ icon, label, value, onClick }: LogCardProps) {
       >
         {icon}
       </Box>
-      <Typography color="text.secondary" sx={{ fontSize: 10, fontWeight: 700, letterSpacing: 1 }}>
+      <Typography color="text.secondary" sx={(theme) => theme.appTokens.typography.microLabel}>
         {label}
       </Typography>
       <Typography
         color={isFilled ? 'text.primary' : 'text.secondary'}
-        sx={{
-          fontSize: isFilled ? 13 : 12,
-          fontWeight: isFilled ? 600 : 400,
+        sx={(theme) => ({
+          ...theme.appTokens.typography.helper,
+          fontWeight: isFilled ? 600 : 500,
           opacity: isFilled ? 1 : 0.72,
           textAlign: 'center',
-        }}
+        })}
       >
         {value ?? 'Chưa log'}
       </Typography>
@@ -111,7 +110,7 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
           <Skeleton
             key={index}
             height={LOG_CARD_HEIGHT}
-            sx={{ borderRadius: '20px', flex: 1 }}
+            sx={(theme) => ({ borderRadius: theme.appTokens.radius.xl, flex: 1 })}
             variant="rounded"
           />
         ))}

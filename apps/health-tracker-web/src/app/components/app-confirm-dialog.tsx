@@ -42,23 +42,13 @@ export function AppConfirmDialog({
   onConfirm,
 }: AppConfirmDialogProps) {
   return (
-    <Dialog
-      fullWidth
-      maxWidth="xs"
-      open={open}
-      onClose={isSubmitting ? undefined : onCancel}
-      PaperProps={{
-        sx: {
-          borderRadius: '32px',
-        },
-      }}
-    >
+    <Dialog fullWidth maxWidth="xs" open={open} onClose={isSubmitting ? undefined : onCancel}>
       <DialogContent sx={{ pb: 2, pt: 3.5, px: 3 }}>
         <Stack spacing={1.5}>
           {icon ? <Box sx={{ mb: 0.25 }}>{icon}</Box> : null}
           <DialogTitle sx={{ p: 0 }}>{title}</DialogTitle>
           {description ? (
-            <Typography color="text.secondary" sx={{ lineHeight: 1.5 }}>
+            <Typography color="text.secondary" variant="body2">
               {description}
             </Typography>
           ) : null}

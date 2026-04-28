@@ -71,7 +71,12 @@ export function SignUpPage() {
       footer={
         <Typography variant="body2" textAlign="center" color="text.secondary">
           {authCopy.signUp.switchPrompt}{' '}
-          <Link component={RouterLink} to="/login" underline="hover" sx={{ fontWeight: 600 }}>
+          <Link
+            component={RouterLink}
+            to="/login"
+            underline="hover"
+            sx={(theme) => theme.appTokens.typography.sectionValue}
+          >
             {authCopy.signUp.switchActionLabel}
           </Link>
         </Typography>

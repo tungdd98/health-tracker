@@ -1,6 +1,5 @@
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import { alpha } from '@mui/material/styles';
-import { Box, ButtonBase, Chip, Stack, Typography } from '@mui/material';
+import { ButtonBase, Chip, Stack, Typography } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { FormField } from '@health-tracker/forms';
@@ -39,36 +38,34 @@ function PhaseOptionCard({
     <ButtonBase
       disabled={disabled}
       onClick={onClick}
-      sx={{
-        borderRadius: 4,
+      sx={(theme) => ({
+        borderRadius: theme.appTokens.radius.xl,
         display: 'block',
         textAlign: 'left',
         width: '100%',
-      }}
+      })}
     >
       <AppCard
         sx={(theme) => ({
-          p: 2.25,
-          border: `1px solid ${selected ? theme.palette.primary.main : alpha(theme.palette.divider, 0.72)}`,
-          backgroundColor: selected
-            ? alpha(theme.palette.primary.light, 0.24)
-            : alpha(theme.palette.background.paper, 0.9),
-          boxShadow: selected ? `0 14px 30px ${alpha(theme.palette.primary.main, 0.12)}` : 'none',
+          backgroundColor: selected ? theme.palette.surface.selected : theme.palette.surface.raised,
+          border: `1px solid ${selected ? theme.palette.primary.main : theme.palette.divider}`,
+          boxShadow: selected ? theme.appTokens.shadow.floating : 'none',
           opacity: disabled ? 0.72 : 1,
+          p: 2.25,
           transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow'], {
             duration: theme.transitions.duration.short,
           }),
         })}
       >
         <Stack spacing={1.25}>
-          <Stack direction="row" justifyContent="space-between" alignItems="flex-start" gap={1}>
-            <Box>
+          <Stack alignItems="flex-start" direction="row" gap={1} justifyContent="space-between">
+            <Stack spacing={0.5}>
               <Typography variant="subtitle1">{label}</Typography>
-              <Typography color="text.secondary" sx={{ mt: 0.5 }}>
+              <Typography color="text.secondary" variant="body2">
                 {description}
               </Typography>
-            </Box>
-            <Stack direction="row" spacing={1} alignItems="center">
+            </Stack>
+            <Stack alignItems="center" direction="row" spacing={1}>
               {helperLabel ? <Chip label={helperLabel} size="small" /> : null}
               {!disabled ? <ChevronRightRoundedIcon color="primary" fontSize="small" /> : null}
             </Stack>

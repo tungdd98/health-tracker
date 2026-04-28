@@ -1,6 +1,6 @@
-import { Box, Button, CircularProgress, Drawer, Stack, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
 import SentimentSatisfiedAltRoundedIcon from '@mui/icons-material/SentimentSatisfiedAltRounded';
+import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 import {
   mapAuthErrorToMessage,
@@ -8,6 +8,8 @@ import {
   type DailyLogPatch,
   type MoodValue,
 } from '@health-tracker/api';
+
+import { DailyLogSheetLayout } from './daily-log-sheet-layout';
 
 type MoodBottomSheetProps = {
   open: boolean;
@@ -27,11 +29,6 @@ const MOODS: Array<{ value: MoodValue; emoji: string; label: string }> = [
   { value: 'very_happy', emoji: '😄', label: 'Rất vui' },
   { value: 'tired', emoji: '😴', label: 'Mệt mỏi' },
 ];
-const COLOR_BORDER_STRONG = '#C0ADB3';
-const COLOR_BORDER_SUBTLE = '#E8DDE1';
-const COLOR_BG_TINTED = '#FFF0F4';
-const COLOR_BG_TINTED_STRONG = '#F4DCE4';
-const COLOR_BG_CANVAS = '#FFF8F8';
 
 export function MoodBottomSheet({
   open,
@@ -67,131 +64,94 @@ export function MoodBottomSheet({
   const mutationMessage = mapAuthErrorToMessage(mutationError) || mutationError?.message || '';
 
   return (
-    <Drawer
-      anchor="bottom"
+    <DailyLogSheetLayout
+      icon={<SentimentSatisfiedAltRoundedIcon color="primary" />}
+      isBusy={isMutating}
+      onClose={onClose}
       open={open}
-      onClose={isMutating ? undefined : onClose}
-      PaperProps={{
-        sx: {
-          borderRadius: '24px 24px 0 0',
-          p: 3,
-          pb: 5,
-        },
-      }}
+      title="Tâm trạng hôm nay"
     >
-      <Stack spacing={2.5}>
-        <Box
-          sx={{
-            alignSelf: 'center',
-            bgcolor: COLOR_BORDER_STRONG,
-            borderRadius: '2px',
-            height: 4,
-            width: 36,
-          }}
-        />
+      <Stack direction="row" spacing={1}>
+        {MOODS.map((mood) => {
+          const isSelected = selectedMood === mood.value;
 
-        <Stack spacing={2}>
-          <Box
-            sx={{
-              alignItems: 'center',
-              bgcolor: COLOR_BG_TINTED,
-              borderRadius: 999,
-              display: 'flex',
-              height: 48,
-              justifyContent: 'center',
-              width: 48,
-            }}
-          >
-            <SentimentSatisfiedAltRoundedIcon color="primary" />
-          </Box>
-
-          <Typography sx={{ fontSize: 18, fontWeight: 700 }}>Tâm trạng hôm nay</Typography>
-
-          <Stack direction="row" spacing={1}>
-            {MOODS.map((mood) => {
-              const isSelected = selectedMood === mood.value;
-
-              return (
-                <Box
-                  component="button"
-                  key={mood.value}
-                  onClick={() => setSelectedMood(mood.value)}
-                  sx={{
-                    alignItems: 'center',
-                    appearance: 'none',
-                    backgroundColor: isSelected ? COLOR_BG_TINTED_STRONG : COLOR_BG_CANVAS,
-                    border: '1px solid',
-                    borderColor: isSelected ? 'primary.main' : COLOR_BORDER_SUBTLE,
-                    borderRadius: '16px',
-                    color: 'text.primary',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    flex: 1,
-                    flexDirection: 'column',
-                    gap: 0.5,
-                    justifyContent: 'center',
-                    minHeight: 64,
-                    px: 0.5,
-                    py: 1,
-                  }}
-                  type="button"
-                >
-                  <Typography sx={{ fontSize: 22 }}>{mood.emoji}</Typography>
-                  <Typography
-                    color={isSelected ? 'primary.main' : 'text.secondary'}
-                    sx={{ fontSize: 9, fontWeight: isSelected ? 700 : 400, lineHeight: 1.25 }}
-                  >
-                    {mood.label}
-                  </Typography>
-                </Box>
-              );
-            })}
-          </Stack>
-
-          {selectedMoodLabel ? (
-            <Typography align="center" color="primary.main" sx={{ fontSize: 14, fontWeight: 600 }}>
-              {selectedMoodLabel}
-            </Typography>
-          ) : null}
-
-          {mutationMessage ? (
-            <Typography color="error.main" variant="caption">
-              {mutationMessage}
-            </Typography>
-          ) : null}
-
-          <Stack direction="row" spacing={1.5}>
-            <Button
-              disabled={isMutating}
-              fullWidth
-              onClick={onClose}
-              sx={{ borderColor: COLOR_BORDER_STRONG, color: 'text.secondary' }}
-              variant="outlined"
+          return (
+            <Box
+              component="button"
+              key={mood.value}
+              onClick={() => setSelectedMood(mood.value)}
+              sx={(theme) => ({
+                alignItems: 'center',
+                appearance: 'none',
+                backgroundColor: isSelected
+                  ? theme.palette.surface.selectedStrong
+                  : theme.palette.surface.canvas,
+                border: '1px solid',
+                borderColor: isSelected ? 'primary.main' : 'border.subtle',
+                borderRadius: theme.appTokens.radius.md,
+                color: 'text.primary',
+                cursor: 'pointer',
+                display: 'flex',
+                flex: 1,
+                flexDirection: 'column',
+                gap: 0.5,
+                justifyContent: 'center',
+                minHeight: 64,
+                px: 0.5,
+                py: 1,
+              })}
+              type="button"
             >
-              Huỷ
-            </Button>
-            <Button
-              disabled={!selectedMood || isMutating}
-              fullWidth
-              onClick={() => void handleSave()}
-              sx={{
-                background: 'linear-gradient(135deg, #6C5A61 0%, #6C5A61B8 100%)',
-                '&.Mui-disabled': {
-                  background: 'linear-gradient(135deg, #6C5A61 0%, #6C5A61B8 100%)',
-                  color: 'rgba(255, 247, 248, 0.72)',
-                  opacity: 0.56,
-                },
-              }}
-              variant="contained"
-            >
-              <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
-                {isMutating ? <CircularProgress color="inherit" size={20} /> : null}
-                Lưu
-              </Box>
-            </Button>
-          </Stack>
-        </Stack>
+              <Typography sx={{ fontSize: 22 }}>{mood.emoji}</Typography>
+              <Typography
+                color={isSelected ? 'primary.main' : 'text.secondary'}
+                sx={(theme) => ({
+                  ...theme.appTokens.typography.microLabel,
+                  fontWeight: isSelected ? 700 : 500,
+                  letterSpacing: '0.03em',
+                  lineHeight: 1.25,
+                  textTransform: 'none',
+                })}
+              >
+                {mood.label}
+              </Typography>
+            </Box>
+          );
+        })}
       </Stack>
-    </Drawer>
+
+      {selectedMoodLabel ? (
+        <Typography
+          align="center"
+          color="primary.main"
+          sx={(theme) => theme.appTokens.typography.sectionValue}
+        >
+          {selectedMoodLabel}
+        </Typography>
+      ) : null}
+
+      {mutationMessage ? (
+        <Typography color="error.main" variant="caption">
+          {mutationMessage}
+        </Typography>
+      ) : null}
+
+      <Stack direction="row" spacing={1.5}>
+        <Button disabled={isMutating} fullWidth onClick={onClose} variant="outlined">
+          Huỷ
+        </Button>
+        <Button
+          disabled={!selectedMood || isMutating}
+          fullWidth
+          onClick={() => void handleSave()}
+          variant="contained"
+        >
+          <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
+            {isMutating ? <CircularProgress color="inherit" size={20} /> : null}
+            Lưu
+          </Box>
+        </Button>
+      </Stack>
+    </DailyLogSheetLayout>
   );
 }

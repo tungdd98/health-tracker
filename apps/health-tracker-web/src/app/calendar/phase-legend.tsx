@@ -27,7 +27,7 @@ export function PhaseLegend() {
               width: 10,
             }}
           />
-          <Typography color="text.secondary" sx={{ fontSize: 11, fontWeight: 500 }}>
+          <Typography color="text.secondary" sx={theme.appTokens.typography.helper}>
             {PHASE_LEGEND_LABELS[phase]}
           </Typography>
         </Stack>

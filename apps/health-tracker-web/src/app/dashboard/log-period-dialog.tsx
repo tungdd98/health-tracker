@@ -1,5 +1,5 @@
 import OpacityRoundedIcon from '@mui/icons-material/OpacityRounded';
-import { Box, alpha, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import type { User } from '@supabase/supabase-js';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
@@ -15,7 +15,6 @@ type LogPeriodDialogProps = {
 };
 
 export function LogPeriodDialog({ open, user, onClose, onSuccess }: LogPeriodDialogProps) {
-  const theme = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -60,15 +59,15 @@ export function LogPeriodDialog({ open, user, onClose, onSuccess }: LogPeriodDia
       errorMessage={errorMessage}
       icon={
         <Box
-          sx={{
+          sx={(theme) => ({
             alignItems: 'center',
-            bgcolor: alpha(theme.palette.primary.light, 0.7),
-            borderRadius: 999,
+            bgcolor: theme.palette.surface.accent,
+            borderRadius: theme.appTokens.radius.pill,
             display: 'flex',
             height: 48,
             justifyContent: 'center',
             width: 48,
-          }}
+          })}
         >
           <OpacityRoundedIcon color="primary" sx={{ fontSize: 22 }} />
         </Box>

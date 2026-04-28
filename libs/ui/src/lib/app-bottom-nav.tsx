@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { alpha } from '@mui/material/styles';
 import { BottomNavigation, BottomNavigationAction, Box, Paper } from '@mui/material';
 
 export type AppBottomNavItem = {
@@ -19,7 +18,7 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
     <>
       <Box
         sx={(theme) => ({
-          backgroundColor: alpha(theme.palette.background.paper, 0.98),
+          backgroundColor: theme.palette.surface.overlay,
           bottom: 0,
           height: 'calc(16px + env(safe-area-inset-bottom, 0px))',
           left: 0,
@@ -31,11 +30,11 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
       <Paper
         elevation={0}
         sx={(theme) => ({
+          backgroundColor: theme.palette.surface.overlay,
+          borderRadius: theme.appTokens.radius.xl,
           bottom: 16,
+          boxShadow: theme.appTokens.shadow.floating,
           left: '50%',
-          borderRadius: '20px',
-          backgroundColor: alpha(theme.palette.background.paper, 0.98),
-          boxShadow: `0 14px 32px ${alpha(theme.palette.primary.main, 0.1)}`,
           position: 'fixed',
           transform: 'translateX(-50%)',
           width: 'min(calc(100vw - 32px), 600px)',
@@ -58,23 +57,20 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
               key={item.value}
               icon={item.icon}
               label={item.label}
-              sx={{
-                borderRadius: '20px',
+              sx={(theme) => ({
+                borderRadius: theme.appTokens.radius.xl,
                 color: 'text.secondary',
                 minHeight: '100%',
                 minWidth: 0,
                 py: 0.75,
                 '& .MuiBottomNavigationAction-label': {
-                  fontSize: 10,
-                  fontWeight: 600,
-                  letterSpacing: 0.5,
-                  lineHeight: 1,
+                  ...theme.appTokens.typography.microLabel,
+                  fontSize: theme.appTokens.typography.microLabel.fontSize,
                   mt: 0.5,
-                  textTransform: 'uppercase',
                   transform: 'none',
                 },
                 '& .MuiBottomNavigationAction-label.Mui-selected': {
-                  fontSize: 10,
+                  fontSize: theme.appTokens.typography.microLabel.fontSize,
                   transform: 'none',
                 },
                 '&.Mui-selected': {
@@ -87,7 +83,7 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
                 '&.Mui-selected .MuiBottomNavigationAction-label': {
                   color: 'primary.contrastText',
                 },
-              }}
+              })}
               value={item.value}
             />
           ))}

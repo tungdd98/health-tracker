@@ -11,7 +11,14 @@ type AppListItemProps = {
 
 export function AppListItem({ title, subtitle, leading, trailing }: AppListItemProps) {
   return (
-    <Paper elevation={0} sx={{ borderRadius: 4, overflow: 'hidden' }}>
+    <Paper
+      elevation={0}
+      sx={(theme) => ({
+        bgcolor: theme.palette.surface.raised,
+        borderRadius: theme.appTokens.radius.xl,
+        overflow: 'hidden',
+      })}
+    >
       <ListItemButton sx={{ minHeight: 72, px: 2.25, py: 1.5 }}>
         {leading ? (
           <ListItemIcon sx={{ color: 'primary.main', minWidth: 40 }}>{leading}</ListItemIcon>

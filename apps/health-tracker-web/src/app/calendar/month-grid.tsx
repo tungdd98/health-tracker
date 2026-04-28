@@ -70,7 +70,7 @@ export function MonthGrid({ displayMonth, input }: MonthGridProps) {
                 border: isToday
                   ? `1.5px solid ${theme.palette.primary.main}`
                   : '1px solid transparent',
-                borderRadius: 1.5,
+                borderRadius: theme.appTokens.radius.sm,
                 display: 'flex',
                 justifyContent: 'center',
                 opacity: isCurrentMonth ? 1 : 0.4,
@@ -79,15 +79,15 @@ export function MonthGrid({ displayMonth, input }: MonthGridProps) {
             >
               {isToday ? (
                 <Box
-                  sx={{
-                    border: `1px solid ${alpha(theme.palette.background.paper, 0.95)}`,
-                    borderRadius: 1.25,
+                  sx={(currentTheme) => ({
+                    border: `1px solid ${alpha(currentTheme.palette.background.paper, 0.95)}`,
+                    borderRadius: currentTheme.appTokens.radius.xs,
                     bottom: 3,
                     left: 3,
                     position: 'absolute',
                     right: 3,
                     top: 3,
-                  }}
+                  })}
                 />
               ) : null}
               <Typography

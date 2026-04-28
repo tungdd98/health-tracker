@@ -1,6 +1,6 @@
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import { Box, ButtonBase, Container, Stack, Typography } from '@mui/material';
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import { Box, Button, Container, IconButton, Stack, Typography } from '@mui/material';
 import type { PropsWithChildren } from 'react';
 
 type MedicationPageLayoutProps = PropsWithChildren<{
@@ -19,17 +19,8 @@ export function MedicationPageLayout({
 }: MedicationPageLayoutProps) {
   return (
     <Box sx={{ minHeight: '100dvh', px: 2, py: 2 }}>
-      <Container
-        maxWidth="sm"
-        sx={{
-          px: '0 !important',
-        }}
-      >
-        <Box
-          sx={{
-            minHeight: 'calc(100dvh - 32px)',
-          }}
-        >
+      <Container maxWidth="sm" sx={{ px: '0 !important' }}>
+        <Box sx={{ minHeight: 'calc(100dvh - 32px)' }}>
           <Box
             sx={{
               alignItems: 'center',
@@ -40,40 +31,26 @@ export function MedicationPageLayout({
             }}
           >
             <Stack alignItems="center" direction="row" spacing={1}>
-              <ButtonBase
+              <IconButton
+                color="primary"
                 onClick={onBack}
-                sx={{
-                  alignItems: 'center',
-                  borderRadius: 999,
-                  color: 'text.primary',
-                  display: 'inline-flex',
-                  justifyContent: 'center',
-                  minHeight: 24,
-                  minWidth: 24,
-                }}
+                size="small"
+                sx={{ bgcolor: 'surface.raised' }}
               >
                 <ArrowBackRoundedIcon fontSize="small" />
-              </ButtonBase>
-              <Typography sx={{ fontSize: 18, fontWeight: 700 }}>{title}</Typography>
+              </IconButton>
+              <Typography variant="h4">{title}</Typography>
             </Stack>
 
             {actionLabel && onAction ? (
-              <ButtonBase
+              <Button
                 onClick={onAction}
-                sx={{
-                  alignItems: 'center',
-                  backgroundColor: 'primary.main',
-                  borderRadius: 999,
-                  color: 'primary.contrastText',
-                  display: 'inline-flex',
-                  gap: 0.5,
-                  px: 1.75,
-                  py: 1,
-                }}
+                size="small"
+                startIcon={<AddRoundedIcon />}
+                variant="contained"
               >
-                <AddRoundedIcon sx={{ fontSize: 16 }} />
-                <Typography sx={{ fontSize: 14, fontWeight: 600 }}>{actionLabel}</Typography>
-              </ButtonBase>
+                {actionLabel}
+              </Button>
             ) : null}
           </Box>
 
