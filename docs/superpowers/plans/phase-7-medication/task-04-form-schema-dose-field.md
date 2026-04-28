@@ -7,11 +7,11 @@
 
 ---
 
-- [ ] **Step 1:** Dựng Zod schema theo spec: required `name`, max lengths, `scheduleType`, conditional validation cho `course`.
-- [ ] **Step 2:** Validate `doses` (min 1, max 12), `HH:mm` regex.
-- [ ] **Step 3:** Tạo `DoseTimeListField` dùng `useFieldArray` (add/remove/reorder nhẹ theo sort).
-- [ ] **Step 4:** Hỗ trợ hiển thị lỗi inline cho từng row/time field.
-- [ ] **Step 5:** Verify lint/build.
+- [x] **Step 1:** Dựng Zod schema theo spec: required `name`, max lengths, `scheduleType`, conditional validation cho `course`.
+- [x] **Step 2:** Validate `doses` (min 1, max 12), `HH:mm` regex.
+- [x] **Step 3:** Tạo `DoseTimeListField` dùng `useFieldArray` (add/remove/reorder nhẹ theo sort).
+- [x] **Step 4:** Hỗ trợ hiển thị lỗi inline cho từng row/time field.
+- [x] **Step 5:** Verify lint/build.
 
 ```bash
 yarn lint && yarn build

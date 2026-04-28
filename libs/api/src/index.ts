@@ -5,3 +5,4 @@ export * from './lib/auth-errors';
 export * from './lib/supabase';
 export * from './lib/onboarding';
 export * from './lib/daily-log';
+export * from './lib/medication';

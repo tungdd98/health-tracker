@@ -4,6 +4,8 @@ import { useAuthSession } from './auth/use-auth-session';
 import { CalendarPage } from './calendar/calendar-page';
 import { AuthRouteState } from './components/auth-route-state';
 import { DashboardPage } from './dashboard/dashboard-page';
+import { MedicationFormPage } from './medications/medication-form-page';
+import { MedicationListPage } from './medications/medication-list-page';
 import { LoginPage } from './pages/login-page';
 import { NotFoundPage } from './pages/not-found-page';
 import { OnboardingPage } from './pages/onboarding-page';
@@ -90,6 +92,30 @@ export const appRouter = createBrowserRouter([
     element: (
       <PrivateRoute>
         <SettingsPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/medications',
+    element: (
+      <PrivateRoute>
+        <MedicationListPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/medications/new',
+    element: (
+      <PrivateRoute>
+        <MedicationFormPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/medications/:medicationId/edit',
+    element: (
+      <PrivateRoute>
+        <MedicationFormPage />
       </PrivateRoute>
     ),
   },

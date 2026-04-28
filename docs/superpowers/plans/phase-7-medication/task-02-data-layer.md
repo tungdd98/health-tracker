@@ -7,17 +7,17 @@
 
 ---
 
-- [ ] **Step 1:** Khai báo types: `ScheduleType`, `Dose`, `Medication`, `MedicationDraft`, `DoseLog`.
-- [ ] **Step 2:** Implement medication APIs: `listMedications`, `getMedication`, `createMedication`, `updateMedication`, `deleteMedication`.
-- [ ] **Step 3:** Implement dose log APIs: `listDoseLogs`, `logDose`, `unlogDose` (idempotent cho log).
-- [ ] **Step 4:** Export module từ `libs/api/src/index.ts`.
-- [ ] **Step 5:** Verify type/build.
+- [x] **Step 1:** Khai báo types: `ScheduleType`, `Dose`, `Medication`, `MedicationDraft`, `DoseLog`.
+- [x] **Step 2:** Implement medication APIs: `listMedications`, `getMedication`, `createMedication`, `updateMedication`, `deleteMedication`.
+- [x] **Step 3:** Implement dose log APIs: `listDoseLogs`, `logDose`, `unlogDose` (idempotent cho log).
+- [x] **Step 4:** Export module từ `libs/api/src/index.ts`.
+- [x] **Step 5:** Verify type/build.
 
 ```bash
 yarn build
 ```
 
-- [ ] **Step 6:** Commit data layer.
+- [x] **Step 6:** Commit data layer.
 
 ```bash
 git add libs/api/src/lib/medication.ts libs/api/src/index.ts

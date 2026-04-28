@@ -42,7 +42,20 @@ const rose = {
   phaseLuteal: '#C9B8E0',
 };
 
+const baseTheme = createTheme();
+const softShadows = baseTheme.shadows.map((shadow, index) => {
+  if (index === 0) {
+    return shadow;
+  }
+
+  return shadow
+    .replaceAll('rgba(0,0,0,0.2)', 'rgba(0,0,0,0.08)')
+    .replaceAll('rgba(0,0,0,0.14)', 'rgba(0,0,0,0.05)')
+    .replaceAll('rgba(0,0,0,0.12)', 'rgba(0,0,0,0.04)');
+}) as typeof baseTheme.shadows;
+
 export const appTheme = createTheme({
+  shadows: softShadows,
   palette: {
     mode: 'light',
     primary: {
@@ -164,11 +177,12 @@ export const appTheme = createTheme({
         root: {
           borderRadius: 999,
           minHeight: 48,
+          minWidth: 120,
           paddingInline: 20,
         },
         contained: {
           background: `linear-gradient(135deg, ${rose.primary} 0%, ${alpha(rose.primary, 0.72)} 100%)`,
-          boxShadow: `0 18px 36px ${alpha(rose.primary, 0.18)}`,
+          boxShadow: `0 10px 20px ${alpha(rose.primary, 0.12)}`,
         },
         outlined: {
           borderColor: alpha(rose.border, 0.36),
@@ -194,7 +208,7 @@ export const appTheme = createTheme({
         root: {
           borderRadius: 32,
           backgroundColor: alpha(rose.paper, 0.94),
-          boxShadow: `0 24px 48px ${alpha(rose.primary, 0.08)}`,
+          boxShadow: `0 12px 24px ${alpha(rose.primary, 0.06)}`,
         },
       },
     },
@@ -256,7 +270,7 @@ export const appTheme = createTheme({
           borderRadius: 28,
           backgroundColor: alpha(rose.paper, 0.88),
           backdropFilter: 'blur(18px)',
-          boxShadow: `0 18px 40px ${alpha(rose.primary, 0.12)}`,
+          boxShadow: `0 10px 22px ${alpha(rose.primary, 0.08)}`,
         },
       },
     },

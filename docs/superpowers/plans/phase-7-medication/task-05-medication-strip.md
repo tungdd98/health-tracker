@@ -11,13 +11,13 @@
 
 ---
 
-- [ ] **Step 1:** Mở file `.pen` và đọc đúng 2 frame strip trước khi viết JSX.
-- [ ] **Step 2:** Render loading state: 1 skeleton card.
-- [ ] **Step 3:** Render empty state: icon + copy + action “Quản lý thuốc”.
-- [ ] **Step 4:** Render with-doses state: header + counter + list rows + footer action.
-- [ ] **Step 5:** Tap row để toggle log/unlog qua hook mutation (optimistic).
-- [ ] **Step 6:** Áp dụng style token/theme hiện tại, icon MUI `Rounded`, font `Plus Jakarta Sans`.
-- [ ] **Step 7:** Verify lint/build.
+- [x] **Step 1:** Mở file `.pen` và đọc đúng 2 frame strip trước khi viết JSX.
+- [x] **Step 2:** Render loading state: 1 skeleton card.
+- [x] **Step 3:** Render empty state: icon + copy + action “Quản lý thuốc”.
+- [x] **Step 4:** Render with-doses state: header + counter + list rows + footer action.
+- [x] **Step 5:** Tap row để toggle log/unlog qua hook mutation (optimistic).
+- [x] **Step 6:** Áp dụng style token/theme hiện tại, icon MUI `Rounded`, font `Plus Jakarta Sans`.
+- [x] **Step 7:** Verify lint/build.
 
 ```bash
 yarn lint && yarn build

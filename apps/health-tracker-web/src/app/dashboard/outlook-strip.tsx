@@ -53,6 +53,7 @@ export function OutlookStrip({ input, isLoading }: OutlookStripProps) {
               border: '1px solid',
               borderColor: isToday ? 'primary.main' : 'transparent',
               borderRadius: 2.5,
+              boxShadow: isToday ? theme.shadows[4] : theme.shadows[2],
               display: 'flex',
               flex: 1,
               flexDirection: 'column',

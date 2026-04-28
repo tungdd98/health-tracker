@@ -4,7 +4,7 @@ Verification only.
 
 ---
 
-- [ ] **Step 1:** Run required DoD commands.
+- [x] **Step 1:** Run required DoD commands.
 
 ```bash
 yarn format

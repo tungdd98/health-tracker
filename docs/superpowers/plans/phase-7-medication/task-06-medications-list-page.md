@@ -12,13 +12,13 @@
 
 ---
 
-- [ ] **Step 1:** Mở `.pen` và đọc 3 frame tương ứng.
-- [ ] **Step 2:** Dựng page header, action `+ Thêm`, empty state.
-- [ ] **Step 3:** Dựng list cards: active switch, menu edit/delete, schedule label, dose times.
-- [ ] **Step 4:** Dựng delete confirm dialog theo frame `DeleteConfirm`.
-- [ ] **Step 5:** Wire mutations: toggle active, delete, navigate edit/new.
-- [ ] **Step 6:** Handle loading/error/empty states theo spec.
-- [ ] **Step 7:** Verify lint/build.
+- [x] **Step 1:** Mở `.pen` và đọc 3 frame tương ứng.
+- [x] **Step 2:** Dựng page header, action `+ Thêm`, empty state.
+- [x] **Step 3:** Dựng list cards: active switch, menu edit/delete, schedule label, dose times.
+- [x] **Step 4:** Dựng delete confirm dialog theo frame `DeleteConfirm`.
+- [x] **Step 5:** Wire mutations: toggle active, delete, navigate edit/new.
+- [x] **Step 6:** Handle loading/error/empty states theo spec.
+- [x] **Step 7:** Verify lint/build.
 
 ```bash
 yarn lint && yarn build

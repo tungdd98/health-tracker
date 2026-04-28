@@ -14,14 +14,14 @@
 
 ## Task Checklist
 
-- [ ] [Task 01 — Supabase migration + RPC](task-01-migration-rpc.md)
-- [ ] [Task 02 — Data layer (libs/api)](task-02-data-layer.md)
-- [ ] [Task 03 — Medication query hooks](task-03-medication-hooks.md)
-- [ ] [Task 04 — Medication form schema + dose field](task-04-form-schema-dose-field.md)
-- [ ] [Task 05 — MedicationStrip UI](task-05-medication-strip.md)
-- [ ] [Task 06 — Medications list page](task-06-medications-list-page.md)
-- [ ] [Task 07 — Medication form page (new/edit)](task-07-medication-form-page.md)
-- [ ] [Task 08 — Router wiring + dashboard integration](task-08-routing-dashboard-wire.md)
+- [x] [Task 01 — Supabase migration + RPC](task-01-migration-rpc.md)
+- [x] [Task 02 — Data layer (libs/api)](task-02-data-layer.md)
+- [x] [Task 03 — Medication query hooks](task-03-medication-hooks.md)
+- [x] [Task 04 — Medication form schema + dose field](task-04-form-schema-dose-field.md)
+- [x] [Task 05 — MedicationStrip UI](task-05-medication-strip.md)
+- [x] [Task 06 — Medications list page](task-06-medications-list-page.md)
+- [x] [Task 07 — Medication form page (new/edit)](task-07-medication-form-page.md)
+- [x] [Task 08 — Router wiring + dashboard integration](task-08-routing-dashboard-wire.md)
 - [ ] [Task 09 — Verification and smoke test](task-09-verification-smoke.md)
 - [ ] [Task 10 — Tracking sync and commit plan](task-10-tracking-and-commit.md)
 

@@ -1,24 +1,11 @@
 import OpacityRoundedIcon from '@mui/icons-material/OpacityRounded';
-import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Stack,
-  Typography,
-  alpha,
-  useTheme,
-} from '@mui/material';
+import { Box, alpha, useTheme } from '@mui/material';
 import type { User } from '@supabase/supabase-js';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 
 import { mapAuthErrorToMessage, updateOnboardingProfile } from '@health-tracker/api';
+import { AppConfirmDialog } from '../components/app-confirm-dialog';
 
 type LogPeriodDialogProps = {
   open: boolean;
@@ -66,68 +53,31 @@ export function LogPeriodDialog({ open, user, onClose, onSuccess }: LogPeriodDia
   };
 
   return (
-    <Dialog fullWidth maxWidth="xs" open={open} onClose={isSubmitting ? undefined : handleClose}>
-      <DialogContent sx={{ p: 3 }}>
-        <Stack spacing={1.75}>
-          <Box
-            sx={{
-              alignItems: 'center',
-              bgcolor: alpha(theme.palette.primary.light, 0.7),
-              borderRadius: 999,
-              display: 'flex',
-              height: 48,
-              justifyContent: 'center',
-              width: 48,
-            }}
-          >
-            <OpacityRoundedIcon color="primary" sx={{ fontSize: 22 }} />
-          </Box>
-
-          <DialogTitle sx={{ p: 0 }}>Xác nhận kỳ kinh mới</DialogTitle>
-
-          <Typography color="text.secondary" variant="body2">
-            Đánh dấu hôm nay là ngày bắt đầu kỳ kinh mới? Hệ thống sẽ cập nhật dự đoán chu kỳ.
-          </Typography>
-
-          {errorMessage ? (
-            <Alert
-              icon={<WarningAmberRoundedIcon fontSize="inherit" />}
-              severity="error"
-              sx={{
-                alignItems: 'flex-start',
-                borderRadius: 1.5,
-              }}
-              variant="filled"
-            >
-              {errorMessage}
-            </Alert>
-          ) : null}
-        </Stack>
-      </DialogContent>
-
-      <DialogActions sx={{ gap: 1.25, px: 3, pb: 3, pt: 0 }}>
-        <Button
-          disabled={isSubmitting}
-          fullWidth
-          onClick={handleClose}
-          sx={{ flex: 1 }}
-          variant="outlined"
+    <AppConfirmDialog
+      cancelLabel="Huỷ"
+      confirmLabel="Xác nhận"
+      description="Đánh dấu hôm nay là ngày bắt đầu kỳ kinh mới? Hệ thống sẽ cập nhật dự đoán chu kỳ."
+      errorMessage={errorMessage}
+      icon={
+        <Box
+          sx={{
+            alignItems: 'center',
+            bgcolor: alpha(theme.palette.primary.light, 0.7),
+            borderRadius: 999,
+            display: 'flex',
+            height: 48,
+            justifyContent: 'center',
+            width: 48,
+          }}
         >
-          Huỷ
-        </Button>
-        <Button
-          disabled={isSubmitting}
-          fullWidth
-          onClick={() => void handleConfirm()}
-          sx={{ flex: 1 }}
-          variant="contained"
-        >
-          <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
-            {isSubmitting ? <CircularProgress color="inherit" size={16} /> : null}
-            Xác nhận
-          </Box>
-        </Button>
-      </DialogActions>
-    </Dialog>
+          <OpacityRoundedIcon color="primary" sx={{ fontSize: 22 }} />
+        </Box>
+      }
+      isSubmitting={isSubmitting}
+      onCancel={handleClose}
+      onConfirm={() => void handleConfirm()}
+      open={open}
+      title="Xác nhận kỳ kinh mới"
+    />
   );
 }

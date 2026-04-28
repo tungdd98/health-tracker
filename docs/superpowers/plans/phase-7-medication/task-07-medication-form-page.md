@@ -11,13 +11,13 @@
 
 ---
 
-- [ ] **Step 1:** Mở `.pen` và đọc 2 frame form trước khi code.
-- [ ] **Step 2:** Dựng shared page cho create/edit dùng RHF + schema task 04.
-- [ ] **Step 3:** Render conditional fields cho `course` (start date, duration, computed end-date label).
-- [ ] **Step 4:** Wire submit create/update qua hooks, handle loading + inline network error.
-- [ ] **Step 5:** Wire cancel/back về `/medications`, prefill data khi edit.
-- [ ] **Step 6:** Verify validation UX: required, max length, min/max duration, min/max doses.
-- [ ] **Step 7:** Verify lint/build.
+- [x] **Step 1:** Mở `.pen` và đọc 2 frame form trước khi code.
+- [x] **Step 2:** Dựng shared page cho create/edit dùng RHF + schema task 04.
+- [x] **Step 3:** Render conditional fields cho `course` (start date, duration, computed end-date label).
+- [x] **Step 4:** Wire submit create/update qua hooks, handle loading + inline network error.
+- [x] **Step 5:** Wire cancel/back về `/medications`, prefill data khi edit.
+- [x] **Step 6:** Verify validation UX: required, max length, min/max duration, min/max doses.
+- [x] **Step 7:** Verify lint/build.
 
 ```bash
 yarn lint && yarn build

@@ -7,8 +7,8 @@
 
 ---
 
-- [ ] **Step 1:** Trong quá trình implement, cập nhật checklist realtime cho từng task đã xong.
-- [ ] **Step 2:** Khi phase hoàn tất, đảm bảo `index.md` và từng task file đều reflect đúng trạng thái thực tế.
+- [x] **Step 1:** Trong quá trình implement, cập nhật checklist realtime cho từng task đã xong.
+- [x] **Step 2:** Khi phase hoàn tất, đảm bảo `index.md` và từng task file đều reflect đúng trạng thái thực tế.
 - [ ] **Step 3:** Commit phần plan nếu Hoàng Thượng yêu cầu tách commit plan.
 
 ```bash

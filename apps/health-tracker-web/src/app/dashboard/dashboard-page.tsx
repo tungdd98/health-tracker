@@ -10,6 +10,7 @@ import { useAuthSession } from '../auth/use-auth-session';
 import { deriveCycleHeroMode } from './cycle-hero-modes';
 import { CycleHero } from './cycle-hero';
 import { DailyLogStrip } from './daily-log-strip';
+import { MedicationStrip } from './medication-strip';
 import { computeCycleSnapshot } from './cycle-utils';
 import { LogPeriodDialog } from './log-period-dialog';
 import { OutlookStrip } from './outlook-strip';
@@ -115,6 +116,8 @@ export function DashboardPage() {
           onLogPeriod={() => setIsDialogOpen(true)}
           snapshot={snapshot}
         />
+
+        {user && snapshot ? <MedicationStrip userId={user.id} date={today.toISODate()!} /> : null}
 
         {showTipAndStrip && snapshot ? <TipOfDay isLoading={false} phase={snapshot.phase} /> : null}
 
