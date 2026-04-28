@@ -1,12 +1,4 @@
-import {
-  Alert,
-  Button,
-  ButtonBase,
-  CircularProgress,
-  Skeleton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Alert, Button, ButtonBase, Skeleton, Stack, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
 import { useEffect, useMemo } from 'react';
 import { useForm, type Path, type UseFormReturn } from 'react-hook-form';
@@ -19,6 +11,7 @@ import {
   FormTextAreaField,
   FormTextField,
 } from '@health-tracker/forms';
+import { AppSubmitButton } from '@health-tracker/ui';
 import { useAuthSession } from '../auth/use-auth-session';
 import {
   defaultMedicationFormValues,
@@ -315,9 +308,15 @@ export function MedicationFormPage() {
             >
               Huỷ
             </Button>
-            <Button disabled={isSaving} fullWidth type="submit" variant="contained">
-              {isSaving ? <CircularProgress color="inherit" size={18} /> : 'Lưu'}
-            </Button>
+            <AppSubmitButton
+              disabled={isSaving}
+              loading={isSaving}
+              fullWidth
+              type="submit"
+              variant="contained"
+            >
+              Lưu
+            </AppSubmitButton>
           </Stack>
         </AppFormProvider>
       </Stack>

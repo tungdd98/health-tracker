@@ -2,7 +2,6 @@ import {
   Alert,
   Box,
   Button,
-  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -11,6 +10,8 @@ import {
   Typography,
 } from '@mui/material';
 import type { ReactNode } from 'react';
+
+import { AppSubmitButton } from '@health-tracker/ui';
 
 type AppConfirmDialogProps = {
   open: boolean;
@@ -21,7 +22,6 @@ type AppConfirmDialogProps = {
   isSubmitting?: boolean;
   cancelLabel?: string;
   confirmLabel: string;
-  confirmLoadingLabel?: string;
   confirmColor?: 'primary' | 'error';
   onCancel: () => void;
   onConfirm: () => Promise<void> | void;
@@ -36,7 +36,6 @@ export function AppConfirmDialog({
   isSubmitting = false,
   cancelLabel = 'Huỷ',
   confirmLabel,
-  confirmLoadingLabel,
   confirmColor = 'primary',
   onCancel,
   onConfirm,
@@ -63,18 +62,16 @@ export function AppConfirmDialog({
         <Button disabled={isSubmitting} fullWidth onClick={onCancel} variant="outlined">
           {cancelLabel}
         </Button>
-        <Button
+        <AppSubmitButton
           color={confirmColor}
-          disabled={isSubmitting}
           fullWidth
+          loading={isSubmitting}
+          loadingIndicatorSize={16}
           onClick={() => void onConfirm()}
           variant="contained"
         >
-          <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
-            {isSubmitting ? <CircularProgress color="inherit" size={16} /> : null}
-            {isSubmitting && confirmLoadingLabel ? confirmLoadingLabel : confirmLabel}
-          </Box>
-        </Button>
+          {confirmLabel}
+        </AppSubmitButton>
       </DialogActions>
     </Dialog>
   );

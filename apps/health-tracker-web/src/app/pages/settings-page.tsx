@@ -1,14 +1,5 @@
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  Snackbar,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { Alert, Button, Grid, Snackbar, Stack, TextField } from '@mui/material';
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import { useForm, type Path, type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +14,7 @@ import {
   updateOnboardingPersonalInfo,
 } from '@health-tracker/api';
 import { AppFormProvider, FormDateField, FormTextField } from '@health-tracker/forms';
-import { AppShell } from '@health-tracker/ui';
+import { AppShell, AppSubmitButton } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
 import { SettingsSectionCard } from '../components/settings-section-card';
@@ -335,12 +326,14 @@ export function SettingsPage() {
                 <FormDateField label="Ngày sinh" name="birthDate" />
               </Grid>
             </Grid>
-            <Button disabled={isSavingPersonalInfo} type="submit" variant="contained">
-              <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
-                {isSavingPersonalInfo ? <CircularProgress color="inherit" size={18} /> : null}
-                {isSavingPersonalInfo ? 'Đang lưu...' : 'Lưu thay đổi'}
-              </Box>
-            </Button>
+            <AppSubmitButton
+              disabled={isSavingPersonalInfo}
+              loading={isSavingPersonalInfo}
+              type="submit"
+              variant="contained"
+            >
+              Lưu thay đổi
+            </AppSubmitButton>
           </AppFormProvider>
         </SettingsSectionCard>
 
@@ -378,12 +371,14 @@ export function SettingsPage() {
                 />
               </Grid>
             </Grid>
-            <Button disabled={isSavingCycleAndBody} type="submit" variant="contained">
-              <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
-                {isSavingCycleAndBody ? <CircularProgress color="inherit" size={18} /> : null}
-                {isSavingCycleAndBody ? 'Đang lưu...' : 'Lưu thay đổi'}
-              </Box>
-            </Button>
+            <AppSubmitButton
+              disabled={isSavingCycleAndBody}
+              loading={isSavingCycleAndBody}
+              type="submit"
+              variant="contained"
+            >
+              Lưu thay đổi
+            </AppSubmitButton>
           </AppFormProvider>
         </SettingsSectionCard>
 

@@ -1,8 +1,9 @@
 import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';
-import { Box, Button, CircularProgress, InputBase, Stack, Typography } from '@mui/material';
+import { Box, Button, InputBase, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { mapAuthErrorToMessage, type DailyLog, type DailyLogPatch } from '@health-tracker/api';
+import { AppSubmitButton } from '@health-tracker/ui';
 
 import { DailyLogSheetLayout } from './daily-log-sheet-layout';
 
@@ -121,17 +122,16 @@ export function WeightBottomSheet({
         <Button disabled={isMutating} fullWidth onClick={onClose} variant="outlined">
           Huỷ
         </Button>
-        <Button
+        <AppSubmitButton
           disabled={isMutating}
           fullWidth
+          loading={isMutating}
+          loadingIndicatorSize={20}
           onClick={() => void handleSave()}
           variant="contained"
         >
-          <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
-            {isMutating ? <CircularProgress color="inherit" size={20} /> : null}
-            Lưu
-          </Box>
-        </Button>
+          Lưu
+        </AppSubmitButton>
       </Stack>
     </DailyLogSheetLayout>
   );

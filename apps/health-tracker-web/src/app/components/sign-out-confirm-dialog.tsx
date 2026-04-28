@@ -19,7 +19,6 @@ export function SignOutConfirmDialog({
     <AppConfirmDialog
       cancelLabel="Huỷ"
       confirmLabel="Đăng xuất"
-      confirmLoadingLabel="Đang đăng xuất..."
       description="Hoàng Thượng có chắc muốn đăng xuất khỏi phiên hiện tại không?"
       errorMessage={errorMessage}
       isSubmitting={isSubmitting}

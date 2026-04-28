@@ -1,6 +1,6 @@
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import { Alert, Box, Button, CircularProgress } from '@mui/material';
+import { Alert, Button } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm, useWatch, type Path, type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,7 @@ import {
   updateOnboardingProfile,
 } from '@health-tracker/api';
 import { AppFormProvider } from '@health-tracker/forms';
+import { AppSubmitButton } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
 import { OnboardingLayout } from '../components/onboarding-layout';
@@ -359,16 +360,9 @@ export function OnboardingPage() {
 
   const continueAction =
     currentStepId === ONBOARDING_STEP_IDS.completion ? null : (
-      <Button disabled={isSubmitting} fullWidth type="submit" variant="contained">
-        {isSubmitting ? (
-          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
-            <CircularProgress color="inherit" size={18} />
-            Đang lưu...
-          </Box>
-        ) : (
-          'Tiếp tục'
-        )}
-      </Button>
+      <AppSubmitButton fullWidth loading={isSubmitting} type="submit" variant="contained">
+        Tiếp tục
+      </AppSubmitButton>
     );
 
   const skipAction = showSkip ? (

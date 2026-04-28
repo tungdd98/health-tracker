@@ -1,23 +1,14 @@
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  IconButton,
-  InputAdornment,
-  Link,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Alert, IconButton, InputAdornment, Link, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import { mapAuthErrorToMessage, signUpWithEmailPassword } from '@health-tracker/api';
 import { AppFormProvider, FormTextField } from '@health-tracker/forms';
+import { AppSubmitButton } from '@health-tracker/ui';
 
 import { authCopy } from '../auth/auth-copy';
 import { type SignUpFormValues, signUpSchema } from '../auth/auth-schemas';
@@ -144,12 +135,9 @@ export function SignUpPage() {
             {submitError}
           </Alert>
         ) : null}
-        <Button disabled={isSubmitting} fullWidth type="submit" variant="contained">
-          <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
-            {isSubmitting ? <CircularProgress color="inherit" size={18} /> : null}
-            {isSubmitting ? authCopy.signUp.submitLoadingLabel : authCopy.signUp.submitLabel}
-          </Box>
-        </Button>
+        <AppSubmitButton fullWidth loading={isSubmitting} type="submit" variant="contained">
+          {authCopy.signUp.submitLabel}
+        </AppSubmitButton>
       </AppFormProvider>
     </AuthLayout>
   );

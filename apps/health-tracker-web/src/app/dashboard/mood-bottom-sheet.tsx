@@ -1,5 +1,5 @@
 import SentimentSatisfiedAltRoundedIcon from '@mui/icons-material/SentimentSatisfiedAltRounded';
-import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import {
@@ -8,6 +8,7 @@ import {
   type DailyLogPatch,
   type MoodValue,
 } from '@health-tracker/api';
+import { AppSubmitButton } from '@health-tracker/ui';
 
 import { DailyLogSheetLayout } from './daily-log-sheet-layout';
 
@@ -140,17 +141,16 @@ export function MoodBottomSheet({
         <Button disabled={isMutating} fullWidth onClick={onClose} variant="outlined">
           Huỷ
         </Button>
-        <Button
+        <AppSubmitButton
           disabled={!selectedMood || isMutating}
           fullWidth
+          loading={isMutating}
+          loadingIndicatorSize={20}
           onClick={() => void handleSave()}
           variant="contained"
         >
-          <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
-            {isMutating ? <CircularProgress color="inherit" size={20} /> : null}
-            Lưu
-          </Box>
-        </Button>
+          Lưu
+        </AppSubmitButton>
       </Stack>
     </DailyLogSheetLayout>
   );

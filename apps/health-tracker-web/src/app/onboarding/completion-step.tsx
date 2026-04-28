@@ -1,6 +1,8 @@
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
-import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import type { ReactNode } from 'react';
+
+import { AppSubmitButton } from '@health-tracker/ui';
 
 type CompletionStepProps = {
   primaryActionLabel: string;
@@ -41,17 +43,15 @@ export function CompletionStep({
         </Typography>
       </Stack>
 
-      <Button
+      <AppSubmitButton
         disabled={primaryActionDisabled}
+        loading={primaryActionLoading}
         onClick={onPrimaryAction}
         size="large"
         variant="contained"
       >
-        <Box component="span" sx={{ alignItems: 'center', display: 'inline-flex', gap: 1 }}>
-          {primaryActionLoading ? <CircularProgress color="inherit" size={18} /> : null}
-          {primaryActionLoading ? 'Đang hoàn tất...' : primaryActionLabel}
-        </Box>
-      </Button>
+        {primaryActionLabel}
+      </AppSubmitButton>
 
       {footer ? (
         <Typography color="text.secondary" variant="caption">
