@@ -13,6 +13,7 @@ import { useDailyLog } from './use-daily-log';
 import { WeightBottomSheet } from './weight-bottom-sheet';
 
 const COLOR_BORDER_SUBTLE = '#E8DDE1';
+const LOG_CARD_HEIGHT = 90;
 
 type DailyLogStripProps = {
   userId: string;
@@ -62,8 +63,8 @@ function LogCard({ icon, label, value, onClick }: LogCardProps) {
         flex: 1,
         flexDirection: 'column',
         gap: 0.75,
+        height: LOG_CARD_HEIGHT,
         justifyContent: 'center',
-        minHeight: 90,
         px: 1.75,
         py: 1.75,
       }}
@@ -109,7 +110,7 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
         {Array.from({ length: 3 }, (_, index) => (
           <Skeleton
             key={index}
-            height={90}
+            height={LOG_CARD_HEIGHT}
             sx={{ borderRadius: '20px', flex: 1 }}
             variant="rounded"
           />

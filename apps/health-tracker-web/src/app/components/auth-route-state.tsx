@@ -9,7 +9,7 @@ export function AuthRouteState() {
     <Box
       component="main"
       sx={{
-        minHeight: '100vh',
+        minHeight: '100dvh',
         display: 'flex',
         alignItems: 'center',
         px: 2,

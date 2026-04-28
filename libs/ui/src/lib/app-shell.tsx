@@ -36,7 +36,7 @@ export function AppShell({
   navValue = 'home',
 }: AppShellProps) {
   return (
-    <Box sx={{ minHeight: '100vh', px: 2, py: 2 }}>
+    <Box sx={{ minHeight: '100dvh', px: 2, py: 2 }}>
       <Container
         maxWidth="sm"
         sx={{

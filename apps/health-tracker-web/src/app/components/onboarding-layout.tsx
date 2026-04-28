@@ -37,7 +37,7 @@ export function OnboardingLayout({
     <Box
       component="main"
       sx={{
-        minHeight: '100vh',
+        minHeight: '100dvh',
         display: 'flex',
         alignItems: 'center',
         py: { xs: 4, sm: 6 },
