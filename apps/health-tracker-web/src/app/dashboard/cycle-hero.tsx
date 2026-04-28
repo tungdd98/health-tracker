@@ -1,7 +1,8 @@
 import CalendarTodayRoundedIcon from '@mui/icons-material/CalendarTodayRounded';
 import OpacityRoundedIcon from '@mui/icons-material/OpacityRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import { Alert, Box, Button, Skeleton, Stack, Typography, alpha, useTheme } from '@mui/material';
+import { Box, Button, Skeleton, Stack, Typography, alpha, useTheme } from '@mui/material';
+import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AppCard } from '@health-tracker/ui';
@@ -33,6 +34,10 @@ const getCountdownLine = (snapshot: CycleSnapshot): string => {
 
   return `Kỳ kinh tiếp · còn ${snapshot.daysUntilNextPeriod} ngày`;
 };
+
+const COLOR_WARNING_BG = '#F8EFE2';
+const COLOR_WARNING_TEXT = '#7B5D4B';
+const COLOR_BORDER_STRONG = '#C0ADB3';
 
 type CycleRingProps = {
   snapshot: CycleSnapshot;
@@ -126,9 +131,16 @@ type CycleHeroProps = {
   snapshot: CycleSnapshot | null;
   isLoading: boolean;
   onLogPeriod: () => void;
+  dailyLogSlot?: ReactNode;
 };
 
-export function CycleHero({ mode, snapshot, isLoading, onLogPeriod }: CycleHeroProps) {
+export function CycleHero({
+  mode,
+  snapshot,
+  isLoading,
+  onLogPeriod,
+  dailyLogSlot,
+}: CycleHeroProps) {
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -192,42 +204,62 @@ export function CycleHero({ mode, snapshot, isLoading, onLogPeriod }: CycleHeroP
   const countdownLine = getCountdownLine(snapshot);
   const highlightColor = theme.palette.phase[snapshot.phase];
   const showLogCta = mode === 'overdue' || mode === 'stale';
+  const isStale = mode === 'stale';
 
   return (
     <AppCard
       sx={{
-        border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
+        border: isStale
+          ? `2px solid ${COLOR_WARNING_TEXT}`
+          : `1px solid ${alpha(theme.palette.divider, 0.9)}`,
         overflow: 'hidden',
         p: 3,
       }}
     >
-      {mode === 'stale' ? (
-        <Alert
-          severity="warning"
+      {isStale ? (
+        <Box
           sx={{
+            alignItems: 'flex-start',
+            backgroundColor: COLOR_WARNING_BG,
+            border: `1px solid ${COLOR_BORDER_STRONG}`,
+            borderRadius: '20px',
+            display: 'flex',
+            gap: 1.25,
             mb: 2,
+            px: 1.75,
+            py: 1.5,
           }}
         >
-          Dữ liệu chu kỳ có vẻ cũ. Hãy cập nhật để dự đoán chính xác hơn.
-        </Alert>
+          <OpacityRoundedIcon sx={{ color: COLOR_WARNING_TEXT, fontSize: 18, mt: 0.125 }} />
+          <Box>
+            <Typography sx={{ color: COLOR_WARNING_TEXT, fontSize: 13, fontWeight: 700 }}>
+              Dữ liệu chu kỳ có vẻ cũ
+            </Typography>
+            <Typography color="text.secondary" sx={{ fontSize: 12, lineHeight: 1.4 }}>
+              Hãy cập nhật để dự đoán chính xác hơn.
+            </Typography>
+          </Box>
+        </Box>
       ) : null}
 
       <Stack alignItems="center" spacing={2}>
         <CycleRing snapshot={snapshot} />
+
+        {dailyLogSlot ? <Box sx={{ width: '100%' }}>{dailyLogSlot}</Box> : null}
 
         <Stack
           alignItems="center"
           direction="row"
           spacing={1}
           sx={{
-            bgcolor: alpha(highlightColor, 0.12),
+            bgcolor: '#FFF0F4',
             borderRadius: 999,
             px: 1.75,
             py: 1,
           }}
         >
           <OpacityRoundedIcon sx={{ color: highlightColor, fontSize: 14 }} />
-          <Typography color="text.primary" variant="caption">
+          <Typography color="text.primary" sx={{ fontSize: 12, fontWeight: 500 }}>
             {countdownLine}
           </Typography>
         </Stack>
@@ -238,10 +270,14 @@ export function CycleHero({ mode, snapshot, isLoading, onLogPeriod }: CycleHeroP
             onClick={onLogPeriod}
             startIcon={<OpacityRoundedIcon />}
             sx={{
-              borderWidth: 1.5,
-              maxWidth: 280,
+              background: isStale
+                ? 'linear-gradient(135deg, #6C5A61 0%, #6C5A61B8 100%)'
+                : undefined,
+              borderColor: isStale ? 'primary.main' : COLOR_BORDER_STRONG,
+              color: isStale ? '#FFF7F8' : 'text.primary',
+              maxWidth: '100%',
             }}
-            variant="outlined"
+            variant={isStale ? 'contained' : 'outlined'}
           >
             Đánh dấu kỳ kinh mới hôm nay
           </Button>

@@ -9,6 +9,7 @@ import { AppShell } from '@health-tracker/ui';
 import { useAuthSession } from '../auth/use-auth-session';
 import { deriveCycleHeroMode } from './cycle-hero-modes';
 import { CycleHero } from './cycle-hero';
+import { DailyLogStrip } from './daily-log-strip';
 import { computeCycleSnapshot } from './cycle-utils';
 import { LogPeriodDialog } from './log-period-dialog';
 import { OutlookStrip } from './outlook-strip';
@@ -63,7 +64,7 @@ export function DashboardPage() {
   const mode = deriveCycleHeroMode(snapshot);
   const isLoading = !isAuthResolved;
   const hasCycleData = Boolean(snapshot);
-  const showTipAndStrip = !isLoading && hasCycleData;
+  const showTipAndStrip = !isLoading && hasCycleData && mode !== 'stale';
   const stripInput =
     onboardingProfile.cycleLengthDays && lastPeriodStartDate?.isValid
       ? {
@@ -106,6 +107,9 @@ export function DashboardPage() {
     >
       <Stack spacing={2}>
         <CycleHero
+          dailyLogSlot={
+            user && snapshot ? <DailyLogStrip userId={user.id} date={today.toISODate()!} /> : null
+          }
           isLoading={isLoading}
           mode={mode}
           onLogPeriod={() => setIsDialogOpen(true)}
