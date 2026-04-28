@@ -253,6 +253,159 @@
                 },
                 {
                   "type": "frame",
+                  "id": "Mp9pj",
+                  "name": "daily-log-strip",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "WhVYh",
+                      "name": "bbt-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "26UBE",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "thermometer",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-text-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MtG3B",
+                          "fill": "$color-text-muted",
+                          "content": "BBT",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "BzBd5",
+                          "opacity": 0.5,
+                          "fill": "$color-text-muted",
+                          "content": "Chưa log",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ucljr",
+                      "name": "mood-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "P8Tm0",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "smiley",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-text-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "va3FO",
+                          "fill": "$color-text-muted",
+                          "content": "Tâm trạng",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "JZIPK",
+                          "opacity": 0.5,
+                          "fill": "$color-text-muted",
+                          "content": "Chưa log",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hlI7v",
+                      "name": "weight-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "EhLSP",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "scales",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-text-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "IkiT1",
+                          "fill": "$color-text-muted",
+                          "content": "Cân nặng",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "neJrA",
+                          "opacity": 0.5,
+                          "fill": "$color-text-muted",
+                          "content": "Chưa log",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
                   "id": "UJX3U",
                   "name": "countdown",
                   "fill": "$color-bg-tinted",
@@ -4376,6 +4529,159 @@
                 },
                 {
                   "type": "frame",
+                  "id": "UsFAp",
+                  "name": "daily-log-strip",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "t52p9",
+                      "name": "bbt-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "5sQOL",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "thermometer",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-text-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "4RbJq",
+                          "fill": "$color-text-muted",
+                          "content": "BBT",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "Qo5hy",
+                          "opacity": 0.5,
+                          "fill": "$color-text-muted",
+                          "content": "Chưa log",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "7NK2R",
+                      "name": "mood-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "VN5fh",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "smiley",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-text-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "WLuaa",
+                          "fill": "$color-text-muted",
+                          "content": "Tâm trạng",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "cstmQ",
+                          "opacity": 0.5,
+                          "fill": "$color-text-muted",
+                          "content": "Chưa log",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "aU0R5",
+                      "name": "weight-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Owlm6",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "scales",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-text-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GZH0N",
+                          "fill": "$color-text-muted",
+                          "content": "Cân nặng",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "nHeTT",
+                          "opacity": 0.5,
+                          "fill": "$color-text-muted",
+                          "content": "Chưa log",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
                   "id": "d3eyG",
                   "name": "countdown",
                   "fill": "$color-bg-tinted",
@@ -5321,6 +5627,157 @@
                           "id": "JzjpX",
                           "fill": "$color-text-secondary",
                           "content": "Pha hoàng thể",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LmyhY",
+                  "name": "daily-log-strip",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "8TOUt",
+                      "name": "bbt-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1.5,
+                        "fill": "$color-accent-primary"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "HJw1j",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "thermometer",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-accent-primary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "kCagR",
+                          "fill": "$color-text-muted",
+                          "content": "BBT",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "Gy1JO",
+                          "fill": "$color-text-primary",
+                          "content": "36.6°C",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nPmXj",
+                      "name": "mood-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1.5,
+                        "fill": "$color-accent-primary"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "n338B",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "smiley",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-accent-primary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZQ1v0",
+                          "fill": "$color-text-muted",
+                          "content": "Tâm trạng",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "sSAAA",
+                          "fill": "$color-text-primary",
+                          "content": "😊 Vui",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "y54OW",
+                      "name": "weight-card",
+                      "width": "fill_container",
+                      "fill": "$color-bg-surface",
+                      "cornerRadius": 20,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 6,
+                      "padding": 14,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "6MYIT",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "scales",
+                          "iconFontFamily": "phosphor",
+                          "fill": "$color-text-muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zY6kS",
+                          "fill": "$color-text-muted",
+                          "content": "Cân nặng",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 10,
+                          "fontWeight": "700",
+                          "letterSpacing": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "jWJrM",
+                          "opacity": 0.5,
+                          "fill": "$color-text-muted",
+                          "content": "Chưa log",
                           "fontFamily": "Plus Jakarta Sans",
                           "fontSize": 12,
                           "fontWeight": "normal"
@@ -7814,6 +8271,876 @@
                 "fill": "$color-border-subtle"
               },
               "padding": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "RnfHT",
+      "x": 1900,
+      "y": 1000,
+      "name": "bbt-bottom-sheet",
+      "width": 375,
+      "height": 900,
+      "fill": "$color-bg-canvas",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "aIHzp",
+          "x": 0,
+          "y": 0,
+          "name": "bg1",
+          "opacity": 0.4,
+          "fill": "$color-bg-canvas",
+          "width": 375,
+          "height": 900
+        },
+        {
+          "type": "rectangle",
+          "id": "fHV8I",
+          "x": 0,
+          "y": 0,
+          "name": "overlay",
+          "fill": "#00000030",
+          "width": 375,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "u0cea",
+          "x": 0,
+          "y": 460,
+          "name": "sheet",
+          "width": 375,
+          "height": 440,
+          "fill": "$color-bg-surface",
+          "cornerRadius": [
+            24,
+            24,
+            0,
+            0
+          ],
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            12,
+            24,
+            40,
+            24
+          ],
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": 2,
+              "id": "iggWw",
+              "layoutPosition": "absolute",
+              "x": 170,
+              "y": 8,
+              "name": "handle",
+              "fill": "$color-border-strong",
+              "width": 36,
+              "height": 4
+            },
+            {
+              "type": "frame",
+              "id": "oox4v",
+              "name": "content",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WRGtS",
+                  "name": "iconBubble",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$color-bg-tinted",
+                  "cornerRadius": 999,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "57zLR",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "thermometer",
+                      "iconFontFamily": "phosphor",
+                      "fill": "$color-accent-primary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "fm1eO",
+                  "fill": "$color-text-primary",
+                  "content": "Nhiệt độ cơ thể buổi sáng",
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "Ivb31",
+                  "fill": "$color-text-secondary",
+                  "content": "Đo trước khi ra khỏi giường",
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "dMnm6",
+                  "name": "inputRow",
+                  "width": "fill_container",
+                  "height": 56,
+                  "fill": "$color-bg-canvas",
+                  "cornerRadius": 16,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color-border-strong"
+                  },
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "D0kxw",
+                      "fill": "$color-text-primary",
+                      "content": "36.5",
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "etEdu",
+                      "fill": "$color-text-secondary",
+                      "content": "°C",
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gkVD5",
+                  "name": "btnRow",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "IFznA",
+                      "name": "cancelBtn",
+                      "width": "fill_container",
+                      "height": 48,
+                      "cornerRadius": "$radius-pill",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-strong"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "hf4cC",
+                          "fill": "$color-text-secondary",
+                          "content": "Huỷ",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "luhjm",
+                      "name": "saveBtn",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 45,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "$color-accent-primary",
+                            "position": 0
+                          },
+                          {
+                            "color": "#6C5A61B8",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": "$radius-pill",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ifvsi",
+                          "fill": "#FFFFFF",
+                          "content": "Lưu",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 15,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "0iK4F",
+      "x": 2300,
+      "y": 1000,
+      "name": "mood-bottom-sheet",
+      "width": 375,
+      "height": 900,
+      "fill": "$color-bg-canvas",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "xIprN",
+          "x": 0,
+          "y": 0,
+          "opacity": 0.4,
+          "fill": "$color-bg-canvas",
+          "width": 375,
+          "height": 900
+        },
+        {
+          "type": "rectangle",
+          "id": "0cDwE",
+          "x": 0,
+          "y": 0,
+          "fill": "#00000030",
+          "width": 375,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "AHTV5",
+          "x": 0,
+          "y": 420,
+          "name": "sheet",
+          "width": 375,
+          "height": 480,
+          "fill": "$color-bg-surface",
+          "cornerRadius": [
+            24,
+            24,
+            0,
+            0
+          ],
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            12,
+            24,
+            40,
+            24
+          ],
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": 2,
+              "id": "4pmEz",
+              "layoutPosition": "absolute",
+              "x": 170,
+              "y": 8,
+              "fill": "$color-border-strong",
+              "width": 36,
+              "height": 4
+            },
+            {
+              "type": "frame",
+              "id": "dzAgY",
+              "name": "content",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ZBc2s",
+                  "name": "mib",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$color-bg-tinted",
+                  "cornerRadius": 999,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "mwbHH",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "smiley",
+                      "iconFontFamily": "phosphor",
+                      "fill": "$color-accent-primary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "qj006",
+                  "fill": "$color-text-primary",
+                  "content": "Tâm trạng hôm nay",
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "rsTCS",
+                  "name": "emojiRow",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Z8VVU",
+                      "name": "e1",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$color-bg-canvas",
+                      "cornerRadius": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Xa2Z1",
+                          "fill": "$color-text-primary",
+                          "content": "😔",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "kxPjd",
+                          "fill": "$color-text-muted",
+                          "content": "Buồn",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "b8xNC",
+                      "name": "e2",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$color-bg-canvas",
+                      "cornerRadius": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "k8Jny",
+                          "fill": "$color-text-primary",
+                          "content": "😐",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "oXMxL",
+                          "fill": "$color-text-muted",
+                          "content": "Bình thường",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "5DNm0",
+                      "name": "e3",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$color-bg-tinted-strong",
+                      "cornerRadius": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1.5,
+                        "fill": "$color-accent-primary"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oNXYH",
+                          "fill": "$color-text-primary",
+                          "content": "😊",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "qo90Z",
+                          "fill": "$color-accent-primary",
+                          "content": "Vui",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 9,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nLFlo",
+                      "name": "e4",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$color-bg-canvas",
+                      "cornerRadius": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "LgYq5",
+                          "fill": "$color-text-primary",
+                          "content": "😄",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "yeIO0",
+                          "fill": "$color-text-muted",
+                          "content": "Rất vui",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "nD02c",
+                      "name": "e5",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$color-bg-canvas",
+                      "cornerRadius": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-subtle"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "4c0ZB",
+                          "fill": "$color-text-primary",
+                          "content": "😴",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MEe0L",
+                          "fill": "$color-text-muted",
+                          "content": "Mệt mỏi",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "r8or7",
+                  "name": "moodLabel",
+                  "fill": "$color-accent-primary",
+                  "content": "Vui",
+                  "textAlign": "center",
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "7oHvu",
+                  "name": "btnRow",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "JWhGs",
+                      "name": "cancelBtn",
+                      "width": "fill_container",
+                      "height": 48,
+                      "cornerRadius": "$radius-pill",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-strong"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "C1OnS",
+                          "fill": "$color-text-secondary",
+                          "content": "Huỷ",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VCFx5",
+                      "name": "saveBtn",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 45,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "$color-accent-primary",
+                            "position": 0
+                          },
+                          {
+                            "color": "#6C5A61B8",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": "$radius-pill",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oHFAK",
+                          "fill": "#FFFFFF",
+                          "content": "Lưu",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 15,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "tQYyK",
+      "x": 2700,
+      "y": 1000,
+      "name": "weight-bottom-sheet",
+      "width": 375,
+      "height": 900,
+      "fill": "$color-bg-canvas",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "R0c5w",
+          "x": 0,
+          "y": 0,
+          "name": "wBg",
+          "opacity": 0.4,
+          "fill": "$color-bg-canvas",
+          "width": 375,
+          "height": 900
+        },
+        {
+          "type": "rectangle",
+          "id": "CyTay",
+          "x": 0,
+          "y": 0,
+          "name": "wOverlay",
+          "fill": "#00000030",
+          "width": 375,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "sBXVb",
+          "x": 0,
+          "y": 460,
+          "name": "sheet",
+          "width": 375,
+          "height": 440,
+          "fill": "$color-bg-surface",
+          "cornerRadius": [
+            24,
+            24,
+            0,
+            0
+          ],
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            12,
+            24,
+            40,
+            24
+          ],
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": 2,
+              "id": "x9eyC",
+              "layoutPosition": "absolute",
+              "x": 170,
+              "y": 8,
+              "name": "handle",
+              "fill": "$color-border-strong",
+              "width": 36,
+              "height": 4
+            },
+            {
+              "type": "frame",
+              "id": "kVUK3",
+              "name": "content",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Wx97m",
+                  "name": "iconBubble",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$color-bg-tinted",
+                  "cornerRadius": 999,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "504nb",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "scales",
+                      "iconFontFamily": "phosphor",
+                      "fill": "$color-accent-primary"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "G5X9N",
+                  "fill": "$color-text-primary",
+                  "content": "Cân nặng hôm nay",
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "p2QjG",
+                  "fill": "$color-text-secondary",
+                  "content": "Cân trước bữa sáng",
+                  "fontFamily": "Plus Jakarta Sans",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "KNhZb",
+                  "name": "inputRow",
+                  "width": "fill_container",
+                  "height": 56,
+                  "fill": "$color-bg-canvas",
+                  "cornerRadius": 16,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color-border-strong"
+                  },
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HD1Cb",
+                      "fill": "$color-text-primary",
+                      "content": "52.5",
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "z6bRj",
+                      "fill": "$color-text-secondary",
+                      "content": "kg",
+                      "fontFamily": "Plus Jakarta Sans",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "5JrzU",
+                  "name": "btnRow",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "cOQtM",
+                      "name": "cancelBtn",
+                      "width": "fill_container",
+                      "height": 48,
+                      "cornerRadius": "$radius-pill",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color-border-strong"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "BVyZ2",
+                          "fill": "$color-text-secondary",
+                          "content": "Huỷ",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 15,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "26lVN",
+                      "name": "saveBtn",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 45,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "$color-accent-primary",
+                            "position": 0
+                          },
+                          {
+                            "color": "#6C5A61B8",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": "$radius-pill",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "em2Xf",
+                          "fill": "#FFFFFF",
+                          "content": "Lưu",
+                          "fontFamily": "Plus Jakarta Sans",
+                          "fontSize": 15,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
