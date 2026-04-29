@@ -122,9 +122,9 @@ export function DashboardPage() {
           snapshot={snapshot}
         />
 
-        {user && snapshot ? <MedicationStrip userId={user.id} date={today.toISODate()!} /> : null}
-
         {showTipAndStrip && snapshot ? <TipOfDay isLoading={false} phase={snapshot.phase} /> : null}
+
+        {user && snapshot ? <MedicationStrip userId={user.id} date={today.toISODate()!} /> : null}
 
         {showTipAndStrip ? <OutlookStrip input={stripInput} isLoading={false} /> : null}
 

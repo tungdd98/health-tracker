@@ -7,6 +7,7 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { markChatDisclaimerSeen, type ChatMessage } from '@health-tracker/api';
 
 import { useAuthSession } from '../auth/use-auth-session';
+import { AppConfirmDialog } from '../components/app-confirm-dialog';
 import { Composer } from './components/composer';
 import { DisclaimerWelcome } from './components/disclaimer-welcome';
 import { MessageList } from './components/message-list';
@@ -23,10 +24,12 @@ export function ChatPage() {
   const [activeSessionId, setActiveSessionId] = useState<string | null | undefined>(undefined);
   const [showDisclaimer, setShowDisclaimer] = useState(!onboardingProfile.hasSeenChatDisclaimer);
   const [isSavingDisclaimer, setIsSavingDisclaimer] = useState(false);
+  const [archiveTarget, setArchiveTarget] = useState<{ id: string; title: string } | null>(null);
+  const [archiveError, setArchiveError] = useState('');
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const lastSessionIdRef = useRef<string | null | undefined>(undefined);
 
-  const { data: sessions = [], archiveSession } = useChatSessions(user?.id);
+  const { data: sessions = [], archiveSession, isArchiving } = useChatSessions(user?.id);
   const { data: storedMessages = [], isFetching: isMessagesFetching } = useChatMessages(
     activeSessionId ?? null,
   );
@@ -106,6 +109,22 @@ export function ChatPage() {
     await markChatDisclaimerSeen(user);
     setIsSavingDisclaimer(false);
     setShowDisclaimer(false);
+  };
+
+  const handleConfirmArchive = async () => {
+    if (!archiveTarget) {
+      return;
+    }
+
+    setArchiveError('');
+
+    try {
+      await archiveSession(archiveTarget.id);
+      setActiveSessionId((current) => (current === archiveTarget.id ? null : current));
+      setArchiveTarget(null);
+    } catch {
+      setArchiveError('Không thể xoá hội thoại lúc này. Vui lòng thử lại.');
+    }
   };
 
   return (
@@ -210,7 +229,14 @@ export function ChatPage() {
       <SessionHistoryDrawer
         activeSessionId={activeSessionId ?? null}
         isOpen={historyOpen}
-        onArchive={(sessionId) => void archiveSession(sessionId)}
+        onArchive={(sessionId) => {
+          const session = sessions.find((item) => item.id === sessionId);
+          setArchiveError('');
+          setArchiveTarget({
+            id: sessionId,
+            title: session?.title?.trim() || 'Cuộc trò chuyện mới',
+          });
+        }}
         onClose={() => setHistoryOpen(false)}
         onSelectSession={(sessionId) => {
           setActiveSessionId(sessionId);
@@ -218,6 +244,25 @@ export function ChatPage() {
           resetRuntimeState();
         }}
         sessions={sessions}
+      />
+
+      <AppConfirmDialog
+        confirmColor="error"
+        confirmLabel="Xoá"
+        description={`Bạn có chắc muốn xoá "${archiveTarget?.title}" không?`}
+        errorMessage={archiveError}
+        isSubmitting={isArchiving}
+        onCancel={() => {
+          if (isArchiving) {
+            return;
+          }
+
+          setArchiveTarget(null);
+          setArchiveError('');
+        }}
+        onConfirm={handleConfirmArchive}
+        open={Boolean(archiveTarget)}
+        title="Xoá hội thoại?"
       />
 
       <DisclaimerWelcome

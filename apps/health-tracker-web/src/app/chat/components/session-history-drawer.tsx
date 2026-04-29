@@ -1,7 +1,7 @@
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { Box, Drawer, IconButton, List, Stack, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
 
@@ -157,7 +157,7 @@ export function SessionHistoryDrawer({
                   size="small"
                   sx={{ color: 'text.secondary' }}
                 >
-                  <MoreVertRoundedIcon fontSize="small" />
+                  <DeleteOutlineRoundedIcon fontSize="small" />
                 </IconButton>
               </Stack>
             );

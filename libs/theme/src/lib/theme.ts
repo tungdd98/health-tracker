@@ -440,7 +440,11 @@ export const appTheme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: rose.textMuted,
+          color: alpha(rose.textMuted, 0.82),
+          fontWeight: 400,
+          '&.Mui-focused': {
+            color: alpha(rose.textMuted, 0.82),
+          },
         },
       },
     },
