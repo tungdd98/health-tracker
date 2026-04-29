@@ -16,13 +16,13 @@
 
 ## Task Checklist
 
-- [ ] [Task 01 — DB migration & Storage buckets](task-01-migration-storage.md)
-- [ ] [Task 02 — API layer: avatar + mood images](task-02-api-layer.md)
-- [ ] [Task 03 — Edge function: generate-mood-images](task-03-edge-function.md)
-- [ ] [Task 04 — Onboarding: avatar picker + wow screen](task-04-onboarding-avatar-wow.md)
-- [ ] [Task 05 — Settings: avatar upload + toggle](task-05-settings-avatar-toggle.md)
-- [ ] [Task 06 — Mood sticker render (bottom sheet + dashboard)](task-06-mood-sticker-render.md)
-- [ ] [Task 07 — Verification, tracking sync, commit](task-07-verification.md)
+- [x] [Task 01 — DB migration & Storage buckets](task-01-migration-storage.md)
+- [x] [Task 02 — API layer: avatar + mood images](task-02-api-layer.md)
+- [x] [Task 03 — Edge function: generate-mood-images](task-03-edge-function.md)
+- [x] [Task 04 — Onboarding: avatar picker + wow screen](task-04-onboarding-avatar-wow.md)
+- [x] [Task 05 — Settings: avatar upload + toggle](task-05-settings-avatar-toggle.md)
+- [x] [Task 06 — Mood sticker render (bottom sheet + dashboard)](task-06-mood-sticker-render.md)
+- [x] [Task 07 — Verification, tracking sync, commit](task-07-verification.md)
 
 ---
 
