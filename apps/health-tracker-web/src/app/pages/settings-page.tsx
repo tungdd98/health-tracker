@@ -1,22 +1,42 @@
+import AddAPhotoRoundedIcon from '@mui/icons-material/AddAPhotoRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
-import { Alert, Button, Grid, Snackbar, Stack, TextField } from '@mui/material';
-import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
+import {
+  Alert,
+  Avatar,
+  Box,
+  Button,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  Snackbar,
+  Stack,
+  Switch,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from 'react';
 import { useForm, type Path, type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import type { ZodIssue } from 'zod';
 
 import {
+  generateMoodImages,
+  getAvatarMeta,
   mapAuthErrorToMessage,
   type OnboardingPhase,
   type OnboardingProfile,
   signOutUser,
+  updateAvatarMeta,
   updateOnboardingProfile,
   updateOnboardingCycleAndBody,
+  uploadAvatar,
+  type UserAvatarMeta,
 } from '@health-tracker/api';
 import { AppFormProvider, FormDateField, FormTextField } from '@health-tracker/forms';
 import { AppShell, AppSubmitButton } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
+import { AppConfirmDialog } from '../components/app-confirm-dialog';
 import { SettingsSectionCard } from '../components/settings-section-card';
 import { SignOutConfirmDialog } from '../components/sign-out-confirm-dialog';
 import {
@@ -89,6 +109,11 @@ export function SettingsPage() {
 
   const [cycleAndBodyState, setCycleAndBodyState] = useState<SettingsSaveState>('idle');
 
+  const [avatarMeta, setAvatarMeta] = useState<UserAvatarMeta | null>(null);
+  const [isRegenerating, setIsRegenerating] = useState(false);
+  const [showRegenerateDialog, setShowRegenerateDialog] = useState(false);
+  const avatarFileInputRef = useRef<HTMLInputElement>(null);
+
   const [isSignOutDialogOpen, setIsSignOutDialogOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [signOutError, setSignOutError] = useState('');
@@ -103,6 +128,13 @@ export function SettingsPage() {
       isSameOnboardingProfile(current, onboardingProfile) ? current : onboardingProfile,
     );
   }, [onboardingProfile]);
+
+  useEffect(() => {
+    if (!user) return;
+    void getAvatarMeta(user.id)
+      .then(setAvatarMeta)
+      .catch(() => null);
+  }, [user]);
 
   const personalInfoDefaults = useMemo(
     () => toPersonalInfoDefaults(profileSnapshot),
@@ -144,6 +176,52 @@ export function SettingsPage() {
   const selectedPhaseLabel = profileSnapshot.selectedPhase
     ? ONBOARDING_PHASE_LABELS[profileSnapshot.selectedPhase]
     : 'Chưa thiết lập';
+
+  const handleAvatarFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file || !user) return;
+    try {
+      const url = await uploadAvatar(user.id, file);
+      await updateAvatarMeta(user.id, { avatarUrl: url });
+      setAvatarMeta((current) => ({ ...(current ?? { useAvatarMood: true }), avatarUrl: url }));
+      setShowRegenerateDialog(true);
+    } catch {
+      setSnackbarState({ open: true, message: 'Không thể tải ảnh lên.', severity: 'error' });
+    }
+  };
+
+  const handleRegenerateConfirm = async () => {
+    if (!user) return;
+    setIsRegenerating(true);
+    setShowRegenerateDialog(false);
+    try {
+      await generateMoodImages(user.id);
+      setSnackbarState({
+        open: true,
+        message: 'Đã tạo sticker mới từ avatar của bạn!',
+        severity: 'success',
+      });
+    } catch {
+      setSnackbarState({
+        open: true,
+        message: 'Không thể tạo sticker. Vui lòng thử lại.',
+        severity: 'error',
+      });
+    } finally {
+      setIsRegenerating(false);
+    }
+  };
+
+  const handleToggleUseAvatarMood = async (checked: boolean) => {
+    if (!user) return;
+    setAvatarMeta((current) => (current ? { ...current, useAvatarMood: checked } : null));
+    try {
+      await updateAvatarMeta(user.id, { useAvatarMood: checked });
+    } catch {
+      setAvatarMeta((current) => (current ? { ...current, useAvatarMood: !checked } : null));
+    }
+  };
 
   const handleSavePersonalInfo = async (values: PersonalInfoSettingsFormValues) => {
     if (!user) {
@@ -296,6 +374,49 @@ export function SettingsPage() {
     >
       <Stack spacing={2.5}>
         <SettingsSectionCard title="Thông tin cá nhân">
+          <Stack alignItems="center" direction="row" spacing={2} sx={{ mb: 1 }}>
+            <Box sx={{ position: 'relative', width: 60, height: 60, flexShrink: 0 }}>
+              <Avatar
+                src={avatarMeta?.avatarUrl ?? undefined}
+                sx={(theme) => ({
+                  width: 60,
+                  height: 60,
+                  bgcolor: theme.palette.surface.subtle,
+                  color: 'text.secondary',
+                })}
+              >
+                {!avatarMeta?.avatarUrl && <AddAPhotoRoundedIcon />}
+              </Avatar>
+              <IconButton
+                aria-label="Thay ảnh đại diện"
+                onClick={() => avatarFileInputRef.current?.click()}
+                size="small"
+                sx={(theme) => ({
+                  bgcolor: 'primary.main',
+                  bottom: 0,
+                  color: 'primary.contrastText',
+                  position: 'absolute',
+                  right: 0,
+                  '&:hover': { bgcolor: 'primary.dark' },
+                  width: 24,
+                  height: 24,
+                  border: `2px solid ${theme.palette.background.default}`,
+                })}
+              >
+                <AddAPhotoRoundedIcon sx={{ fontSize: 12 }} />
+              </IconButton>
+              <input
+                accept="image/*"
+                onChange={(e) => void handleAvatarFileChange(e)}
+                ref={avatarFileInputRef}
+                style={{ display: 'none' }}
+                type="file"
+              />
+            </Box>
+            <Typography color="text.secondary" variant="body2">
+              Thay ảnh đại diện
+            </Typography>
+          </Stack>
           <AppFormProvider form={personalInfoForm} onSubmit={handleSavePersonalInfo}>
             <Grid container spacing={2}>
               <Grid size={{ xs: 12 }}>
@@ -333,6 +454,17 @@ export function SettingsPage() {
                 />
               </Grid>
             </Grid>
+            {avatarMeta?.avatarUrl ? (
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={avatarMeta.useAvatarMood}
+                    onChange={(e) => void handleToggleUseAvatarMood(e.target.checked)}
+                  />
+                }
+                label="Dùng sticker avatar cho tâm trạng"
+              />
+            ) : null}
             <AppSubmitButton
               disabled={isSavingPersonalInfo}
               loading={isSavingPersonalInfo}
@@ -402,6 +534,15 @@ export function SettingsPage() {
         </SettingsSectionCard>
       </Stack>
 
+      <AppConfirmDialog
+        confirmLabel={isRegenerating ? 'Đang tạo...' : 'Tạo sticker'}
+        description="Bạn có muốn tạo sticker tâm trạng mới từ avatar vừa tải lên không?"
+        isSubmitting={isRegenerating}
+        onCancel={() => setShowRegenerateDialog(false)}
+        onConfirm={() => void handleRegenerateConfirm()}
+        open={showRegenerateDialog}
+        title="Tạo sticker mới?"
+      />
       <SignOutConfirmDialog
         errorMessage={signOutError}
         isSubmitting={isSigningOut}
