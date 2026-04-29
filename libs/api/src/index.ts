@@ -7,3 +7,4 @@ export * from './lib/onboarding';
 export * from './lib/daily-log';
 export * from './lib/medication';
 export * from './lib/chat';
+export * from './lib/avatar';
