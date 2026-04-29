@@ -40,9 +40,6 @@ export function AuthRouteState() {
               <FavoriteRoundedIcon />
             </Box>
             <Typography variant="h4">Đang chuẩn bị không gian sức khỏe</Typography>
-            <Typography color="text.secondary" variant="body2">
-              Nô tỳ đang kiểm tra phiên đăng nhập để đưa Hoàng Thượng vào đúng màn hình.
-            </Typography>
             <CircularProgress size={28} />
           </Stack>
         </AppCard>

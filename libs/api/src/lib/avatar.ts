@@ -46,7 +46,7 @@ export const getAvatarMeta = async (userId: string): Promise<UserAvatarMeta> => 
 
   return {
     avatarUrl: data?.avatar_url ?? null,
-    useAvatarMood: data?.use_avatar_mood ?? true,
+    useAvatarMood: data?.use_avatar_mood ?? false,
   };
 };
 

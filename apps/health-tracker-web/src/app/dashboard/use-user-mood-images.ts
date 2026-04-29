@@ -23,7 +23,7 @@ export function useUserMoodImages(userId: string): UserMoodImagesResult {
 
   return {
     moodImages,
-    useAvatarMood: avatarMeta?.useAvatarMood ?? true,
+    useAvatarMood: avatarMeta?.useAvatarMood ?? false,
     hasStickers: Object.keys(moodImages).length > 0,
   };
 }

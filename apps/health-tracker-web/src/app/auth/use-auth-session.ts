@@ -1,5 +1,6 @@
 import type { AuthSession } from '@supabase/supabase-js';
-import { useMemo, useSyncExternalStore } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo } from 'react';
 
 import {
   getCurrentSession,
@@ -7,77 +8,54 @@ import {
   subscribeToAuthChanges,
 } from '@health-tracker/api';
 
-type AuthSessionStore = {
-  isAuthResolved: boolean;
-  session: AuthSession | null;
-};
+const AUTH_SESSION_QUERY_KEY = ['authSession'] as const;
+let hasSubscribedAuthChanges = false;
 
-const listeners = new Set<() => void>();
-
-let authStore: AuthSessionStore = {
-  isAuthResolved: false,
-  session: null,
-};
-
-let hasBootstrapped = false;
-
-const emitChange = () => {
-  listeners.forEach((listener) => listener());
-};
-
-const setAuthStore = (nextStore: AuthSessionStore) => {
-  authStore = nextStore;
-  emitChange();
-};
-
-const bootstrapAuthSession = async () => {
+const getSessionSnapshot = async (): Promise<AuthSession | null> => {
   const { session } = await getCurrentSession();
-
-  setAuthStore({
-    isAuthResolved: true,
-    session,
-  });
+  return session;
 };
 
-const ensureAuthBootstrap = () => {
-  if (hasBootstrapped) {
+const ensureAuthSubscription = (setSession: (session: AuthSession | null) => void) => {
+  if (hasSubscribedAuthChanges) {
     return;
   }
 
-  hasBootstrapped = true;
-
-  void bootstrapAuthSession();
+  hasSubscribedAuthChanges = true;
 
   subscribeToAuthChanges((_event, session) => {
-    setAuthStore({
-      isAuthResolved: true,
-      session,
-    });
+    setSession(session);
   });
 };
 
-const subscribe = (listener: () => void) => {
-  ensureAuthBootstrap();
-  listeners.add(listener);
-
-  return () => {
-    listeners.delete(listener);
-  };
-};
-
-const getSnapshot = () => authStore;
-
 export const useAuthSession = () => {
-  const snapshot = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    ensureAuthSubscription((session) => {
+      queryClient.setQueryData<AuthSession | null>(AUTH_SESSION_QUERY_KEY, session);
+    });
+  }, [queryClient]);
+
+  const { data: session = null, isFetched } = useQuery({
+    queryKey: AUTH_SESSION_QUERY_KEY,
+    queryFn: getSessionSnapshot,
+    staleTime: 1000 * 60 * 60 * 12,
+    gcTime: 1000 * 60 * 60 * 24,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+  });
+
   const onboardingProfile = useMemo(
-    () => getOnboardingProfileFromUser(snapshot.session?.user ?? null),
-    [snapshot.session?.user],
+    () => getOnboardingProfileFromUser(session?.user ?? null),
+    [session?.user],
   );
 
   return {
-    isAuthResolved: snapshot.isAuthResolved,
-    session: snapshot.session,
-    user: snapshot.session?.user ?? null,
+    isAuthResolved: isFetched,
+    session,
+    user: session?.user ?? null,
     onboardingProfile,
     isOnboardingComplete: onboardingProfile.onboardingCompleted,
     hasSelectedOnboardingPhase: onboardingProfile.selectedPhase !== null,

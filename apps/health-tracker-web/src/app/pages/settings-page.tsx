@@ -118,8 +118,6 @@ export function SettingsPage() {
 
   const [cycleAndBodyState, setCycleAndBodyState] = useState<SettingsSaveState>('idle');
 
-  const [avatarMeta, setAvatarMeta] = useState<UserAvatarMeta | null>(null);
-  const [isAvatarMetaLoading, setIsAvatarMetaLoading] = useState(false);
   const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [showRegenerateDialog, setShowRegenerateDialog] = useState(false);
@@ -144,14 +142,17 @@ export function SettingsPage() {
     );
   }, [onboardingProfile]);
 
-  useEffect(() => {
-    if (!user) return;
-    setIsAvatarMetaLoading(true);
-    void getAvatarMeta(user.id)
-      .then(setAvatarMeta)
-      .catch(() => null)
-      .finally(() => setIsAvatarMetaLoading(false));
-  }, [user]);
+  const { data: avatarMeta, isLoading: isAvatarMetaLoading } = useQuery({
+    queryKey: ['avatarMeta', user?.id],
+    queryFn: async () => {
+      if (!user) return null;
+      return getAvatarMeta(user.id);
+    },
+    enabled: !!user,
+    staleTime: 1000 * 60 * 10,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
   const { data: moodImages = {} } = useQuery({
     queryKey: ['userMoodImages', user?.id],
@@ -161,6 +162,8 @@ export function SettingsPage() {
     },
     enabled: !!user,
     staleTime: 1000 * 60 * 10,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   const personalInfoDefaults = useMemo(
@@ -213,7 +216,10 @@ export function SettingsPage() {
       const compressedFile = await compressImage(file);
       const url = await uploadAvatar(user.id, compressedFile);
       await updateAvatarMeta(user.id, { avatarUrl: url });
-      setAvatarMeta((current) => ({ ...(current ?? { useAvatarMood: true }), avatarUrl: url }));
+      queryClient.setQueryData<UserAvatarMeta | null>(['avatarMeta', user.id], (current) => ({
+        ...(current ?? { avatarUrl: null, useAvatarMood: false }),
+        avatarUrl: url,
+      }));
       setShowRegenerateDialog(true);
       setSnackbarState({ open: false, message: '', severity: 'success' });
     } catch (error) {
@@ -254,11 +260,15 @@ export function SettingsPage() {
 
   const handleToggleUseAvatarMood = async (checked: boolean) => {
     if (!user || !avatarMeta?.avatarUrl) return;
-    setAvatarMeta((current) => (current ? { ...current, useAvatarMood: checked } : null));
+    queryClient.setQueryData<UserAvatarMeta | null>(['avatarMeta', user.id], (current) =>
+      current ? { ...current, useAvatarMood: checked } : current,
+    );
     try {
       await updateAvatarMeta(user.id, { useAvatarMood: checked });
     } catch {
-      setAvatarMeta((current) => (current ? { ...current, useAvatarMood: !checked } : null));
+      queryClient.setQueryData<UserAvatarMeta | null>(['avatarMeta', user.id], (current) =>
+        current ? { ...current, useAvatarMood: !checked } : current,
+      );
     }
   };
 
@@ -524,7 +534,7 @@ export function SettingsPage() {
             <FormControlLabel
               control={
                 <Switch
-                  checked={avatarMeta?.useAvatarMood ?? true}
+                  checked={avatarMeta?.useAvatarMood ?? false}
                   disabled={isStickerToggleDisabled}
                   onChange={(e) => void handleToggleUseAvatarMood(e.target.checked)}
                 />
