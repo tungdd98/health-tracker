@@ -10,6 +10,7 @@ import { type MoodValue } from '@health-tracker/api';
 import { BbtBottomSheet } from './bbt-bottom-sheet';
 import { MoodBottomSheet } from './mood-bottom-sheet';
 import { useDailyLog } from './use-daily-log';
+import { useUserMoodImages } from './use-user-mood-images';
 import { WeightBottomSheet } from './weight-bottom-sheet';
 
 const LOG_CARD_HEIGHT = 90;
@@ -101,7 +102,22 @@ function LogCard({ icon, label, value, onClick }: LogCardProps) {
 
 export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
   const { log, isLoading, isPending, error, save, resetError } = useDailyLog(userId, date);
+  const { moodImages, useAvatarMood, hasStickers } = useUserMoodImages(userId);
   const [openSheet, setOpenSheet] = useState<'bbt' | 'mood' | 'weight' | null>(null);
+
+  const moodCardIcon = (() => {
+    if (hasStickers && useAvatarMood && log?.mood && moodImages[log.mood]) {
+      return (
+        <Box
+          alt={MOOD_LABELS[log.mood]}
+          component="img"
+          src={moodImages[log.mood]}
+          sx={{ height: 22, width: 22, objectFit: 'contain' }}
+        />
+      );
+    }
+    return <SentimentSatisfiedAltRoundedIcon fontSize="inherit" />;
+  })();
 
   if (isLoading) {
     return (
@@ -135,13 +151,19 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
           }
         />
         <LogCard
-          icon={<SentimentSatisfiedAltRoundedIcon fontSize="inherit" />}
+          icon={moodCardIcon}
           label="Tâm trạng"
           onClick={() => {
             resetError();
             setOpenSheet('mood');
           }}
-          value={log?.mood ? `${MOOD_EMOJI[log.mood]} ${MOOD_LABELS[log.mood]}` : null}
+          value={
+            log?.mood
+              ? hasStickers && useAvatarMood
+                ? MOOD_LABELS[log.mood]
+                : `${MOOD_EMOJI[log.mood]} ${MOOD_LABELS[log.mood]}`
+              : null
+          }
         />
         <LogCard
           icon={<MonitorWeightRoundedIcon fontSize="inherit" />}
@@ -172,11 +194,13 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
         currentLog={log}
         date={date}
         isMutating={isPending}
+        moodImages={moodImages}
         mutationError={error}
         onClose={() => setOpenSheet(null)}
         onResetError={resetError}
         onSave={save}
         open={openSheet === 'mood'}
+        useAvatarMood={useAvatarMood}
       />
       <WeightBottomSheet
         currentLog={log}

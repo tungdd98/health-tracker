@@ -21,6 +21,8 @@ type MoodBottomSheetProps = {
   mutationError: Error | null;
   onSave: (patch: DailyLogPatch) => Promise<DailyLog>;
   onResetError: () => void;
+  moodImages?: Partial<Record<MoodValue, string>>;
+  useAvatarMood?: boolean;
 };
 
 const MOODS: Array<{ value: MoodValue; emoji: string; label: string }> = [
@@ -40,7 +42,10 @@ export function MoodBottomSheet({
   mutationError,
   onSave,
   onResetError,
+  moodImages = {},
+  useAvatarMood = true,
 }: MoodBottomSheetProps) {
+  const showStickers = useAvatarMood && Object.keys(moodImages).length > 0;
   const [selectedMood, setSelectedMood] = useState<MoodValue | null>(null);
 
   useEffect(() => {
@@ -103,7 +108,16 @@ export function MoodBottomSheet({
               })}
               type="button"
             >
-              <Typography sx={{ fontSize: 22 }}>{mood.emoji}</Typography>
+              {showStickers && moodImages[mood.value] ? (
+                <Box
+                  alt={mood.label}
+                  component="img"
+                  src={moodImages[mood.value]}
+                  sx={{ height: 32, width: 32, objectFit: 'contain' }}
+                />
+              ) : (
+                <Typography sx={{ fontSize: 22 }}>{mood.emoji}</Typography>
+              )}
               <Typography
                 color={isSelected ? 'primary.main' : 'text.secondary'}
                 sx={(theme) => ({
