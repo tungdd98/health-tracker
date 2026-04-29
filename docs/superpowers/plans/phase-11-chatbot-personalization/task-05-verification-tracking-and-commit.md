@@ -5,23 +5,23 @@
 - Modify: `docs/superpowers/plans/phase-11-chatbot-personalization/index.md`
 - Modify: `docs/superpowers/plans/phase-11-chatbot-personalization/task-*.md`
 
-- [ ] **Step 1:** Chạy format cho đúng định nghĩa done.
+- [x] **Step 1:** Chạy format cho đúng định nghĩa done.
 
 Run: `yarn format`
 Expected: format thành công, không còn diff style ngoài thay đổi chủ đích.
 
-- [ ] **Step 2:** Chạy lint toàn repo.
+- [x] **Step 2:** Chạy lint toàn repo.
 
 Run: `yarn lint`
 Expected: PASS tất cả projects.
 
-- [ ] **Step 3:** Chạy build app web.
+- [x] **Step 3:** Chạy build app web.
 
 Run: `yarn build`
 Expected: `health-tracker-web` build thành công.
 
-- [ ] **Step 4:** Đồng bộ tracking: tick `[x]` task hoàn tất trong `index.md` và checklists trong từng task file.
-- [ ] **Step 5:** Commit gói hoàn thiện phase personalization.
+- [x] **Step 4:** Đồng bộ tracking: tick `[x]` task hoàn tất trong `index.md` và checklists trong từng task file.
+- [x] **Step 5:** Commit gói hoàn thiện phase personalization.
 
 Run:
 

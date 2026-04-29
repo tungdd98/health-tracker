@@ -1,6 +1,19 @@
 import { supabase } from './supabase';
 
 export type ChatMessageRole = 'user' | 'assistant' | 'tool';
+export type AssistantResponseLength = 'short' | 'medium' | 'detailed';
+export type AssistantTone = 'friendly' | 'neutral' | 'expert';
+
+export type AssistantPreferences = {
+  addressingStyle: string | null;
+  responseLength: AssistantResponseLength | null;
+  tone: AssistantTone | null;
+};
+
+export type ChatPersonalization = {
+  preferences: AssistantPreferences;
+  goals: string[];
+};
 
 export type ChatTextContentBlock = {
   type: 'text';
@@ -67,6 +80,15 @@ type ChatMessageRow = {
   created_at: string;
 };
 
+type ProfilePersonalizationRow = {
+  assistant_preferences: {
+    addressing_style?: string | null;
+    response_length?: AssistantResponseLength | null;
+    tone?: AssistantTone | null;
+  } | null;
+  assistant_goals: string[] | null;
+};
+
 const CHAT_SESSION_COLUMNS = 'id, user_id, title, created_at, last_message_at, is_archived';
 const CHAT_MESSAGE_COLUMNS =
   'id, session_id, user_id, role, content, token_input, token_output, created_at';
@@ -90,6 +112,35 @@ const toChatMessage = (row: ChatMessageRow): ChatMessage => ({
   tokenOutput: row.token_output,
   createdAt: row.created_at,
 });
+
+const defaultPreferences: AssistantPreferences = {
+  addressingStyle: null,
+  responseLength: null,
+  tone: null,
+};
+
+const toChatPersonalization = (row: ProfilePersonalizationRow | null): ChatPersonalization => {
+  if (!row) {
+    return {
+      preferences: defaultPreferences,
+      goals: [],
+    };
+  }
+
+  const preferences = row.assistant_preferences;
+  const goals = Array.isArray(row.assistant_goals)
+    ? row.assistant_goals.filter((goal) => typeof goal === 'string')
+    : [];
+
+  return {
+    preferences: {
+      addressingStyle: preferences?.addressing_style?.trim() || null,
+      responseLength: preferences?.response_length ?? null,
+      tone: preferences?.tone ?? null,
+    },
+    goals,
+  };
+};
 
 export const listChatSessions = async (userId: string): Promise<ChatSession[]> => {
   const { data, error } = await supabase
@@ -143,6 +194,41 @@ export const archiveChatSession = async (sessionId: string): Promise<void> => {
       is_archived: true,
     })
     .eq('id', sessionId);
+
+  if (error) {
+    throw error;
+  }
+};
+
+export const getChatPersonalization = async (userId: string): Promise<ChatPersonalization> => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('assistant_preferences, assistant_goals')
+    .eq('id', userId)
+    .maybeSingle<ProfilePersonalizationRow>();
+
+  if (error) {
+    throw error;
+  }
+
+  return toChatPersonalization(data);
+};
+
+export const upsertChatPersonalization = async (
+  userId: string,
+  personalization: ChatPersonalization,
+): Promise<void> => {
+  const { error } = await supabase
+    .from('profiles')
+    .update({
+      assistant_preferences: {
+        addressing_style: personalization.preferences.addressingStyle,
+        response_length: personalization.preferences.responseLength,
+        tone: personalization.preferences.tone,
+      },
+      assistant_goals: personalization.goals,
+    })
+    .eq('id', userId);
 
   if (error) {
     throw error;

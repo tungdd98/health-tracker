@@ -24,6 +24,15 @@ Ngoài scope pha này:
 - Icon luôn hiển thị ở cả trạng thái chat rỗng, đang chat, và streaming.
 - Khi bấm, mở `bottom sheet` (mobile-first), không điều hướng sang màn hình mới.
 
+### Nguồn thiết kế UI
+
+- File: `docs/superpowers/designs/2026-04-29-chatbot-personalization.pen`
+- Frames:
+  - `ChatHeaderSettingsEntry`
+  - `AssistantPersonalizationSheetDefault`
+  - `AssistantPersonalizationSheetGoalsFilled`
+  - `AssistantPersonalizationSheetValidationError`
+
 ## 3. Cấu trúc Bottom Sheet
 
 ### 3.1 Section A — Cách trợ lý trả lời

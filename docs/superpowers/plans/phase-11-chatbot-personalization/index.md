@@ -12,11 +12,11 @@
 
 ## Task Checklist
 
-- [ ] [Task 01 — Pencil design for assistant personalization sheet](task-01-pencil-personalization-design.md)
-- [ ] [Task 02 — Supabase profile personalization schema](task-02-profile-personalization-schema.md)
-- [ ] [Task 03 — Chat personalization UI and form behavior](task-03-chat-personalization-sheet-ui.md)
-- [ ] [Task 04 — Edge function personalization prompt injection](task-04-chat-send-personalization-context.md)
-- [ ] [Task 05 — Verification, tracking sync, and commit](task-05-verification-tracking-and-commit.md)
+- [x] [Task 01 — Pencil design for assistant personalization sheet](task-01-pencil-personalization-design.md)
+- [x] [Task 02 — Supabase profile personalization schema](task-02-profile-personalization-schema.md)
+- [x] [Task 03 — Chat personalization UI and form behavior](task-03-chat-personalization-sheet-ui.md)
+- [x] [Task 04 — Edge function personalization prompt injection](task-04-chat-send-personalization-context.md)
+- [x] [Task 05 — Verification, tracking sync, and commit](task-05-verification-tracking-and-commit.md)
 
 ---
 

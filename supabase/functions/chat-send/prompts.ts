@@ -1,9 +1,48 @@
+import type { AssistantPersonalizationProfile } from './types.ts';
+
 type PromptProfile = {
   displayName: string | null;
   emergencyContactName: string | null;
+  personalization: AssistantPersonalizationProfile;
 };
 
-export const buildSystemPrompt = ({ displayName, emergencyContactName }: PromptProfile) => {
+const buildPersonalizationPromptBlock = ({
+  preferences,
+  goals,
+}: AssistantPersonalizationProfile) => {
+  const toneMap = {
+    expert: 'chuyên gia',
+    friendly: 'thân thiện',
+    neutral: 'trung tính',
+  } as const;
+  const responseLengthMap = {
+    detailed: 'chi tiết',
+    medium: 'vừa',
+    short: 'ngắn',
+  } as const;
+  const profileLines = [
+    `- Cách xưng hô mong muốn: ${preferences.addressingStyle?.trim() || 'mặc định'}`,
+    `- Độ dài trả lời ưu tiên: ${responseLengthMap[preferences.responseLength ?? 'medium']}`,
+    `- Giọng điệu ưu tiên: ${toneMap[preferences.tone ?? 'friendly']}`,
+  ];
+  const goalLines =
+    goals.length > 0
+      ? goals.map((goal, index) => `  ${index + 1}. ${goal}`)
+      : ['  (chưa thiết lập mục tiêu)'];
+
+  return [
+    'CÁ NHÂN HOÁ (áp dụng cho câu trả lời mới):',
+    ...profileLines,
+    '- Mục tiêu hiện tại:',
+    ...goalLines,
+  ].join('\n');
+};
+
+export const buildSystemPrompt = ({
+  displayName,
+  emergencyContactName,
+  personalization,
+}: PromptProfile) => {
   const preferredName = displayName?.trim() || 'bạn';
   const emergencyLine = emergencyContactName?.trim()
     ? ` + nhắc liên hệ ${emergencyContactName.trim()}`
@@ -16,6 +55,8 @@ export const buildSystemPrompt = ({ displayName, emergencyContactName }: PromptP
         `Bạn là trợ lý sức khoẻ thân thiết của ${preferredName}.`,
         'Trả lời bằng tiếng Việt tự nhiên, ngắn gọn, ấm áp.',
         'Khi cần dữ liệu cá nhân, hãy gọi tool tương ứng thay vì đoán.',
+        '',
+        buildPersonalizationPromptBlock(personalization),
         '',
         'QUY TẮC AN TOÀN (BẮT BUỘC):',
         '- Nếu phát hiện tín hiệu cấp cứu (đau ngực dữ dội, khó thở, mất ý thức, đột quỵ, chảy máu không cầm, ngộ độc, ý nghĩ tự gây hại...), DỪNG tư vấn thông thường.',

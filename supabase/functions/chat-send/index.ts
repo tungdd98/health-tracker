@@ -8,6 +8,7 @@ import { checkChatRateLimit, incrementChatUsage } from './rate-limit.ts';
 import {
   createChatSession,
   getChatSession,
+  loadAssistantPersonalization,
   loadChatHistory,
   persistChatMessages,
   toAnthropicHistory,
@@ -202,6 +203,7 @@ Deno.serve(async (request) => {
         }
 
         const historyRows = await loadChatHistory(supabase, sessionId);
+        const personalization = await loadAssistantPersonalization(supabase, user.id);
         const history = trimHistory(toAnthropicHistory(historyRows));
         const userMessageBlocks = [
           {
@@ -229,6 +231,7 @@ Deno.serve(async (request) => {
             typeof user.user_metadata?.emergencyContactName === 'string'
               ? user.user_metadata.emergencyContactName
               : null,
+          personalization,
         });
         let finalUsage = {
           input: 0,

@@ -5,6 +5,17 @@ export type ChatSendRequest = {
   user_message: string;
 };
 
+export type AssistantPreferenceProfile = {
+  addressingStyle: string | null;
+  responseLength: 'short' | 'medium' | 'detailed' | null;
+  tone: 'friendly' | 'neutral' | 'expert' | null;
+};
+
+export type AssistantPersonalizationProfile = {
+  preferences: AssistantPreferenceProfile;
+  goals: string[];
+};
+
 export type ChatSseErrorCode =
   | 'invalid_request'
   | 'unauthorized'

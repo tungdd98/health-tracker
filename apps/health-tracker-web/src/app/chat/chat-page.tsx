@@ -1,5 +1,6 @@
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import { Box, Container, IconButton, Stack, Typography } from '@mui/material';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
@@ -12,7 +13,9 @@ import { Composer } from './components/composer';
 import { DisclaimerWelcome } from './components/disclaimer-welcome';
 import { MessageList } from './components/message-list';
 import { SessionHistoryDrawer } from './components/session-history-drawer';
+import { AssistantPersonalizationSheet } from './components/assistant-personalization-sheet';
 import { useChatMessages } from './hooks/use-chat-messages';
+import { useChatPersonalization } from './hooks/use-chat-personalization';
 import { useChatSessions } from './hooks/use-chat-sessions';
 import { useChatStream } from './hooks/use-chat-stream';
 import { useNavigate } from 'react-router-dom';
@@ -23,6 +26,7 @@ export function ChatPage() {
   const [historyOpen, setHistoryOpen] = useState(false);
   const [activeSessionId, setActiveSessionId] = useState<string | null | undefined>(undefined);
   const [showDisclaimer, setShowDisclaimer] = useState(!onboardingProfile.hasSeenChatDisclaimer);
+  const [isPersonalizationOpen, setIsPersonalizationOpen] = useState(false);
   const [isSavingDisclaimer, setIsSavingDisclaimer] = useState(false);
   const [archiveTarget, setArchiveTarget] = useState<{ id: string; title: string } | null>(null);
   const [archiveError, setArchiveError] = useState('');
@@ -30,6 +34,11 @@ export function ChatPage() {
   const lastSessionIdRef = useRef<string | null | undefined>(undefined);
 
   const { data: sessions = [], archiveSession, isArchiving } = useChatSessions(user?.id);
+  const {
+    data: personalization,
+    isSaving: isSavingPersonalization,
+    savePersonalization,
+  } = useChatPersonalization(user?.id);
   const { data: storedMessages = [], isFetching: isMessagesFetching } = useChatMessages(
     activeSessionId ?? null,
   );
@@ -162,6 +171,18 @@ export function ChatPage() {
 
               <Stack alignItems="center" direction="row" spacing={1}>
                 <IconButton
+                  color="primary"
+                  onClick={() => setIsPersonalizationOpen(true)}
+                  size="small"
+                  sx={(theme) => ({
+                    backgroundColor: theme.palette.surface.overlay,
+                    height: 36,
+                    width: 36,
+                  })}
+                >
+                  <TuneRoundedIcon fontSize="small" />
+                </IconButton>
+                <IconButton
                   disableRipple={sessions.length === 0}
                   color="primary"
                   onClick={sessions.length > 0 ? () => setHistoryOpen(true) : undefined}
@@ -269,6 +290,14 @@ export function ChatPage() {
         isSubmitting={isSavingDisclaimer}
         onConfirm={() => void handleDismissDisclaimer()}
         open={showDisclaimer}
+      />
+
+      <AssistantPersonalizationSheet
+        initialValue={personalization}
+        isOpen={isPersonalizationOpen}
+        isSaving={isSavingPersonalization}
+        onClose={() => setIsPersonalizationOpen(false)}
+        onSave={savePersonalization}
       />
     </>
   );

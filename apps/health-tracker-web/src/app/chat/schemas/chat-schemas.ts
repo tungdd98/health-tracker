@@ -1,5 +1,18 @@
 import { z } from 'zod';
 
+export const assistantPreferenceSchema = z.object({
+  addressing_style: z.string().trim().max(60).nullable(),
+  response_length: z.enum(['short', 'medium', 'detailed']).nullable(),
+  tone: z.enum(['friendly', 'neutral', 'expert']).nullable(),
+});
+
+export const assistantGoalSchema = z.string().trim().min(1).max(120);
+
+export const assistantGoalsSchema = z
+  .array(assistantGoalSchema)
+  .max(3)
+  .transform((goals) => goals.map((goal) => goal.trim()));
+
 export const chatSendRequestSchema = z.object({
   session_id: z.string().uuid().nullable().optional(),
   user_message: z.string().trim().min(1),

@@ -1,6 +1,7 @@
 import type { SupabaseClient } from 'npm:@supabase/supabase-js@2';
 
 import type {
+  AssistantPersonalizationProfile,
   AnthropicContentBlock,
   AnthropicMessage,
   ChatMessageRow,
@@ -10,6 +11,16 @@ import type {
 
 const CHAT_SESSION_COLUMNS = 'id, title';
 const CHAT_MESSAGE_COLUMNS = 'id, role, content, token_input, token_output, created_at';
+const PROFILE_COLUMNS = 'assistant_preferences, assistant_goals';
+
+const defaultPersonalization: AssistantPersonalizationProfile = {
+  preferences: {
+    addressingStyle: null,
+    responseLength: null,
+    tone: null,
+  },
+  goals: [],
+};
 
 const toolRowsToAnthropicUserMessage = (rows: ChatMessageRow[]): AnthropicMessage => ({
   role: 'user',
@@ -155,4 +166,43 @@ export const touchChatSession = async (
   if (error) {
     throw error;
   }
+};
+
+export const loadAssistantPersonalization = async (
+  supabase: SupabaseClient,
+  userId: string,
+): Promise<AssistantPersonalizationProfile> => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select(PROFILE_COLUMNS)
+    .eq('id', userId)
+    .maybeSingle<{
+      assistant_preferences: {
+        addressing_style?: string | null;
+        response_length?: 'short' | 'medium' | 'detailed' | null;
+        tone?: 'friendly' | 'neutral' | 'expert' | null;
+      } | null;
+      assistant_goals: string[] | null;
+    }>();
+
+  if (error) {
+    throw error;
+  }
+
+  if (!data) {
+    return defaultPersonalization;
+  }
+
+  const goals = Array.isArray(data.assistant_goals)
+    ? data.assistant_goals.filter((goal) => typeof goal === 'string').slice(0, 3)
+    : [];
+
+  return {
+    preferences: {
+      addressingStyle: data.assistant_preferences?.addressing_style?.trim() || null,
+      responseLength: data.assistant_preferences?.response_length ?? null,
+      tone: data.assistant_preferences?.tone ?? null,
+    },
+    goals,
+  };
 };
