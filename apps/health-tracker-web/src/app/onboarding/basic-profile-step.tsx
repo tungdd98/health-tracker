@@ -1,5 +1,5 @@
 import AddAPhotoRoundedIcon from '@mui/icons-material/AddAPhotoRounded';
-import { Avatar, Box, Grid, IconButton, Stack } from '@mui/material';
+import { alpha, Avatar, Box, CircularProgress, Grid, IconButton, Stack } from '@mui/material';
 import { useRef } from 'react';
 
 import { FormDateField, FormTextField } from '@health-tracker/forms';
@@ -7,9 +7,14 @@ import { FormDateField, FormTextField } from '@health-tracker/forms';
 type BasicProfileStepProps = {
   onAvatarChange?: (file: File) => void;
   avatarPreviewUrl?: string | null;
+  isUploading?: boolean;
 };
 
-export function BasicProfileStep({ onAvatarChange, avatarPreviewUrl }: BasicProfileStepProps) {
+export function BasicProfileStep({
+  onAvatarChange,
+  avatarPreviewUrl,
+  isUploading = false,
+}: BasicProfileStepProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +34,7 @@ export function BasicProfileStep({ onAvatarChange, avatarPreviewUrl }: BasicProf
             sx={(theme) => ({
               width: 80,
               height: 80,
-              bgcolor: theme.palette.surface.subtle,
+              bgcolor: theme.palette.surface.accent,
               color: 'text.secondary',
             })}
           >
@@ -60,6 +65,21 @@ export function BasicProfileStep({ onAvatarChange, avatarPreviewUrl }: BasicProf
             style={{ display: 'none' }}
             type="file"
           />
+          {isUploading ? (
+            <Box
+              sx={(theme) => ({
+                position: 'absolute',
+                inset: 0,
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                bgcolor: alpha(theme.palette.common.black, 0.45),
+              })}
+            >
+              <CircularProgress size={32} sx={{ color: 'common.white' }} />
+            </Box>
+          ) : null}
         </Box>
       </Box>
 

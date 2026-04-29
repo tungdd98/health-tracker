@@ -5977,6 +5977,7 @@
         "npm:@types/react-dom@^19.1.9",
         "npm:@types/react@^19.1.13",
         "npm:@vitejs/plugin-react@^5.0.2",
+        "npm:browser-image-compression@^2.0.2",
         "npm:eslint@^9.35.0",
         "npm:globals@^16.4.0",
         "npm:husky@^9.1.7",

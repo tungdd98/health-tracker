@@ -13,6 +13,10 @@ const MOOD_LABELS: Record<string, string> = {
 const MOODS = ['sad', 'neutral', 'happy', 'very_happy', 'tired'] as const;
 
 const OPENROUTER_MODEL = 'google/gemini-2.5-flash-image';
+const STICKER_SIZE = 256;
+const STICKER_QUALITY = 60;
+type MoodValue = (typeof MOODS)[number];
+type MoodImageResult = { mood: MoodValue; imageUrl: string };
 
 const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -21,7 +25,7 @@ const corsHeaders = {
 };
 
 const buildPrompt = (moodLabel: string) =>
-  `Hãy tạo hình ảnh phong cách sticker zalo sử dụng khuôn mặt của avatar người dùng.\nNền sạch, đơn giản.\nBiểu cảm: ${moodLabel}`;
+  `Hãy tạo hình ảnh phong cách sticker zalo sử dụng khuôn mặt của avatar người dùng.\nTỷ lệ ảnh bắt buộc 1:1 (vuông).\nNền sạch, đơn giản.\nBiểu cảm: ${moodLabel}`;
 
 const generateImage = async (
   openrouterKey: string,
@@ -77,8 +81,14 @@ const generateImage = async (
   return imageUrl;
 };
 
-const dataUrlToBytes = (dataUrl: string): Uint8Array => {
-  const base64 = dataUrl.split(',')[1];
+const mimeTypeToExtension = (mimeType: string) => {
+  if (mimeType.includes('png')) return 'png';
+  if (mimeType.includes('webp')) return 'webp';
+  if (mimeType.includes('jpeg') || mimeType.includes('jpg')) return 'jpg';
+  return 'png';
+};
+
+const decodeBase64 = (base64: string): Uint8Array => {
   const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) {
@@ -86,6 +96,40 @@ const dataUrlToBytes = (dataUrl: string): Uint8Array => {
   }
   return bytes;
 };
+
+const resolveImageAsset = async (
+  imageRef: string,
+): Promise<{ bytes: Uint8Array; contentType: string; extension: string }> => {
+  if (imageRef.startsWith('data:')) {
+    const [header, base64] = imageRef.split(',', 2);
+    if (!header || !base64) {
+      throw new Error('Invalid data URL returned from model');
+    }
+
+    const mimeType = header.match(/^data:(.*?);base64$/)?.[1] ?? 'image/png';
+    return {
+      bytes: decodeBase64(base64),
+      contentType: mimeType,
+      extension: mimeTypeToExtension(mimeType),
+    };
+  }
+
+  const response = await fetch(imageRef);
+  if (!response.ok) {
+    throw new Error(`Failed to download generated image: ${response.status}`);
+  }
+
+  const arrayBuffer = await response.arrayBuffer();
+  const contentType = response.headers.get('content-type') ?? 'image/png';
+  return {
+    bytes: new Uint8Array(arrayBuffer),
+    contentType,
+    extension: mimeTypeToExtension(contentType),
+  };
+};
+
+const isFulfilled = <T>(result: PromiseSettledResult<T>): result is PromiseFulfilledResult<T> =>
+  result.status === 'fulfilled';
 
 Deno.serve(async (request) => {
   if (request.method === 'OPTIONS') {
@@ -138,32 +182,33 @@ Deno.serve(async (request) => {
   try {
     const results = await Promise.allSettled(
       MOODS.map(async (mood) => {
-        const dataUrl = await generateImage(openrouterKey, avatarUrl, mood);
-        const bytes = dataUrlToBytes(dataUrl);
-        const path = `${user.id}/${mood}.png`;
+        const imageRef = await generateImage(openrouterKey, avatarUrl, mood);
+        const imageAsset = await resolveImageAsset(imageRef);
+        const path = `${user.id}/${mood}.${imageAsset.extension}`;
 
         const { error: uploadError } = await supabase.storage
           .from('mood-images')
-          .upload(path, bytes, { contentType: 'image/png', upsert: true });
+          .upload(path, imageAsset.bytes, { contentType: imageAsset.contentType, upsert: true });
 
         if (uploadError) throw uploadError;
 
         const { data: signed, error: signedError } = await supabase.storage
           .from('mood-images')
-          .createSignedUrl(path, 60 * 60 * 24 * 365);
+          .createSignedUrl(path, 60 * 60 * 24 * 365, {
+            transform: {
+              width: STICKER_SIZE,
+              height: STICKER_SIZE,
+              quality: STICKER_QUALITY,
+            },
+          });
 
         if (signedError) throw signedError;
 
-        return { mood, imageUrl: signed.signedUrl };
+        return { mood, imageUrl: signed.signedUrl } satisfies MoodImageResult;
       }),
     );
 
-    const succeeded = results
-      .filter(
-        (r): r is PromiseFulfilledResult<{ mood: string; imageUrl: string }> =>
-          r.status === 'fulfilled',
-      )
-      .map((r) => r.value);
+    const succeeded = results.filter(isFulfilled).map((r) => r.value);
 
     if (succeeded.length === 0) {
       throw new Error('All image generations failed');

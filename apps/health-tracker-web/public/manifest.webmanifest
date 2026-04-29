@@ -1,0 +1,28 @@
+{
+  "name": "Health Tracker",
+  "short_name": "Health Tracker",
+  "description": "Track cycle, symptoms, and daily health signals in one calm, mobile-first app.",
+  "theme_color": "#fff8f8",
+  "background_color": "#fff8f8",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

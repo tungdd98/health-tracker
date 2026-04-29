@@ -21,6 +21,7 @@ import { AppFormProvider } from '@health-tracker/forms';
 import { AppSubmitButton } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
+import { MoodGeneratingOverlay } from '../components/mood-generating-overlay';
 import { OnboardingLayout } from '../components/onboarding-layout';
 import { BasicProfileStep } from '../onboarding/basic-profile-step';
 import { OnboardingWowScreen } from '../onboarding/onboarding-wow-screen';
@@ -58,6 +59,7 @@ import {
   toCycleAndBodyDefaults,
   toPersonalInfoDefaults,
 } from '../profile/profile-mappers';
+import { compressImage } from '../utils/compress-image';
 
 const isSameOnboardingProfile = (current: OnboardingProfile, next: OnboardingProfile) =>
   current.selectedPhase === next.selectedPhase &&
@@ -114,6 +116,8 @@ export function OnboardingPage() {
   const [profileSnapshot, setProfileSnapshot] = useState(onboardingProfile);
   const [submitError, setSubmitError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+  const [isGeneratingMood, setIsGeneratingMood] = useState(false);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreviewUrl, setAvatarPreviewUrl] = useState<string | null>(null);
   const [showWowScreen, setShowWowScreen] = useState(false);
@@ -182,13 +186,20 @@ export function OnboardingPage() {
 
   const handleAvatarChange = async (file: File) => {
     if (!user) return;
+    setIsUploadingAvatar(true);
     try {
-      const url = await uploadAvatar(user.id, file);
+      const compressedFile = await compressImage(file);
+      const url = await uploadAvatar(user.id, compressedFile);
       await updateAvatarMeta(user.id, { avatarUrl: url });
-      setAvatarFile(file);
+      setAvatarFile(compressedFile);
       setAvatarPreviewUrl(url);
-    } catch {
-      // silent — avatar upload failure is non-blocking in onboarding
+      setSubmitError('');
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : 'Không thể tải ảnh lên. Vui lòng thử lại.',
+      );
+    } finally {
+      setIsUploadingAvatar(false);
     }
   };
 
@@ -261,7 +272,7 @@ export function OnboardingPage() {
       });
 
       if (avatarFile) {
-        setIsSaving(true);
+        setIsGeneratingMood(true);
         try {
           await generateMoodImages(user.id);
           const images = await getUserMoodImages(user.id);
@@ -270,7 +281,7 @@ export function OnboardingPage() {
         } catch {
           setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.cycle);
         } finally {
-          setIsSaving(false);
+          setIsGeneratingMood(false);
         }
         return;
       }
@@ -387,6 +398,7 @@ export function OnboardingPage() {
         return (
           <BasicProfileStep
             avatarPreviewUrl={avatarPreviewUrl}
+            isUploading={isUploadingAvatar}
             onAvatarChange={(file) => void handleAvatarChange(file)}
           />
         );
@@ -444,32 +456,35 @@ export function OnboardingPage() {
   }
 
   return (
-    <AppFormProvider
-      form={form}
-      onSubmit={
-        currentStepId === ONBOARDING_STEP_IDS.completion
-          ? handleComplete
-          : validateAndPersistCurrentStep
-      }
-    >
-      <OnboardingLayout
-        backAction={backAction}
-        continueAction={continueAction}
-        currentStepNumber={currentStepNumber}
-        description={currentStep.description}
-        eyebrow="Thiết lập ban đầu"
-        skipAction={skipAction}
-        stepLabel={currentStep.title}
-        title={currentStep.title}
-        totalSteps={ONBOARDING_STEP_COUNT}
+    <>
+      <AppFormProvider
+        form={form}
+        onSubmit={
+          currentStepId === ONBOARDING_STEP_IDS.completion
+            ? handleComplete
+            : validateAndPersistCurrentStep
+        }
       >
-        {submitError ? (
-          <Alert color="error" variant="filled">
-            {submitError}
-          </Alert>
-        ) : null}
-        {stepContent}
-      </OnboardingLayout>
-    </AppFormProvider>
+        <OnboardingLayout
+          backAction={backAction}
+          continueAction={continueAction}
+          currentStepNumber={currentStepNumber}
+          description={currentStep.description}
+          eyebrow="Thiết lập ban đầu"
+          skipAction={skipAction}
+          stepLabel={currentStep.title}
+          title={currentStep.title}
+          totalSteps={ONBOARDING_STEP_COUNT}
+        >
+          {submitError ? (
+            <Alert color="error" variant="filled">
+              {submitError}
+            </Alert>
+          ) : null}
+          {stepContent}
+        </OnboardingLayout>
+      </AppFormProvider>
+      <MoodGeneratingOverlay open={isGeneratingMood} />
+    </>
   );
 }

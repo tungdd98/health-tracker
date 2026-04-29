@@ -3,9 +3,11 @@ import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import {
   Alert,
+  alpha,
   Avatar,
   Box,
   Button,
+  CircularProgress,
   FormControlLabel,
   Grid,
   IconButton,
@@ -14,6 +16,7 @@ import {
   Switch,
   TextField,
 } from '@mui/material';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from 'react';
 import { useForm, type Path, type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -23,6 +26,7 @@ import {
   generateMoodImages,
   getAvatarMeta,
   mapAuthErrorToMessage,
+  type MoodValue,
   type OnboardingPhase,
   type OnboardingProfile,
   signOutUser,
@@ -30,6 +34,7 @@ import {
   updateOnboardingProfile,
   updateOnboardingCycleAndBody,
   uploadAvatar,
+  getUserMoodImages,
   type UserAvatarMeta,
 } from '@health-tracker/api';
 import { AppFormProvider, FormDateField, FormTextField } from '@health-tracker/forms';
@@ -37,8 +42,10 @@ import { AppShell, AppSubmitButton } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
 import { AppConfirmDialog } from '../components/app-confirm-dialog';
+import { MoodGeneratingOverlay } from '../components/mood-generating-overlay';
 import { SettingsSectionCard } from '../components/settings-section-card';
 import { SignOutConfirmDialog } from '../components/sign-out-confirm-dialog';
+import { StickerPreviewDialog } from '../components/sticker-preview-dialog';
 import {
   normalizeOptionalIsoDate,
   normalizeOptionalText,
@@ -54,6 +61,7 @@ import type {
   PersonalInfoSettingsFormValues,
   SettingsSaveState,
 } from '../settings/settings-types';
+import { compressImage } from '../utils/compress-image';
 import { useAppNavChange } from '../use-app-nav-change';
 
 const ONBOARDING_PHASE_LABELS: Record<OnboardingPhase, string> = {
@@ -102,6 +110,7 @@ export function SettingsPage() {
   const navigate = useNavigate();
   const { onboardingProfile, user } = useAuthSession();
   const handleNavChange = useAppNavChange();
+  const queryClient = useQueryClient();
 
   const [profileSnapshot, setProfileSnapshot] = useState(onboardingProfile);
 
@@ -110,8 +119,14 @@ export function SettingsPage() {
   const [cycleAndBodyState, setCycleAndBodyState] = useState<SettingsSaveState>('idle');
 
   const [avatarMeta, setAvatarMeta] = useState<UserAvatarMeta | null>(null);
+  const [isAvatarMetaLoading, setIsAvatarMetaLoading] = useState(false);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [showRegenerateDialog, setShowRegenerateDialog] = useState(false);
+  const [showStickerPreviewDialog, setShowStickerPreviewDialog] = useState(false);
+  const [generatedMoodImages, setGeneratedMoodImages] = useState<
+    Partial<Record<MoodValue, string>>
+  >({});
   const avatarFileInputRef = useRef<HTMLInputElement>(null);
 
   const [isSignOutDialogOpen, setIsSignOutDialogOpen] = useState(false);
@@ -131,10 +146,22 @@ export function SettingsPage() {
 
   useEffect(() => {
     if (!user) return;
+    setIsAvatarMetaLoading(true);
     void getAvatarMeta(user.id)
       .then(setAvatarMeta)
-      .catch(() => null);
+      .catch(() => null)
+      .finally(() => setIsAvatarMetaLoading(false));
   }, [user]);
+
+  const { data: moodImages = {} } = useQuery({
+    queryKey: ['userMoodImages', user?.id],
+    queryFn: async () => {
+      if (!user) return {};
+      return getUserMoodImages(user.id);
+    },
+    enabled: !!user,
+    staleTime: 1000 * 60 * 10,
+  });
 
   const personalInfoDefaults = useMemo(
     () => toPersonalInfoDefaults(profileSnapshot),
@@ -181,13 +208,20 @@ export function SettingsPage() {
     const file = e.target.files?.[0];
     e.target.value = '';
     if (!file || !user) return;
+    setIsUploadingAvatar(true);
     try {
-      const url = await uploadAvatar(user.id, file);
+      const compressedFile = await compressImage(file);
+      const url = await uploadAvatar(user.id, compressedFile);
       await updateAvatarMeta(user.id, { avatarUrl: url });
       setAvatarMeta((current) => ({ ...(current ?? { useAvatarMood: true }), avatarUrl: url }));
       setShowRegenerateDialog(true);
-    } catch {
-      setSnackbarState({ open: true, message: 'Không thể tải ảnh lên.', severity: 'error' });
+      setSnackbarState({ open: false, message: '', severity: 'success' });
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'Không thể tải ảnh lên. Vui lòng thử lại.';
+      setSnackbarState({ open: true, message, severity: 'error' });
+    } finally {
+      setIsUploadingAvatar(false);
     }
   };
 
@@ -197,6 +231,11 @@ export function SettingsPage() {
     setShowRegenerateDialog(false);
     try {
       await generateMoodImages(user.id);
+      await queryClient.invalidateQueries({ queryKey: ['userMoodImages', user.id] });
+      await queryClient.invalidateQueries({ queryKey: ['avatarMeta', user.id] });
+      const latestMoodImages = await getUserMoodImages(user.id);
+      setGeneratedMoodImages(latestMoodImages);
+      setShowStickerPreviewDialog(Object.keys(latestMoodImages).length > 0);
       setSnackbarState({
         open: true,
         message: 'Đã tạo sticker mới từ avatar của bạn!',
@@ -214,7 +253,7 @@ export function SettingsPage() {
   };
 
   const handleToggleUseAvatarMood = async (checked: boolean) => {
-    if (!user) return;
+    if (!user || !avatarMeta?.avatarUrl) return;
     setAvatarMeta((current) => (current ? { ...current, useAvatarMood: checked } : null));
     try {
       await updateAvatarMeta(user.id, { useAvatarMood: checked });
@@ -353,6 +392,8 @@ export function SettingsPage() {
 
   const isSavingPersonalInfo = personalInfoState === 'saving';
   const isSavingCycleAndBody = cycleAndBodyState === 'saving';
+  const hasAvatar = !!avatarMeta?.avatarUrl;
+  const isStickerToggleDisabled = isAvatarMetaLoading || !hasAvatar;
   const handleCloseSnackbar = (_event?: Event | SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -374,56 +415,74 @@ export function SettingsPage() {
     >
       <Stack spacing={2.5}>
         <SettingsSectionCard title="Thông tin cá nhân">
-          <Stack alignItems="center" direction="row" spacing={2} sx={{ mb: 1 }}>
-            <Box sx={{ position: 'relative', width: 60, height: 60, flexShrink: 0 }}>
-              <Avatar
-                src={avatarMeta?.avatarUrl ?? undefined}
-                sx={(theme) => ({
-                  width: 60,
-                  height: 60,
-                  bgcolor: theme.palette.surface.subtle,
-                  color: 'text.secondary',
-                })}
-              >
-                {!avatarMeta?.avatarUrl && <AddAPhotoRoundedIcon />}
-              </Avatar>
-              <IconButton
-                aria-label="Thay ảnh đại diện"
-                onClick={() => avatarFileInputRef.current?.click()}
-                size="small"
-                sx={(theme) => ({
-                  bgcolor: 'primary.main',
-                  bottom: 0,
-                  color: 'primary.contrastText',
-                  position: 'absolute',
-                  right: 0,
-                  '&:hover': { bgcolor: 'primary.dark' },
-                  width: 24,
-                  height: 24,
-                  border: `2px solid ${theme.palette.background.default}`,
-                })}
-              >
-                <AddAPhotoRoundedIcon sx={{ fontSize: 12 }} />
-              </IconButton>
-              <input
-                accept="image/*"
-                onChange={(e) => void handleAvatarFileChange(e)}
-                ref={avatarFileInputRef}
-                style={{ display: 'none' }}
-                type="file"
-              />
-            </Box>
-            {avatarMeta?.avatarUrl ? (
-              <Button
-                disabled={isRegenerating}
-                onClick={() => void handleRegenerateConfirm()}
-                size="small"
-                startIcon={<AutorenewRoundedIcon fontSize="small" />}
-                variant="outlined"
-              >
-                {isRegenerating ? 'Đang tạo...' : 'Tạo lại sticker'}
-              </Button>
-            ) : null}
+          <Stack spacing={2} sx={{ mb: 1 }}>
+            <Stack alignItems="center" direction="row" spacing={2}>
+              <Box sx={{ position: 'relative', width: 60, height: 60, flexShrink: 0 }}>
+                <Avatar
+                  src={avatarMeta?.avatarUrl ?? undefined}
+                  sx={(theme) => ({
+                    width: 60,
+                    height: 60,
+                    bgcolor: theme.palette.surface.accent,
+                    color: 'text.secondary',
+                  })}
+                >
+                  {!avatarMeta?.avatarUrl && <AddAPhotoRoundedIcon />}
+                </Avatar>
+                <IconButton
+                  aria-label="Thay ảnh đại diện"
+                  onClick={() => avatarFileInputRef.current?.click()}
+                  size="small"
+                  sx={(theme) => ({
+                    bgcolor: 'primary.main',
+                    bottom: 0,
+                    color: 'primary.contrastText',
+                    position: 'absolute',
+                    right: 0,
+                    '&:hover': { bgcolor: 'primary.dark' },
+                    width: 24,
+                    height: 24,
+                    border: `2px solid ${theme.palette.background.default}`,
+                  })}
+                >
+                  <AddAPhotoRoundedIcon sx={{ fontSize: 12 }} />
+                </IconButton>
+                <input
+                  accept="image/*"
+                  onChange={(e) => void handleAvatarFileChange(e)}
+                  ref={avatarFileInputRef}
+                  style={{ display: 'none' }}
+                  type="file"
+                />
+                {isUploadingAvatar ? (
+                  <Box
+                    sx={(theme) => ({
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      bgcolor: alpha(theme.palette.common.black, 0.45),
+                    })}
+                  >
+                    <CircularProgress size={26} sx={{ color: 'common.white' }} />
+                  </Box>
+                ) : null}
+              </Box>
+              {avatarMeta?.avatarUrl ? (
+                <Button
+                  disabled={isRegenerating}
+                  onClick={() => void handleRegenerateConfirm()}
+                  size="small"
+                  startIcon={<AutorenewRoundedIcon fontSize="small" />}
+                  sx={{ px: 1 }}
+                  variant="outlined"
+                >
+                  {isRegenerating ? 'Đang tạo...' : 'Tạo lại sticker'}
+                </Button>
+              ) : null}
+            </Stack>
           </Stack>
           <AppFormProvider form={personalInfoForm} onSubmit={handleSavePersonalInfo}>
             <Grid container spacing={2}>
@@ -462,17 +521,16 @@ export function SettingsPage() {
                 />
               </Grid>
             </Grid>
-            {avatarMeta?.avatarUrl ? (
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={avatarMeta.useAvatarMood}
-                    onChange={(e) => void handleToggleUseAvatarMood(e.target.checked)}
-                  />
-                }
-                label="Dùng sticker avatar cho tâm trạng"
-              />
-            ) : null}
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={avatarMeta?.useAvatarMood ?? true}
+                  disabled={isStickerToggleDisabled}
+                  onChange={(e) => void handleToggleUseAvatarMood(e.target.checked)}
+                />
+              }
+              label="Dùng sticker avatar cho tâm trạng"
+            />
             <AppSubmitButton
               disabled={isSavingPersonalInfo}
               loading={isSavingPersonalInfo}
@@ -573,6 +631,12 @@ export function SettingsPage() {
           {snackbarState.message}
         </Alert>
       </Snackbar>
+      <MoodGeneratingOverlay open={isRegenerating} />
+      <StickerPreviewDialog
+        moodImages={Object.keys(generatedMoodImages).length > 0 ? generatedMoodImages : moodImages}
+        onClose={() => setShowStickerPreviewDialog(false)}
+        open={showStickerPreviewDialog}
+      />
     </AppShell>
   );
 }
