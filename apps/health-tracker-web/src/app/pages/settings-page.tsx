@@ -413,9 +413,21 @@ export function SettingsPage() {
                 type="file"
               />
             </Box>
-            <Typography color="text.secondary" variant="body2">
-              Thay ảnh đại diện
-            </Typography>
+            <Stack spacing={0.5}>
+              <Typography color="text.secondary" variant="body2">
+                Thay ảnh đại diện
+              </Typography>
+              {avatarMeta?.avatarUrl ? (
+                <Button
+                  disabled={isRegenerating}
+                  onClick={() => void handleRegenerateConfirm()}
+                  size="small"
+                  variant="text"
+                >
+                  {isRegenerating ? 'Đang tạo...' : 'Tạo lại sticker'}
+                </Button>
+              ) : null}
+            </Stack>
           </Stack>
           <AppFormProvider form={personalInfoForm} onSubmit={handleSavePersonalInfo}>
             <Grid container spacing={2}>
