@@ -7,6 +7,7 @@ export type ChatSendRequest = {
 
 export type AssistantPreferenceProfile = {
   addressingStyle: string | null;
+  chatbotName: string | null;
   responseLength: 'short' | 'medium' | 'detailed' | null;
   tone: 'friendly' | 'neutral' | 'expert' | null;
 };

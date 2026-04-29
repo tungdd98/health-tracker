@@ -16,6 +16,7 @@ const PROFILE_COLUMNS = 'assistant_preferences, assistant_goals';
 const defaultPersonalization: AssistantPersonalizationProfile = {
   preferences: {
     addressingStyle: null,
+    chatbotName: null,
     responseLength: null,
     tone: null,
   },
@@ -179,6 +180,7 @@ export const loadAssistantPersonalization = async (
     .maybeSingle<{
       assistant_preferences: {
         addressing_style?: string | null;
+        chatbot_name?: string | null;
         response_length?: 'short' | 'medium' | 'detailed' | null;
         tone?: 'friendly' | 'neutral' | 'expert' | null;
       } | null;
@@ -200,6 +202,7 @@ export const loadAssistantPersonalization = async (
   return {
     preferences: {
       addressingStyle: data.assistant_preferences?.addressing_style?.trim() || null,
+      chatbotName: data.assistant_preferences?.chatbot_name?.trim() || null,
       responseLength: data.assistant_preferences?.response_length ?? null,
       tone: data.assistant_preferences?.tone ?? null,
     },

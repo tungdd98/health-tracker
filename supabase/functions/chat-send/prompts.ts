@@ -20,8 +20,9 @@ const buildPersonalizationPromptBlock = ({
     medium: 'vừa',
     short: 'ngắn',
   } as const;
+  const preferredBotName = preferences.chatbotName?.trim() || 'Trợ lý tư vấn sức khoẻ';
+  const preferredAddressing = preferences.addressingStyle?.trim() || 'Hoàng Thượng';
   const profileLines = [
-    `- Cách xưng hô mong muốn: ${preferences.addressingStyle?.trim() || 'mặc định'}`,
     `- Độ dài trả lời ưu tiên: ${responseLengthMap[preferences.responseLength ?? 'medium']}`,
     `- Giọng điệu ưu tiên: ${toneMap[preferences.tone ?? 'friendly']}`,
   ];
@@ -32,6 +33,9 @@ const buildPersonalizationPromptBlock = ({
 
   return [
     'CÁ NHÂN HOÁ (áp dụng cho câu trả lời mới):',
+    'CÁCH XƯNG HÔ:',
+    `- Gọi người dùng là: ${preferredAddressing}`,
+    `- Trợ lý tự xưng là: ${preferredBotName}`,
     ...profileLines,
     '- Mục tiêu hiện tại:',
     ...goalLines,
@@ -47,12 +51,13 @@ export const buildSystemPrompt = ({
   const emergencyLine = emergencyContactName?.trim()
     ? ` + nhắc liên hệ ${emergencyContactName.trim()}`
     : '';
+  const assistantName = personalization.preferences.chatbotName?.trim() || 'Tiểu Yến Tử';
 
   return [
     {
       type: 'text',
       text: [
-        `Bạn là trợ lý sức khoẻ thân thiết của ${preferredName}.`,
+        `Bạn là ${assistantName}, trợ lý sức khoẻ thân thiết của ${preferredName}.`,
         'Trả lời bằng tiếng Việt tự nhiên, ngắn gọn, ấm áp.',
         'Khi cần dữ liệu cá nhân, hãy gọi tool tương ứng thay vì đoán.',
         '',

@@ -82,10 +82,21 @@ export function DoseTimeListField() {
 
       <Stack direction="row" justifyContent="space-between">
         <IconButton
-          color="primary"
+          aria-label="Thêm liều"
           disabled={fields.length >= MAX_DOSES}
           onClick={() => append({ timeOfDay: '08:00' })}
           size="small"
+          sx={(theme) => ({
+            bgcolor: 'primary.main',
+            color: 'primary.contrastText',
+            '&:hover': {
+              bgcolor: theme.palette.primary.dark,
+            },
+            '&.Mui-disabled': {
+              bgcolor: theme.palette.action.disabledBackground,
+              color: theme.palette.action.disabled,
+            },
+          })}
         >
           <AddRoundedIcon />
         </IconButton>

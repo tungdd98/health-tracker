@@ -1,8 +1,8 @@
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
-import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
-import { Box, Container, IconButton, Stack, Typography } from '@mui/material';
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import { Alert, Box, Container, IconButton, Snackbar, Stack, Typography } from '@mui/material';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type SyntheticEvent } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 import { markChatDisclaimerSeen, type ChatMessage } from '@health-tracker/api';
@@ -30,6 +30,8 @@ export function ChatPage() {
   const [isSavingDisclaimer, setIsSavingDisclaimer] = useState(false);
   const [archiveTarget, setArchiveTarget] = useState<{ id: string; title: string } | null>(null);
   const [archiveError, setArchiveError] = useState('');
+  const [personalizationError, setPersonalizationError] = useState('');
+  const [isPersonalizationErrorOpen, setIsPersonalizationErrorOpen] = useState(false);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const lastSessionIdRef = useRef<string | null | undefined>(undefined);
 
@@ -136,6 +138,30 @@ export function ChatPage() {
     }
   };
 
+  const handlePersonalizationSave = async (payload: Parameters<typeof savePersonalization>[0]) => {
+    try {
+      await savePersonalization(payload);
+      setPersonalizationError('');
+      setIsPersonalizationErrorOpen(false);
+    } catch (error) {
+      setPersonalizationError(
+        error instanceof Error
+          ? error.message
+          : 'Không thể lưu tuỳ chỉnh trợ lý. Vui lòng thử lại.',
+      );
+      setIsPersonalizationErrorOpen(true);
+      throw error;
+    }
+  };
+
+  const handleClosePersonalizationSnackbar = (_event?: Event | SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsPersonalizationErrorOpen(false);
+  };
+
   return (
     <>
       <Box
@@ -180,7 +206,7 @@ export function ChatPage() {
                     width: 36,
                   })}
                 >
-                  <TuneRoundedIcon fontSize="small" />
+                  <SettingsRoundedIcon fontSize="small" />
                 </IconButton>
                 <IconButton
                   disableRipple={sessions.length === 0}
@@ -297,8 +323,18 @@ export function ChatPage() {
         isOpen={isPersonalizationOpen}
         isSaving={isSavingPersonalization}
         onClose={() => setIsPersonalizationOpen(false)}
-        onSave={savePersonalization}
+        onSave={handlePersonalizationSave}
       />
+
+      <Snackbar
+        autoHideDuration={4000}
+        onClose={handleClosePersonalizationSnackbar}
+        open={isPersonalizationErrorOpen}
+      >
+        <Alert color="error" onClose={handleClosePersonalizationSnackbar} variant="filled">
+          {personalizationError || 'Không thể lưu tuỳ chỉnh trợ lý. Vui lòng thử lại.'}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

@@ -441,6 +441,7 @@ export const appTheme = createTheme({
       styleOverrides: {
         root: {
           color: alpha(rose.textMuted, 0.82),
+          lineHeight: 2,
           fontWeight: 400,
           '&.Mui-focused': {
             color: alpha(rose.textMuted, 0.82),

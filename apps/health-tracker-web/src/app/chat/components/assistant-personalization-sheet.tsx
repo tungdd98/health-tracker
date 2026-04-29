@@ -1,18 +1,9 @@
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import {
-  Box,
-  Button,
-  Drawer,
-  IconButton,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import { Box, Button, IconButton, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
 
 import type { AssistantPreferences, ChatPersonalization } from '@health-tracker/api';
-import { AppSubmitButton } from '@health-tracker/ui';
+import { AppBottomSheetDialog, AppSubmitButton } from '@health-tracker/ui';
 
 import { assistantGoalsSchema } from '../schemas/chat-schemas';
 
@@ -21,12 +12,14 @@ const defaultPersonalization: ChatPersonalization = {
     addressingStyle: null,
     responseLength: 'medium',
     tone: 'friendly',
+    chatbotName: '',
   },
   goals: [],
 };
 
 const emptyPreferences: AssistantPreferences = {
   addressingStyle: '',
+  chatbotName: '',
   responseLength: 'medium',
   tone: 'friendly',
 };
@@ -59,6 +52,7 @@ export function AssistantPersonalizationSheet({
 
     setPreferences({
       addressingStyle: normalizedInitial.preferences.addressingStyle ?? '',
+      chatbotName: normalizedInitial.preferences.chatbotName ?? '',
       responseLength: normalizedInitial.preferences.responseLength ?? 'medium',
       tone: normalizedInitial.preferences.tone ?? 'friendly',
     });
@@ -76,6 +70,7 @@ export function AssistantPersonalizationSheet({
     () => ({
       preferences: {
         addressingStyle: preferences.addressingStyle?.trim() || null,
+        chatbotName: preferences.chatbotName?.trim() || null,
         responseLength: preferences.responseLength ?? 'medium',
         tone: preferences.tone ?? 'friendly',
       },
@@ -126,149 +121,172 @@ export function AssistantPersonalizationSheet({
   };
 
   return (
-    <Drawer anchor="bottom" onClose={isSaving ? undefined : onClose} open={isOpen}>
-      <Box
-        sx={{
-          borderTopLeftRadius: 24,
-          borderTopRightRadius: 24,
-          maxWidth: 480,
-          mx: 'auto',
-          p: 2,
-          width: '100%',
-        }}
-      >
-        <Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }} useFlexGap>
-          <Typography variant="h4">Tuỳ chỉnh trợ lý</Typography>
-          <IconButton disabled={isSaving} onClick={onClose} size="small">
-            <CloseRoundedIcon fontSize="small" />
-          </IconButton>
-        </Stack>
+    <AppBottomSheetDialog
+      actions={
+        <>
+          <Button
+            color="inherit"
+            disabled={isSaving}
+            fullWidth
+            onClick={handleReset}
+            variant="outlined"
+          >
+            Khôi phục mặc định
+          </Button>
+          <AppSubmitButton
+            fullWidth
+            loading={isSaving}
+            onClick={() => void handleSave()}
+            variant="contained"
+          >
+            Lưu thay đổi
+          </AppSubmitButton>
+        </>
+      }
+      isBusy={isSaving}
+      onClose={onClose}
+      open={isOpen}
+      title="Tuỳ chỉnh trợ lý"
+    >
+      <Stack spacing={2.25} useFlexGap>
+        <Box sx={{ backgroundColor: 'surface.overlay', borderRadius: 3 }}>
+          <Typography sx={{ fontWeight: 700, mb: 1 }} variant="body2">
+            Cách trợ lý trả lời
+          </Typography>
 
-        <Stack spacing={2} useFlexGap>
-          <Box sx={{ backgroundColor: 'surface.overlay', borderRadius: 3, p: 1.5 }}>
-            <Typography sx={{ fontWeight: 700, mb: 1 }} variant="body2">
-              Cách trợ lý trả lời
-            </Typography>
+          <Stack spacing={1.5} useFlexGap>
+            <TextField
+              fullWidth
+              label="Tên chatbot"
+              onChange={(event) =>
+                setPreferences((current) => ({
+                  ...current,
+                  chatbotName: event.target.value,
+                }))
+              }
+              size="small"
+              value={preferences.chatbotName ?? ''}
+            />
+            <TextField
+              fullWidth
+              onChange={(event) =>
+                setPreferences((current) => ({
+                  ...current,
+                  addressingStyle: event.target.value,
+                }))
+              }
+              label="Cách xưng hô mong muốn"
+              size="small"
+              value={preferences.addressingStyle ?? ''}
+            />
+            <TextField
+              fullWidth
+              label="Độ dài mặc định"
+              onChange={(event) =>
+                setPreferences((current) => ({
+                  ...current,
+                  responseLength: event.target.value as AssistantPreferences['responseLength'],
+                }))
+              }
+              select
+              size="small"
+              value={preferences.responseLength ?? 'medium'}
+            >
+              <MenuItem value="short">Ngắn</MenuItem>
+              <MenuItem value="medium">Vừa</MenuItem>
+              <MenuItem value="detailed">Chi tiết</MenuItem>
+            </TextField>
+            <TextField
+              fullWidth
+              label="Giọng điệu"
+              onChange={(event) =>
+                setPreferences((current) => ({
+                  ...current,
+                  tone: event.target.value as AssistantPreferences['tone'],
+                }))
+              }
+              select
+              size="small"
+              value={preferences.tone ?? 'friendly'}
+            >
+              <MenuItem value="friendly">Thân thiện</MenuItem>
+              <MenuItem value="neutral">Trung tính</MenuItem>
+              <MenuItem value="expert">Chuyên gia</MenuItem>
+            </TextField>
+          </Stack>
+        </Box>
 
-            <Stack spacing={1} useFlexGap>
-              <TextField
-                fullWidth
-                label="Cách xưng hô mong muốn"
-                onChange={(event) =>
-                  setPreferences((current) => ({
-                    ...current,
-                    addressingStyle: event.target.value,
-                  }))
-                }
-                size="small"
-                value={preferences.addressingStyle ?? ''}
-              />
-              <TextField
-                fullWidth
-                label="Độ dài mặc định"
-                onChange={(event) =>
-                  setPreferences((current) => ({
-                    ...current,
-                    responseLength: event.target.value as AssistantPreferences['responseLength'],
-                  }))
-                }
-                select
-                size="small"
-                value={preferences.responseLength ?? 'medium'}
+        <Box sx={{ backgroundColor: 'surface.overlay', borderRadius: 3 }}>
+          <Typography sx={{ fontWeight: 700, mb: 1 }} variant="body2">
+            Mục tiêu hiện tại
+          </Typography>
+
+          <Stack spacing={1.25} useFlexGap>
+            {goals.length === 0 ? (
+              <Typography color="text.secondary" variant="caption">
+                Chưa có mục tiêu nào
+              </Typography>
+            ) : null}
+
+            {goals.map((goal, index) => (
+              <Stack
+                alignItems="center"
+                direction="row"
+                justifyContent="space-between"
+                key={`${goal}-${index}`}
               >
-                <MenuItem value="short">Ngắn</MenuItem>
-                <MenuItem value="medium">Vừa</MenuItem>
-                <MenuItem value="detailed">Chi tiết</MenuItem>
-              </TextField>
-              <TextField
-                fullWidth
-                label="Giọng điệu"
-                onChange={(event) =>
-                  setPreferences((current) => ({
-                    ...current,
-                    tone: event.target.value as AssistantPreferences['tone'],
-                  }))
-                }
-                select
-                size="small"
-                value={preferences.tone ?? 'friendly'}
-              >
-                <MenuItem value="friendly">Thân thiện</MenuItem>
-                <MenuItem value="neutral">Trung tính</MenuItem>
-                <MenuItem value="expert">Chuyên gia</MenuItem>
-              </TextField>
-            </Stack>
-          </Box>
-
-          <Box sx={{ backgroundColor: 'surface.overlay', borderRadius: 3, p: 1.5 }}>
-            <Typography sx={{ fontWeight: 700, mb: 1 }} variant="body2">
-              Mục tiêu hiện tại
-            </Typography>
-
-            <Stack spacing={1} useFlexGap>
-              {goals.length === 0 ? (
-                <Typography color="text.secondary" variant="caption">
-                  Chưa có mục tiêu nào
+                <Typography sx={{ pr: 1 }} variant="caption">
+                  {index + 1}. {goal}
                 </Typography>
-              ) : null}
-
-              {goals.map((goal, index) => (
-                <Stack
-                  alignItems="center"
-                  direction="row"
-                  justifyContent="space-between"
-                  key={`${goal}-${index}`}
-                >
-                  <Typography sx={{ pr: 1 }} variant="caption">
-                    {index + 1}. {goal}
-                  </Typography>
-                  <Button
-                    color="inherit"
-                    onClick={() => handleRemoveGoal(index)}
-                    size="small"
-                    sx={{ minWidth: 'auto' }}
-                  >
-                    Xoá
-                  </Button>
-                </Stack>
-              ))}
-
-              <Stack direction="row" spacing={1}>
-                <TextField
-                  fullWidth
-                  helperText={`${newGoal.trim().length}/120`}
-                  onChange={(event) => setNewGoal(event.target.value)}
-                  placeholder="Thêm mục tiêu..."
+                <Button
+                  color="inherit"
+                  onClick={() => handleRemoveGoal(index)}
                   size="small"
-                  value={newGoal}
-                />
-                <Button disabled={isAddDisabled} onClick={handleAddGoal} variant="outlined">
-                  Thêm
+                  sx={{ minWidth: 'auto' }}
+                >
+                  Xoá
                 </Button>
               </Stack>
+            ))}
+
+            <TextField
+              fullWidth
+              helperText={`${newGoal.trim().length}/120`}
+              onChange={(event) => setNewGoal(event.target.value)}
+              placeholder="Thêm mục tiêu..."
+              size="small"
+              value={newGoal}
+            />
+            <Stack direction="row" justifyContent="space-between">
+              <IconButton
+                aria-label="Thêm mục tiêu"
+                disabled={isAddDisabled}
+                onClick={handleAddGoal}
+                size="small"
+                sx={(theme) => ({
+                  bgcolor: 'primary.main',
+                  color: 'primary.contrastText',
+                  '&:hover': {
+                    bgcolor: theme.palette.primary.dark,
+                  },
+                  '&.Mui-disabled': {
+                    bgcolor: theme.palette.action.disabledBackground,
+                    color: theme.palette.action.disabled,
+                  },
+                })}
+              >
+                <AddRoundedIcon fontSize="small" />
+              </IconButton>
             </Stack>
-          </Box>
-
-          {errorMessage ? (
-            <Typography color="error.main" variant="caption">
-              {errorMessage}
-            </Typography>
-          ) : null}
-
-          <Stack direction="row" justifyContent="space-between" sx={{ pt: 0.5 }}>
-            <Button color="inherit" disabled={isSaving} onClick={handleReset}>
-              Khôi phục mặc định
-            </Button>
-            <AppSubmitButton
-              loading={isSaving}
-              onClick={() => void handleSave()}
-              variant="contained"
-            >
-              Lưu thay đổi
-            </AppSubmitButton>
           </Stack>
-        </Stack>
-      </Box>
-    </Drawer>
+        </Box>
+
+        {errorMessage ? (
+          <Typography color="error.main" variant="caption">
+            {errorMessage}
+          </Typography>
+        ) : null}
+      </Stack>
+    </AppBottomSheetDialog>
   );
 }

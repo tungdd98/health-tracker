@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const assistantPreferenceSchema = z.object({
   addressing_style: z.string().trim().max(60).nullable(),
+  chatbot_name: z.string().trim().min(1).max(40).nullable(),
   response_length: z.enum(['short', 'medium', 'detailed']).nullable(),
   tone: z.enum(['friendly', 'neutral', 'expert']).nullable(),
 });

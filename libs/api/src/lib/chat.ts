@@ -6,6 +6,7 @@ export type AssistantTone = 'friendly' | 'neutral' | 'expert';
 
 export type AssistantPreferences = {
   addressingStyle: string | null;
+  chatbotName: string | null;
   responseLength: AssistantResponseLength | null;
   tone: AssistantTone | null;
 };
@@ -83,6 +84,7 @@ type ChatMessageRow = {
 type ProfilePersonalizationRow = {
   assistant_preferences: {
     addressing_style?: string | null;
+    chatbot_name?: string | null;
     response_length?: AssistantResponseLength | null;
     tone?: AssistantTone | null;
   } | null;
@@ -115,6 +117,7 @@ const toChatMessage = (row: ChatMessageRow): ChatMessage => ({
 
 const defaultPreferences: AssistantPreferences = {
   addressingStyle: null,
+  chatbotName: null,
   responseLength: null,
   tone: null,
 };
@@ -135,6 +138,7 @@ const toChatPersonalization = (row: ProfilePersonalizationRow | null): ChatPerso
   return {
     preferences: {
       addressingStyle: preferences?.addressing_style?.trim() || null,
+      chatbotName: preferences?.chatbot_name?.trim() || null,
       responseLength: preferences?.response_length ?? null,
       tone: preferences?.tone ?? null,
     },
@@ -220,15 +224,19 @@ export const upsertChatPersonalization = async (
 ): Promise<void> => {
   const { error } = await supabase
     .from('profiles')
-    .update({
+    .upsert({
+      id: userId,
       assistant_preferences: {
         addressing_style: personalization.preferences.addressingStyle,
+        chatbot_name: personalization.preferences.chatbotName,
         response_length: personalization.preferences.responseLength,
         tone: personalization.preferences.tone,
       },
       assistant_goals: personalization.goals,
+      updated_at: new Date().toISOString(),
     })
-    .eq('id', userId);
+    .select('id')
+    .single();
 
   if (error) {
     throw error;

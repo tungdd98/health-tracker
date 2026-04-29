@@ -5,6 +5,7 @@ export * from './lib/app-shell';
 export * from './lib/app-header';
 export * from './lib/app-list-item';
 export * from './lib/app-submit-button';
+export * from './lib/app-bottom-sheet-dialog';
 export * from './lib/page-section';
 export * from './lib/loading-block';
 export * from './lib/empty-state';
