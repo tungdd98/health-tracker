@@ -29,6 +29,8 @@ export const toPersonalInfoDefaults = (profile: OnboardingProfile) => ({
   selectedPhase: profile.selectedPhase,
   displayName: profile.displayName ?? '',
   birthDate: toDateTimeOrNull(profile.birthDate),
+  emergencyContactName: profile.emergencyContactName ?? '',
+  emergencyContactPhone: profile.emergencyContactPhone ?? '',
 });
 
 export const toCycleAndBodyDefaults = (profile: OnboardingProfile) => ({

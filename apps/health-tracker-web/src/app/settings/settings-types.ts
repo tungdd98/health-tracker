@@ -12,6 +12,8 @@ export type SettingsSaveState = 'idle' | 'saving' | 'success' | 'error';
 export type PersonalInfoSettingsFormValues = {
   displayName: string;
   birthDate: DateTime | null;
+  emergencyContactName: string;
+  emergencyContactPhone: string;
 };
 
 export type CycleAndBodySettingsFormValues = {

@@ -10,8 +10,8 @@ import {
   type OnboardingPhase,
   type OnboardingProfile,
   signOutUser,
+  updateOnboardingProfile,
   updateOnboardingCycleAndBody,
-  updateOnboardingPersonalInfo,
 } from '@health-tracker/api';
 import { AppFormProvider, FormDateField, FormTextField } from '@health-tracker/forms';
 import { AppShell, AppSubmitButton } from '@health-tracker/ui';
@@ -48,7 +48,10 @@ const isSameOnboardingProfile = (current: OnboardingProfile, next: OnboardingPro
   current.cycleLengthDays === next.cycleLengthDays &&
   current.lastPeriodStartDate === next.lastPeriodStartDate &&
   current.heightCm === next.heightCm &&
-  current.weightKg === next.weightKg;
+  current.weightKg === next.weightKg &&
+  current.emergencyContactName === next.emergencyContactName &&
+  current.emergencyContactPhone === next.emergencyContactPhone &&
+  current.hasSeenChatDisclaimer === next.hasSeenChatDisclaimer;
 
 const mapZodIssuesToFields = <TValues extends Record<string, unknown>>(
   form: UseFormReturn<TValues>,
@@ -112,6 +115,8 @@ export function SettingsPage() {
     defaultValues: {
       displayName: personalInfoDefaults.displayName,
       birthDate: personalInfoDefaults.birthDate,
+      emergencyContactName: personalInfoDefaults.emergencyContactName,
+      emergencyContactPhone: personalInfoDefaults.emergencyContactPhone,
     },
     mode: 'onBlur',
   });
@@ -125,6 +130,8 @@ export function SettingsPage() {
     personalInfoForm.reset({
       displayName: personalInfoDefaults.displayName,
       birthDate: personalInfoDefaults.birthDate,
+      emergencyContactName: personalInfoDefaults.emergencyContactName,
+      emergencyContactPhone: personalInfoDefaults.emergencyContactPhone,
     });
   }, [personalInfoDefaults, personalInfoForm]);
 
@@ -144,6 +151,11 @@ export function SettingsPage() {
 
     if (value === 'calendar') {
       navigate('/calendar');
+      return;
+    }
+
+    if (value === 'chat') {
+      navigate('/chat');
       return;
     }
 
@@ -169,9 +181,11 @@ export function SettingsPage() {
     const patch = {
       displayName: normalizeOptionalText(result.data.displayName) ?? null,
       birthDate: normalizeOptionalIsoDate(result.data.birthDate) ?? null,
+      emergencyContactName: normalizeOptionalText(result.data.emergencyContactName) ?? null,
+      emergencyContactPhone: normalizeOptionalText(result.data.emergencyContactPhone) ?? null,
     };
 
-    const { error } = await updateOnboardingPersonalInfo(user, patch);
+    const { error } = await updateOnboardingProfile(user, patch);
 
     if (error) {
       setPersonalInfoState('error');
@@ -188,6 +202,8 @@ export function SettingsPage() {
       ...current,
       displayName: patch.displayName,
       birthDate: patch.birthDate,
+      emergencyContactName: patch.emergencyContactName,
+      emergencyContactPhone: patch.emergencyContactPhone,
     }));
     setPersonalInfoState('success');
     const message = 'Đã lưu thông tin cá nhân.';
@@ -324,6 +340,23 @@ export function SettingsPage() {
               </Grid>
               <Grid size={{ xs: 12 }}>
                 <FormDateField label="Ngày sinh" name="birthDate" />
+              </Grid>
+              <Grid size={{ xs: 12 }}>
+                <FormTextField
+                  helperText="Không bắt buộc"
+                  label="Tên người liên hệ khẩn cấp"
+                  name="emergencyContactName"
+                  placeholder="Ví dụ: Mẹ"
+                />
+              </Grid>
+              <Grid size={{ xs: 12 }}>
+                <FormTextField
+                  helperText="Không bắt buộc"
+                  inputMode="tel"
+                  label="Số điện thoại khẩn cấp"
+                  name="emergencyContactPhone"
+                  placeholder="Ví dụ: 0901234567"
+                />
               </Grid>
             </Grid>
             <AppSubmitButton

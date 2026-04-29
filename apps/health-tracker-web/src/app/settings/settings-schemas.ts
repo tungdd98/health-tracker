@@ -10,6 +10,8 @@ import {
 export const personalInfoSettingsSchema = z.object({
   displayName: optionalTrimmedTextSchema,
   birthDate: optionalDateTimeSchema,
+  emergencyContactName: optionalTrimmedTextSchema,
+  emergencyContactPhone: optionalTrimmedTextSchema,
 });
 
 export const cycleAndBodySettingsSchema = z.object({

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["deno.window", "dom", "dom.iterable"]
+  },
+  "imports": {
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2",
+    "luxon": "npm:luxon@3.7.2"
+  }
+}

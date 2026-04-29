@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { useAuthSession } from './auth/use-auth-session';
 import { CalendarPage } from './calendar/calendar-page';
+import { ChatPage } from './chat/chat-page';
 import { AuthRouteState } from './components/auth-route-state';
 import { DashboardPage } from './dashboard/dashboard-page';
 import { MedicationFormPage } from './medications/medication-form-page';
@@ -76,6 +77,14 @@ export const appRouter = createBrowserRouter([
     element: (
       <PrivateRoute>
         <CalendarPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/chat',
+    element: (
+      <PrivateRoute>
+        <ChatPage />
       </PrivateRoute>
     ),
   },

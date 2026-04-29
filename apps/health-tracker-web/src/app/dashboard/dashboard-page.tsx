@@ -85,6 +85,11 @@ export function DashboardPage() {
       return;
     }
 
+    if (value === 'chat') {
+      navigate('/chat');
+      return;
+    }
+
     if (value === 'home') {
       navigate('/');
     }

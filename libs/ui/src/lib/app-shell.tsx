@@ -1,4 +1,5 @@
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
+import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
 import { Box, Container } from '@mui/material';
@@ -7,9 +8,10 @@ import type { PropsWithChildren } from 'react';
 import { AppHeader } from './app-header';
 import { AppBottomNav, type AppBottomNavItem } from './app-bottom-nav';
 
-const defaultNavItems: AppBottomNavItem[] = [
+export const defaultNavItems: AppBottomNavItem[] = [
   { icon: <HomeRoundedIcon />, label: 'Trang chủ', value: 'home' },
   { icon: <CalendarMonthRoundedIcon />, label: 'Chu kỳ', value: 'calendar' },
+  { icon: <ChatBubbleRoundedIcon />, label: 'AI', value: 'chat' },
   { icon: <TuneRoundedIcon />, label: 'Cài đặt', value: 'settings' },
 ];
 

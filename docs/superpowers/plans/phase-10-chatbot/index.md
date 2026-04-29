@@ -19,8 +19,8 @@
 - [ ] [Task 03 — Edge Function transport, auth, and persistence foundation](task-03-edge-function-foundation.md)
 - [ ] [Task 04 — Claude prompt, tools, and safety loop](task-04-claude-tools-and-safety.md)
 - [ ] [Task 05 — Web chat data layer and streaming hooks](task-05-web-chat-data-layer.md)
-- [ ] [Task 06 — Chat route, shell wiring, and primary screens](task-06-chat-route-and-screens.md)
-- [ ] [Task 07 — Streaming, emergency, history, and rate-limit states](task-07-chat-runtime-states.md)
+- [x] [Task 06 — Chat route, shell wiring, and primary screens](task-06-chat-route-and-screens.md)
+- [x] [Task 07 — Streaming, emergency, history, and rate-limit states](task-07-chat-runtime-states.md)
 - [ ] [Task 08 — Verification, tracking sync, and commit](task-08-verification-tracking-and-commit.md)
 
 ---

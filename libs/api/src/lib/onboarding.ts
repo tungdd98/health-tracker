@@ -16,12 +16,19 @@ export type OnboardingProfile = {
   lastPeriodStartDate: string | null;
   heightCm: number | null;
   weightKg: number | null;
+  emergencyContactName: string | null;
+  emergencyContactPhone: string | null;
+  hasSeenChatDisclaimer: boolean;
 };
 
 export type OnboardingPersonalInfoPatch = Pick<OnboardingProfile, 'displayName' | 'birthDate'>;
 export type OnboardingCycleAndBodyPatch = Pick<
   OnboardingProfile,
   'cycleLengthDays' | 'lastPeriodStartDate' | 'heightCm' | 'weightKg'
+>;
+export type OnboardingEmergencyContactPatch = Pick<
+  OnboardingProfile,
+  'emergencyContactName' | 'emergencyContactPhone'
 >;
 
 const createDefaultOnboardingProfile = (): OnboardingProfile => ({
@@ -34,6 +41,9 @@ const createDefaultOnboardingProfile = (): OnboardingProfile => ({
   lastPeriodStartDate: null,
   heightCm: null,
   weightKg: null,
+  emergencyContactName: null,
+  emergencyContactPhone: null,
+  hasSeenChatDisclaimer: false,
 });
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -82,6 +92,9 @@ const toOnboardingProfile = (metadata: Record<string, unknown>): OnboardingProfi
   lastPeriodStartDate: getStringValue(metadata.lastPeriodStartDate),
   heightCm: getNullableNumberValue(metadata.heightCm),
   weightKg: getNullableNumberValue(metadata.weightKg),
+  emergencyContactName: getStringValue(metadata.emergencyContactName),
+  emergencyContactPhone: getStringValue(metadata.emergencyContactPhone),
+  hasSeenChatDisclaimer: getBooleanValue(metadata.hasSeenChatDisclaimer),
 });
 
 const pickOnboardingPatch = (patch: Partial<OnboardingProfile>): Record<string, unknown> => {
@@ -114,6 +127,16 @@ export const updateOnboardingCycleAndBody = async (
   user: User,
   patch: OnboardingCycleAndBodyPatch,
 ) => updateOnboardingProfile(user, patch);
+
+export const updateOnboardingEmergencyContact = async (
+  user: User,
+  patch: OnboardingEmergencyContactPatch,
+) => updateOnboardingProfile(user, patch);
+
+export const markChatDisclaimerSeen = async (user: User) =>
+  updateOnboardingProfile(user, {
+    hasSeenChatDisclaimer: true,
+  });
 
 export const completeOnboarding = async (user: User) =>
   updateOnboardingProfile(user, {

@@ -43,6 +43,11 @@ export function CalendarPage() {
       return;
     }
 
+    if (value === 'chat') {
+      navigate('/chat');
+      return;
+    }
+
     if (value === 'calendar') {
       navigate('/calendar');
     }
