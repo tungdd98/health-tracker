@@ -8,9 +8,14 @@ import type { ZodIssue } from 'zod';
 
 import {
   completeOnboarding,
+  generateMoodImages,
+  getUserMoodImages,
   mapAuthErrorToMessage,
+  type MoodValue,
   type OnboardingProfile,
+  updateAvatarMeta,
   updateOnboardingProfile,
+  uploadAvatar,
 } from '@health-tracker/api';
 import { AppFormProvider } from '@health-tracker/forms';
 import { AppSubmitButton } from '@health-tracker/ui';
@@ -18,6 +23,7 @@ import { AppSubmitButton } from '@health-tracker/ui';
 import { useAuthSession } from '../auth/use-auth-session';
 import { OnboardingLayout } from '../components/onboarding-layout';
 import { BasicProfileStep } from '../onboarding/basic-profile-step';
+import { OnboardingWowScreen } from '../onboarding/onboarding-wow-screen';
 import { BodyMetricsStep } from '../onboarding/body-metrics-step';
 import { CompletionStep } from '../onboarding/completion-step';
 import { CycleStep } from '../onboarding/cycle-step';
@@ -108,6 +114,10 @@ export function OnboardingPage() {
   const [profileSnapshot, setProfileSnapshot] = useState(onboardingProfile);
   const [submitError, setSubmitError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [avatarPreviewUrl, setAvatarPreviewUrl] = useState<string | null>(null);
+  const [showWowScreen, setShowWowScreen] = useState(false);
+  const [wowMoodImages, setWowMoodImages] = useState<Partial<Record<MoodValue, string>>>({});
 
   const defaultValues = useMemo(() => buildFormDefaults(profileSnapshot), [profileSnapshot]);
 
@@ -170,6 +180,25 @@ export function OnboardingPage() {
     }));
   };
 
+  const handleAvatarChange = async (file: File) => {
+    if (!user) return;
+    try {
+      const url = await uploadAvatar(user.id, file);
+      await updateAvatarMeta(user.id, { avatarUrl: url });
+      setAvatarFile(file);
+      setAvatarPreviewUrl(url);
+    } catch {
+      // silent — avatar upload failure is non-blocking in onboarding
+    }
+  };
+
+  const handleWowContinue = () => {
+    setShowWowScreen(false);
+    setCurrentStepId(
+      getNextOnboardingStepId(ONBOARDING_STEP_IDS.basicProfile) ?? ONBOARDING_STEP_IDS.cycle,
+    );
+  };
+
   const validateAndPersistCurrentStep = async () => {
     if (!user) {
       return;
@@ -230,6 +259,22 @@ export function OnboardingPage() {
         displayName: normalizeOptionalText(result.data.displayName) ?? null,
         birthDate: normalizeOptionalIsoDate(result.data.birthDate) ?? null,
       });
+
+      if (avatarFile) {
+        setIsSaving(true);
+        try {
+          await generateMoodImages(user.id);
+          const images = await getUserMoodImages(user.id);
+          setWowMoodImages(images);
+          setShowWowScreen(true);
+        } catch {
+          setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.cycle);
+        } finally {
+          setIsSaving(false);
+        }
+        return;
+      }
+
       setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.cycle);
       return;
     }
@@ -339,7 +384,12 @@ export function OnboardingPage() {
       case ONBOARDING_STEP_IDS.phase:
         return <PhaseStep />;
       case ONBOARDING_STEP_IDS.basicProfile:
-        return <BasicProfileStep />;
+        return (
+          <BasicProfileStep
+            avatarPreviewUrl={avatarPreviewUrl}
+            onAvatarChange={(file) => void handleAvatarChange(file)}
+          />
+        );
       case ONBOARDING_STEP_IDS.cycle:
         return <CycleStep />;
       case ONBOARDING_STEP_IDS.bodyMetrics:
@@ -388,6 +438,10 @@ export function OnboardingPage() {
       Quay lại
     </Button>
   ) : null;
+
+  if (showWowScreen) {
+    return <OnboardingWowScreen moodImages={wowMoodImages} onContinue={handleWowContinue} />;
+  }
 
   return (
     <AppFormProvider
