@@ -443,8 +443,10 @@ export const appTheme = createTheme({
       styleOverrides: {
         root: {
           color: alpha(rose.textMuted, 0.82),
-          lineHeight: 2,
           fontWeight: 400,
+          '&.MuiInputLabel-outlined.MuiInputLabel-sizeSmall:not(.MuiInputLabel-shrink)': {
+            transform: 'translate(14px, 14px) scale(1)',
+          },
           '&.Mui-focused': {
             color: alpha(rose.textMuted, 0.82),
           },
