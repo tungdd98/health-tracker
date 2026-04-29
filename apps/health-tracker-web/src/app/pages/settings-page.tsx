@@ -1,4 +1,5 @@
 import AddAPhotoRoundedIcon from '@mui/icons-material/AddAPhotoRounded';
+import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import {
   Alert,
@@ -12,7 +13,6 @@ import {
   Stack,
   Switch,
   TextField,
-  Typography,
 } from '@mui/material';
 import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from 'react';
 import { useForm, type Path, type UseFormReturn } from 'react-hook-form';
@@ -413,21 +413,17 @@ export function SettingsPage() {
                 type="file"
               />
             </Box>
-            <Stack spacing={0.5}>
-              <Typography color="text.secondary" variant="body2">
-                Thay ảnh đại diện
-              </Typography>
-              {avatarMeta?.avatarUrl ? (
-                <Button
-                  disabled={isRegenerating}
-                  onClick={() => void handleRegenerateConfirm()}
-                  size="small"
-                  variant="text"
-                >
-                  {isRegenerating ? 'Đang tạo...' : 'Tạo lại sticker'}
-                </Button>
-              ) : null}
-            </Stack>
+            {avatarMeta?.avatarUrl ? (
+              <Button
+                disabled={isRegenerating}
+                onClick={() => void handleRegenerateConfirm()}
+                size="small"
+                startIcon={<AutorenewRoundedIcon fontSize="small" />}
+                variant="outlined"
+              >
+                {isRegenerating ? 'Đang tạo...' : 'Tạo lại sticker'}
+              </Button>
+            ) : null}
           </Stack>
           <AppFormProvider form={personalInfoForm} onSubmit={handleSavePersonalInfo}>
             <Grid container spacing={2}>

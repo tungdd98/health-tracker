@@ -343,9 +343,11 @@ export const appTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: appTokens.radius.pill,
-          minHeight: 48,
           minWidth: 120,
           paddingInline: 20,
+        },
+        sizeMedium: {
+          minHeight: 48,
         },
         contained: {
           background: `linear-gradient(135deg, ${rose.primary} 0%, ${alpha(rose.primary, 0.72)} 100%)`,
