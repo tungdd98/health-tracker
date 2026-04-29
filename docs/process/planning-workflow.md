@@ -83,6 +83,7 @@ brainstorming → spec → designing-with-pencil → writing-plans → executing
 Rules:
 
 - Use the **Pencil MCP server** to produce a `.pen` artifact at `docs/superpowers/designs/YYYY-MM-DD-<topic>.pen`. Each distinct screen/state lives in its own frame.
+- During implementation, frame review must be done via **Pencil MCP tool calls**; opening `.pen` as raw JSON/text does not satisfy the design-read requirement.
 - Invoke the `designing-with-pencil` skill to drive this step — it owns the procedure (screens to cover, states, naming, handoff).
 - Skip the design step entirely for backend-only, CLI, schema-only, or pure-logic changes.
 - The plan **MUST reference the design** (`docs/superpowers/designs/<file>.pen` → frame `<name>`) instead of describing UI in prose. Plan tasks for UI work cover state, validation, API, routing — not visual description.
