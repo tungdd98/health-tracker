@@ -34,6 +34,7 @@ import type {
   PersonalInfoSettingsFormValues,
   SettingsSaveState,
 } from '../settings/settings-types';
+import { useAppNavChange } from '../use-app-nav-change';
 
 const ONBOARDING_PHASE_LABELS: Record<OnboardingPhase, string> = {
   'pre-pregnancy': 'Tiền thai kỳ',
@@ -80,6 +81,7 @@ type SnackbarState = {
 export function SettingsPage() {
   const navigate = useNavigate();
   const { onboardingProfile, user } = useAuthSession();
+  const handleNavChange = useAppNavChange();
 
   const [profileSnapshot, setProfileSnapshot] = useState(onboardingProfile);
 
@@ -142,27 +144,6 @@ export function SettingsPage() {
   const selectedPhaseLabel = profileSnapshot.selectedPhase
     ? ONBOARDING_PHASE_LABELS[profileSnapshot.selectedPhase]
     : 'Chưa thiết lập';
-
-  const handleNavChange = (value: string) => {
-    if (value === 'home') {
-      navigate('/');
-      return;
-    }
-
-    if (value === 'calendar') {
-      navigate('/calendar');
-      return;
-    }
-
-    if (value === 'chat') {
-      navigate('/chat');
-      return;
-    }
-
-    if (value === 'settings') {
-      navigate('/settings');
-    }
-  };
 
   const handleSavePersonalInfo = async (values: PersonalInfoSettingsFormValues) => {
     if (!user) {

@@ -1,16 +1,18 @@
 import type { ReactNode } from 'react';
 import { BottomNavigation, BottomNavigationAction, Box, Paper } from '@mui/material';
 
+export type AppNavValue = 'home' | 'calendar' | 'chat' | 'settings';
+
 export type AppBottomNavItem = {
   icon: ReactNode;
   label: string;
-  value: string;
+  value: AppNavValue;
 };
 
 type AppBottomNavProps = {
   items: AppBottomNavItem[];
-  value: string;
-  onChange?: (value: string) => void;
+  value: AppNavValue;
+  onChange?: (value: AppNavValue) => void;
 };
 
 export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
@@ -50,7 +52,7 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
             p: 0.5,
           }}
           value={value}
-          onChange={(_event, nextValue: string) => onChange?.(nextValue)}
+          onChange={(_event, nextValue: AppNavValue) => onChange?.(nextValue)}
         >
           {items.map((item) => (
             <BottomNavigationAction

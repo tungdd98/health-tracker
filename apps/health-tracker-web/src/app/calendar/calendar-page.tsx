@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppCard, AppShell } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
+import { useAppNavChange } from '../use-app-nav-change';
 import { MonthGrid } from './month-grid';
 import { PhaseLegend } from './phase-legend';
 
@@ -31,27 +32,7 @@ export function CalendarPage() {
   const theme = useTheme();
   const { isAuthResolved, onboardingProfile } = useAuthSession();
   const [displayMonth, setDisplayMonth] = useState(() => DateTime.local().startOf('month'));
-
-  const handleNavChange = (value: string) => {
-    if (value === 'home') {
-      navigate('/');
-      return;
-    }
-
-    if (value === 'settings') {
-      navigate('/settings');
-      return;
-    }
-
-    if (value === 'chat') {
-      navigate('/chat');
-      return;
-    }
-
-    if (value === 'calendar') {
-      navigate('/calendar');
-    }
-  };
+  const handleNavChange = useAppNavChange();
 
   const lastPeriodStartDate = onboardingProfile.lastPeriodStartDate
     ? DateTime.fromISO(onboardingProfile.lastPeriodStartDate)

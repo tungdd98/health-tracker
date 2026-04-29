@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppShell } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
+import { useAppNavChange } from '../use-app-nav-change';
 import { deriveCycleHeroMode } from './cycle-hero-modes';
 import { CycleHero } from './cycle-hero';
 import { DailyLogStrip } from './daily-log-strip';
@@ -45,6 +46,7 @@ export function DashboardPage() {
   const { isAuthResolved, onboardingProfile, user } = useAuthSession();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const handleNavChange = useAppNavChange();
 
   const today = DateTime.local();
   const greetingName =
@@ -73,27 +75,6 @@ export function DashboardPage() {
           lastPeriodStartDate,
         }
       : null;
-
-  const handleNavChange = (value: string) => {
-    if (value === 'calendar') {
-      navigate('/calendar');
-      return;
-    }
-
-    if (value === 'settings') {
-      navigate('/settings');
-      return;
-    }
-
-    if (value === 'chat') {
-      navigate('/chat');
-      return;
-    }
-
-    if (value === 'home') {
-      navigate('/');
-    }
-  };
 
   const handleSnackbarClose = (_event?: Event | SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {

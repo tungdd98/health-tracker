@@ -6,7 +6,7 @@ import { Box, Container } from '@mui/material';
 import type { PropsWithChildren } from 'react';
 
 import { AppHeader } from './app-header';
-import { AppBottomNav, type AppBottomNavItem } from './app-bottom-nav';
+import { AppBottomNav, type AppBottomNavItem, type AppNavValue } from './app-bottom-nav';
 
 export const defaultNavItems: AppBottomNavItem[] = [
   { icon: <HomeRoundedIcon />, label: 'Trang chủ', value: 'home' },
@@ -22,8 +22,8 @@ type AppShellProps = PropsWithChildren<{
   headerSubtitle?: string;
   headerTitle?: string;
   navItems?: AppBottomNavItem[];
-  onNavChange?: (value: string) => void;
-  navValue?: string;
+  onNavChange?: (value: AppNavValue) => void;
+  navValue?: AppNavValue;
 }>;
 
 export function AppShell({
