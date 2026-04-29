@@ -312,19 +312,13 @@ export function SettingsPage() {
                 />
               </Grid>
               <Grid size={{ xs: 12 }}>
-                <FormTextField
-                  helperText="Không bắt buộc"
-                  label="Tên"
-                  name="displayName"
-                  placeholder="Ví dụ: Lan Anh"
-                />
+                <FormTextField label="Tên" name="displayName" placeholder="Ví dụ: Lan Anh" />
               </Grid>
               <Grid size={{ xs: 12 }}>
                 <FormDateField label="Ngày sinh" name="birthDate" />
               </Grid>
               <Grid size={{ xs: 12 }}>
                 <FormTextField
-                  helperText="Không bắt buộc"
                   label="Tên người liên hệ khẩn cấp"
                   name="emergencyContactName"
                   placeholder="Ví dụ: Mẹ"
@@ -332,7 +326,6 @@ export function SettingsPage() {
               </Grid>
               <Grid size={{ xs: 12 }}>
                 <FormTextField
-                  helperText="Không bắt buộc"
                   inputMode="tel"
                   label="Số điện thoại khẩn cấp"
                   name="emergencyContactPhone"

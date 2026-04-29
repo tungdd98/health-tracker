@@ -9,9 +9,9 @@ import { AppHeader } from './app-header';
 import { AppBottomNav, type AppBottomNavItem, type AppNavValue } from './app-bottom-nav';
 
 export const defaultNavItems: AppBottomNavItem[] = [
-  { icon: <HomeRoundedIcon />, label: 'Trang chủ', value: 'home' },
+  { icon: <HomeRoundedIcon />, label: 'Home', value: 'home' },
   { icon: <CalendarMonthRoundedIcon />, label: 'Chu kỳ', value: 'calendar' },
-  { icon: <ChatBubbleRoundedIcon />, label: 'AI', value: 'chat' },
+  { icon: <ChatBubbleRoundedIcon />, label: 'AI chat', value: 'chat' },
   { icon: <TuneRoundedIcon />, label: 'Cài đặt', value: 'settings' },
 ];
 

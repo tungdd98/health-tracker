@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import type { AssistantPreferences, ChatPersonalization } from '@health-tracker/api';
 import { AppBottomSheetDialog, AppSubmitButton } from '@health-tracker/ui';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 
 import { assistantGoalsSchema } from '../schemas/chat-schemas';
 
@@ -238,32 +239,33 @@ export function AssistantPersonalizationSheet({
                 <Typography sx={{ pr: 1 }} variant="caption">
                   {index + 1}. {goal}
                 </Typography>
-                <Button
-                  color="inherit"
+                <IconButton
+                  edge="end"
                   onClick={() => handleRemoveGoal(index)}
                   size="small"
-                  sx={{ minWidth: 'auto' }}
+                  sx={{ color: 'text.secondary' }}
                 >
-                  Xoá
-                </Button>
+                  <DeleteOutlineRoundedIcon fontSize="small" />
+                </IconButton>
               </Stack>
             ))}
 
-            <TextField
-              fullWidth
-              helperText={`${newGoal.trim().length}/120`}
-              onChange={(event) => setNewGoal(event.target.value)}
-              placeholder="Thêm mục tiêu..."
-              size="small"
-              value={newGoal}
-            />
-            <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row" justifyContent="space-between" alignItems="center" gap={1}>
+              <TextField
+                fullWidth
+                helperText={`${newGoal.trim().length}/120`}
+                onChange={(event) => setNewGoal(event.target.value)}
+                placeholder="Thêm mục tiêu..."
+                size="small"
+                value={newGoal}
+              />
               <IconButton
                 aria-label="Thêm mục tiêu"
                 disabled={isAddDisabled}
                 onClick={handleAddGoal}
                 size="small"
                 sx={(theme) => ({
+                  mb: 2.5,
                   bgcolor: 'primary.main',
                   color: 'primary.contrastText',
                   '&:hover': {
