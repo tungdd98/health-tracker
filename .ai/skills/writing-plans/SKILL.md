@@ -15,8 +15,12 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Context:** This should be run in a dedicated worktree (created by brainstorming skill).
 
-**Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
+**Save plans to:** `docs/superpowers/plans/<feature-name>/`
 
+- Always create `index.md` inside that folder as the tracking entrypoint
+- Record the plan creation date inside `index.md` instead of encoding it in the folder name
+- Split execution work into `task-XX-<topic>.md` files in the same folder
+- Use a plain feature slug by default; if the user or repo workflow wants a naming scheme such as phases, that decision should happen during brainstorming
 - (User preferences for plan location override this default)
 - After saving, ask the user: "Commit this plan to git? (y/n)"
   - If yes → commit. If no → leave as uncommitted file.
@@ -66,14 +70,18 @@ This structure informs the task decomposition. Each task should produce self-con
 - "Run the tests and make sure they pass" - step
 - "Commit" - step
 
-## Plan Document Header
+## Index File Header
 
-**Every plan MUST start with this header:**
+**Every plan folder MUST include `index.md` starting with this header:**
 
 ```markdown
 # [Feature Name] Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `subagent-driven-development` (recommended) or `executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Created:** YYYY-MM-DD
+
+**Status:** Planning
 
 **Goal:** [One sentence describing what this builds]
 
@@ -83,6 +91,15 @@ This structure informs the task decomposition. Each task should produce self-con
 
 ---
 ```
+
+## Index File Requirements
+
+Each `index.md` should act as the control tower for the plan:
+
+- Include the header above
+- Add a task checklist linking to every `task-XX-<topic>.md` file
+- Include a short file structure map when that helps the implementer orient quickly
+- Keep progress current as tasks are completed
 
 ## Task Structure
 
@@ -128,6 +145,12 @@ git commit -m "feat: add specific feature"
 ```
 ````
 
+Save each task as its own file:
+
+- `docs/superpowers/plans/<feature-name>/task-01-<topic>.md`
+- `docs/superpowers/plans/<feature-name>/task-02-<topic>.md`
+- Continue numbering in execution order
+
 ## No Placeholders
 
 Every step must contain the actual content an engineer needs. These are **plan failures** — never write them:
@@ -164,7 +187,7 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 After saving the plan, offer execution choice:
 
-**"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Two execution options:**
+**"Plan complete and saved to `docs/superpowers/plans/<feature-name>/`. Two execution options:**
 
 **1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
 
