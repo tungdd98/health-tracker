@@ -1,6 +1,6 @@
 ---
 name: finishing-a-development-branch
-description: Use this (overrides upstream superpowers; minimal flow) when implementation is complete, all verifications pass, and the user wants to open a PR - delegates to the create-pr skill, no other options offered
+description: Use this when implementation is complete, all verifications pass, and the user wants to open a PR - delegates to the create-pr skill, no other options offered
 ---
 
 # Finishing a Development Branch

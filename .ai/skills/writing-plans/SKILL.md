@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Use this (overrides upstream superpowers; trimmed for FE projects) when you have a spec or requirements for a multi-step task, before touching code
+description: Use this when you have a spec or requirements for a multi-step task, before touching code
 ---
 
 # Writing Plans

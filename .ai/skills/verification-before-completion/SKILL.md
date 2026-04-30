@@ -1,6 +1,6 @@
 ---
 name: verification-before-completion
-description: Use this (overrides upstream superpowers; FE-default verification) when about to claim work is complete, fixed, or passing, before committing or creating PRs - runs typecheck → lint → build using project's package manager; tests are optional
+description: Use this when about to claim work is complete, fixed, or passing, before committing or creating PRs - runs typecheck → lint → build using project's package manager; tests are optional
 ---
 
 # Verification Before Completion

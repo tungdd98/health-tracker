@@ -1,6 +1,6 @@
 ---
 name: using-git-worktrees
-description: Use this (overrides upstream superpowers; requires explicit folder+branch params) when starting feature work that needs isolation - creates isolated git worktrees in .worktrees/ with safety verification; does NOT auto-derive names
+description: Use this when starting feature work that needs isolation - creates isolated git worktrees in .worktrees/ with safety verification; does NOT auto-derive names
 ---
 
 # Using Git Worktrees
