@@ -16,9 +16,9 @@
 
 ## Tracking
 
-- [ ] Task 01: [Remove onboarding avatar and sticker flow from the basic profile step and onboarding page](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-13-onboarding-sticker-removal/task-01-remove-onboarding-avatar-flow.md)
-- [ ] Task 02: [Retire onboarding-only sticker artifacts and align plan docs with the settings-only ownership model](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-13-onboarding-sticker-removal/task-02-retire-artifacts-and-align-docs.md)
-- [ ] Task 03: [Verify the simplified onboarding flow, confirm settings still owns stickers, and synchronize tracking](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-13-onboarding-sticker-removal/task-03-verification-and-tracking.md)
+- [x] Task 01: [Remove onboarding avatar and sticker flow from the basic profile step and onboarding page](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-13-onboarding-sticker-removal/task-01-remove-onboarding-avatar-flow.md)
+- [x] Task 02: [Retire onboarding-only sticker artifacts and align plan docs with the settings-only ownership model](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-13-onboarding-sticker-removal/task-02-retire-artifacts-and-align-docs.md)
+- [x] Task 03: [Verify the simplified onboarding flow, confirm settings still owns stickers, and synchronize tracking](/Users/mac/Desktop/health-tracker/docs/superpowers/plans/phase-13-onboarding-sticker-removal/task-03-verification-and-tracking.md)
 
 ## File Structure Map
 
