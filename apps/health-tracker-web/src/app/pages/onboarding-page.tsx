@@ -8,23 +8,16 @@ import type { ZodIssue } from 'zod';
 
 import {
   completeOnboarding,
-  generateMoodImages,
-  getUserMoodImages,
   mapAuthErrorToMessage,
-  type MoodValue,
   type OnboardingProfile,
-  updateAvatarMeta,
   updateOnboardingProfile,
-  uploadAvatar,
 } from '@health-tracker/api';
 import { AppFormProvider } from '@health-tracker/forms';
 import { AppSubmitButton } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
-import { MoodGeneratingOverlay } from '../components/mood-generating-overlay';
 import { OnboardingLayout } from '../components/onboarding-layout';
 import { BasicProfileStep } from '../onboarding/basic-profile-step';
-import { OnboardingWowScreen } from '../onboarding/onboarding-wow-screen';
 import { BodyMetricsStep } from '../onboarding/body-metrics-step';
 import { CompletionStep } from '../onboarding/completion-step';
 import { CycleStep } from '../onboarding/cycle-step';
@@ -59,7 +52,6 @@ import {
   toCycleAndBodyDefaults,
   toPersonalInfoDefaults,
 } from '../profile/profile-mappers';
-import { compressImage } from '../utils/compress-image';
 
 const isSameOnboardingProfile = (current: OnboardingProfile, next: OnboardingProfile) =>
   current.selectedPhase === next.selectedPhase &&
@@ -116,12 +108,6 @@ export function OnboardingPage() {
   const [profileSnapshot, setProfileSnapshot] = useState(onboardingProfile);
   const [submitError, setSubmitError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
-  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
-  const [isGeneratingMood, setIsGeneratingMood] = useState(false);
-  const [avatarFile, setAvatarFile] = useState<File | null>(null);
-  const [avatarPreviewUrl, setAvatarPreviewUrl] = useState<string | null>(null);
-  const [showWowScreen, setShowWowScreen] = useState(false);
-  const [wowMoodImages, setWowMoodImages] = useState<Partial<Record<MoodValue, string>>>({});
 
   const defaultValues = useMemo(() => buildFormDefaults(profileSnapshot), [profileSnapshot]);
 
@@ -184,32 +170,6 @@ export function OnboardingPage() {
     }));
   };
 
-  const handleAvatarChange = async (file: File) => {
-    if (!user) return;
-    setIsUploadingAvatar(true);
-    try {
-      const compressedFile = await compressImage(file);
-      const url = await uploadAvatar(user.id, compressedFile);
-      await updateAvatarMeta(user.id, { avatarUrl: url });
-      setAvatarFile(compressedFile);
-      setAvatarPreviewUrl(url);
-      setSubmitError('');
-    } catch (error) {
-      setSubmitError(
-        error instanceof Error ? error.message : 'Không thể tải ảnh lên. Vui lòng thử lại.',
-      );
-    } finally {
-      setIsUploadingAvatar(false);
-    }
-  };
-
-  const handleWowContinue = () => {
-    setShowWowScreen(false);
-    setCurrentStepId(
-      getNextOnboardingStepId(ONBOARDING_STEP_IDS.basicProfile) ?? ONBOARDING_STEP_IDS.cycle,
-    );
-  };
-
   const validateAndPersistCurrentStep = async () => {
     if (!user) {
       return;
@@ -270,21 +230,6 @@ export function OnboardingPage() {
         displayName: normalizeOptionalText(result.data.displayName) ?? null,
         birthDate: normalizeOptionalIsoDate(result.data.birthDate) ?? null,
       });
-
-      if (avatarFile) {
-        setIsGeneratingMood(true);
-        try {
-          await generateMoodImages(user.id);
-          const images = await getUserMoodImages(user.id);
-          setWowMoodImages(images);
-          setShowWowScreen(true);
-        } catch {
-          setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.cycle);
-        } finally {
-          setIsGeneratingMood(false);
-        }
-        return;
-      }
 
       setCurrentStepId(getNextOnboardingStepId(currentStepId) ?? ONBOARDING_STEP_IDS.cycle);
       return;
@@ -395,13 +340,7 @@ export function OnboardingPage() {
       case ONBOARDING_STEP_IDS.phase:
         return <PhaseStep />;
       case ONBOARDING_STEP_IDS.basicProfile:
-        return (
-          <BasicProfileStep
-            avatarPreviewUrl={avatarPreviewUrl}
-            isUploading={isUploadingAvatar}
-            onAvatarChange={(file) => void handleAvatarChange(file)}
-          />
-        );
+        return <BasicProfileStep />;
       case ONBOARDING_STEP_IDS.cycle:
         return <CycleStep />;
       case ONBOARDING_STEP_IDS.bodyMetrics:
@@ -451,40 +390,33 @@ export function OnboardingPage() {
     </Button>
   ) : null;
 
-  if (showWowScreen) {
-    return <OnboardingWowScreen moodImages={wowMoodImages} onContinue={handleWowContinue} />;
-  }
-
   return (
-    <>
-      <AppFormProvider
-        form={form}
-        onSubmit={
-          currentStepId === ONBOARDING_STEP_IDS.completion
-            ? handleComplete
-            : validateAndPersistCurrentStep
-        }
+    <AppFormProvider
+      form={form}
+      onSubmit={
+        currentStepId === ONBOARDING_STEP_IDS.completion
+          ? handleComplete
+          : validateAndPersistCurrentStep
+      }
+    >
+      <OnboardingLayout
+        backAction={backAction}
+        continueAction={continueAction}
+        currentStepNumber={currentStepNumber}
+        description={currentStep.description}
+        eyebrow="Thiết lập ban đầu"
+        skipAction={skipAction}
+        stepLabel={currentStep.title}
+        title={currentStep.title}
+        totalSteps={ONBOARDING_STEP_COUNT}
       >
-        <OnboardingLayout
-          backAction={backAction}
-          continueAction={continueAction}
-          currentStepNumber={currentStepNumber}
-          description={currentStep.description}
-          eyebrow="Thiết lập ban đầu"
-          skipAction={skipAction}
-          stepLabel={currentStep.title}
-          title={currentStep.title}
-          totalSteps={ONBOARDING_STEP_COUNT}
-        >
-          {submitError ? (
-            <Alert color="error" variant="filled">
-              {submitError}
-            </Alert>
-          ) : null}
-          {stepContent}
-        </OnboardingLayout>
-      </AppFormProvider>
-      <MoodGeneratingOverlay open={isGeneratingMood} />
-    </>
+        {submitError ? (
+          <Alert color="error" variant="filled">
+            {submitError}
+          </Alert>
+        ) : null}
+        {stepContent}
+      </OnboardingLayout>
+    </AppFormProvider>
   );
 }
