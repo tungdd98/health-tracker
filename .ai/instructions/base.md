@@ -1,10 +1,3 @@
-# CLAUDE.md
-
-> Generated from `.ai/instructions/base.md` by `.ai/scripts/sync-ai-shims.sh`.
-> Edit the shared instructions in `.ai/instructions/base.md`, not this file.
-
-Claude-specific config stays under `.claude/` (for example `.claude/settings.json` and `.claude/hooks/`).
-
 # Shared AI Instructions
 
 ## Personal Instructions

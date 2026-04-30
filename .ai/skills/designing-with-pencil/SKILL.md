@@ -35,7 +35,7 @@ Bridges the gap between spec and plan with a visual design step using the **Penc
 brainstorming → spec → [designing-with-pencil] → writing-plans → executing-plans
 ```
 
-This skill is invoked **after** the spec is written and approved, **before** `superpowers:writing-plans`.
+This skill is invoked **after** the spec is written and approved, **before** `writing-plans`.
 
 ## Process
 
@@ -47,7 +47,7 @@ This skill is invoked **after** the spec is written and approved, **before** `su
 6. **Save the file** — to `docs/superpowers/designs/YYYY-MM-DD-<topic>.pen` (matching the spec's date and topic slug). Create the directory if missing.
 7. **Self-review** — see Self-Review section.
 8. **Hand off to user** — show the saved path, ask user to open it in the Pencil app and approve before the plan step.
-9. **Invoke writing-plans** — only after user approval, invoke `superpowers:writing-plans`. Tell the plan author the design file path so they reference it instead of describing UI.
+9. **Invoke writing-plans** — only after user approval, invoke `writing-plans`. Tell the plan author the design file path so they reference it instead of describing UI.
 
 ## What to Design (and What NOT to)
 
@@ -135,6 +135,6 @@ These thoughts mean STOP — you're skipping the design step you should be doing
 
 After the user approves the design, hand off with:
 
-> "Design approved and saved to `docs/superpowers/designs/<file>.pen`. Invoking `superpowers:writing-plans` now. The plan will reference this file for all UI tasks instead of describing visuals in prose."
+> "Design approved and saved to `docs/superpowers/designs/<file>.pen`. Invoking `writing-plans` now. The plan will reference this file for all UI tasks instead of describing visuals in prose."
 
-Then invoke `superpowers:writing-plans`, passing the design path so it knows to reference rather than re-describe.
+Then invoke `writing-plans`, passing the design path so it knows to reference rather than re-describe.
