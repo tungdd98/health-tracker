@@ -1,6 +1,8 @@
 # Phase 12 — Avatar & Mood Sticker
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+>
+> **Status note (2026-04-30):** The onboarding avatar picker and wow screen described in this phase were intentionally removed by `docs/superpowers/specs/2026-04-30-onboarding-sticker-removal-design.md` and `docs/superpowers/plans/phase-13-onboarding-sticker-removal/`. The settings, dashboard, and sticker-generation parts of phase 12 remain the active ownership model.
 
 **Goal:** Cho phép user upload avatar, sinh 5 sticker tâm trạng phong cách Zalo bằng OpenRouter Nano Banana, và dùng sticker thay thế emoji trong mood bottom sheet + dashboard.
 

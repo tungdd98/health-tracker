@@ -1,5 +1,7 @@
 # Task 04 — Onboarding: Avatar Picker + Wow Screen
 
+> Superseded on 2026-04-30 by `docs/superpowers/specs/2026-04-30-onboarding-sticker-removal-design.md` and `docs/superpowers/plans/phase-13-onboarding-sticker-removal/`. The settings-side sticker work remains active; the onboarding avatar picker and wow screen were intentionally removed.
+
 **Files:**
 
 - Modify: `apps/health-tracker-web/src/app/onboarding/basic-profile-step.tsx`
