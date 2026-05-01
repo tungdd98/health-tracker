@@ -1,5 +1,5 @@
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { Stack, Typography } from '@mui/material';
+import { SearchRounded } from '@mui/icons-material';
 
 const TOOL_LABELS: Record<string, string> = {
   get_profile: 'Đang đọc hồ sơ của bạn',
@@ -24,7 +24,7 @@ export function ToolCallChip({ name }: { name: string }) {
         py: 1,
       })}
     >
-      <SearchRoundedIcon sx={{ fontSize: 18 }} />
+      <SearchRounded sx={{ fontSize: 18 }} />
       <Typography fontSize={13} fontWeight={600} lineHeight={1.3}>
         {TOOL_LABELS[name] ?? 'Đang tra cứu thêm dữ liệu'}
       </Typography>

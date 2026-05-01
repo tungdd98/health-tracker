@@ -1,9 +1,9 @@
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Dialog, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material';
 
 import type { MoodValue } from '@health-tracker/api';
 
 import { StickerPreviewGrid } from './sticker-preview-grid';
+import { CloseRounded } from '@mui/icons-material';
 
 type StickerPreviewDialogProps = {
   open: boolean;
@@ -22,7 +22,7 @@ export function StickerPreviewDialog({ open, moodImages, onClose }: StickerPrevi
           size="small"
           sx={{ position: 'absolute', right: 12, top: 12 }}
         >
-          <CloseRoundedIcon />
+          <CloseRounded />
         </IconButton>
       </DialogTitle>
       <DialogContent>

@@ -1,6 +1,3 @@
-import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import {
   Box,
   Button,
@@ -21,6 +18,7 @@ import { useAuthSession } from '../auth/use-auth-session';
 import { useAppNavChange } from '../use-app-nav-change';
 import { MonthGrid } from './month-grid';
 import { PhaseLegend } from './phase-legend';
+import { ChevronLeftRounded, ChevronRightRounded, SettingsRounded } from '@mui/icons-material';
 
 const DASHBOARD_DISCLAIMER =
   'Thông tin chỉ mang tính ước tính dựa trên dữ liệu bạn cung cấp. Không thay thế tư vấn y tế.';
@@ -66,7 +64,7 @@ export function CalendarPage() {
               border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
             }}
           >
-            <ChevronLeftRoundedIcon />
+            <ChevronLeftRounded />
           </IconButton>
 
           <Typography variant="subtitle1">{monthLabel}</Typography>
@@ -79,7 +77,7 @@ export function CalendarPage() {
               border: `1px solid ${alpha(theme.palette.divider, 0.9)}`,
             }}
           >
-            <ChevronRightRoundedIcon />
+            <ChevronRightRounded />
           </IconButton>
         </Stack>
 
@@ -127,7 +125,7 @@ export function CalendarPage() {
               <Button
                 onClick={() => navigate('/settings')}
                 size="small"
-                startIcon={<SettingsRoundedIcon />}
+                startIcon={<SettingsRounded />}
                 variant="contained"
               >
                 Mở cài đặt

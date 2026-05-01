@@ -1,7 +1,5 @@
-import EmergencyRoundedIcon from '@mui/icons-material/EmergencyRounded';
-import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
-import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
 import { Button, Stack, Typography } from '@mui/material';
+import { EmergencyRounded, GroupRounded, LocalPhoneRounded } from '@mui/icons-material';
 
 export function EmergencyAlertCard({
   emergencyContactName,
@@ -21,7 +19,7 @@ export function EmergencyAlertCard({
     >
       <Stack spacing={1.5}>
         <Stack direction="row" spacing={1.25}>
-          <EmergencyRoundedIcon sx={{ fontSize: 24 }} />
+          <EmergencyRounded sx={{ fontSize: 24 }} />
           <Stack spacing={0.5} sx={{ flex: 1 }}>
             <Typography fontSize={15} fontWeight={700} lineHeight={1.3}>
               Đây có thể là tình trạng cấp cứu!
@@ -36,7 +34,7 @@ export function EmergencyAlertCard({
           <Button
             component="a"
             href="tel:115"
-            startIcon={<LocalPhoneRoundedIcon sx={{ fontSize: 18 }} />}
+            startIcon={<LocalPhoneRounded sx={{ fontSize: 18 }} />}
             sx={(theme) => ({
               backgroundColor: theme.palette.background.paper,
               borderRadius: theme.appTokens.radius.pill,
@@ -53,7 +51,7 @@ export function EmergencyAlertCard({
             <Button
               component="a"
               href={`tel:${emergencyContactPhone}`}
-              startIcon={<GroupRoundedIcon sx={{ fontSize: 18 }} />}
+              startIcon={<GroupRounded sx={{ fontSize: 18 }} />}
               sx={(theme) => ({
                 borderColor: theme.palette.background.paper,
                 borderRadius: theme.appTokens.radius.pill,
@@ -68,11 +66,11 @@ export function EmergencyAlertCard({
           ) : null}
         </Stack>
 
-        {!emergencyContactPhone ? (
+        {emergencyContactPhone ? null : (
           <Typography fontSize={13} lineHeight={1.5} sx={{ opacity: 0.9 }}>
             Nếu đang ở một mình, hãy nhờ người xung quanh hỗ trợ gọi cấp cứu ngay bây giờ.
           </Typography>
-        ) : null}
+        )}
       </Stack>
     </Stack>
   );

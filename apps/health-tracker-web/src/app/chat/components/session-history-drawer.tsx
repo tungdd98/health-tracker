@@ -1,11 +1,13 @@
-import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
-import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { Box, Drawer, IconButton, List, Stack, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
 
 import type { ChatSession } from '@health-tracker/api';
+import {
+  AccessTimeRounded,
+  ChatBubbleRounded,
+  CloseRounded,
+  DeleteOutlineRounded,
+} from '@mui/icons-material';
 
 export function SessionHistoryDrawer({
   activeSessionId,
@@ -72,7 +74,7 @@ export function SessionHistoryDrawer({
             Lịch sử hội thoại
           </Typography>
           <IconButton onClick={onClose} size="small" sx={{ color: 'text.secondary' }}>
-            <CloseRoundedIcon fontSize="small" />
+            <CloseRounded fontSize="small" />
           </IconButton>
         </Stack>
 
@@ -125,7 +127,7 @@ export function SessionHistoryDrawer({
                     width: 40,
                   })}
                 >
-                  <ChatBubbleRoundedIcon sx={{ fontSize: 20 }} />
+                  <ChatBubbleRounded sx={{ fontSize: 20 }} />
                 </Stack>
 
                 <Stack spacing={0.5} sx={{ minWidth: 0, width: '100%' }}>
@@ -141,7 +143,7 @@ export function SessionHistoryDrawer({
                     {session.title?.trim() || 'Cuộc trò chuyện mới'}
                   </Typography>
                   <Stack alignItems="center" direction="row" spacing={0.75}>
-                    <AccessTimeRoundedIcon sx={{ color: 'text.secondary', fontSize: 14 }} />
+                    <AccessTimeRounded sx={{ color: 'text.secondary', fontSize: 14 }} />
                     <Typography color="text.secondary" fontSize={12}>
                       {subtitle}
                     </Typography>
@@ -157,7 +159,7 @@ export function SessionHistoryDrawer({
                   size="small"
                   sx={{ color: 'text.secondary' }}
                 >
-                  <DeleteOutlineRoundedIcon fontSize="small" />
+                  <DeleteOutlineRounded fontSize="small" />
                 </IconButton>
               </Stack>
             );

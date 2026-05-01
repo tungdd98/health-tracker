@@ -1,6 +1,6 @@
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { Box, Stack, Typography } from '@mui/material';
 import type { ReactNode } from 'react';
+import { FavoriteRounded } from '@mui/icons-material';
 
 type EmptyStateProps = {
   icon?: ReactNode;
@@ -33,7 +33,7 @@ export function EmptyState({ icon, title, description, action }: EmptyStateProps
           width: 52,
         })}
       >
-        {icon ?? <FavoriteRoundedIcon />}
+        {icon ?? <FavoriteRounded />}
       </Box>
       <Typography variant="h5">{title}</Typography>
       <Typography color="text.secondary">{description}</Typography>

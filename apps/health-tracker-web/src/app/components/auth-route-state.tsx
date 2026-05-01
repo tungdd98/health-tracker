@@ -1,7 +1,7 @@
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { Box, CircularProgress, Container, Stack, Typography } from '@mui/material';
 
 import { AppCard } from '@health-tracker/ui';
+import { FavoriteRounded } from '@mui/icons-material';
 
 export function AuthRouteState() {
   return (
@@ -37,7 +37,7 @@ export function AuthRouteState() {
                 width: 64,
               })}
             >
-              <FavoriteRoundedIcon />
+              <FavoriteRounded />
             </Box>
             <Typography variant="h4">Đang chuẩn bị không gian sức khỏe</Typography>
             <CircularProgress size={28} />

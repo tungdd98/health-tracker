@@ -1,7 +1,6 @@
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { Box, Button, Container, IconButton, Stack, Typography } from '@mui/material';
 import type { PropsWithChildren } from 'react';
+import { AddRounded, ArrowBackRounded } from '@mui/icons-material';
 
 type MedicationPageLayoutProps = PropsWithChildren<{
   actionLabel?: string;
@@ -37,7 +36,7 @@ export function MedicationPageLayout({
                 size="small"
                 sx={{ bgcolor: 'surface.raised' }}
               >
-                <ArrowBackRoundedIcon fontSize="small" />
+                <ArrowBackRounded fontSize="small" />
               </IconButton>
               <Typography variant="h4">{title}</Typography>
             </Stack>
@@ -46,7 +45,7 @@ export function MedicationPageLayout({
               <Button
                 onClick={onAction}
                 size="small"
-                startIcon={<AddRoundedIcon />}
+                startIcon={<AddRounded />}
                 variant="contained"
               >
                 {actionLabel}

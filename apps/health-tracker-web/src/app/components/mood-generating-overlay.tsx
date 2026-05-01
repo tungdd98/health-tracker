@@ -1,5 +1,5 @@
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import { alpha, Backdrop, LinearProgress, Paper, Stack, Typography } from '@mui/material';
+import { AutoAwesomeRounded } from '@mui/icons-material';
 
 type MoodGeneratingOverlayProps = {
   open: boolean;
@@ -26,7 +26,7 @@ export function MoodGeneratingOverlay({ open }: MoodGeneratingOverlayProps) {
         })}
       >
         <Stack spacing={1.5}>
-          <AutoAwesomeRoundedIcon
+          <AutoAwesomeRounded
             sx={(theme) => ({
               fontSize: 56,
               color: theme.palette.primary.main,

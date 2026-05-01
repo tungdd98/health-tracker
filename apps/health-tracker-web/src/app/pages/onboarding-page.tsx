@@ -1,5 +1,3 @@
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Alert, Button } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm, useWatch, type Path, type UseFormReturn } from 'react-hook-form';
@@ -46,6 +44,7 @@ import type {
   OnboardingStepId,
 } from '../onboarding/onboarding-types';
 import { ONBOARDING_STEP_IDS } from '../onboarding/onboarding-types';
+import { ArrowBackRounded, CloseRounded } from '@mui/icons-material';
 import {
   normalizeOptionalIsoDate,
   normalizeOptionalText,
@@ -371,7 +370,7 @@ export function OnboardingPage() {
       disabled={isSubmitting}
       fullWidth
       onClick={handleSkip}
-      startIcon={<CloseRoundedIcon />}
+      startIcon={<CloseRounded />}
       variant="text"
     >
       Bỏ qua
@@ -383,7 +382,7 @@ export function OnboardingPage() {
       disabled={isSubmitting}
       fullWidth
       onClick={handleBack}
-      startIcon={<ArrowBackRoundedIcon />}
+      startIcon={<ArrowBackRounded />}
       variant="outlined"
     >
       Quay lại

@@ -1,8 +1,8 @@
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { Box, Stack, Typography } from '@mui/material';
 import type { ReactNode } from 'react';
 
 import { AppSubmitButton } from '@health-tracker/ui';
+import { FavoriteRounded } from '@mui/icons-material';
 
 type CompletionStepProps = {
   primaryActionLabel: string;
@@ -35,7 +35,7 @@ export function CompletionStep({
             width: 96,
           })}
         >
-          <FavoriteRoundedIcon sx={{ fontSize: 36 }} />
+          <FavoriteRounded sx={{ fontSize: 36 }} />
         </Box>
         <Typography variant="h4">Bạn đã sẵn sàng!</Typography>
         <Typography color="text.secondary" variant="body2">

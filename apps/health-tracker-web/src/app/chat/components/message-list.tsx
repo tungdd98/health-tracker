@@ -1,6 +1,3 @@
-import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
-import ScheduleRoundedIcon from '@mui/icons-material/ScheduleRounded';
-import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
 import { Box, Stack, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
 
@@ -10,6 +7,11 @@ import { EmergencyAlertCard } from './emergency-alert-card';
 import { MessageBubble } from './message-bubble';
 import { ToolCallChip } from './tool-call-chip';
 import type { ChatErrorCode } from '../hooks/use-chat-stream';
+import {
+  ChatBubbleOutlineRounded,
+  ScheduleRounded,
+  WarningAmberRounded,
+} from '@mui/icons-material';
 
 const getRateLimitSecondaryText = (message: string) => {
   const minutes = new RegExp(/(\d+)\s*phút/i).exec(message)?.[1];
@@ -87,7 +89,7 @@ export function MessageList({
             width: 80,
           })}
         >
-          <ChatBubbleOutlineRoundedIcon sx={{ fontSize: 36 }} />
+          <ChatBubbleOutlineRounded sx={{ fontSize: 36 }} />
         </Box>
 
         <Stack spacing={1}>
@@ -118,7 +120,7 @@ export function MessageList({
             px: 2,
           })}
         >
-          <ScheduleRoundedIcon sx={{ fontSize: 22 }} />
+          <ScheduleRounded sx={{ fontSize: 22 }} />
           <Stack spacing={0.25}>
             <Typography fontSize={13} fontWeight={700}>
               Đã đạt giới hạn 30 tin/giờ
@@ -181,7 +183,7 @@ export function MessageList({
             py: 1.5,
           })}
         >
-          <WarningAmberRoundedIcon sx={{ fontSize: 20 }} />
+          <WarningAmberRounded sx={{ fontSize: 20 }} />
           <Typography fontSize={13} lineHeight={1.5}>
             {errorMessage}
           </Typography>

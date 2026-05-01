@@ -1,8 +1,8 @@
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { alpha } from '@mui/material/styles';
 import { Dialog, DialogContent, Stack, Typography } from '@mui/material';
 
 import { AppSubmitButton } from '@health-tracker/ui';
+import { InfoOutlined } from '@mui/icons-material';
 
 export function DisclaimerWelcome({
   isSubmitting,
@@ -47,7 +47,7 @@ export function DisclaimerWelcome({
                 width: 44,
               })}
             >
-              <InfoOutlinedIcon sx={{ fontSize: 22 }} />
+              <InfoOutlined sx={{ fontSize: 22 }} />
             </Stack>
             <Typography sx={(theme) => ({ ...theme.appTokens.typography.titleMd, fontSize: 17 })}>
               Lưu ý quan trọng

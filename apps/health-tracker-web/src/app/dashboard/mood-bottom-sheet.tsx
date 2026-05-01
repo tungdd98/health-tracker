@@ -1,4 +1,3 @@
-import SentimentSatisfiedAltRoundedIcon from '@mui/icons-material/SentimentSatisfiedAltRounded';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
@@ -11,6 +10,7 @@ import {
 import { AppSubmitButton } from '@health-tracker/ui';
 
 import { DailyLogSheetLayout } from './daily-log-sheet-layout';
+import { SentimentSatisfiedAltRounded } from '@mui/icons-material';
 
 type MoodBottomSheetProps = {
   open: boolean;
@@ -71,7 +71,7 @@ export function MoodBottomSheet({
 
   return (
     <DailyLogSheetLayout
-      icon={<SentimentSatisfiedAltRoundedIcon color="primary" />}
+      icon={<SentimentSatisfiedAltRounded color="primary" />}
       isBusy={isMutating}
       onClose={onClose}
       open={open}

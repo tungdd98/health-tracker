@@ -1,6 +1,3 @@
-import AddAPhotoRoundedIcon from '@mui/icons-material/AddAPhotoRounded';
-import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import {
   Alert,
   alpha,
@@ -63,6 +60,7 @@ import type {
 } from '../settings/settings-types';
 import { compressImage } from '../utils/compress-image';
 import { useAppNavChange } from '../use-app-nav-change';
+import { AddAPhotoRounded, AutorenewRounded, LogoutRounded } from '@mui/icons-material';
 
 const ONBOARDING_PHASE_LABELS: Record<OnboardingPhase, string> = {
   'pre-pregnancy': 'Tiền thai kỳ',
@@ -437,7 +435,7 @@ export function SettingsPage() {
                     color: 'text.secondary',
                   })}
                 >
-                  {!avatarMeta?.avatarUrl && <AddAPhotoRoundedIcon />}
+                  {!avatarMeta?.avatarUrl && <AddAPhotoRounded />}
                 </Avatar>
                 <IconButton
                   aria-label="Thay ảnh đại diện"
@@ -455,7 +453,7 @@ export function SettingsPage() {
                     border: `2px solid ${theme.palette.background.default}`,
                   })}
                 >
-                  <AddAPhotoRoundedIcon sx={{ fontSize: 12 }} />
+                  <AddAPhotoRounded sx={{ fontSize: 12 }} />
                 </IconButton>
                 <input
                   accept="image/*"
@@ -485,7 +483,7 @@ export function SettingsPage() {
                   disabled={isRegenerating}
                   onClick={() => void handleRegenerateConfirm()}
                   size="small"
-                  startIcon={<AutorenewRoundedIcon fontSize="small" />}
+                  startIcon={<AutorenewRounded fontSize="small" />}
                   sx={{ px: 1 }}
                   variant="outlined"
                 >
@@ -602,7 +600,7 @@ export function SettingsPage() {
             color="error"
             disabled={isSigningOut}
             onClick={handleOpenSignOutDialog}
-            startIcon={<LogoutRoundedIcon />}
+            startIcon={<LogoutRounded />}
             variant="outlined"
           >
             Đăng xuất

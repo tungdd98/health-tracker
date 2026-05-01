@@ -1,4 +1,3 @@
-import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';
 import { Box, Button, InputBase, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
@@ -6,6 +5,7 @@ import { mapAuthErrorToMessage, type DailyLog, type DailyLogPatch } from '@healt
 import { AppSubmitButton } from '@health-tracker/ui';
 
 import { DailyLogSheetLayout } from './daily-log-sheet-layout';
+import { MonitorWeightRounded } from '@mui/icons-material';
 
 type WeightBottomSheetProps = {
   open: boolean;
@@ -62,7 +62,7 @@ export function WeightBottomSheet({
   return (
     <DailyLogSheetLayout
       description="Cân trước bữa sáng"
-      icon={<MonitorWeightRoundedIcon color="primary" />}
+      icon={<MonitorWeightRounded color="primary" />}
       isBusy={isMutating}
       onClose={onClose}
       open={open}

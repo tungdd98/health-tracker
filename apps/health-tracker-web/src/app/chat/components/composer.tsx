@@ -1,9 +1,9 @@
-import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import { alpha } from '@mui/material/styles';
 import { Box, IconButton, InputBase, Stack, type SxProps, type Theme } from '@mui/material';
 import { useState } from 'react';
 
 import type { ChatErrorCode } from '../hooks/use-chat-stream';
+import { ArrowUpwardRounded } from '@mui/icons-material';
 
 const getDisabledPlaceholder = (errorCode: ChatErrorCode | null, errorMessage?: string) => {
   if (errorCode !== 'rate_limited') {
@@ -120,7 +120,7 @@ export function Composer({
           },
         })}
       >
-        <ArrowUpwardRoundedIcon fontSize="small" />
+        <ArrowUpwardRounded fontSize="small" />
       </IconButton>
     </Stack>
   );

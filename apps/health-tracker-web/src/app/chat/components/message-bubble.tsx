@@ -1,5 +1,5 @@
-import HealthAndSafetyRoundedIcon from '@mui/icons-material/HealthAndSafetyRounded';
 import { Stack, Typography } from '@mui/material';
+import { HealthAndSafetyRounded } from '@mui/icons-material';
 
 type MessageBubbleProps = {
   content: string;
@@ -31,7 +31,7 @@ export function MessageBubble({ content, role, isStreaming = false }: MessageBub
             width: 32,
           })}
         >
-          <HealthAndSafetyRoundedIcon sx={{ fontSize: 16 }} />
+          <HealthAndSafetyRounded sx={{ fontSize: 16 }} />
         </Stack>
       )}
 

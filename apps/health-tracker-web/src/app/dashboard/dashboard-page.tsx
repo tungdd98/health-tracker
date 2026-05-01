@@ -1,4 +1,3 @@
-import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import { Alert, Button, Snackbar, Stack, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
 import { useState, type SyntheticEvent } from 'react';
@@ -16,6 +15,7 @@ import { computeCycleSnapshot } from './cycle-utils';
 import { LogPeriodDialog } from './log-period-dialog';
 import { OutlookStrip } from './outlook-strip';
 import { TipOfDay } from './tip-of-day';
+import { CalendarMonthRounded } from '@mui/icons-material';
 
 const VN_WEEKDAYS = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
 const VN_MONTHS = [
@@ -112,7 +112,7 @@ export function DashboardPage() {
         <Button
           fullWidth
           onClick={() => navigate('/calendar')}
-          startIcon={<CalendarMonthRoundedIcon />}
+          startIcon={<CalendarMonthRounded />}
           variant="outlined"
         >
           Xem lịch chu kỳ

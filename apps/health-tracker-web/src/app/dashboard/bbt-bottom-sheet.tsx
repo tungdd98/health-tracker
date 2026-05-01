@@ -1,4 +1,3 @@
-import DeviceThermostatRoundedIcon from '@mui/icons-material/DeviceThermostatRounded';
 import { Box, Button, InputBase, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
@@ -6,6 +5,7 @@ import { mapAuthErrorToMessage, type DailyLog, type DailyLogPatch } from '@healt
 import { AppSubmitButton } from '@health-tracker/ui';
 
 import { DailyLogSheetLayout } from './daily-log-sheet-layout';
+import { DeviceThermostatRounded } from '@mui/icons-material';
 
 type BbtBottomSheetProps = {
   open: boolean;
@@ -62,7 +62,7 @@ export function BbtBottomSheet({
   return (
     <DailyLogSheetLayout
       description="Đo trước khi ra khỏi giường"
-      icon={<DeviceThermostatRoundedIcon color="primary" />}
+      icon={<DeviceThermostatRounded color="primary" />}
       isBusy={isMutating}
       onClose={onClose}
       open={open}

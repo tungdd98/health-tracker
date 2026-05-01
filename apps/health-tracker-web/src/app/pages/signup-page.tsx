@@ -1,5 +1,3 @@
-import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Alert, IconButton, InputAdornment, Link, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -13,6 +11,7 @@ import { AppSubmitButton } from '@health-tracker/ui';
 import { authCopy } from '../auth/auth-copy';
 import { type SignUpFormValues, signUpSchema } from '../auth/auth-schemas';
 import { AuthLayout } from '../components/auth-layout';
+import { VisibilityOffRounded, VisibilityRounded } from '@mui/icons-material';
 
 export function SignUpPage() {
   const navigate = useNavigate();
@@ -96,7 +95,7 @@ export function SignUpPage() {
                     edge="end"
                     onClick={() => setIsPasswordVisible((value) => !value)}
                   >
-                    {isPasswordVisible ? <VisibilityOffRoundedIcon /> : <VisibilityRoundedIcon />}
+                    {isPasswordVisible ? <VisibilityOffRounded /> : <VisibilityRounded />}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -120,11 +119,7 @@ export function SignUpPage() {
                   edge="end"
                   onClick={() => setIsConfirmPasswordVisible((value) => !value)}
                 >
-                  {isConfirmPasswordVisible ? (
-                    <VisibilityOffRoundedIcon />
-                  ) : (
-                    <VisibilityRoundedIcon />
-                  )}
+                  {isConfirmPasswordVisible ? <VisibilityOffRounded /> : <VisibilityRounded />}
                 </IconButton>
               </InputAdornment>
             ),

@@ -1,6 +1,6 @@
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Box, Drawer, IconButton, Stack, Typography } from '@mui/material';
 import type { ReactNode } from 'react';
+import { CloseRounded } from '@mui/icons-material';
 
 type AppBottomSheetDialogProps = {
   open: boolean;
@@ -45,7 +45,7 @@ export function AppBottomSheetDialog({
           </Stack>
 
           <IconButton disabled={isBusy} onClick={onClose} size="small">
-            <CloseRoundedIcon fontSize="small" />
+            <CloseRounded fontSize="small" />
           </IconButton>
         </Stack>
 

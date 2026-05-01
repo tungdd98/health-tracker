@@ -1,6 +1,3 @@
-import CalendarTodayRoundedIcon from '@mui/icons-material/CalendarTodayRounded';
-import OpacityRoundedIcon from '@mui/icons-material/OpacityRounded';
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import { Box, Button, Skeleton, Stack, Typography, alpha, useTheme } from '@mui/material';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +6,7 @@ import { AppCard } from '@health-tracker/ui';
 
 import type { CycleHeroMode } from './cycle-hero-modes';
 import { PHASE_BADGE_LABELS, PHASE_LABELS, type CycleSnapshot } from './cycle-utils';
+import { CalendarTodayRounded, OpacityRounded, SettingsRounded } from '@mui/icons-material';
 
 const polarToCartesian = (cx: number, cy: number, r: number, deg: number) => {
   const rad = ((deg - 90) * Math.PI) / 180;
@@ -181,7 +179,7 @@ export function CycleHero({
               width: 64,
             })}
           >
-            <CalendarTodayRoundedIcon color="primary" />
+            <CalendarTodayRounded color="primary" />
           </Box>
           <Stack spacing={1} sx={{ maxWidth: 280 }}>
             <Typography variant="h5">Bổ sung thông tin chu kỳ để xem dự đoán hôm nay</Typography>
@@ -192,7 +190,7 @@ export function CycleHero({
           </Stack>
           <Button
             onClick={() => navigate('/settings')}
-            startIcon={<SettingsRoundedIcon />}
+            startIcon={<SettingsRounded />}
             variant="contained"
           >
             Mở cài đặt
@@ -232,7 +230,7 @@ export function CycleHero({
             py: 1.5,
           })}
         >
-          <OpacityRoundedIcon
+          <OpacityRounded
             sx={(currentTheme) => ({
               color: currentTheme.palette.status.warningText,
               fontSize: 18,
@@ -275,7 +273,7 @@ export function CycleHero({
             py: 1,
           })}
         >
-          <OpacityRoundedIcon sx={{ color: highlightColor, fontSize: 14 }} />
+          <OpacityRounded sx={{ color: highlightColor, fontSize: 14 }} />
           <Typography
             color="text.primary"
             sx={(currentTheme) => currentTheme.appTokens.typography.helper}
@@ -288,7 +286,7 @@ export function CycleHero({
           <Button
             fullWidth
             onClick={onLogPeriod}
-            startIcon={<OpacityRoundedIcon />}
+            startIcon={<OpacityRounded />}
             sx={{
               maxWidth: '100%',
             }}

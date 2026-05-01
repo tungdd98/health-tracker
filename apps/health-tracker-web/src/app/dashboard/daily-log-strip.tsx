@@ -1,6 +1,3 @@
-import DeviceThermostatRoundedIcon from '@mui/icons-material/DeviceThermostatRounded';
-import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';
-import SentimentSatisfiedAltRoundedIcon from '@mui/icons-material/SentimentSatisfiedAltRounded';
 import { Box, Skeleton, Stack, Typography } from '@mui/material';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
@@ -12,6 +9,11 @@ import { MoodBottomSheet } from './mood-bottom-sheet';
 import { useDailyLog } from './use-daily-log';
 import { useUserMoodImages } from './use-user-mood-images';
 import { WeightBottomSheet } from './weight-bottom-sheet';
+import {
+  DeviceThermostatRounded,
+  MonitorWeightRounded,
+  SentimentSatisfiedAltRounded,
+} from '@mui/icons-material';
 
 const LOG_CARD_HEIGHT = 90;
 
@@ -116,7 +118,7 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
         />
       );
     }
-    return <SentimentSatisfiedAltRoundedIcon fontSize="inherit" />;
+    return <SentimentSatisfiedAltRounded fontSize="inherit" />;
   })();
 
   if (isLoading) {
@@ -138,7 +140,7 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
     <>
       <Stack direction="row" spacing={1}>
         <LogCard
-          icon={<DeviceThermostatRoundedIcon fontSize="inherit" />}
+          icon={<DeviceThermostatRounded fontSize="inherit" />}
           label="BBT"
           onClick={() => {
             resetError();
@@ -166,7 +168,7 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
           }
         />
         <LogCard
-          icon={<MonitorWeightRoundedIcon fontSize="inherit" />}
+          icon={<MonitorWeightRounded fontSize="inherit" />}
           label="Cân nặng"
           onClick={() => {
             resetError();

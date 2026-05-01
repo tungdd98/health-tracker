@@ -1,8 +1,8 @@
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import type { PropsWithChildren, ReactNode } from 'react';
 
 import { AppCard } from '@health-tracker/ui';
+import { FavoriteRounded } from '@mui/icons-material';
 
 type AuthLayoutProps = PropsWithChildren<{
   eyebrow: string;
@@ -44,7 +44,7 @@ export function AuthLayout({ eyebrow, title, description, footer, children }: Au
                 width: 68,
               })}
             >
-              <FavoriteRoundedIcon />
+              <FavoriteRounded />
             </Box>
             <Typography color="text.secondary" variant="overline">
               {eyebrow}

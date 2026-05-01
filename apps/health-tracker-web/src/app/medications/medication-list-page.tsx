@@ -1,8 +1,3 @@
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
-import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
-import MedicationRoundedIcon from '@mui/icons-material/MedicationRounded';
 import {
   Alert,
   Box,
@@ -28,6 +23,13 @@ import { EmptyState } from '@health-tracker/ui';
 import { useAuthSession } from '../auth/use-auth-session';
 import { AppConfirmDialog } from '../components/app-confirm-dialog';
 import { MedicationPageLayout } from './medication-page-layout';
+import {
+  AddRounded,
+  DeleteRounded,
+  EditRounded,
+  MedicationRounded,
+  MoreVertRounded,
+} from '@mui/icons-material';
 import {
   useDeleteMedicationMutation,
   useMedications,
@@ -126,14 +128,14 @@ export function MedicationListPage() {
               action={
                 <Button
                   onClick={() => navigate('/medications/new')}
-                  startIcon={<AddRoundedIcon />}
+                  startIcon={<AddRounded />}
                   variant="contained"
                 >
                   Thêm thuốc đầu tiên
                 </Button>
               }
               description="Thêm thuốc để theo dõi lịch uống hằng ngày."
-              icon={<MedicationRoundedIcon sx={{ color: 'border.default', fontSize: 34 }} />}
+              icon={<MedicationRounded sx={{ color: 'border.default', fontSize: 34 }} />}
               title="Chưa có thuốc nào"
             />
           </Box>
@@ -193,7 +195,7 @@ export function MedicationListPage() {
                       }}
                       size="small"
                     >
-                      <MoreVertRoundedIcon fontSize="small" />
+                      <MoreVertRounded fontSize="small" />
                     </IconButton>
                   </Stack>
                 </Stack>
@@ -252,7 +254,7 @@ export function MedicationListPage() {
           }}
         >
           <ListItemIcon>
-            <EditRoundedIcon fontSize="small" />
+            <EditRounded fontSize="small" />
           </ListItemIcon>
           <ListItemText>Sửa</ListItemText>
         </MenuItem>
@@ -267,7 +269,7 @@ export function MedicationListPage() {
           }}
         >
           <ListItemIcon>
-            <DeleteRoundedIcon color="error" fontSize="small" />
+            <DeleteRounded color="error" fontSize="small" />
           </ListItemIcon>
           <ListItemText>Xoá</ListItemText>
         </MenuItem>

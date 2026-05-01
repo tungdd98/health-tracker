@@ -1,5 +1,3 @@
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { Button, IconButton, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -13,6 +11,7 @@ import { AppFormProvider, FormSelectField, FormTextField } from '@health-tracker
 import { AppBottomSheetDialog, AppSubmitButton } from '@health-tracker/ui';
 
 import { assistantGoalsSchema } from '../schemas/chat-schemas';
+import { AddRounded, DeleteOutlineRounded } from '@mui/icons-material';
 
 const defaultPersonalization: ChatPersonalization = {
   preferences: {
@@ -223,7 +222,7 @@ export function AssistantPersonalizationSheet({
                     sx={{ color: 'text.secondary' }}
                     type="button"
                   >
-                    <DeleteOutlineRoundedIcon fontSize="small" />
+                    <DeleteOutlineRounded fontSize="small" />
                   </IconButton>
                 </Stack>
               ))}
@@ -265,7 +264,7 @@ export function AssistantPersonalizationSheet({
                   })}
                   type="button"
                 >
-                  <AddRoundedIcon fontSize="small" />
+                  <AddRounded fontSize="small" />
                 </IconButton>
               </Stack>
             </Stack>

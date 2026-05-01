@@ -1,9 +1,5 @@
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import { Alert, Box, Container, IconButton, Snackbar, Stack, Typography } from '@mui/material';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type SyntheticEvent } from 'react';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 import { markChatDisclaimerSeen, type ChatMessage } from '@health-tracker/api';
 
@@ -19,6 +15,7 @@ import { useChatPersonalization } from './hooks/use-chat-personalization';
 import { useChatSessions } from './hooks/use-chat-sessions';
 import { useChatStream } from './hooks/use-chat-stream';
 import { useNavigate } from 'react-router-dom';
+import { AddRounded, ArrowBackRounded, HistoryRounded, SettingsRounded } from '@mui/icons-material';
 
 export function ChatPage() {
   const navigate = useNavigate();
@@ -190,7 +187,7 @@ export function ChatPage() {
                   size="small"
                   sx={{ bgcolor: 'surface.raised' }}
                 >
-                  <ArrowBackRoundedIcon fontSize="small" />
+                  <ArrowBackRounded fontSize="small" />
                 </IconButton>
                 <Typography variant="h4">Trò chuyện</Typography>
               </Stack>
@@ -206,7 +203,7 @@ export function ChatPage() {
                     width: 36,
                   })}
                 >
-                  <SettingsRoundedIcon fontSize="small" />
+                  <SettingsRounded fontSize="small" />
                 </IconButton>
                 <IconButton
                   disableRipple={sessions.length === 0}
@@ -220,7 +217,7 @@ export function ChatPage() {
                     ml: 'auto',
                   })}
                 >
-                  <HistoryRoundedIcon fontSize="small" />
+                  <HistoryRounded fontSize="small" />
                 </IconButton>
                 <IconButton
                   color="primary"
@@ -231,7 +228,7 @@ export function ChatPage() {
                     width: 36,
                   })}
                 >
-                  <AddRoundedIcon fontSize="small" />
+                  <AddRounded fontSize="small" />
                 </IconButton>
               </Stack>
             </Stack>

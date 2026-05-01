@@ -1,8 +1,8 @@
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { Box, Container, LinearProgress, Stack, Typography } from '@mui/material';
 import type { PropsWithChildren, ReactNode } from 'react';
 
 import { AppCard } from '@health-tracker/ui';
+import { FavoriteRounded } from '@mui/icons-material';
 
 type OnboardingLayoutProps = PropsWithChildren<{
   eyebrow: string;
@@ -64,7 +64,7 @@ export function OnboardingLayout({
                 width: 68,
               })}
             >
-              <FavoriteRoundedIcon />
+              <FavoriteRounded />
             </Box>
             <Typography color="text.secondary" variant="overline">
               {eyebrow}

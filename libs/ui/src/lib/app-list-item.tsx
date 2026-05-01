@@ -1,6 +1,6 @@
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import { Box, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from '@mui/material';
 import type { ReactNode } from 'react';
+import { ChevronRightRounded } from '@mui/icons-material';
 
 type AppListItemProps = {
   title: string;
@@ -37,7 +37,7 @@ export function AppListItem({ title, subtitle, leading, trailing }: AppListItemP
           ) : (
             trailing
           )}
-          <ChevronRightRoundedIcon color="disabled" />
+          <ChevronRightRounded color="disabled" />
         </Box>
       </ListItemButton>
     </Paper>

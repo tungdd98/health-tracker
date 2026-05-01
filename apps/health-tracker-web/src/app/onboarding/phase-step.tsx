@@ -1,4 +1,3 @@
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import { ButtonBase, Chip, Stack, Typography } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -6,6 +5,7 @@ import { FormField } from '@health-tracker/forms';
 import { AppCard } from '@health-tracker/ui';
 
 import { type OnboardingPhaseStepValues, type OnboardingPhaseOption } from './onboarding-types';
+import { ChevronRightRounded } from '@mui/icons-material';
 
 const PHASE_OPTIONS: OnboardingPhaseOption[] = [
   {
@@ -67,7 +67,7 @@ function PhaseOptionCard({
             </Stack>
             <Stack alignItems="center" direction="row" spacing={1}>
               {helperLabel ? <Chip label={helperLabel} size="small" /> : null}
-              {!disabled ? <ChevronRightRoundedIcon color="primary" fontSize="small" /> : null}
+              {!disabled ? <ChevronRightRounded color="primary" fontSize="small" /> : null}
             </Stack>
           </Stack>
         </Stack>

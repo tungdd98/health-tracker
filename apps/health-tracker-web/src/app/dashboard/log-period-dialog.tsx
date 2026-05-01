@@ -1,4 +1,3 @@
-import OpacityRoundedIcon from '@mui/icons-material/OpacityRounded';
 import { Box } from '@mui/material';
 import type { User } from '@supabase/supabase-js';
 import { DateTime } from 'luxon';
@@ -6,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { mapAuthErrorToMessage, updateOnboardingProfile } from '@health-tracker/api';
 import { AppConfirmDialog } from '../components/app-confirm-dialog';
+import { OpacityRounded } from '@mui/icons-material';
 
 type LogPeriodDialogProps = {
   open: boolean;
@@ -69,7 +69,7 @@ export function LogPeriodDialog({ open, user, onClose, onSuccess }: LogPeriodDia
             width: 48,
           })}
         >
-          <OpacityRoundedIcon color="primary" sx={{ fontSize: 22 }} />
+          <OpacityRounded color="primary" sx={{ fontSize: 22 }} />
         </Box>
       }
       isSubmitting={isSubmitting}

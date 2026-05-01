@@ -1,11 +1,10 @@
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { IconButton, Stack, TextField, Typography } from '@mui/material';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTime } from 'luxon';
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 
 import type { MedicationFormValues } from './medication-form-schema';
+import { AddRounded, CloseRounded } from '@mui/icons-material';
 
 const MAX_DOSES = 12;
 
@@ -72,7 +71,7 @@ export function DoseTimeListField() {
                   onClick={() => remove(index)}
                   size="small"
                 >
-                  <CloseRoundedIcon />
+                  <CloseRounded />
                 </IconButton>
               ) : null}
             </Stack>
@@ -98,7 +97,7 @@ export function DoseTimeListField() {
             },
           })}
         >
-          <AddRoundedIcon />
+          <AddRounded />
         </IconButton>
       </Stack>
 

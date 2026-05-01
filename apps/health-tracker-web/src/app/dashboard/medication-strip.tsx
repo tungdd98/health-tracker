@@ -1,11 +1,13 @@
-import CheckBoxOutlineBlankRoundedIcon from '@mui/icons-material/CheckBoxOutlineBlankRounded';
-import CheckBoxRoundedIcon from '@mui/icons-material/CheckBoxRounded';
-import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
-import MedicationRoundedIcon from '@mui/icons-material/MedicationRounded';
 import { Alert, Box, Button, ButtonBase, Skeleton, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { useTodayMedications } from '../medications/use-today-medications';
+import {
+  CheckBoxOutlineBlankRounded,
+  CheckBoxRounded,
+  KeyboardArrowRightRounded,
+  MedicationRounded,
+} from '@mui/icons-material';
 
 type MedicationStripProps = {
   userId: string;
@@ -61,7 +63,7 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
           py: 3,
         })}
       >
-        <MedicationRoundedIcon color="action" sx={{ fontSize: 34 }} />
+        <MedicationRounded color="action" sx={{ fontSize: 34 }} />
         <Typography
           color="text.secondary"
           sx={(theme) => theme.appTokens.typography.sectionValue}
@@ -71,7 +73,7 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
         </Typography>
 
         <Button
-          endIcon={<KeyboardArrowRightRoundedIcon fontSize="small" />}
+          endIcon={<KeyboardArrowRightRounded fontSize="small" />}
           onClick={() => navigate('/medications')}
           variant="text"
         >
@@ -138,7 +140,7 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
                   mt: 0.2,
                 }}
               >
-                {dose.taken ? <CheckBoxRoundedIcon /> : <CheckBoxOutlineBlankRoundedIcon />}
+                {dose.taken ? <CheckBoxRounded /> : <CheckBoxOutlineBlankRounded />}
               </Box>
               <Stack spacing={0.25} width="100%">
                 <Typography
@@ -182,7 +184,7 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
         <Typography sx={(theme) => theme.appTokens.typography.sectionValue}>
           Quản lý thuốc
         </Typography>
-        <KeyboardArrowRightRoundedIcon fontSize="small" />
+        <KeyboardArrowRightRounded fontSize="small" />
       </ButtonBase>
 
       {error ? (
