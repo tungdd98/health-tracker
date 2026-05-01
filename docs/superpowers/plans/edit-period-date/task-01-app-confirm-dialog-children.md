@@ -1,3 +1,16 @@
+# Task 01 — Extend AppConfirmDialog with children slot
+
+**File:** `apps/health-tracker-web/src/app/components/app-confirm-dialog.tsx`
+
+`AppConfirmDialog` currently renders only a `description` string in its content stack. Task 02 needs to embed a `DatePicker` there. Add an optional `children` prop that renders below the description (and above the error alert).
+
+---
+
+- [ ] **Step 1: Add `children` to the props type and render it**
+
+Replace the file content with:
+
+```tsx
 import {
   Alert,
   Box,
@@ -82,3 +95,25 @@ export function AppConfirmDialog({
     </Dialog>
   );
 }
+```
+
+Two additions vs the original:
+
+- `children?: ReactNode` in props + rendered between description and error alert.
+- `confirmDisabled?: boolean` forwarded to `AppSubmitButton` — needed by Task 02.
+
+- [ ] **Step 2: Verify lint and build pass**
+
+```bash
+yarn lint
+yarn build
+```
+
+Expected: no errors.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add apps/health-tracker-web/src/app/components/app-confirm-dialog.tsx
+git commit -m "feat: add children slot and confirmDisabled prop to AppConfirmDialog"
+```

@@ -1,11 +1,31 @@
-import { Box, TextField } from '@mui/material';
+# Task 02 — Upgrade LogPeriodDialog with DatePicker
+
+**File:** `apps/health-tracker-web/src/app/dashboard/log-period-dialog.tsx`
+
+**Depends on:** Task 01 (uses `children` + `confirmDisabled` from `AppConfirmDialog`)
+
+Replace the hardcoded `DateTime.local().toISODate()` submit with a user-controlled `DatePicker`.
+
+- `mode='log'` → title "Xác nhận kỳ kinh mới", date defaults to today.
+- `mode='edit'` → title "Chỉnh sửa ngày bắt đầu", date defaults to `initialDate`.
+- `minDate`: today minus 90 days. `maxDate`: today. Confirm disabled when date is null or out of range.
+
+The `DatePicker` component pattern follows `libs/forms/src/lib/form-date-field.tsx` — same import path, same `enableAccessibleFieldDOMStructure={false}`, same `format="dd/MM/yyyy"`, same `TextField` slot. This dialog is not inside an RHF context, so state is plain `useState`.
+
+---
+
+- [ ] **Step 1: Replace the file with the upgraded implementation**
+
+```tsx
+import { TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { OpacityRounded } from '@mui/icons-material';
 import type { User } from '@supabase/supabase-js';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 
 import { mapAuthErrorToMessage, updateOnboardingProfile } from '@health-tracker/api';
+import { OpacityRounded } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { AppConfirmDialog } from '../components/app-confirm-dialog';
 
 type LogPeriodDialogProps = {
@@ -124,3 +144,20 @@ export function LogPeriodDialog({
     </AppConfirmDialog>
   );
 }
+```
+
+- [ ] **Step 2: Verify lint and build pass**
+
+```bash
+yarn lint
+yarn build
+```
+
+Expected: no errors. TypeScript will flag a compile error if `initialDate` or `mode` are missing at the call site in `dashboard-page.tsx` — that is expected and will be fixed in Task 04.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add apps/health-tracker-web/src/app/dashboard/log-period-dialog.tsx
+git commit -m "feat: add date picker to LogPeriodDialog with mode-aware title"
+```

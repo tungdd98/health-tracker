@@ -1,4 +1,13 @@
-import { Box, Button, Skeleton, Stack, Typography, alpha, useTheme } from '@mui/material';
+import {
+  Box,
+  Button,
+  IconButton,
+  Skeleton,
+  Stack,
+  Typography,
+  alpha,
+  useTheme,
+} from '@mui/material';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,7 +15,12 @@ import { AppCard } from '@health-tracker/ui';
 
 import type { CycleHeroMode } from './cycle-hero-modes';
 import { PHASE_BADGE_LABELS, PHASE_LABELS, type CycleSnapshot } from './cycle-utils';
-import { CalendarTodayRounded, OpacityRounded, SettingsRounded } from '@mui/icons-material';
+import {
+  CalendarTodayRounded,
+  EditRounded,
+  OpacityRounded,
+  SettingsRounded,
+} from '@mui/icons-material';
 
 const polarToCartesian = (cx: number, cy: number, r: number, deg: number) => {
   const rad = ((deg - 90) * Math.PI) / 180;
@@ -128,6 +142,7 @@ type CycleHeroProps = {
   snapshot: CycleSnapshot | null;
   isLoading: boolean;
   onLogPeriod: () => void;
+  onEditPeriod: () => void;
   dailyLogSlot?: ReactNode;
 };
 
@@ -136,6 +151,7 @@ export function CycleHero({
   snapshot,
   isLoading,
   onLogPeriod,
+  onEditPeriod,
   dailyLogSlot,
 }: CycleHeroProps) {
   const navigate = useNavigate();
@@ -214,8 +230,18 @@ export function CycleHero({
         overflow: 'hidden',
         p: 3,
         borderRadius: theme.appTokens.radius.xl,
+        position: 'relative',
       }}
     >
+      <IconButton
+        aria-label="Chỉnh sửa ngày bắt đầu kỳ kinh"
+        onClick={onEditPeriod}
+        size="small"
+        sx={{ position: 'absolute', top: 8, right: 8 }}
+      >
+        <EditRounded fontSize="small" />
+      </IconButton>
+
       {isStale ? (
         <Box
           sx={(currentTheme) => ({

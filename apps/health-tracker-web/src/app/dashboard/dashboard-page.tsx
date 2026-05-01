@@ -1,6 +1,6 @@
 import { Alert, Button, Snackbar, Stack, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
-import { useState, type SyntheticEvent } from 'react';
+import { useRef, useState, type SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AppShell } from '@health-tracker/ui';
@@ -44,7 +44,8 @@ const formatVietnameseDate = (date: DateTime): string => {
 export function DashboardPage() {
   const navigate = useNavigate();
   const { isAuthResolved, onboardingProfile, user } = useAuthSession();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogMode, setDialogMode] = useState<'log' | 'edit' | null>(null);
+  const lastDialogModeRef = useRef<'log' | 'edit'>('log');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const handleNavChange = useAppNavChange();
 
@@ -99,7 +100,14 @@ export function DashboardPage() {
           }
           isLoading={isLoading}
           mode={mode}
-          onLogPeriod={() => setIsDialogOpen(true)}
+          onEditPeriod={() => {
+            lastDialogModeRef.current = 'edit';
+            setDialogMode('edit');
+          }}
+          onLogPeriod={() => {
+            lastDialogModeRef.current = 'log';
+            setDialogMode('log');
+          }}
           snapshot={snapshot}
         />
 
@@ -125,12 +133,18 @@ export function DashboardPage() {
 
       {user ? (
         <LogPeriodDialog
-          onClose={() => setIsDialogOpen(false)}
+          initialDate={
+            dialogMode === 'edit'
+              ? (onboardingProfile.lastPeriodStartDate ?? today.toISODate()!)
+              : today.toISODate()!
+          }
+          mode={lastDialogModeRef.current}
+          onClose={() => setDialogMode(null)}
           onSuccess={() => {
-            setIsDialogOpen(false);
+            setDialogMode(null);
             setSnackbarOpen(true);
           }}
-          open={isDialogOpen}
+          open={dialogMode !== null}
           user={user}
         />
       ) : null}
