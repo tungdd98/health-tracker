@@ -1,15 +1,16 @@
 ---
 name: create-pr
-description: Use when implementation is complete and verified, and the user wants to open a pull request on GitHub. Pushes the current branch (if needed) and creates a PR via gh CLI with auto-detected base branch. Defers title/body to gh's --fill default; respects .github/PULL_REQUEST_TEMPLATE.md when present.
+description: Use when implementation is complete and verified, and the user wants to open a pull request on GitHub. Pushes the current branch (if needed) and creates a PR via gh CLI with auto-detected base branch. Generates a conventional-commit title from commits; uses .github/PULL_REQUEST_TEMPLATE.md for the body when present.
 ---
 
 # Create Pull Request
 
 ## Overview
 
-Minimal GitHub PR creation. Auto-detects base branch from upstream
-tracking, pushes the current branch if not yet pushed, and runs
-`gh pr create --fill --base <base>`.
+GitHub PR creation with a structured title. Auto-detects base branch from
+upstream tracking, pushes the current branch if not yet pushed, generates
+a conventional-commit title from commits, and runs
+`gh pr create --title "<title>" --body-file .github/PULL_REQUEST_TEMPLATE.md --base <base>`.
 
 **Announce at start:** "I'm using the create-pr skill to open a pull request."
 
@@ -81,24 +82,53 @@ Run these checks; if any fails, surface a clear error to the user and STOP.
    fi
    ```
 
-4. **Create PR**
+4. **Generate PR title**
+
+   Read the commits ahead of base:
 
    ```bash
-   gh pr create --fill --base "$base"
+   git log "origin/$base..$branch" --pretty=format:"%s" 2>/dev/null \
+     || git log "$base..$branch" --pretty=format:"%s"
    ```
 
-   `--fill`: title + body auto-populated from commits.
-   If `.github/PULL_REQUEST_TEMPLATE.md` exists, gh applies it (see gh docs).
+   From those commit subjects, synthesize a single title that follows the
+   conventional-commit format:
 
-5. **Output the PR URL** — surface the URL printed by `gh pr create` so the user can click straight to it.
+   ```
+   <type>(<scope>): <short description>
+   ```
+
+   Rules:
+   - `type` must be one of: `feat`, `fix`, `refactor`, `docs`, `chore`
+   - `scope` is optional but preferred when a clear area is involved (e.g., `ui`, `auth`, `api`)
+   - `description` is lowercase, present tense, no trailing period, ≤ 72 chars total
+   - If commits have mixed types, pick the most significant one (`feat` > `fix` > `refactor` > `docs` > `chore`)
+   - If there is only one commit and it already follows the format, use it directly (reformatted to lowercase if needed)
+
+   Example outputs: `feat(auth): add forgot-password flow`, `fix(ui): correct shadow on trip card`
+
+5. **Create PR**
+
+   If `.github/PULL_REQUEST_TEMPLATE.md` exists, use it as the body:
+
+   ```bash
+   gh pr create --title "<generated-title>" --body-file .github/PULL_REQUEST_TEMPLATE.md --base "$base"
+   ```
+
+   Otherwise fall back to `--fill`:
+
+   ```bash
+   gh pr create --title "<generated-title>" --fill --base "$base"
+   ```
+
+6. **Output the PR URL** — surface the URL printed by `gh pr create` so the user can click straight to it.
 
 ## Constraints / Out of Scope
 
 This minimal version does NOT support:
 
-- Custom title/body via prompt (use `gh pr create` manually if needed)
 - Draft PRs (`--draft`)
-- Reviewer assignment / labels / milestone
+- Reviewer assignment / labels / milestone (use `gh pr create` manually if needed)
 - Generating body from `docs/superpowers/specs/` or `docs/superpowers/plans/`
 
 These are deferred to a future spec. If the user requests them, surface
