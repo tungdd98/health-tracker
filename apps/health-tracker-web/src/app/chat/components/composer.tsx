@@ -51,6 +51,12 @@ export function Composer({
     }
   };
 
+  const normalizedSx = (() => {
+    if (!sx) return [];
+    if (Array.isArray(sx)) return sx;
+    return [sx];
+  })();
+
   return (
     <Stack
       direction="row"
@@ -64,7 +70,7 @@ export function Composer({
           pt: 1.75,
           px: 2,
         }),
-        ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
+        ...normalizedSx,
       ]}
     >
       <Box

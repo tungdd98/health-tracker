@@ -13,12 +13,18 @@ export function NotFoundPage() {
     return <AuthRouteState />;
   }
 
-  const homePath = session ? (hasSelectedOnboardingPhase ? '/' : '/onboarding') : '/login';
-  const buttonLabel = session
-    ? hasSelectedOnboardingPhase
-      ? 'Về trang chủ'
-      : 'Tới onboarding'
-    : 'Tới đăng nhập';
+  let homePath: string;
+  let buttonLabel: string;
+  if (!session) {
+    homePath = '/login';
+    buttonLabel = 'Tới đăng nhập';
+  } else if (hasSelectedOnboardingPhase) {
+    homePath = '/';
+    buttonLabel = 'Về trang chủ';
+  } else {
+    homePath = '/onboarding';
+    buttonLabel = 'Tới onboarding';
+  }
 
   return (
     <AppShell>

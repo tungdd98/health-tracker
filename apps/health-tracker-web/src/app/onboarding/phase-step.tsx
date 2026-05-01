@@ -67,7 +67,7 @@ function PhaseOptionCard({
             </Stack>
             <Stack alignItems="center" direction="row" spacing={1}>
               {helperLabel ? <Chip label={helperLabel} size="small" /> : null}
-              {!disabled ? <ChevronRightRounded color="primary" fontSize="small" /> : null}
+              {disabled ? null : <ChevronRightRounded color="primary" fontSize="small" />}
             </Stack>
           </Stack>
         </Stack>

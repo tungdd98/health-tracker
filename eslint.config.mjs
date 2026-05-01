@@ -19,6 +19,8 @@ export default [
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-nested-ternary': 'error',
+      'no-negated-condition': 'error',
     },
   },
 ];

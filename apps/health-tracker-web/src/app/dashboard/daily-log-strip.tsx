@@ -136,6 +136,14 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
     );
   }
 
+  let moodValue: string | null = null;
+  if (log?.mood) {
+    moodValue =
+      hasStickers && useAvatarMood
+        ? MOOD_LABELS[log.mood]
+        : `${MOOD_EMOJI[log.mood]} ${MOOD_LABELS[log.mood]}`;
+  }
+
   return (
     <>
       <Stack direction="row" spacing={1}>
@@ -159,13 +167,7 @@ export function DailyLogStrip({ userId, date }: DailyLogStripProps) {
             resetError();
             setOpenSheet('mood');
           }}
-          value={
-            log?.mood
-              ? hasStickers && useAvatarMood
-                ? MOOD_LABELS[log.mood]
-                : `${MOOD_EMOJI[log.mood]} ${MOOD_LABELS[log.mood]}`
-              : null
-          }
+          value={moodValue}
         />
         <LogCard
           icon={<MonitorWeightRounded fontSize="inherit" />}
