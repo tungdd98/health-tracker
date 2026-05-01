@@ -18,11 +18,13 @@ type AppConfirmDialogProps = {
   title: string;
   description?: string;
   icon?: ReactNode;
+  children?: ReactNode;
   errorMessage?: string;
   isSubmitting?: boolean;
   cancelLabel?: string;
   confirmLabel: string;
   confirmColor?: 'primary' | 'error';
+  confirmDisabled?: boolean;
   onCancel: () => void;
   onConfirm: () => Promise<void> | void;
 };
@@ -32,11 +34,13 @@ export function AppConfirmDialog({
   title,
   description,
   icon,
+  children,
   errorMessage,
   isSubmitting = false,
   cancelLabel = 'Huỷ',
   confirmLabel,
   confirmColor = 'primary',
+  confirmDisabled = false,
   onCancel,
   onConfirm,
 }: AppConfirmDialogProps) {
@@ -51,6 +55,7 @@ export function AppConfirmDialog({
               {description}
             </Typography>
           ) : null}
+          {children}
           {errorMessage ? (
             <Alert color="error" sx={{ mt: 0.5 }} variant="filled">
               {errorMessage}
@@ -64,6 +69,7 @@ export function AppConfirmDialog({
         </Button>
         <AppSubmitButton
           color={confirmColor}
+          disabled={confirmDisabled}
           fullWidth
           loading={isSubmitting}
           loadingIndicatorSize={16}
