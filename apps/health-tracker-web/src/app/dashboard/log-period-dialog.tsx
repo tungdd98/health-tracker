@@ -1,44 +1,68 @@
-import { Box } from '@mui/material';
+import { Box, TextField } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { OpacityRounded } from '@mui/icons-material';
 import type { User } from '@supabase/supabase-js';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 
 import { mapAuthErrorToMessage, updateOnboardingProfile } from '@health-tracker/api';
 import { AppConfirmDialog } from '../components/app-confirm-dialog';
-import { OpacityRounded } from '@mui/icons-material';
 
 type LogPeriodDialogProps = {
   open: boolean;
   user: User;
+  initialDate: string;
+  mode: 'log' | 'edit';
   onClose: () => void;
   onSuccess: () => void;
 };
 
-export function LogPeriodDialog({ open, user, onClose, onSuccess }: LogPeriodDialogProps) {
+export function LogPeriodDialog({
+  open,
+  user,
+  initialDate,
+  mode,
+  onClose,
+  onSuccess,
+}: LogPeriodDialogProps) {
+  const today = DateTime.local().startOf('day');
+  const minDate = today.minus({ days: 90 });
+
+  const [selectedDate, setSelectedDate] = useState<DateTime | null>(
+    DateTime.fromISO(initialDate).isValid ? DateTime.fromISO(initialDate) : today,
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (open) {
       setErrorMessage('');
+      setSelectedDate(
+        DateTime.fromISO(initialDate).isValid ? DateTime.fromISO(initialDate) : today,
+      );
     }
-  }, [open]);
+  }, [open, initialDate]);
+
+  const isDateValid =
+    selectedDate !== null &&
+    selectedDate.isValid &&
+    selectedDate >= minDate &&
+    selectedDate <= today;
 
   const handleClose = () => {
-    if (isSubmitting) {
-      return;
-    }
-
+    if (isSubmitting) return;
     setErrorMessage('');
     onClose();
   };
 
   const handleConfirm = async () => {
+    if (!isDateValid || !selectedDate) return;
+
     setIsSubmitting(true);
     setErrorMessage('');
 
     const { error } = await updateOnboardingProfile(user, {
-      lastPeriodStartDate: DateTime.local().toISODate() ?? null,
+      lastPeriodStartDate: selectedDate.toISODate() ?? null,
     });
 
     setIsSubmitting(false);
@@ -51,11 +75,13 @@ export function LogPeriodDialog({ open, user, onClose, onSuccess }: LogPeriodDia
     onSuccess();
   };
 
+  const title = mode === 'edit' ? 'Chỉnh sửa ngày bắt đầu' : 'Xác nhận kỳ kinh mới';
+
   return (
     <AppConfirmDialog
       cancelLabel="Huỷ"
+      confirmDisabled={!isDateValid || isSubmitting}
       confirmLabel="Xác nhận"
-      description="Đánh dấu hôm nay là ngày bắt đầu kỳ kinh mới? Hệ thống sẽ cập nhật dự đoán chu kỳ."
       errorMessage={errorMessage}
       icon={
         <Box
@@ -76,7 +102,25 @@ export function LogPeriodDialog({ open, user, onClose, onSuccess }: LogPeriodDia
       onCancel={handleClose}
       onConfirm={() => void handleConfirm()}
       open={open}
-      title="Xác nhận kỳ kinh mới"
-    />
+      title={title}
+    >
+      <DatePicker
+        enableAccessibleFieldDOMStructure={false}
+        format="dd/MM/yyyy"
+        label="Ngày bắt đầu"
+        maxDate={today}
+        minDate={minDate}
+        value={selectedDate}
+        onChange={(value) => setSelectedDate(value)}
+        slotProps={{
+          textField: {
+            fullWidth: true,
+          },
+        }}
+        slots={{
+          textField: TextField,
+        }}
+      />
+    </AppConfirmDialog>
   );
 }
