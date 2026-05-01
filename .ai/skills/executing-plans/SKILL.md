@@ -27,9 +27,17 @@ Load plan, review critically, execute all tasks, report when complete.
 For each task:
 
 1. Mark as in_progress
+   - Update the TodoWrite task status to `in_progress`
+   - In `index.md`: change the task's checkbox from `- [ ]` to `- [~]` and set `**Status:** In Progress`
+   - In the task file: if a `**Status:**` field exists, update it to `In Progress`
 2. Follow each step exactly (plan has bite-sized steps)
+   - After completing each step, check it off in the task file: `- [ ]` → `- [x]`
 3. Run verifications as specified
 4. Mark as completed
+   - Update the TodoWrite task status to `completed`
+   - In `index.md`: change the task's checkbox from `- [~]` to `- [x]`
+   - In the task file: if a `**Status:**` field exists, update it to `Completed`
+   - After the **last** task: set `**Status:** Completed` in `index.md`
 
 ### Step 3: Complete Development
 
