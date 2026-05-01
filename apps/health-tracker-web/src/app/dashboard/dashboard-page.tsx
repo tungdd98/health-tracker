@@ -44,7 +44,7 @@ const formatVietnameseDate = (date: DateTime): string => {
 export function DashboardPage() {
   const navigate = useNavigate();
   const { isAuthResolved, onboardingProfile, user } = useAuthSession();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogMode, setDialogMode] = useState<'log' | 'edit' | null>(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const handleNavChange = useAppNavChange();
 
@@ -99,7 +99,8 @@ export function DashboardPage() {
           }
           isLoading={isLoading}
           mode={mode}
-          onLogPeriod={() => setIsDialogOpen(true)}
+          onEditPeriod={() => setDialogMode('edit')}
+          onLogPeriod={() => setDialogMode('log')}
           snapshot={snapshot}
         />
 
@@ -125,12 +126,18 @@ export function DashboardPage() {
 
       {user ? (
         <LogPeriodDialog
-          onClose={() => setIsDialogOpen(false)}
+          initialDate={
+            dialogMode === 'edit'
+              ? (onboardingProfile.lastPeriodStartDate ?? today.toISODate()!)
+              : today.toISODate()!
+          }
+          mode={dialogMode === 'edit' ? 'edit' : 'log'}
+          onClose={() => setDialogMode(null)}
           onSuccess={() => {
-            setIsDialogOpen(false);
+            setDialogMode(null);
             setSnackbarOpen(true);
           }}
-          open={isDialogOpen}
+          open={dialogMode !== null}
           user={user}
         />
       ) : null}
