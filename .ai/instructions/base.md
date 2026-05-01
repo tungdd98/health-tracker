@@ -73,7 +73,17 @@ Import via path aliases: `@health-tracker/ui`, `@health-tracker/forms`, etc. (co
 - TypeScript strict mode, 2-space indent, single quotes, semicolons enabled (Prettier config), 100-char line width.
 - Unused variables disallowed; prefix intentionally unused arguments with `_`.
 - Colocate implementation files with their feature area (e.g., `libs/ui/src/lib/app-shell.tsx`).
+
+**MUI rules:**
+
 - For MUI icons, use the `Rounded` variants by default unless an approved design explicitly requires something else.
+- Import icons as named exports from `@mui/icons-material` (e.g., `import { HomeRounded } from '@mui/icons-material'`); never use the per-file default import (`import HomeRounded from '@mui/icons-material/HomeRounded'`).
+- Always use design tokens for colors, spacing, typography, shadows, and border-radius — never hardcode raw values (e.g., `theme.spacing(2)` not `'16px'`, `theme.palette.primary.main` not `'#1976d2'`).
+- Use the `sx` prop for one-off styles on a single component; extract to `styled()` only when the same style block is reused across multiple components.
+- Prefer `Box` and `Stack` for layout; avoid writing custom CSS flexbox or grid when an MUI primitive already covers it.
+- Use `<Typography variant="...">` instead of raw HTML text elements (`h1`, `p`, `span`) so variants remain tied to the theme.
+- Always add `aria-label` to `IconButton` elements that contain no visible text.
+- Use `theme.breakpoints.up/down/between` for responsive styles; never hardcode pixel breakpoints.
 
 ## Commits
 
