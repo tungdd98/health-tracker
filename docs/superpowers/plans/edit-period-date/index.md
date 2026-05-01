@@ -1,10 +1,10 @@
 # Edit Period Date — Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use `subagent-driven-development` (recommended) or `executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use `subagent-driven-development` (recommended) or `executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Created:** 2026-05-01
 
-**Status:** Planning
+**Status:** Completed
 
 **Goal:** Let users pick a specific date (up to 90 days in the past) when logging or correcting their period start date, instead of always recording today.
 
@@ -16,10 +16,10 @@
 
 ## Task Checklist
 
-- [ ] [Task 01 — Extend AppConfirmDialog with children slot](task-01-app-confirm-dialog-children.md)
-- [ ] [Task 02 — Upgrade LogPeriodDialog with DatePicker](task-02-log-period-dialog-date-picker.md)
-- [ ] [Task 03 — Add edit icon button to CycleHero](task-03-cycle-hero-edit-button.md)
-- [ ] [Task 04 — Wire DashboardPage](task-04-dashboard-wiring.md)
+- [x] [Task 01 — Extend AppConfirmDialog with children slot](task-01-app-confirm-dialog-children.md)
+- [x] [Task 02 — Upgrade LogPeriodDialog with DatePicker](task-02-log-period-dialog-date-picker.md)
+- [x] [Task 03 — Add edit icon button to CycleHero](task-03-cycle-hero-edit-button.md)
+- [x] [Task 04 — Wire DashboardPage](task-04-dashboard-wiring.md)
 
 ---
 
