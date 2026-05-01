@@ -16,6 +16,7 @@ import { AppCard, AppShell } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
 import { useAppNavChange } from '../use-app-nav-change';
+import { DayDetailSheet } from './day-detail-sheet';
 import { MonthGrid } from './month-grid';
 import { PhaseLegend } from './phase-legend';
 import { ChevronLeftRounded, ChevronRightRounded, SettingsRounded } from '@mui/icons-material';
@@ -28,8 +29,9 @@ const formatMonthLabel = (date: DateTime) => `Tháng ${date.month}, ${date.year}
 export function CalendarPage() {
   const navigate = useNavigate();
   const theme = useTheme();
-  const { isAuthResolved, onboardingProfile } = useAuthSession();
+  const { isAuthResolved, onboardingProfile, user } = useAuthSession();
   const [displayMonth, setDisplayMonth] = useState(() => DateTime.local().startOf('month'));
+  const [selectedDay, setSelectedDay] = useState<DateTime | null>(null);
   const handleNavChange = useAppNavChange();
 
   const lastPeriodStartDate = onboardingProfile.lastPeriodStartDate
@@ -107,7 +109,7 @@ export function CalendarPage() {
             </Box>
           </Stack>
         ) : (
-          <MonthGrid displayMonth={displayMonth} input={input} />
+          <MonthGrid displayMonth={displayMonth} input={input} onDayClick={setSelectedDay} />
         )}
 
         {!isLoading && hasData ? <PhaseLegend /> : null}
@@ -138,6 +140,13 @@ export function CalendarPage() {
           {DASHBOARD_DISCLAIMER}
         </Typography>
       </Stack>
+
+      <DayDetailSheet
+        input={input}
+        selectedDay={selectedDay}
+        userId={user?.id}
+        onClose={() => setSelectedDay(null)}
+      />
     </AppShell>
   );
 }
