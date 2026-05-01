@@ -4,7 +4,7 @@
 
 **Created:** 2026-05-01
 
-**Status:** Planning
+**Status:** Completed
 
 **Goal:** Tap any day on the calendar to open a read-only bottom sheet showing cycle phase info and that day's logged mood/BBT/weight.
 
@@ -27,8 +27,8 @@
 
 ## Tasks
 
-- [ ] [Task 01 — Add `onDayClick` to MonthGrid](task-01-month-grid-click.md)
-- [ ] [Task 02 — Create `useDayDetail` hook](task-02-use-day-detail-hook.md)
-- [ ] [Task 03 — Create `DayDetailSheet` component](task-03-day-detail-sheet.md)
-- [ ] [Task 04 — Wire everything in CalendarPage](task-04-wire-calendar-page.md)
-- [ ] [Task 05 — Definition of Done](task-05-definition-of-done.md)
+- [x] [Task 01 — Add `onDayClick` to MonthGrid](task-01-month-grid-click.md)
+- [x] [Task 02 — Create `useDayDetail` hook](task-02-use-day-detail-hook.md)
+- [x] [Task 03 — Create `DayDetailSheet` component](task-03-day-detail-sheet.md)
+- [x] [Task 04 — Wire everything in CalendarPage](task-04-wire-calendar-page.md)
+- [x] [Task 05 — Definition of Done](task-05-definition-of-done.md)
