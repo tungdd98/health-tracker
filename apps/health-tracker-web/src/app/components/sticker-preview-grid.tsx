@@ -1,17 +1,9 @@
 import { Box, Stack, Typography } from '@mui/material';
 
-import type { MoodValue } from '@health-tracker/api';
+import { MOOD_LABELS, type MoodValue } from '@health-tracker/api';
 
 type StickerPreviewGridProps = {
   moodImages: Partial<Record<MoodValue, string>>;
-};
-
-const MOOD_LABELS: Record<MoodValue, string> = {
-  sad: 'Buồn',
-  neutral: 'Bình thường',
-  happy: 'Vui',
-  very_happy: 'Rất vui',
-  tired: 'Mệt mỏi',
 };
 
 const MOOD_ORDER: MoodValue[] = ['sad', 'neutral', 'happy', 'very_happy', 'tired'];

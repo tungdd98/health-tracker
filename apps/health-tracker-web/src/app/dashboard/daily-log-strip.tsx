@@ -2,7 +2,7 @@ import { Box, Skeleton, Stack, Typography } from '@mui/material';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 
-import { type MoodValue } from '@health-tracker/api';
+import { MOOD_LABELS, type MoodValue } from '@health-tracker/api';
 
 import { BbtBottomSheet } from './bbt-bottom-sheet';
 import { MoodBottomSheet } from './mood-bottom-sheet';
@@ -35,14 +35,6 @@ const MOOD_EMOJI: Record<MoodValue, string> = {
   happy: '😊',
   very_happy: '😄',
   tired: '😴',
-};
-
-const MOOD_LABELS: Record<MoodValue, string> = {
-  sad: 'Buồn',
-  neutral: 'Bình thường',
-  happy: 'Vui',
-  very_happy: 'Rất vui',
-  tired: 'Mệt mỏi',
 };
 
 function LogCard({ icon, label, value, onClick }: LogCardProps) {

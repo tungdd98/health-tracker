@@ -2,6 +2,14 @@ import { supabase } from './supabase';
 
 export type MoodValue = 'sad' | 'neutral' | 'happy' | 'very_happy' | 'tired';
 
+export const MOOD_LABELS: Record<MoodValue, string> = {
+  sad: 'Buồn',
+  neutral: 'Bình thường',
+  happy: 'Vui',
+  very_happy: 'Rất vui',
+  tired: 'Mệt mỏi',
+};
+
 export type DailyLog = {
   id: string;
   userId: string;

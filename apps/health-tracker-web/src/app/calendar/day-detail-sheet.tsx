@@ -1,7 +1,8 @@
 import { Box, Drawer, Skeleton, Stack, Typography, alpha, useTheme } from '@mui/material';
-import { type DateTime } from 'luxon';
+import { DateTime } from 'luxon';
+import { useRef } from 'react';
 
-import { type MoodValue } from '@health-tracker/api';
+import { MOOD_LABELS } from '@health-tracker/api';
 
 import {
   PHASE_LABELS,
@@ -29,14 +30,6 @@ const PHASE_DESCRIPTIONS: Record<CyclePhase, string> = {
   follicular: 'Năng lượng tăng dần, thích hợp hoạt động',
   fertile: 'Đỉnh năng lượng và khả năng sinh sản',
   luteal: 'Cơ thể chuẩn bị cho chu kỳ mới',
-};
-
-const MOOD_LABELS: Record<MoodValue, string> = {
-  sad: 'Buồn',
-  neutral: 'Bình thường',
-  happy: 'Vui',
-  very_happy: 'Rất vui',
-  tired: 'Mệt mỏi',
 };
 
 const formatDayHeader = (date: DateTime, snapshot: CycleSnapshot | null): string => {
@@ -77,16 +70,24 @@ function InfoRow({ label, value, valueFaded = false }: InfoRowProps) {
 
 export function DayDetailSheet({ selectedDay, input, userId, onClose }: DayDetailSheetProps) {
   const theme = useTheme();
+
+  // Keep last non-null day alive so content doesn't flash empty during close animation
+  const stableDay = useRef<DateTime | null>(null);
+  if (selectedDay !== null) {
+    stableDay.current = selectedDay;
+  }
+  const renderDay = stableDay.current;
+
   const today = DateTime.local().startOf('day');
-  const dateStr = selectedDay?.toISODate() ?? null;
-  const isFuture = selectedDay ? selectedDay.startOf('day') > today : false;
+  const dateStr = renderDay?.toISODate() ?? null;
+  const isFuture = renderDay ? renderDay.startOf('day') > today : false;
 
   const snapshot =
-    selectedDay && input
+    renderDay && input
       ? computeCycleSnapshot({
           cycleLengthDays: input.cycleLengthDays,
           lastPeriodStartDate: input.lastPeriodStartDate,
-          targetDate: selectedDay,
+          targetDate: renderDay,
         })
       : null;
 
@@ -111,10 +112,10 @@ export function DayDetailSheet({ selectedDay, input, userId, onClose }: DayDetai
         />
 
         <Stack spacing={2}>
-          {selectedDay ? (
+          {renderDay ? (
             <Stack alignItems="center" direction="row" spacing={1}>
               <Typography sx={theme.appTokens.typography.titleMd}>
-                {formatDayHeader(selectedDay, snapshot)}
+                {formatDayHeader(renderDay, snapshot)}
               </Typography>
               {snapshot ? (
                 <Box
