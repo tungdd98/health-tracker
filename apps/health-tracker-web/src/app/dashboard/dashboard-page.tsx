@@ -1,6 +1,6 @@
 import { Alert, Button, Snackbar, Stack, Typography } from '@mui/material';
 import { DateTime } from 'luxon';
-import { useState, type SyntheticEvent } from 'react';
+import { useRef, useState, type SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AppShell } from '@health-tracker/ui';
@@ -45,6 +45,7 @@ export function DashboardPage() {
   const navigate = useNavigate();
   const { isAuthResolved, onboardingProfile, user } = useAuthSession();
   const [dialogMode, setDialogMode] = useState<'log' | 'edit' | null>(null);
+  const lastDialogModeRef = useRef<'log' | 'edit'>('log');
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const handleNavChange = useAppNavChange();
 
@@ -99,8 +100,14 @@ export function DashboardPage() {
           }
           isLoading={isLoading}
           mode={mode}
-          onEditPeriod={() => setDialogMode('edit')}
-          onLogPeriod={() => setDialogMode('log')}
+          onEditPeriod={() => {
+            lastDialogModeRef.current = 'edit';
+            setDialogMode('edit');
+          }}
+          onLogPeriod={() => {
+            lastDialogModeRef.current = 'log';
+            setDialogMode('log');
+          }}
           snapshot={snapshot}
         />
 
@@ -131,7 +138,7 @@ export function DashboardPage() {
               ? (onboardingProfile.lastPeriodStartDate ?? today.toISODate()!)
               : today.toISODate()!
           }
-          mode={dialogMode === 'edit' ? 'edit' : 'log'}
+          mode={lastDialogModeRef.current}
           onClose={() => setDialogMode(null)}
           onSuccess={() => {
             setDialogMode(null);
