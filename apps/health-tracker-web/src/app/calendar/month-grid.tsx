@@ -13,9 +13,10 @@ type MonthGridInput = {
 type MonthGridProps = {
   displayMonth: DateTime;
   input: MonthGridInput | null;
+  onDayClick?: (day: DateTime) => void;
 };
 
-export function MonthGrid({ displayMonth, input }: MonthGridProps) {
+export function MonthGrid({ displayMonth, input, onDayClick }: MonthGridProps) {
   const theme = useTheme();
   const today = DateTime.local().startOf('day');
   const firstDayOfMonth = displayMonth.startOf('month');
@@ -63,6 +64,7 @@ export function MonthGrid({ displayMonth, input }: MonthGridProps) {
           return (
             <Box
               key={date.toISODate()}
+              onClick={onDayClick ? () => onDayClick(date) : undefined}
               sx={{
                 alignItems: 'center',
                 aspectRatio: '1',
@@ -71,6 +73,7 @@ export function MonthGrid({ displayMonth, input }: MonthGridProps) {
                   ? `1.5px solid ${theme.palette.primary.main}`
                   : '1px solid transparent',
                 borderRadius: theme.appTokens.radius.sm,
+                cursor: onDayClick ? 'pointer' : 'default',
                 display: 'flex',
                 justifyContent: 'center',
                 opacity: isCurrentMonth ? 1 : 0.4,
