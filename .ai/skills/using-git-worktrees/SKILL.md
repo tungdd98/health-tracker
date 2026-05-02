@@ -118,7 +118,27 @@ git worktree add "$path" -b "<branch_name>"
 cd "$path"
 ```
 
-### 3. Run Project Setup
+### 3. Symlink Gitignored Env Files
+
+Gitignored files (`.env`, `.env.local`, etc.) are not present in new worktrees. Symlink them from the main worktree so all worktrees share one source of truth — no manual copying, no sync issues.
+
+```bash
+main_root=$(git rev-parse --show-toplevel)
+
+# Common env file patterns — symlink each that exists in main worktree
+for f in .env .env.local .env.development .env.development.local .env.production .env.production.local; do
+  if [ -f "$main_root/$f" ]; then
+    ln -sf "$main_root/$f" "$path/$f"
+    echo "Symlinked $f"
+  fi
+done
+```
+
+**If no env files found:** Skip silently.
+
+**Why symlink, not copy:** Changes to `.env.local` in main propagate automatically — no need to keep multiple copies in sync.
+
+### 4. Run Project Setup
 
 Auto-detect and run appropriate setup:
 
@@ -137,7 +157,7 @@ if [ -f pyproject.toml ]; then poetry install; fi
 if [ -f go.mod ]; then go mod download; fi
 ```
 
-### 4. Verify Clean Baseline
+### 5. Verify Clean Baseline
 
 Run tests to ensure worktree starts clean:
 
@@ -153,7 +173,35 @@ go test ./...
 
 **If tests pass:** Report ready.
 
-### 5. Report Location
+### 6. Migrate Untracked Spec/Plan Files
+
+After baseline verification, check if the main worktree has untracked spec/plan files that should travel with the feature:
+
+```bash
+# Check for untracked spec/plan files in main worktree
+main_root=$(git rev-parse --show-toplevel)
+git -C "$main_root" ls-files --others --exclude-standard docs/superpowers/
+```
+
+**If untracked files found under `docs/superpowers/`:**
+
+1. Identify files relevant to this feature (ask user if ambiguous)
+2. Copy them into the new worktree:
+   ```bash
+   mkdir -p "$path/docs/superpowers/specs" "$path/docs/superpowers/plans"
+   # Copy relevant spec/plan files
+   cp <matched-files> "$path/docs/superpowers/..."
+   ```
+3. Commit on the feature branch:
+   ```bash
+   git -C "$path" add docs/superpowers/
+   git -C "$path" commit -m "docs: add spec and plan for <feature-name>"
+   ```
+4. Report: "Spec/plan files copied and committed on feature branch."
+
+**If no untracked spec/plan files:** Skip this step silently.
+
+### 7. Report Location
 
 ```
 Worktree ready at <full-path>
@@ -172,6 +220,8 @@ Ready to implement <feature-name>
 | Directory not ignored      | Add to .gitignore + commit |
 | Tests fail during baseline | Report failures + ask      |
 | No package.json/Cargo.toml | Skip dependency install    |
+| Untracked spec/plan found  | Copy to worktree + commit  |
+| No untracked spec/plan     | Skip silently              |
 
 ## Common Mistakes
 

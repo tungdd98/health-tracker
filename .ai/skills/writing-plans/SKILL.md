@@ -1,13 +1,13 @@
 ---
 name: writing-plans
-description: Use this when you have a spec or requirements for a multi-step task, before touching code
+description: Use when you have a spec or requirements for a multi-step task, before touching code
 ---
 
 # Writing Plans
 
 ## Overview
 
-Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
+Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD.
 
 Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
 
@@ -22,8 +22,6 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 - Split execution work into `task-XX-<topic>.md` files in the same folder
 - Use a plain feature slug by default; if the user or repo workflow wants a naming scheme such as phases, that decision should happen during brainstorming
 - (User preferences for plan location override this default)
-- After saving, ask the user: "Commit this plan to git? (y/n)"
-  - If yes → commit. If no → leave as uncommitted file.
 
 ## Frontend / UI Plans — STRIP UI Verbosity
 
@@ -68,7 +66,6 @@ This structure informs the task decomposition. Each task should produce self-con
 - "Run it to make sure it fails" - step
 - "Implement the minimal code to make the test pass" - step
 - "Run the tests and make sure they pass" - step
-- "Commit" - step
 
 ## Index File Header
 
@@ -77,7 +74,7 @@ This structure informs the task decomposition. Each task should produce self-con
 ```markdown
 # [Feature Name] Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use `subagent-driven-development` (recommended) or `executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use subagent-driven-development (recommended) or executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Created:** YYYY-MM-DD
 
@@ -197,10 +194,10 @@ After saving the plan, offer execution choice:
 
 **If Subagent-Driven chosen:**
 
-- **REQUIRED SUB-SKILL:** Use `subagent-driven-development`
+- **REQUIRED SUB-SKILL:** Use subagent-driven-development
 - Fresh subagent per task + two-stage review
 
 **If Inline Execution chosen:**
 
-- **REQUIRED SUB-SKILL:** Use `executing-plans`
+- **REQUIRED SUB-SKILL:** Use executing-plans
 - Batch execution with checkpoints for review

@@ -1,6 +1,6 @@
 ---
 name: verification-before-completion
-description: Use this when about to claim work is complete, fixed, or passing, before committing or creating PRs - runs typecheck → lint → build using project's package manager; tests are optional
+description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
 ---
 
 # Verification Before Completion
@@ -20,25 +20,6 @@ NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
 ```
 
 If you haven't run the verification command in this message, you cannot claim it passes.
-
-## Verification Commands (Frontend Default)
-
-Detect package manager from lockfile in repo root:
-
-- `pnpm-lock.yaml` → use `pnpm`
-- `yarn.lock` → use `yarn`
-- `package-lock.json` → use `npm`
-- None of the above → fallback to `npx` for direct binary calls
-
-Then run, in this order, all must pass:
-
-1. `<pm> typecheck` (or `<pm> run typecheck`; fallback `npx tsc --noEmit`)
-2. `<pm> lint` (or `<pm> run lint`)
-3. `<pm> build` (or `<pm> run build`)
-
-Do NOT require running tests. If the project has tests and they're already
-green, that's good — but lack of tests is not a blocker for completion.
-Tests are optional in this project's verification policy.
 
 ## The Gate Function
 
