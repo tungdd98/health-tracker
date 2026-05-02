@@ -1,0 +1,166 @@
+# AI-Generated Daily Tip — Design Spec
+
+**Date:** 2026-05-02
+**Status:** Approved
+
+## Overview
+
+Replace the hardcoded tip rotation in `tip-library.ts` with AI-generated tips personalized to each user's cycle phase, recent daily logs, and health goals. Tips are cached once per day in the database; the static library remains as a silent fallback.
+
+---
+
+## Architecture
+
+```
+Dashboard load
+    │
+    ▼
+useQuery("daily-tip", fetchDailyTip)
+    │
+    ├─ Query bảng daily_tips (user_id + date = hôm nay)
+    │       │
+    │       ├─ Có record → trả về tip, DONE
+    │       │
+    │       └─ Không có → gọi Edge Function generate-daily-tip
+    │                           │
+    │                           ├─ Fetch server-side: daily logs (7 ngày), assistant goals
+    │                           ├─ Gọi Claude API → sinh tip (tiếng Việt, ~2-3 câu)
+    │                           ├─ Lưu vào daily_tips
+    │                           └─ Trả về tip text
+    │
+    └─ Lỗi bất kỳ → fallback: pickTip() từ tip-library.ts (silent, no UI change)
+```
+
+---
+
+## Database
+
+### New table: `daily_tips`
+
+| Column       | Type        | Notes                          |
+| ------------ | ----------- | ------------------------------ |
+| `id`         | uuid PK     | gen_random_uuid()              |
+| `user_id`    | uuid FK     | → profiles(id), CASCADE DELETE |
+| `date`       | date        | date tip was generated         |
+| `tip_text`   | text        | generated tip content          |
+| `created_at` | timestamptz | default now()                  |
+
+**Unique constraint:** `(user_id, date)` — one tip per user per day.
+
+**RLS:** Users can only read their own rows (`user_id = auth.uid()`). Edge Function uses service role key to write.
+
+---
+
+## Edge Function: `generate-daily-tip`
+
+**Endpoint:** `POST /functions/v1/generate-daily-tip`
+
+**Request body:**
+
+```ts
+{
+  userId: string;
+  date: string; // "YYYY-MM-DD"
+  phase: CyclePhase; // "menstrual" | "follicular" | "fertile" | "luteal"
+}
+```
+
+**Response:**
+
+```ts
+{
+  tipText: string;
+}
+```
+
+**Logic:**
+
+1. Check `daily_tips` for existing `(userId, date)` — return immediately if found (idempotent).
+2. Fetch in parallel:
+   - Daily logs from last 7 days (`daily_logs` table) — if empty, omit symptom context from prompt
+   - `assistant_goals` from `profiles` — if empty, omit goals section from prompt
+3. Build Vietnamese prompt (see below).
+4. Call Claude API — model: `claude-haiku-4-5-20251001` (low cost, sufficient for short tip).
+5. Upsert result into `daily_tips` (handles race conditions).
+6. Return `{ tipText }`.
+
+**Prompt template:**
+
+```
+Bạn là trợ lý sức khỏe phụ nữ. Hãy viết 1 lời khuyên ngắn (2-3 câu)
+bằng tiếng Việt, thân thiện và ấm áp, phù hợp với:
+- Giai đoạn chu kỳ: [phase]
+- Triệu chứng/cảm xúc gần đây: [summary từ daily logs]
+- Mục tiêu sức khỏe: [goals]
+
+Chỉ trả về nội dung lời khuyên, không thêm tiêu đề hay giải thích.
+```
+
+**Security:** Claude API key stored as Supabase secret, never exposed to client. Edge Function authenticated via Supabase JWT.
+
+---
+
+## Frontend
+
+### New hook: `useDailyTip`
+
+Location: `apps/health-tracker-web/src/app/dashboard/use-daily-tip.ts`
+
+```ts
+useDailyTip(userId: string, phase: CyclePhase, date: string): {
+  tip: string;
+  isLoading: boolean;
+}
+```
+
+- `useQuery` with `staleTime: Infinity` — tip never refetches within the same day.
+- On cache miss: calls Edge Function, returns result.
+- On any error: silently returns `pickTip(phase, DateTime.local())` from `tip-library.ts`.
+
+### Updated: `TipOfDay` component
+
+New props:
+
+- `userId: string` — passed down from `DashboardPage`
+- `chatbotName: string | null` — from `assistant_preferences.chatbot_name`
+
+Title logic:
+
+```ts
+const title = chatbotName ? `Lời khuyên của ${chatbotName}` : 'Lời khuyên của AI';
+```
+
+No visual changes to the card layout, skeleton, colors, or position in the dashboard.
+
+### Updated: `DashboardPage`
+
+- Pass `user.id` to `TipOfDay`.
+- Load `chatbotName` via `getChatPersonalization(user.id)` — React Query, same pattern as chat feature.
+
+---
+
+## Fallback Behavior
+
+| Scenario                          | Result                             |
+| --------------------------------- | ---------------------------------- |
+| `daily_tips` has today's record   | Show cached AI tip                 |
+| No record, Edge Function succeeds | Generate, cache, show AI tip       |
+| Edge Function fails               | Show static tip from `tip-library` |
+| `chatbotName` is null             | Title: "Lời khuyên của AI"         |
+| `chatbotName` is set              | Title: "Lời khuyên của [name]"     |
+
+---
+
+## Files Changed
+
+| File                                                    | Change                                                          |
+| ------------------------------------------------------- | --------------------------------------------------------------- |
+| `supabase/migrations/<timestamp>_create_daily_tips.sql` | New migration (timestamp generated by `supabase migration new`) |
+| `supabase/functions/generate-daily-tip/index.ts`        | New Edge Function                                               |
+| `libs/api/src/lib/daily-tip.ts`                         | New API helper (fetch/upsert daily_tips)                        |
+| `libs/api/src/index.ts`                                 | Export new API helper                                           |
+| `apps/.../dashboard/use-daily-tip.ts`                   | New hook                                                        |
+| `apps/.../dashboard/tip-of-day.tsx`                     | Add `userId`, `chatbotName` props; update title                 |
+| `apps/.../dashboard/dashboard-page.tsx`                 | Pass new props, load `chatbotName`                              |
+
+`tip-library.ts` — **no changes** (kept as fallback).
