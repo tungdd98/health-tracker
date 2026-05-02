@@ -96,7 +96,7 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
       })}
     >
       <Stack alignItems="center" direction="row" justifyContent="space-between">
-        <Typography fontWeight={700}>Thuốc hôm nay</Typography>
+        <Typography variant="subtitle1">Thuốc hôm nay</Typography>
         <Box
           sx={(theme) => ({
             backgroundColor: theme.palette.surface.canvas,

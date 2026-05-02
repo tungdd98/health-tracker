@@ -43,7 +43,7 @@ export function TipOfDay({ userId, phase, date, chatbotName }: TipOfDayProps) {
       }}
     >
       <Stack spacing={0.75}>
-        <Typography color="warning.main" variant="overline">
+        <Typography color="warning.main" variant="subtitle1">
           {title}
         </Typography>
         <Typography color="text.primary" variant="body2">
