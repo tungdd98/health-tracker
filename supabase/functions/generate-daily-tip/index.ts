@@ -63,7 +63,7 @@ const buildPrompt = (phase: CyclePhase, moodSummary: string | null, goals: strin
 const sevenDaysAgo = (fromDate: string): string => {
   const d = new Date(fromDate);
   d.setDate(d.getDate() - 7);
-  return d.toISOString().split('T')[0]!;
+  return d.toISOString().split('T')[0] ?? fromDate;
 };
 
 Deno.serve(async (request) => {
@@ -184,26 +184,32 @@ Deno.serve(async (request) => {
     );
   }
 
-  const claudeJson = (await claudeResponse.json()) as {
-    content: Array<{ type: string; text: string }>;
-  };
+  const claudeJson = (await claudeResponse.json()) as Record<string, unknown>;
+  const content = Array.isArray(claudeJson.content) ? claudeJson.content : [];
+  const tipText = (content as Array<Record<string, unknown>>).find((b) => b['type'] === 'text')?.[
+    'text'
+  ] as string | undefined;
 
-  const tipText = claudeJson.content.find((b) => b.type === 'text')?.text?.trim() ?? '';
-
-  if (!tipText) {
+  if (!tipText?.trim()) {
     return Response.json(
       { error: 'Empty response from Claude.' },
       { headers: corsHeaders, status: 502 },
     );
   }
 
+  const trimmedTip = tipText.trim();
+
   // Upsert handles the race condition where two requests arrive simultaneously
-  await supabase
+  const { error: upsertError } = await supabase
     .from('daily_tips')
     .upsert(
-      { user_id: user.id, date: body.date, tip_text: tipText },
+      { user_id: user.id, date: body.date, tip_text: trimmedTip },
       { onConflict: 'user_id,date' },
     );
 
-  return Response.json({ tipText }, { headers: corsHeaders });
+  if (upsertError) {
+    return Response.json({ error: 'Failed to save tip.' }, { headers: corsHeaders, status: 500 });
+  }
+
+  return Response.json({ tipText: trimmedTip }, { headers: corsHeaders });
 });
