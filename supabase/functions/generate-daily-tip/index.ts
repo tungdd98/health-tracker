@@ -43,7 +43,7 @@ const isValidDate = (value: unknown): value is string =>
 
 const buildPrompt = (phase: CyclePhase, moodSummary: string | null, goals: string[]): string => {
   const lines = [
-    'Bạn là trợ lý sức khỏe phụ nữ. Hãy viết 1 lời khuyên ngắn (2-3 câu) bằng tiếng Việt, thân thiện và ấm áp, phù hợp với:',
+    'Bạn là trợ lý sức khỏe phụ nữ. Hãy viết 1 câu lời khuyên ngắn gọn (tối đa 20 từ) bằng tiếng Việt, thân thiện, phù hợp với:',
     `- Giai đoạn chu kỳ: ${PHASE_LABELS[phase]}`,
   ];
 
