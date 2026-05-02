@@ -74,7 +74,7 @@ This structure informs the task decomposition. Each task should produce self-con
 ```markdown
 # [Feature Name] Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use subagent-driven-development (recommended) or executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use subagent-driven-development (recommended), branch-driven-development, or executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Created:** YYYY-MM-DD
 
@@ -184,18 +184,25 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 After saving the plan, offer execution choice:
 
-**"Plan complete and saved to `docs/superpowers/plans/<feature-name>/`. Two execution options:**
+**"Plan complete and saved to `docs/superpowers/plans/<feature-name>/`. Three execution options:**
 
-**1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
+**1. Subagent-Driven with Worktree (recommended)** - Fresh subagent per task + isolated directory, no risk of polluting current working tree
 
-**2. Inline Execution** - Execute tasks in this session using executing-plans, batch execution with checkpoints
+**2. Subagent-Driven in Current Directory** - Same subagent loop but checks out a branch here, skips worktree overhead
+
+**3. Inline Execution** - Execute tasks in this session using executing-plans, batch execution with checkpoints
 
 **Which approach?"**
 
-**If Subagent-Driven chosen:**
+**If Subagent-Driven with Worktree chosen:**
 
 - **REQUIRED SUB-SKILL:** Use subagent-driven-development
-- Fresh subagent per task + two-stage review
+- Fresh subagent per task + two-stage review + isolated worktree directory
+
+**If Subagent-Driven in Current Directory chosen:**
+
+- **REQUIRED SUB-SKILL:** Use branch-driven-development
+- Fresh subagent per task + two-stage review, checkout branch in current directory
 
 **If Inline Execution chosen:**
 

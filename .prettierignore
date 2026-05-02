@@ -3,3 +3,7 @@ coverage
 node_modules
 .nx
 .worktrees
+# Symlinks - Prettier cannot process symbolic links
+.ai/skills/branch-driven-development/implementer-prompt.md
+.ai/skills/branch-driven-development/spec-reviewer-prompt.md
+.ai/skills/branch-driven-development/code-quality-reviewer-prompt.md
