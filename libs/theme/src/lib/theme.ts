@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import { alpha, createTheme } from '@mui/material/styles';
 
 type PhasePalette = {
@@ -52,16 +51,6 @@ type AppShadowTokens = {
   icon: string;
 };
 
-type AppTypographyTokens = {
-  eyebrow: CSSProperties;
-  sectionLabel: CSSProperties;
-  sectionValue: CSSProperties;
-  helper: CSSProperties;
-  microLabel: CSSProperties;
-  metricValue: CSSProperties;
-  titleMd: CSSProperties;
-};
-
 declare module '@mui/material/styles' {
   interface Palette {
     phase: PhasePalette;
@@ -81,7 +70,6 @@ declare module '@mui/material/styles' {
     appTokens: {
       radius: AppRadiusTokens;
       shadow: AppShadowTokens;
-      typography: AppTypographyTokens;
     };
   }
 
@@ -89,7 +77,6 @@ declare module '@mui/material/styles' {
     appTokens?: {
       radius?: Partial<AppRadiusTokens>;
       shadow?: Partial<AppShadowTokens>;
-      typography?: Partial<AppTypographyTokens>;
     };
   }
 }
@@ -152,50 +139,9 @@ const appTokens = {
     modal: `0 24px 48px ${alpha(rose.primary, 0.08)}`,
     icon: `0 18px 36px ${alpha(rose.primary, 0.14)}`,
   },
-  typography: {
-    eyebrow: {
-      fontSize: '0.72rem',
-      fontWeight: 700,
-      letterSpacing: '0.16em',
-      lineHeight: 1,
-      textTransform: 'uppercase',
-    },
-    sectionLabel: {
-      fontSize: '0.8125rem',
-      fontWeight: 600,
-      lineHeight: 1.4,
-    },
-    sectionValue: {
-      fontSize: '0.875rem',
-      fontWeight: 600,
-      lineHeight: 1.4,
-    },
-    helper: {
-      fontSize: '0.75rem',
-      lineHeight: 1.4,
-    },
-    microLabel: {
-      fontSize: '0.625rem',
-      fontWeight: 700,
-      letterSpacing: '0.08em',
-      lineHeight: 1.2,
-      textTransform: 'uppercase',
-    },
-    metricValue: {
-      fontSize: '1.375rem',
-      fontWeight: 700,
-      lineHeight: 1.2,
-    },
-    titleMd: {
-      fontSize: '1.125rem',
-      fontWeight: 700,
-      lineHeight: 1.25,
-    },
-  },
 } satisfies {
   radius: AppRadiusTokens;
   shadow: AppShadowTokens;
-  typography: AppTypographyTokens;
 };
 
 export const appTheme = createTheme({
@@ -264,45 +210,27 @@ export const appTheme = createTheme({
   typography: {
     fontFamily: '"Plus Jakarta Sans", sans-serif',
     h1: {
-      fontSize: 'clamp(2.4rem, 6vw, 3.35rem)',
       fontWeight: 700,
-      letterSpacing: '-0.04em',
-      lineHeight: 1.02,
     },
     h2: {
-      fontSize: 'clamp(2rem, 5vw, 2.75rem)',
       fontWeight: 700,
-      letterSpacing: '-0.03em',
-      lineHeight: 1.08,
     },
     h3: {
-      fontSize: '1.45rem',
       fontWeight: 700,
-      letterSpacing: '-0.02em',
-      lineHeight: 1.12,
     },
     h4: {
-      fontSize: '1.2rem',
       fontWeight: 700,
-      lineHeight: 1.2,
     },
     h5: {
-      fontSize: '1.05rem',
       fontWeight: 700,
-      lineHeight: 1.25,
     },
-    body1: {
-      fontSize: '0.98rem',
-      lineHeight: 1.65,
+    h6: {
+      fontWeight: 700,
     },
-    body2: {
-      fontSize: '0.92rem',
-      lineHeight: 1.6,
-    },
+    body1: {},
+    body2: {},
     subtitle1: {
-      fontSize: '1rem',
-      fontWeight: 600,
-      lineHeight: 1.4,
+      fontWeight: 700,
     },
     subtitle2: {
       fontSize: '0.88rem',
@@ -310,20 +238,15 @@ export const appTheme = createTheme({
       lineHeight: 1.35,
     },
     overline: {
-      fontSize: '0.72rem',
       fontWeight: 700,
-      letterSpacing: '0.16em',
       textTransform: 'uppercase',
+      lineHeight: 1,
     },
     button: {
       textTransform: 'none',
       fontWeight: 700,
-      letterSpacing: '-0.01em',
     },
-    caption: {
-      fontSize: '0.78rem',
-      lineHeight: 1.5,
-    },
+    caption: {},
   },
   components: {
     MuiCssBaseline: {
@@ -424,9 +347,6 @@ export const appTheme = createTheme({
             borderColor: alpha(rose.primary, 0.7),
           },
         },
-        input: {
-          paddingBlock: 14,
-        },
       },
     },
     MuiInputBase: {
@@ -485,20 +405,6 @@ export const appTheme = createTheme({
           backgroundColor: alpha(rose.paper, 0.88),
           backdropFilter: 'blur(18px)',
           boxShadow: `0 10px 22px ${alpha(rose.primary, 0.08)}`,
-        },
-      },
-    },
-    MuiBottomNavigationAction: {
-      styleOverrides: {
-        root: {
-          color: rose.textMuted,
-          '&.Mui-selected': {
-            color: rose.primary,
-          },
-        },
-        label: {
-          fontSize: '0.72rem',
-          fontWeight: 700,
         },
       },
     },

@@ -83,7 +83,12 @@ export function WeightBottomSheet({
         })}
       >
         <InputBase
-          inputProps={{ max: MAX_WEIGHT, min: MIN_WEIGHT, step: 0.1 }}
+          inputProps={{
+            className: 'MuiTypography-root MuiTypography-h5',
+            max: MAX_WEIGHT,
+            min: MIN_WEIGHT,
+            step: 0.1,
+          }}
           onChange={(event) => {
             setValue(event.target.value);
             if (localError) {
@@ -91,17 +96,11 @@ export function WeightBottomSheet({
             }
           }}
           placeholder="52.5"
-          sx={(theme) => ({
-            '& input': {
-              ...theme.appTokens.typography.metricValue,
-              padding: 0,
-            },
-            flex: 1,
-          })}
+          sx={{ '& input': { padding: 0 }, flex: 1 }}
           type="number"
           value={value}
         />
-        <Typography color="text.secondary" sx={(theme) => theme.appTokens.typography.sectionValue}>
+        <Typography color="text.secondary" variant="subtitle1">
           kg
         </Typography>
       </Box>

@@ -83,7 +83,12 @@ export function BbtBottomSheet({
         })}
       >
         <InputBase
-          inputProps={{ max: MAX_BBT, min: MIN_BBT, step: 0.05 }}
+          inputProps={{
+            className: 'MuiTypography-root MuiTypography-h5',
+            max: MAX_BBT,
+            min: MIN_BBT,
+            step: 0.05,
+          }}
           onChange={(event) => {
             setValue(event.target.value);
             if (localError) {
@@ -91,17 +96,11 @@ export function BbtBottomSheet({
             }
           }}
           placeholder="36.5"
-          sx={(theme) => ({
-            '& input': {
-              ...theme.appTokens.typography.metricValue,
-              padding: 0,
-            },
-            flex: 1,
-          })}
+          sx={{ '& input': { padding: 0 }, flex: 1 }}
           type="number"
           value={value}
         />
-        <Typography color="text.secondary" sx={(theme) => theme.appTokens.typography.sectionValue}>
+        <Typography color="text.secondary" variant="subtitle1">
           °C
         </Typography>
       </Box>

@@ -37,7 +37,7 @@ export function CompletionStep({
         >
           <FavoriteRounded sx={{ fontSize: 36 }} />
         </Box>
-        <Typography variant="h4">Bạn đã sẵn sàng!</Typography>
+        <Typography variant="h5">Bạn đã sẵn sàng!</Typography>
         <Typography color="text.secondary" variant="body2">
           Mọi thông tin cần thiết đã ở đúng chỗ để bạn bắt đầu vào app.
         </Typography>

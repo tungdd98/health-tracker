@@ -214,19 +214,13 @@ export function MedicationListPage() {
                   {schedule.ended ? (
                     <Chip color="default" label={schedule.label} size="small" variant="outlined" />
                   ) : (
-                    <Typography
-                      color="text.secondary"
-                      sx={(theme) => theme.appTokens.typography.sectionLabel}
-                    >
+                    <Typography color="text.secondary" variant="subtitle2">
                       {schedule.label}
                     </Typography>
                   )}
                 </Stack>
 
-                <Typography
-                  color="text.secondary"
-                  sx={(theme) => theme.appTokens.typography.sectionLabel}
-                >
+                <Typography color="text.secondary" variant="subtitle2">
                   {medication.doses.map((dose) => dose.timeOfDay).join(' · ')}
                 </Typography>
               </Stack>

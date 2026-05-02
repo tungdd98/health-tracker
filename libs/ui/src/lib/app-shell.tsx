@@ -20,7 +20,6 @@ export const defaultNavItems: AppBottomNavItem[] = [
 type AppShellProps = PropsWithChildren<{
   headerAction?: React.ReactNode;
   headerEyebrow?: string;
-  headerSubtitleFontWeight?: number;
   headerSubtitle?: string;
   headerTitle?: string;
   navItems?: AppBottomNavItem[];
@@ -32,7 +31,6 @@ export function AppShell({
   children,
   headerAction,
   headerEyebrow,
-  headerSubtitleFontWeight,
   headerSubtitle,
   headerTitle,
   navItems = defaultNavItems,
@@ -50,7 +48,6 @@ export function AppShell({
         <AppHeader
           action={headerAction}
           eyebrow={headerEyebrow}
-          subtitleFontWeight={headerSubtitleFontWeight}
           subtitle={headerSubtitle}
           title={headerTitle}
         />

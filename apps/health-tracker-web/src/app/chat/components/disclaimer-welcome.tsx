@@ -49,12 +49,10 @@ export function DisclaimerWelcome({
             >
               <InfoOutlined sx={{ fontSize: 22 }} />
             </Stack>
-            <Typography sx={(theme) => ({ ...theme.appTokens.typography.titleMd, fontSize: 17 })}>
-              Lưu ý quan trọng
-            </Typography>
+            <Typography variant="h5">Lưu ý quan trọng</Typography>
           </Stack>
 
-          <Typography color="text.secondary" fontSize={14} lineHeight={1.6}>
+          <Typography color="text.secondary" variant="body2">
             Trợ lý này cung cấp thông tin sức khoẻ mang tính tham khảo, không thay thế lời khuyên từ
             bác sĩ hoặc dược sĩ.
             <br />
@@ -75,7 +73,7 @@ export function DisclaimerWelcome({
             Đã hiểu
           </AppSubmitButton>
 
-          <Typography color="text.secondary" fontSize={13} textAlign="center">
+          <Typography color="text.secondary" textAlign="center" variant="caption">
             Không hiện lại
           </Typography>
         </Stack>

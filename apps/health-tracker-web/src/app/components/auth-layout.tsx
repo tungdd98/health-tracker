@@ -49,7 +49,7 @@ export function AuthLayout({ eyebrow, title, description, footer, children }: Au
             <Typography color="text.secondary" variant="overline">
               {eyebrow}
             </Typography>
-            <Typography sx={{ maxWidth: 360 }} variant="h2">
+            <Typography sx={{ maxWidth: 360 }} variant="h5">
               {title}
             </Typography>
             <Typography color="text.secondary" sx={{ maxWidth: 420 }} variant="body2">

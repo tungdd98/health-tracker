@@ -1,4 +1,4 @@
-import { Box, Drawer, Skeleton, Stack, Typography, alpha, useTheme } from '@mui/material';
+import { Box, Chip, Drawer, Skeleton, Stack, Typography, useTheme } from '@mui/material';
 import { DateTime } from 'luxon';
 import { useRef } from 'react';
 
@@ -114,28 +114,15 @@ export function DayDetailSheet({ selectedDay, input, userId, onClose }: DayDetai
         <Stack spacing={2}>
           {renderDay ? (
             <Stack alignItems="center" direction="row" spacing={1}>
-              <Typography sx={theme.appTokens.typography.titleMd}>
-                {formatDayHeader(renderDay, snapshot)}
-              </Typography>
+              <Typography variant="h6">{formatDayHeader(renderDay, snapshot)}</Typography>
               {snapshot ? (
-                <Box
+                <Chip
+                  label={PHASE_LABELS[snapshot.phase]}
+                  size="small"
                   sx={{
-                    bgcolor: alpha(theme.palette.phase[snapshot.phase], 0.2),
-                    border: `1px solid ${theme.palette.phase[snapshot.phase]}`,
-                    borderRadius: theme.appTokens.radius.pill,
-                    px: 1,
-                    py: 0.25,
+                    backgroundColor: PHASE_LABELS[snapshot.phase],
                   }}
-                >
-                  <Typography
-                    sx={{
-                      ...theme.appTokens.typography.microLabel,
-                      color: theme.palette.phase[snapshot.phase],
-                    }}
-                  >
-                    {PHASE_LABELS[snapshot.phase].toUpperCase()}
-                  </Typography>
-                </Box>
+                />
               ) : null}
             </Stack>
           ) : null}
@@ -148,7 +135,7 @@ export function DayDetailSheet({ selectedDay, input, userId, onClose }: DayDetai
 
           {snapshot ? (
             <Stack spacing={1.5}>
-              <Typography color="text.secondary" sx={theme.appTokens.typography.sectionLabel}>
+              <Typography color="text.secondary" variant="subtitle1">
                 Pha chu kỳ
               </Typography>
               <Stack spacing={1}>
@@ -167,7 +154,7 @@ export function DayDetailSheet({ selectedDay, input, userId, onClose }: DayDetai
 
           {isFuture ? null : (
             <Stack spacing={1.5}>
-              <Typography color="text.secondary" sx={theme.appTokens.typography.sectionLabel}>
+              <Typography color="text.secondary" variant="subtitle1">
                 Nhật ký ngày
               </Typography>
               <Stack spacing={1}>

@@ -20,7 +20,7 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
     <>
       <Box
         sx={(theme) => ({
-          backgroundColor: theme.palette.surface.overlay,
+          backgroundColor: theme.palette.background.paper,
           bottom: 0,
           height: 'calc(16px + env(safe-area-inset-bottom, 0px))',
           left: 0,
@@ -32,7 +32,7 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
       <Paper
         elevation={0}
         sx={(theme) => ({
-          backgroundColor: theme.palette.surface.overlay,
+          backgroundColor: theme.palette.background.paper,
           borderRadius: theme.appTokens.radius.xl,
           bottom: 16,
           boxShadow: theme.appTokens.shadow.floating,
@@ -61,20 +61,8 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
               label={item.label}
               sx={(theme) => ({
                 borderRadius: theme.appTokens.radius.xl,
-                color: 'text.secondary',
-                minHeight: '100%',
                 minWidth: 0,
-                py: 0.75,
-                '& .MuiBottomNavigationAction-label': {
-                  ...theme.appTokens.typography.microLabel,
-                  fontSize: theme.appTokens.typography.microLabel.fontSize,
-                  mt: 0.5,
-                  transform: 'none',
-                },
-                '& .MuiBottomNavigationAction-label.Mui-selected': {
-                  fontSize: theme.appTokens.typography.microLabel.fontSize,
-                  transform: 'none',
-                },
+                fontWeight: 700,
                 '&.Mui-selected': {
                   bgcolor: 'primary.main',
                   color: 'primary.main',
@@ -84,6 +72,8 @@ export function AppBottomNav({ items, value, onChange }: AppBottomNavProps) {
                 },
                 '&.Mui-selected .MuiBottomNavigationAction-label': {
                   color: 'primary.contrastText',
+                  fontSize: theme.typography.caption,
+                  fontWeight: 700,
                 },
               })}
               value={item.value}

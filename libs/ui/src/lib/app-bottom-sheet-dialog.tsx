@@ -36,7 +36,7 @@ export function AppBottomSheetDialog({
 
         <Stack alignItems="center" direction="row" justifyContent="space-between">
           <Stack spacing={0.5}>
-            <Typography variant="h4">{title}</Typography>
+            <Typography variant="h6">{title}</Typography>
             {description ? (
               <Typography color="text.secondary" variant="body2">
                 {description}

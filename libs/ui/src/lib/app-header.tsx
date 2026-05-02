@@ -4,18 +4,11 @@ import type { ReactNode } from 'react';
 type AppHeaderProps = {
   action?: ReactNode;
   eyebrow?: string;
-  subtitleFontWeight?: number;
   subtitle?: string;
   title?: string;
 };
 
-export function AppHeader({
-  action,
-  eyebrow,
-  subtitleFontWeight,
-  subtitle,
-  title,
-}: AppHeaderProps) {
+export function AppHeader({ action, eyebrow, subtitle, title }: AppHeaderProps) {
   let actionNode: ReactNode = null;
 
   if (action) {
@@ -38,16 +31,9 @@ export function AppHeader({
               {eyebrow}
             </Typography>
           ) : null}
-          {title ? <Typography variant="h3">{title}</Typography> : null}
+          {title ? <Typography variant="h5">{title}</Typography> : null}
           {subtitle ? (
-            <Typography
-              color="text.secondary"
-              sx={(theme) => ({
-                ...theme.appTokens.typography.sectionValue,
-                fontWeight:
-                  subtitleFontWeight ?? theme.appTokens.typography.sectionValue.fontWeight,
-              })}
-            >
+            <Typography color="text.secondary" variant="subtitle2">
               {subtitle}
             </Typography>
           ) : null}

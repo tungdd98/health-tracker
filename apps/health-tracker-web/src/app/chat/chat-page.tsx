@@ -189,7 +189,7 @@ export function ChatPage() {
                 >
                   <ArrowBackRounded fontSize="small" />
                 </IconButton>
-                <Typography variant="h4">Trò chuyện</Typography>
+                <Typography variant="h5">Trò chuyện</Typography>
               </Stack>
 
               <Stack alignItems="center" direction="row" spacing={1}>

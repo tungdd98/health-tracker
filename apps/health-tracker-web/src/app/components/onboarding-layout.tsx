@@ -69,7 +69,7 @@ export function OnboardingLayout({
             <Typography color="text.secondary" variant="overline">
               {eyebrow}
             </Typography>
-            <Typography sx={{ maxWidth: 360 }} variant="h2">
+            <Typography sx={{ maxWidth: 360 }} variant="h5">
               {title}
             </Typography>
             <Typography color="text.secondary" sx={{ maxWidth: 460 }} variant="body2">
@@ -92,9 +92,7 @@ export function OnboardingLayout({
                   <Typography color="text.secondary" variant="overline">
                     Bước {currentStepNumber} / {totalSteps}
                   </Typography>
-                  <Typography sx={(theme) => theme.appTokens.typography.sectionValue}>
-                    {stepLabel}
-                  </Typography>
+                  <Typography variant="subtitle1">{stepLabel}</Typography>
                 </Stack>
                 <LinearProgress sx={{ height: 8 }} value={progressValue} variant="determinate" />
               </Stack>

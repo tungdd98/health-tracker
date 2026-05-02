@@ -52,10 +52,7 @@ function StickerCard({ imageUrl, label }: { imageUrl: string | undefined; label:
           />
         ) : null}
       </Box>
-      <Typography
-        color="text.secondary"
-        sx={(theme) => ({ ...theme.appTokens.typography.microLabel, textAlign: 'center' })}
-      >
+      <Typography color="text.secondary" sx={{ textAlign: 'center' }} variant="caption">
         {label}
       </Typography>
     </Stack>

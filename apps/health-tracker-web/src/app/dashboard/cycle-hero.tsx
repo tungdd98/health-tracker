@@ -64,9 +64,9 @@ function CycleRing({ snapshot }: CycleRingProps) {
   const markerDeg = ((snapshot.dayOfCycle - 1) / cycleLength) * 360;
   const marker = polarToCartesian(100, 100, 80, markerDeg);
   const markerColor = phaseColors[snapshot.phase];
-  const badgeText = theme.appTokens.typography.microLabel;
-  const valueText = theme.appTokens.typography.metricValue;
-  const helperText = theme.appTokens.typography.helper;
+  const badgeText = theme.typography.overline;
+  const valueText = theme.typography.h5;
+  const helperText = theme.typography.caption;
 
   return (
     <svg height={200} viewBox="0 0 200 200" width={200}>
@@ -264,19 +264,10 @@ export function CycleHero({
             })}
           />
           <Box>
-            <Typography
-              sx={(currentTheme) => ({
-                color: currentTheme.palette.status.warningText,
-                fontSize: '0.8125rem',
-                fontWeight: 700,
-              })}
-            >
+            <Typography color="status.warningText" variant="subtitle2">
               Dữ liệu chu kỳ có vẻ cũ
             </Typography>
-            <Typography
-              color="text.secondary"
-              sx={(currentTheme) => currentTheme.appTokens.typography.helper}
-            >
+            <Typography color="text.secondary" variant="caption">
               Hãy cập nhật để dự đoán chính xác hơn.
             </Typography>
           </Box>
@@ -300,10 +291,7 @@ export function CycleHero({
           })}
         >
           <OpacityRounded sx={{ color: highlightColor, fontSize: 14 }} />
-          <Typography
-            color="text.primary"
-            sx={(currentTheme) => currentTheme.appTokens.typography.helper}
-          >
+          <Typography color="text.primary" variant="caption">
             {countdownLine}
           </Typography>
         </Stack>
