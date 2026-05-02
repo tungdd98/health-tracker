@@ -1,18 +1,22 @@
 import { Skeleton, Stack, Typography, alpha, useTheme } from '@mui/material';
-import { DateTime } from 'luxon';
 
 import { AppCard } from '@health-tracker/ui';
 
-import { pickTip } from './tip-library';
 import type { CyclePhase } from './cycle-utils';
+import { useDailyTip } from './use-daily-tip';
 
 type TipOfDayProps = {
+  userId: string;
   phase: CyclePhase;
-  isLoading: boolean;
+  date: string;
+  chatbotName: string | null;
 };
 
-export function TipOfDay({ phase, isLoading }: TipOfDayProps) {
+export function TipOfDay({ userId, phase, date, chatbotName }: TipOfDayProps) {
   const theme = useTheme();
+  const { tip, isLoading } = useDailyTip(userId, phase, date);
+
+  const title = chatbotName ? `Lời khuyên của ${chatbotName}` : 'Lời khuyên của AI';
 
   if (isLoading) {
     return (
@@ -31,8 +35,6 @@ export function TipOfDay({ phase, isLoading }: TipOfDayProps) {
     );
   }
 
-  const tip = pickTip(phase, DateTime.local());
-
   return (
     <AppCard
       sx={{
@@ -42,7 +44,7 @@ export function TipOfDay({ phase, isLoading }: TipOfDayProps) {
     >
       <Stack spacing={0.75}>
         <Typography color="warning.main" variant="overline">
-          Mẹo hôm nay
+          {title}
         </Typography>
         <Typography color="text.primary" variant="body2">
           {tip}

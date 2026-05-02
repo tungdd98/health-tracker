@@ -1,8 +1,10 @@
 import { Alert, Button, Snackbar, Stack, Typography } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useRef, useState, type SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { getChatPersonalization } from '@health-tracker/api';
 import { AppShell } from '@health-tracker/ui';
 
 import { useAuthSession } from '../auth/use-auth-session';
@@ -50,6 +52,15 @@ export function DashboardPage() {
   const handleNavChange = useAppNavChange();
 
   const today = DateTime.local();
+
+  const { data: chatPersonalization } = useQuery({
+    queryKey: ['chat-personalization', user?.id],
+    queryFn: () => getChatPersonalization(user!.id),
+    enabled: !!user,
+    staleTime: 5 * 60 * 1000,
+  });
+  const chatbotName = chatPersonalization?.preferences.chatbotName ?? null;
+
   const greetingName =
     onboardingProfile.displayName?.trim() || user?.email?.split('@')[0]?.trim() || 'bạn';
   const lastPeriodStartDate = onboardingProfile.lastPeriodStartDate
@@ -111,7 +122,14 @@ export function DashboardPage() {
           snapshot={snapshot}
         />
 
-        {showTipAndStrip && snapshot ? <TipOfDay isLoading={false} phase={snapshot.phase} /> : null}
+        {showTipAndStrip && snapshot && user ? (
+          <TipOfDay
+            chatbotName={chatbotName}
+            date={today.toISODate()!}
+            phase={snapshot.phase}
+            userId={user.id}
+          />
+        ) : null}
 
         {user && snapshot ? <MedicationStrip userId={user.id} date={today.toISODate()!} /> : null}
 
