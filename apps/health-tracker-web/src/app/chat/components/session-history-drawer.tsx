@@ -70,9 +70,7 @@ export function SessionHistoryDrawer({
           justifyContent="space-between"
           sx={{ px: 2.5, py: 1.25 }}
         >
-          <Typography sx={(theme) => ({ ...theme.appTokens.typography.titleMd, fontSize: 17 })}>
-            Lịch sử hội thoại
-          </Typography>
+          <Typography variant="h6">Lịch sử hội thoại</Typography>
           <IconButton onClick={onClose} size="small" sx={{ color: 'text.secondary' }}>
             <CloseRounded fontSize="small" />
           </IconButton>
@@ -87,7 +85,7 @@ export function SessionHistoryDrawer({
 
         <List sx={{ p: 0 }}>
           {sessions.length === 0 ? (
-            <Typography color="text.secondary" sx={{ px: 2.5, py: 3 }}>
+            <Typography color="text.secondary" sx={{ px: 2.5, py: 3 }} variant="body2">
               Chưa có hội thoại nào được lưu.
             </Typography>
           ) : null}
@@ -133,18 +131,17 @@ export function SessionHistoryDrawer({
                 <Stack spacing={0.5} sx={{ minWidth: 0, width: '100%' }}>
                   <Typography
                     sx={{
-                      fontSize: 14,
-                      fontWeight: 600,
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       whiteSpace: 'nowrap',
                     }}
+                    variant="subtitle2"
                   >
                     {session.title?.trim() || 'Cuộc trò chuyện mới'}
                   </Typography>
                   <Stack alignItems="center" direction="row" spacing={0.75}>
                     <AccessTimeRounded sx={{ color: 'text.secondary', fontSize: 14 }} />
-                    <Typography color="text.secondary" fontSize={12}>
+                    <Typography color="text.secondary" variant="caption">
                       {subtitle}
                     </Typography>
                   </Stack>

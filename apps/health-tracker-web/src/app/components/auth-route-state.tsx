@@ -39,7 +39,7 @@ export function AuthRouteState() {
             >
               <FavoriteRounded />
             </Box>
-            <Typography variant="h4">Đang chuẩn bị không gian sức khỏe</Typography>
+            <Typography variant="h5">Đang chuẩn bị không gian sức khỏe</Typography>
             <CircularProgress size={28} />
           </Stack>
         </AppCard>

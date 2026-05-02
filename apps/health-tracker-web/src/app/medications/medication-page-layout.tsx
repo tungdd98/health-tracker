@@ -38,7 +38,7 @@ export function MedicationPageLayout({
               >
                 <ArrowBackRounded fontSize="small" />
               </IconButton>
-              <Typography variant="h4">{title}</Typography>
+              <Typography variant="h5">{title}</Typography>
             </Stack>
 
             {actionLabel && onAction ? (

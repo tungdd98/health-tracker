@@ -49,12 +49,9 @@ export function DailyLogSheetLayout({
           </Box>
 
           <Stack spacing={0.5}>
-            <Typography sx={(theme) => theme.appTokens.typography.titleMd}>{title}</Typography>
+            <Typography variant="h6">{title}</Typography>
             {description ? (
-              <Typography
-                color="text.secondary"
-                sx={(theme) => theme.appTokens.typography.sectionLabel}
-              >
+              <Typography color="text.secondary" variant="subtitle2">
                 {description}
               </Typography>
             ) : null}

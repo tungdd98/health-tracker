@@ -199,10 +199,7 @@ export function MedicationFormPage() {
           <FormTextAreaField label="Ghi chú" name="notes" minRows={3} />
 
           <Stack spacing={1}>
-            <Typography
-              color="text.secondary"
-              sx={(theme) => theme.appTokens.typography.sectionLabel}
-            >
+            <Typography color="text.secondary" variant="subtitle2">
               Loại lịch *
             </Typography>
             <ButtonBase
@@ -223,10 +220,7 @@ export function MedicationFormPage() {
             >
               <Typography
                 color={scheduleType === 'daily' ? 'text.primary' : 'text.secondary'}
-                sx={(theme) => ({
-                  ...theme.appTokens.typography.sectionValue,
-                  fontWeight: scheduleType === 'daily' ? 600 : 500,
-                })}
+                variant={scheduleType === 'daily' ? 'subtitle1' : 'subtitle2'}
               >
                 Hằng ngày
               </Typography>
@@ -249,10 +243,7 @@ export function MedicationFormPage() {
             >
               <Typography
                 color={scheduleType === 'course' ? 'text.primary' : 'text.secondary'}
-                sx={(theme) => ({
-                  ...theme.appTokens.typography.sectionValue,
-                  fontWeight: scheduleType === 'course' ? 600 : 500,
-                })}
+                variant={scheduleType === 'course' ? 'subtitle1' : 'subtitle2'}
               >
                 Theo liệu trình
               </Typography>
@@ -269,16 +260,10 @@ export function MedicationFormPage() {
                 type="number"
               />
               <Stack direction="row" justifyContent="space-between" px={0.25}>
-                <Typography
-                  color="text.secondary"
-                  sx={(theme) => theme.appTokens.typography.sectionLabel}
-                >
+                <Typography color="text.secondary" variant="subtitle2">
                   Kết thúc dự kiến
                 </Typography>
-                <Typography
-                  color="text.secondary"
-                  sx={(theme) => theme.appTokens.typography.sectionValue}
-                >
+                <Typography color="text.secondary" variant="subtitle1">
                   {computedEndDateLabel ?? '--/--/----'}
                 </Typography>
               </Stack>
@@ -286,10 +271,7 @@ export function MedicationFormPage() {
           ) : null}
 
           <Stack spacing={1}>
-            <Typography
-              color="text.secondary"
-              sx={(theme) => theme.appTokens.typography.sectionLabel}
-            >
+            <Typography color="text.secondary" variant="subtitle2">
               Lịch uống
             </Typography>
             <DoseTimeListField />

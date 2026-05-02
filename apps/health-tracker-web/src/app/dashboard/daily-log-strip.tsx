@@ -76,17 +76,13 @@ function LogCard({ icon, label, value, onClick }: LogCardProps) {
       >
         {icon}
       </Box>
-      <Typography color="text.secondary" sx={(theme) => theme.appTokens.typography.microLabel}>
+      <Typography color="text.secondary" variant="overline">
         {label}
       </Typography>
       <Typography
         color={isFilled ? 'text.primary' : 'text.secondary'}
-        sx={(theme) => ({
-          ...theme.appTokens.typography.helper,
-          fontWeight: isFilled ? 600 : 500,
-          opacity: isFilled ? 1 : 0.72,
-          textAlign: 'center',
-        })}
+        sx={{ opacity: isFilled ? 1 : 0.72, textAlign: 'center' }}
+        variant="subtitle2"
       >
         {value ?? 'Chưa log'}
       </Typography>

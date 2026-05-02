@@ -69,12 +69,10 @@ export function OutlookStrip({ input, isLoading }: OutlookStripProps) {
               py: 1,
             }}
           >
-            <Typography color="text.secondary" sx={theme.appTokens.typography.helper}>
+            <Typography color="text.secondary" variant="caption">
               {getWeekdayShort(date)}
             </Typography>
-            <Typography sx={{ fontWeight: isToday ? 700 : 600 }} variant="body2">
-              {date.toFormat('dd')}
-            </Typography>
+            <Typography variant={isToday ? 'subtitle2' : 'body2'}>{date.toFormat('dd')}</Typography>
             <Box
               sx={{
                 bgcolor: dotColor,

@@ -93,10 +93,8 @@ export function MessageList({
         </Box>
 
         <Stack spacing={1}>
-          <Typography sx={(theme) => theme.appTokens.typography.titleMd}>
-            Bắt đầu trò chuyện
-          </Typography>
-          <Typography color="text.secondary" sx={{ lineHeight: 1.5 }}>
+          <Typography variant="h5">Bắt đầu trò chuyện</Typography>
+          <Typography color="text.secondary" variant="body2">
             Hỏi về sức khoẻ, thuốc men
             <br />
             hoặc xem lại dữ liệu của bạn
@@ -122,10 +120,8 @@ export function MessageList({
         >
           <ScheduleRounded sx={{ fontSize: 22 }} />
           <Stack spacing={0.25}>
-            <Typography fontSize={13} fontWeight={700}>
-              Đã đạt giới hạn 30 tin/giờ
-            </Typography>
-            <Typography fontSize={12}>{getRateLimitSecondaryText(errorMessage)}</Typography>
+            <Typography variant="subtitle2">Đã đạt giới hạn 30 tin/giờ</Typography>
+            <Typography variant="caption">{getRateLimitSecondaryText(errorMessage)}</Typography>
           </Stack>
         </Stack>
       ) : null}
@@ -140,7 +136,7 @@ export function MessageList({
         return (
           <Stack key={message.id} spacing={1}>
             {showTimestamp ? (
-              <Typography color="text.secondary" fontSize={11} sx={{ ml: 0.75 }}>
+              <Typography color="text.secondary" sx={{ ml: 0.75 }} variant="overline">
                 {formatMessageTime(message.createdAt)}
               </Typography>
             ) : null}
@@ -184,9 +180,7 @@ export function MessageList({
           })}
         >
           <WarningAmberRounded sx={{ fontSize: 20 }} />
-          <Typography fontSize={13} lineHeight={1.5}>
-            {errorMessage}
-          </Typography>
+          <Typography variant="body2">{errorMessage}</Typography>
         </Stack>
       ) : null}
     </Stack>

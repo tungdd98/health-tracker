@@ -64,11 +64,7 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
         })}
       >
         <MedicationRounded color="action" sx={{ fontSize: 34 }} />
-        <Typography
-          color="text.secondary"
-          sx={(theme) => theme.appTokens.typography.sectionValue}
-          textAlign="center"
-        >
+        <Typography color="text.secondary" textAlign="center" variant="subtitle1">
           Chưa có thuốc nào hôm nay
         </Typography>
 
@@ -105,10 +101,7 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
             py: 0.5,
           })}
         >
-          <Typography
-            color="text.secondary"
-            sx={(theme) => theme.appTokens.typography.sectionValue}
-          >
+          <Typography color="text.secondary" variant="subtitle2">
             {takenCount}/{totalCount} đã uống
           </Typography>
         </Box>
@@ -143,21 +136,13 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
                 {dose.taken ? <CheckBoxRounded /> : <CheckBoxOutlineBlankRounded />}
               </Box>
               <Stack spacing={0.25} width="100%">
-                <Typography
-                  sx={(theme) => ({
-                    ...theme.appTokens.typography.sectionValue,
-                    color: theme.palette.text.primary,
-                  })}
-                >
+                <Typography color="text.primary" variant="subtitle2">
                   {dose.timeOfDay} {dose.medicationName}
                   {dose.dosage ? ` · ${dose.dosage}` : ''}
                 </Typography>
 
                 {dose.notes ? (
-                  <Typography
-                    color="text.secondary"
-                    sx={(theme) => theme.appTokens.typography.helper}
-                  >
+                  <Typography color="text.secondary" variant="caption">
                     {dose.notes}
                   </Typography>
                 ) : null}
@@ -181,9 +166,7 @@ export function MedicationStrip({ userId, date }: MedicationStripProps) {
           width: '100%',
         })}
       >
-        <Typography sx={(theme) => theme.appTokens.typography.sectionValue}>
-          Quản lý thuốc
-        </Typography>
+        <Typography variant="subtitle2">Quản lý thuốc</Typography>
         <KeyboardArrowRightRounded fontSize="small" />
       </ButtonBase>
 

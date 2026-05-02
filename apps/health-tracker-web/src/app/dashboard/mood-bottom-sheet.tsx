@@ -116,18 +116,9 @@ export function MoodBottomSheet({
                   sx={{ height: 32, width: 32, objectFit: 'contain' }}
                 />
               ) : (
-                <Typography sx={{ fontSize: 22 }}>{mood.emoji}</Typography>
+                <Typography variant="h5">{mood.emoji}</Typography>
               )}
-              <Typography
-                color={isSelected ? 'primary.main' : 'text.secondary'}
-                sx={(theme) => ({
-                  ...theme.appTokens.typography.microLabel,
-                  fontWeight: isSelected ? 700 : 500,
-                  letterSpacing: '0.03em',
-                  lineHeight: 1.25,
-                  textTransform: 'none',
-                })}
-              >
+              <Typography color={isSelected ? 'primary.main' : 'text.secondary'} variant="caption">
                 {mood.label}
               </Typography>
             </Box>
@@ -136,11 +127,7 @@ export function MoodBottomSheet({
       </Stack>
 
       {selectedMoodLabel ? (
-        <Typography
-          align="center"
-          color="primary.main"
-          sx={(theme) => theme.appTokens.typography.sectionValue}
-        >
+        <Typography align="center" color="primary.main" variant="subtitle1">
           {selectedMoodLabel}
         </Typography>
       ) : null}
