@@ -14,12 +14,15 @@ export function useDailyTip(
   const { data: tip, isLoading } = useQuery({
     queryKey: ['daily-tip', userId, date],
     queryFn: async () => {
-      const cached = await getDailyTip(userId, date);
-      if (cached) return cached;
-      return generateDailyTip(phase, date);
+      try {
+        const cached = await getDailyTip(userId, date);
+        if (cached) return cached;
+        return await generateDailyTip(phase, date);
+      } catch {
+        return pickTip(phase, DateTime.local());
+      }
     },
     staleTime: Infinity,
-    retry: 1,
   });
 
   return {
